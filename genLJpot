@@ -1,0 +1,44 @@
+#! /usr/bin/python
+
+
+eps = 0.1
+sigma = 1.5
+cutoff = 4.
+
+maxlimit = 10**6
+smin = 0.10
+smax = 2.**(1./6.)
+increment = 0.002
+dummy = increment/100.
+rmax = cutoff + 0.5
+
+def LJ(r,shift):
+ if r < smin: return maxlimit
+ elif r <= cutoff + dummy:
+	U = 4.*eps*(((sigma/r)**12.)-((sigma/r)**6.)) + shift
+	if U > maxlimit: return maxlimit
+	else: return U
+ else: return 0.
+
+def LJrep(r):
+ if r < smin: return maxlimit
+ elif r <= smax + dummy:
+	U = 4.*eps*(((sigma/r)**12.-((sigma/r)**6.))) + eps
+	if U > maxlimit: return maxlimit
+	else: return U
+ else: return 0.
+
+
+fLJ = open('LJpot.pot','w')
+#fLJrep = open('LJrep.pot','w')
+
+r = 0.
+shift = -1. * LJ(cutoff,0)
+#shift = 0.0
+
+while r <= rmax:
+ fLJ.write('%2.3f %2.1f %2.1f %2.1f %2.1f %2.10f %2.1f\n' %(r,0,0,0,0,LJ(r,shift),0))
+ #fLJrep.write('%2.3f %2.1f %2.1f %2.1f %2.1f %2.10f %2.1f\n' %(r,0,0,0,0,LJrep(r),0))
+ r += increment
+
+print "DONE!"

@@ -1,0 +1,120 @@
+#! /usr/bin/python
+
+import sys
+
+class Molecule:
+    ''' Represents a molecule or part of it '''
+
+    def __init__(self, atomlist=[]):
+	''' atomlist should be a list of Atom instances '''
+	self.atomlist = atomlist
+
+class Atom:
+    ''' Represents an atom of a Molecule instance '''
+    atomlist = []
+    atomdic = {}
+
+    def __init__(self, line):
+	Atom.atomlist.append(self)
+	linelist = line.split()
+	self.line = line.rstrip()
+	self.nr = int(linelist[0])
+	self.type = str(linelist[1])
+	self.resnr = int(linelist[2])
+	self.residue = linelist[3]
+	self.name = linelist[4]
+	self.cgnr = int(linelist[5])
+	self.charge = float(linelist[6])
+	self.mass = float(linelist[7])
+	Atom.atomdic[self.nr] = self.name
+
+    def __str__(self):
+	return self.line
+
+def top2mol(file):
+    ''' Read topology and generate an instance of Molecule class '''
+    commentlist = ['#','@',';']
+    atomlist = []
+    while 1:
+	line = file.readline()
+	if not line: break
+	elif line[0] in commentlist: continue
+	elif line[0] == '[' and line.split()[1] == 'atoms':
+	    while 1:
+		# inside [ atoms ], parse until section end
+		line = file.readline()
+		if not line or line == '\n' or line[0] == '[':
+		    mol = Molecule(atomlist)
+		    return mol
+		elif line[0] in commentlist: continue
+		else: atomlist.append(Atom(line))
+
+filename = sys.argv[1]
+fin = open(filename,'r')
+mol = top2mol(fin)
+fin.close()
+
+#for atom in mol.atomlist:
+#    print atom
+
+fout = open(filename[:-4]+'.translated.top','w')
+fin = open(filename,'r')
+commentlist = ['#','@',';']
+while 1:
+    sectionlist = ['bonds','pairs','angles','dihedrals','dihedral_restraints']
+    line = fin.readline()
+    if not line: break
+    elif line[0] in commentlist: fout.write(line)
+    elif line[0] == '[' and line.split()[1] in sectionlist:
+	option = line.split()[1]
+	fout.write(line)
+	while 1:
+	    line = fin.readline()
+	    if not line or line == '\n': break
+	    elif line[0] in commentlist: fout.write(line)
+	    elif option == 'bonds':
+		txt = line.split()
+		a1 = int(txt[0])
+		a2 = int(txt[1])
+		func = int(txt[2])
+		fout.write('%s\t%s\t%d\n' %(Atom.atomdic[a1], Atom.atomdic[a2], func))
+	    elif option == 'pairs':
+		txt = line.split()
+		a1 = int(txt[0])
+		a2 = int(txt[1])
+		func = int(txt[2])
+		fout.write('%s\t%s\t%d\n' %(Atom.atomdic[a1], Atom.atomdic[a2], func))
+	    elif option == 'angles':
+		txt = line.split()
+		a1 = int(txt[0])
+		a2 = int(txt[1])
+		a3 = int(txt[2])
+		func = int(txt[3])
+		fout.write('%s\t%s\t%s\t%d\n' %(Atom.atomdic[a1], Atom.atomdic[a2], Atom.atomdic[a3], func))
+	    elif option == 'dihedrals' :
+		txt = line.split()
+		a1 = int(txt[0])
+		a2 = int(txt[1])
+		a3 = int(txt[2])
+		a4 = int(txt[3])
+		func = int(txt[4])
+		fout.write('%s\t%s\t%s\t%s\t%d\n' %(Atom.atomdic[a1], Atom.atomdic[a2], Atom.atomdic[a3], Atom.atomdic[a4], func))
+	    elif option == 'dihedral_restraints':
+		txt = line.split()
+		a1 = int(txt[0])
+		a2 = int(txt[1])
+		a3 = int(txt[2])
+		a4 = int(txt[3])
+		f1 = int(txt[4])
+		f2 = int(txt[5])
+		ang = float(txt[6])
+		dang = float(txt[7])
+		f3 = int(txt[8])
+		f4 = int(txt[9])
+		fout.write('%s\t%s\t%s\t%s\t%d %d %f %f %d %d\n' %(Atom.atomdic[a1], Atom.atomdic[a2], Atom.atomdic[a3], Atom.atomdic[a4], f1, f2, ang, dang, f3, f4))
+	fout.write('\n')
+    else: fout.write(line)
+
+
+fout.close()
+fin.close()

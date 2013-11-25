@@ -1,0 +1,14 @@
+#! /bin/bash
+
+function mergegro {
+    local n1=`sed -n '2p' ${1} | tr -d ' '`
+    local n2=`sed -n '2p' ${2} | tr -d ' '`
+    local n3=$((n1+n2))
+    awk '{if (NF!=3)print}' ${1} > ${1}.xXx
+    awk '{if (NR>2)print}' ${2} > ${2}.xXx
+    cat ${1}.xXx ${2}.xXx > ${3}.xXx
+    sed '2s/'$n1'/'$n3'/' ${3}.xXx > ${3}
+    rm ${1}.xXx ${2}.xXx ${3}.xXx
+}
+
+mergegro ${1} ${2} ${3}

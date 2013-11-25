@@ -1,0 +1,64 @@
+#! /bin/bash
+
+file=$1 && shift
+title=`grep "\stitle" $file | perl -lane 'print "@F[2..$#F]"'|tr -d "\""`
+xlabel=`grep -m 1 xaxis $file | perl -lane 'print "@F[3..$#F]"'|tr -d "\""`
+ylabel=`grep -m 1 yaxis $file | perl -lane 'print "@F[3..$#F]"'|tr -d "\""`
+plotcommand=''
+q="'"
+
+    plot () {
+    #gplot -t "$title" -x $xlabel -y $ylabel -c "set key out" -- "for [i=2:$nc:1] '$file' u 1:i w l t sprintf('%i',i)"
+    gplot -t "$title" -x $xlabel -y $ylabel -c "set key out" -- "$plotcommand"
+    }
+
+    help () {
+	echo "Usage: $ phis filename [ -f namesfile ] [ begin [end] ]"
+}
+
+if [[ $# -ge 2 ]] ; then
+    # parse options
+    while [[ $# -ge 1 ]]; do
+	case $1 in
+	    -f)
+		namesfile=$2
+		shift 2
+		;;
+	    [0-9]*)
+		[[ $end ]] && begin=$1 || end=$1
+		shift 
+		;;
+	    *)
+		echo "Unknown option!"
+		help
+		exit 1
+		;;
+
+	esac
+    done
+    names=( $(cat "$namesfile") )
+	
+    [[ $end ]] || end=$((${#names[@]}-1))
+    [[ $begin ]] || begin=0
+    [[ $begin -gt $end ]] && tmp=$end && end=$begin && begin=$tmp
+    echo "Doing from $begin to $end!"
+    for i in `seq $begin $end`
+    do
+	plotcommand=$plotcommand" $q$file$q using 1:$((i+2)) with line t $q${names[$i]}$q,"
+    done
+    len=${#plotcommand}
+    [[ $len -gt 0 ]] && len2=`expr $len - 1` && plotcommand=${plotcommand:0:$len2}
+    #gplot -t "$title" -x $xlabel -y $ylabel -c 'set key out' -- "$plotcommand"
+elif [[ $# -eq 1 ]]; then
+    end=$1
+    plotcommand="for [i=2:$end:1] '$file' u 1:i w l t sprintf('%i',i)"
+#elif [[ $# -eq 2 ]]; then
+#    begin=$1 && end=$2
+#    plotcommand="for [i=$begin:$end:1] '$file' u 1:i w l t sprintf('%i',i)"
+else
+    nc=`tail -1 $file | awk '{print NF}'`
+    plotcommand="for [i=2:$nc:1] '$file' u 1:i w l t sprintf('%i',i)"
+fi
+
+# Now plot all!
+plot $@

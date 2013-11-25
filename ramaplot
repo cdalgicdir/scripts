@@ -1,0 +1,311 @@
+#! /bin/bash
+#
+# Bash script to plot the gridded Ramachandran Map
+# Needs the gplot bash pipe by C.Junghans to work
+# C. Dalgicdir
+#
+
+IFS=$' \t\n'
+usage="Usage: ${0##*/} filename <options>"
+gplot="gplot"
+grid1=13
+grid2=13
+grid3=12
+using='u 1:2:3'
+range=""
+save=""
+terminal="set terminal wxt enhanced"
+xrange="[:]"
+yrange="[:]"
+xlabel=""
+ylabel=""
+title=""
+xtics=""
+ytics=""
+size=""
+color0="blue"
+color3="green"
+color6="yellow"
+color10="red"
+xticsfont="set xtics font 'Arial,7'" 
+#plottype="prob" #default is probability distribution (other is energy)
+
+
+help () {
+cat << eof
+Script to plot the gridded Ramachandran Map using the gplot pipe by C.Junghans
+Author: C. Dalgicdir
+Version: 10.11.22
+$usage
+
+OPTIONS:
+-r	Set ranges
+-x	Set xrange
+-y	Set yrange
+-t	Set title
+-xl	Set xlabel
+-yl	Set ylabel
+-rama	Plot as Ramachandran map
+-c	Set color ranges
+-g	Set number of grids
+-png	Save as png (1280x960 cropped)
+-gpl	Save as gnuplot file (run file with gnuplot --persist)
+-pdf	Save as pdf with pdfcairo terminal 
+-eps	Save as epslatex
+-ps	Save as postscript
+-m	Data is in matrix format (for Ramachandran Maps)
+-ma	Data is in matrix format (for Ramachandran Maps - tweaked)
+-en	Output set to energy scale (color scale in colorbar are inverted)
+-h	Prints help
+
+Examples: ${0##*/} filename
+	  ${0##*/} filename -r 100:180 -180:180
+	  ${0##*/} filename -x 100:180
+	  ${0##*/} filename -g 13 13 (default is 13x13)
+	  ${0##*/} filename -rama
+	  ${0##*/} filename -c 0.5:1.5
+	  ${0##*/} filename -s plot.png
+          ${0##*/} filename -m
+          ${0##*/} filename -auto -en
+          ${0##*/} filename -png out -r 0:180 -180:180 -xt 30 -yt 60 -t '{/Symbol a}' -xl NH_3 -yl H^2
+          ${0##*/} filename -h
+eof
+}
+
+plot () {
+
+	$gplot -3 -c "$range" $save -c "$size" -c "$terminal" -a "$xrange" -j "$yrange" -x "$xlabel" -y "$ylabel" -t "$title" -c "$xtics" -c "$ytics"  -c "set palette defined ( 0 '$color0',3 '$color3',6 '$color6',10 '$color10' )" -c "set cntrparam bspline" -c "set cntrparam order 5" -c "set cntrparam levels 30" -c "unset clabel" -c "set contour base" -c "set pm3d map interpolate 30,30" -c "set size square" -c "set dgrid3d $grid1,$grid2,$grid3" -c "set style line 1 lt 1 lc rgb 'black' lw 0.1" -k $file $using
+
+}
+
+# **************** MAIN *******************
+
+
+if [ $# -ge 1 ] ; then
+    if [[ $1 != -* ]]; then
+	file=$1
+	shift
+    fi
+
+while [ $# -ge 1 ]
+do
+	case $1 in
+
+	    -c)
+		cr=(${2//:/ })
+		range="set cbrange [${cr[0]}:${cr[1]}]"
+		shift 2;;
+
+	    -r)
+		xr=(${2//:/ })
+		yr=(${3//:/ })
+		xrange="[${xr[0]}:${xr[1]}]"
+		yrange="[${yr[0]}:${yr[1]}]"
+		shift 3;;
+
+	    -x)
+		xr=(${2//:/ })
+		xrange="[${xr[0]}:${xr[1]}]"
+		shift 2;;
+
+	    -y)
+		yr=(${2//:/ })
+		yrange="[${yr[0]}:${yr[1]}]"
+		shift 2;;
+
+	    -xt)
+		if  [ -z $2 ]; then
+		    echo "Error: Please enter a valid number"
+		    exit -1
+		fi
+		xtics="set xtics $2"
+		shift 2
+		;;
+
+	    -yt)
+		if  [ -z $2 ]; then
+		    echo "Error: Please enter a valid number"
+		    exit -1
+		fi
+		ytics="set ytics $2"
+		shift 2
+		;;
+
+	    -t)
+		if [[ $2 == 'd' ]];then
+		    d=(${PWD//// })
+		    title="${d[-1]}"
+		else
+		    title=$2
+		fi
+		shift 2
+		;;
+
+	    -xl)
+		xlabel=$2
+		shift 2
+		;;
+
+	    -yl)
+		ylabel=$2
+		shift 2
+		;;
+
+	    -g)
+		[[ $# -lt 3 ]] && echo "Error! grid requires 2 inputs: ie. -g 12 12" && exit 1
+		grid1=$2
+		grid2=$3
+		echo "Gridding $grid1 by $grid2..."
+		shift 3;;
+
+	    -auto)
+		#Xmax=`awk '{if($1>m) {m=$1}} END{print m}' $file`
+		#Xmin=`awk '{if($1<m) {m=$1}} END{print m}' $file`
+		#Ymax=`awk '{if($2>m) {m=$2}} END{print m}' $file`
+		#Ymin=`awk '{if($2<m) {m=$2}} END{print m}' $file`
+		Xmax=`awk 'END{print $1}' $file`
+		Ymax=`awk 'END{print $2}' $file`
+		Xmin=`awk '{if (NR==1){print $1}}' $file`
+		Ymin=`awk '{if (NR==1){print $2}}' $file`
+		xrange="[$Xmin:$Xmax]"
+		yrange="[$Ymin:$Ymax]"
+		echo "Ranges set to $xrange $yrange"
+		shift
+		;;
+
+	    -rama)
+		xrange="[-180:180]"
+		yrange="[-180:180]"
+		title="Ramachandran Map"
+		xtics="set xtics 60"
+		ytics="set ytics 60"
+		xlabel="Phi"
+		ylabel="Psi"
+		shift
+		;;
+
+		# invert colors for energy scale
+	    -en)
+		color0="red"
+		color3="yellow"
+		color6="green"
+		color10="blue"
+		#plottype="energy"
+		shift
+		;;
+
+	    -png)
+		if [ -z $2 ]; then
+			echo "Error: Please enter a filename"
+			exit -1
+		else
+			size="set size 0.5,0.5"
+			[[ ${2: -3} == '.png' ]] && fname=$2 || fname="$2.png"
+			save="-o $fname"
+			terminal="set terminal pngcairo font \"Gill Sans,24\" enhanced size 3000,3000 crop"
+			echo "Saving to: " $fname
+			shift 2
+		fi
+		;;
+
+	    -gpl)
+		if [ -z $2 ]; then
+			echo "Error: Please enter a filename"
+			exit -1
+		else
+			size="set size 0.5,0.5"
+			[[ ${2: -3} == '.gp' ]] && fname=$2 || fname="$2.gp"
+			save="-o $fname"
+			#save="save $fname"
+			echo "Saving to: " $fname
+			shift 2
+		fi
+		;;
+
+	    -pdf)
+		if [ -z $2 ]; then
+			echo "Error: Please enter a filename"
+			exit -1
+		else
+			size="set size 1,1"
+			[[ ${2: -3} == '.pdf' ]] && fname=$2 || fname="$2.pdf"
+			echo $fname
+			#fname="$2.pdf"
+			save="-o $fname"
+			terminal="set terminal pdfcairo linewidth 0.1"
+			echo "Saving to: $fname"
+			shift 2
+		fi
+		;;
+
+	    -ps)
+		if [ -z $2 ]; then
+			echo "Error: Please enter a filename"
+			exit -1
+		else
+			size="set size 1,1"
+			fname="$2.ps"
+			save="-o $fname"
+			terminal="set terminal epscairo color enhanced linewidth 0.1 crop"
+			#terminal="set terminal postscript eps color enhanced linewidth 0.01"
+			echo "Saving to: " $fname
+			shift 2
+		fi
+		;;
+
+	    -m)
+		using="mat u ($1*30-180):($2*30-180):($3)"
+		shift;;
+
+	    -ma)
+		using="mat u ($1*30-165):($2*30-165):($3)"
+		shift;;
+	
+	    -u)
+		title=""
+		xrange=""
+		yrange=""
+		xlabel=""
+		ylabel=""
+		xtics=""
+		ytics=""
+		shift;;
+
+		# grayscale
+	    -gr)
+	    #if [[ $plottype == "energy" ]]; then
+		color0="black"
+		color3="gray40"
+		color6="gray80"
+		color10="white"
+	    #elif [[ $plottype == "prob" ]]; then
+	    #    color0="white"
+	    #    color3="gray80"
+	    #    color6="gray40"
+	    #    color10="black"
+	    #else
+	    #    echo "Unknown plot type! Exiting..."
+	    #    exit 1
+	    #fi
+		shift
+		;;
+
+	    -h | --help)
+		help
+		exit 0;;
+
+	    *)
+		echo "Unknown option '$2'" >&2
+		exit 1;;
+
+	esac
+
+done
+	
+	plot $@
+
+else
+	echo 'Wrong option!'
+	help
+	exit 1
+fi

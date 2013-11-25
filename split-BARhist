@@ -1,0 +1,75 @@
+#! /usr/bin/python
+
+import sys,os
+
+fin=open(sys.argv[1],'r')
+foutname=sys.argv[1].split('.')[0]
+sub=sys.argv[1].split('.')[0].strip('histogram')
+
+x=y=0
+n=-1
+
+foutdHdLheader=open('tmp_headerdHdL','w')
+foutdeltaHheader=open('tmp_headerdeltaH','w')
+
+while 1:
+    line=fin.readline()
+    if not line:
+	break
+    else:
+	if line[0] == '#':
+	    continue
+	elif line[0] == '@' and len(line)>=3:
+	    txt=line.split()
+	    if len(txt) >= 3:
+		if txt[2] == 'legend':
+		    if txt[3][0:5] == '"N(dH':
+			foutdHdLheader.write(line)
+		    if txt[3][0:6] == '"N(\\xD':
+			foutdeltaHheader.write(line)
+		else:
+		    continue
+	    else:
+		continue
+#	elif line[0] == '@' and len(line)>=3 and line[2] == 'legend' and line[3][0:5] == '"N(dH':
+#	    print >> foutdHdLheader, line
+#	elif line[0] == '@' and len(line)>=3 and line[2] == 'legend' and line[3][0:5] == '"N(\\xD':
+#	    print >> foutdeltaHheader, line
+#	elif line[0] == '@' and len(line)>=3 and not line[2] == 'legend':
+#	    continue
+	elif line[0] == '@' and len(line) < 3:
+	    n+=1
+	    try:
+		fout.close()
+	    except NameError:
+		pass
+	    if n%3 == 0:
+		xstr="%03d" %x
+		fout=open('tmp_dHdL'+xstr+'.xvg','w')
+		x+=1
+	    else:
+		ystr="%03d" %y
+		fout=open('tmp_DH'+ystr+'.xvg','w')
+		y+=1
+	else:
+	    fout.write(line)
+
+fin.close()
+fout.close()
+foutdHdLheader.close()
+foutdeltaHheader.close()
+
+dHdLfile='dHdL'+sub+'.xvg'
+deltaHfile='deltaH'+sub+'.xvg'
+
+os.system("paste tmp_dHdL* > tmp_dHdL")
+os.system("paste tmp_DH* > tmp_DH")
+
+dHdLcomm='cat tmp_headerdHdL tmp_dHdL > '+ dHdLfile
+DHcomm='cat tmp_headerdeltaH tmp_DH > '+ deltaHfile
+
+os.system(dHdLcomm)
+os.system(DHcomm)
+os.system("rm tmp_*")
+
+print "Splitting DONE! %s and %s are created!" %(dHdLfile,deltaHfile)

@@ -1,0 +1,7 @@
+#! /bin/bash
+
+f=${1%.tex}
+latex $f.tex
+dvips $f.dvi
+ps2eps -l --nohires -f $f.ps
+ps2pdf -dEPSCrop -dAutoRotatePages=/None -dUseFlateCompression=true $f.eps

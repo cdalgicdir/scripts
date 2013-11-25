@@ -1,0 +1,56 @@
+#! /bin/bash
+
+if [[ $# != 2 ]]; then
+    echo "ERROR! Usage: blockaverage file 4"
+    exit 1
+fi
+file=$1
+split=$2
+nrow=`awk '{if ($1 ~ /^[@#]/) NR--}END{print NR}' $file `
+increment=`echo "$nrow/$split" | bc -l`
+
+echo -e "Total number of data points: $nrow : Splitting into $split"
+echo -e "# part mean std n"
+
+# std = sum(x**2)/(n-1) - mean**2*(n/(n-1))
+#
+# don't include end points
+awk -v increment=$increment -v nsp=$split '{
+if ($1 ~ /^[@#]/) {
+    NR--;
+    if ($3 ~ "legend") {
+	j=substr($2,2);
+	for (i=4;i<=NF;i++) {
+	legend[j]=legend[j]" "$i;
+    }
+    }
+    }
+else {
+    for (i=2;i<=NF;i++) {
+	if (NR % increment == 0) n=int(NR/increment)-1;
+	else n=int(NR/increment);
+	sum[n,i]+=$i;
+	sumsq[n,i]+=$i*$i;
+	l[n,i]++
+	}
+    }
+}
+END{
+    for (i=2;i<=NF;i++){
+	#print "#","column",i;
+	#print "\033[1;31m#","column",i"\033[0m";
+	print "\033[1;31m#","column",i,legend[i-2]"\033[0m";
+	for (j=0;j<=nsp-1;j++) {
+	    summeans[i]+=sum[j,i]/l[j,i];
+	    sumsqmeans[i]+=sum[j,i]*sum[j,i]/l[j,i]/l[j,i];
+	    #print j+1,sum[j,i]/l[j,i],sqrt((sumsq[j,i]/(l[j,i]-1))-((sum[j,i]/l[j,i])**2)*l[j,i]/(l[j,i]-1)),l[j,i]
+	    print j+1,"\033[1;37m"sum[j,i]/l[j,i]"\033[0m",sqrt((sumsq[j,i]/(l[j,i]-1))-((sum[j,i]/l[j,i])**2)*l[j,i]/(l[j,i]-1)),l[j,i]
+	}
+	#print "std of means: ",sqrt(sumsqmeans[i]/(nsp-1)-((summeans[i]/nsp)**2)*nsp/(nsp-1))
+	print "\033[1;35mstd of means: ",sqrt(sumsqmeans[i]/(nsp-1)-((summeans[i]/nsp)**2)*nsp/(nsp-1))"\033[0m"
+    }
+}' $file
+
+
+# include end points (number of data points for each block might not be the same
+#awk -v increment=$increment -v nsp=$split '{if ($1 ~ /^[@#]/) NR--;else {for (i=1;i<=NF;i++) {if (NR%increment==0) n=int(NR/increment)-1;else n=int(NR/increment);sum[n,i]+=$i;sumsq[n,i]+=$i*$i;l[n,i]++}}}END{for (i=1;i<=NF;i++){print "#",i;for (j=0;j<=nsp-1;j++) {summeans[i]+=sum[j,i]/l[j,i];sumsqmeans[i]+=sum[j,i]*sum[j,i]/l[j,i]/l[j,i];print j+1,sum[j,i]/l[j,i],sqrt((sumsq[j,i]/(l[j,i]-1))-((sum[j,i]/l[j,i])**2)*l[j,i]/(l[j,i]-1)),l[j,i]}print "std of means: ",sqrt(sumsqmeans[i]/(nsp-1)-((summeans[i]/nsp)**2)*nsp/(nsp-1))}}' $file

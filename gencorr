@@ -1,0 +1,205 @@
+#! /usr/bin/python
+
+import sys, math, re
+
+def printhelp():
+    print "Script to generate correlation from data file of two rows"
+    print "Usage :\n \
+    ${0##*/} file.xvg 12 (divides into 12 equal rows, default is 12)\n \
+    ${0##*/} file.xvg 12 -mat (writes out the matrix)\n \
+    ${0##*/} file.xvg 12 (-rowsum|-colsum)\n \
+    ${0##*/} file.xvg 12 -bins"
+
+infilename = sys.argv[1]
+outfilename = infilename[:-3] + 'corr'
+
+writeprob = True
+writematrix = printbins = rowsum = colsum = False
+for arg in sys.argv:
+    if arg == '-mat':
+	writematrix = True
+	writeprob = False
+    elif arg == '-rowsum':
+	rowsum = True
+	writeprob = False
+    elif arg == '-colsum':
+	colsum = True
+	writeprob = False
+    elif arg == '-bins':
+	printbins = True
+	writeprob = False
+    elif re.search(r'^\d+',arg):
+	divide = int(arg)
+    elif arg in ['-h','-help','help','--h','--help']:
+	printhelp()
+	sys.exit(0)
+
+try:
+    divide
+except NameError:
+    print "# Number of areas not specified. Using 12 instead."
+    divide = 12
+
+#if len(sys.argv) > 1:
+#    divide = int(sys.argv[2])
+#else:
+#    divide = 12
+
+print "# Dividing into %d by %d..." %(divide,divide)
+
+def FindMinMax(infilename):
+    infile = open(infilename,'r')
+    nlines = 0
+    minmax = [[99999999,-99999999],[99999999,-99999999]]
+    while 1:
+	txt = infile.readline()
+	if not txt:
+	    break
+	elif txt[0] in ['@','#']:
+	    pass
+	else:
+	    nlines += 1
+	    tmp = txt.split()
+	    data0 = float(tmp[0])
+	    data1 = float(tmp[1])
+
+	    # minmax = [min max]
+	    if data0 > minmax[0][1]:
+		minmax[0][1] = data0
+	    if data0 < minmax[0][0]:
+		minmax[0][0] = data0
+	    if data1 > minmax[1][1]:
+		minmax[1][1] = data1
+	    if data1 < minmax[1][0]:
+		minmax[1][0] = data1
+
+    infile.close()
+    return minmax, nlines
+
+def printMatrix(matrix):
+    nrow = len(matrix)
+    ncol = len(matrix[0])
+    for i in range(nrow):
+	print
+	for j in range(ncol):
+	    print matrix[i][j],
+    print
+    print
+
+def printMatrixCol(matrix):
+    nrow = len(matrix)
+    ncol = len(matrix[0])
+    for i in range(nrow):
+	for j in range(ncol):
+	    print matrix[i][j]
+	    #print matrix[i][j],
+    print
+    print
+
+
+def writeMatrix(matrix):
+    nrow = len(matrix)
+    ncol = len(matrix[0])
+    outname = infilename[:-3] + 'mat'
+    outfile = open(outname,'w')
+    for i in range(nrow):
+	print >> outfile, ""
+	for j in range(ncol):
+	    outfile.write("%12f" %(matrix[i][j]))
+	    #print >> outfile, matrix[i][j],
+    print "[filename].mat generated!"
+
+def writeXYP(minmax,increment,matrix):
+    nrow = len(matrix)
+    ncol = len(matrix[0])
+    outfile = open(outfilename,'w')
+    x = minmax[0][0]+increment[0]/2
+    i = 0
+
+    #while x<minmax[0][1]:
+    for i in range(divide):
+	y = minmax[1][0]+increment[1]/2
+	for j in range(divide):
+	#while y<minmax[1][1]:
+	    print >> outfile, '%f %f %f' %(x,y,matrix[i][j])
+	    y+=increment[1]
+	x+=increment[0]
+
+
+def sumrow(matrix):
+    nrow = len(matrix)
+    ncol = len(matrix[0])
+    rowsum = []
+    for i in range(nrow):
+	rowsum.append([sum(matrix[i])])
+    return rowsum
+
+def sumcol(matrix):
+    nrow = len(matrix)
+    ncol = len(matrix[0])
+    colsum = [[]]
+    for j in range(ncol):
+	sum = 0
+	for i in range(nrow):
+	    sum += matrix[i][j]
+	colsum[0].append(sum)
+    return colsum
+
+def bin2prob(bins,n):
+    nrow = len(bins)
+    ncol = len(bins[0])
+    prob = []
+    for i in range(nrow):
+	tmp = []
+	for j in range(ncol):
+	    tmp.append(float(bins[i][j])/n)
+	prob.append(tmp)
+    return prob
+
+
+minmax, nlines = FindMinMax(infilename)
+# to avoid extra bins for the maximum and minimum points
+eps = 1e-10
+minmax = [[minmax[0][0]-eps, minmax[0][1]+eps],[minmax[1][0]-eps, minmax[1][1]+eps]]
+increment = [(minmax[0][1] - minmax[0][0])/divide,(minmax[1][1] - minmax[1][0])/divide]
+
+bins = []
+for i in range(divide):
+    tmp = []
+    for j in range(divide):
+	tmp.append(0)
+    bins.append(tmp)
+
+infile = open(infilename,'r')
+outfile = open(outfilename,'w')
+
+while 1:
+    txt = infile.readline()
+    if not txt:
+	break
+    elif txt[0] in ['@','#']:
+	pass
+    else:
+	tmp = txt.split()
+	data0 = float(tmp[0])
+	data1 = float(tmp[1])
+
+	bins[int((data0 - minmax[0][0])/increment[0])][int((data1 - minmax[1][0])/increment[1])] += 1
+
+probs = bin2prob(bins,nlines)
+
+if printbins:
+    print "# The matrix is with counts is: "
+    printMatrix(bins)
+if writematrix:
+    writeMatrix(probs)
+if rowsum:
+    print "# The row sum of the matrix is: "
+    printMatrix(sumrow(probs))
+if colsum:
+    print "# The column sum of the matrix is: "
+    #printMatrix(sumcol(probs))
+    printMatrixCol(sumcol(probs))
+if writeprob:
+    writeXYP(minmax,increment,probs)
+    print "%s created!" %outfilename

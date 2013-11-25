@@ -1,0 +1,95 @@
+#! /usr/bin/python
+
+#import multiprocessing
+import numpy as np
+import pandas as pd
+from scipy import stats
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import seaborn as sns
+from matplotlib.pyplot import plot, hist
+import sys
+import time
+
+start=time.time()
+
+def splithist(data, divide):
+    ''' splits time data into divide regions, calculates histogram
+    for each region and returns a list of counts and bins '''
+
+    mindata = np.min(data)
+    maxdata = np.max(data)
+    nbins = 200
+    bins = np.arange(mindata, maxdata, (maxdata-mindata)/nbins)
+
+    size = a.shape[0]
+    remainder = size%divide
+    if remainder:
+	ar = data[:-remainder]
+	print "To be able to divide into %d equal regions, last %d points will be discarded" %(divide, remainder)
+    else:
+	ar = a
+    a2 = ar.reshape((divide,size/divide))
+
+    for i in range(divide):
+	counts, bins = np.histogram(a2[i,:],bins=bins,normed=True)
+	try:
+	    countslist = np.vstack((countslist,counts))
+	    binslist = np.vstack((binslist,bins))
+	except NameError:
+	    countslist = counts
+	    binslist = bins
+    return countslist, binslist
+
+try: n = int(sys.argv[2])
+except IndexError: n = 1
+try: divide = int(sys.argv[3])
+except IndexError: divide = 4
+
+if len(sys.argv) > 4:
+    print "Error in number of arguments!"
+    sys.exit(1)
+
+# numpy loadtxt function changed to take into account the comment 
+x = np.loadtxt(sys.argv[1])
+
+print "Shape of data:", x.shape
+print "Taking column %d" %n
+print "Dividing into %d equal regions" %divide
+
+if x.shape[0] == x.size: a = x
+else: a = x[:,n]
+
+mindata = np.min(a)
+maxdata = np.max(a)
+
+countslist, binslist = splithist(a, divide)
+
+f, axes = plt.subplots(2, 2, sharex=True, sharey=True, figsize=(12,9))
+axes = np.ravel(axes)
+
+color = sns.color_palette("husl")[0]
+cis = np.linspace(95, 10, 4) #confidence intervals
+sns.tsplot(.5*(binslist[0][1:]+binslist[0][:-1]), countslist, err_style="ci_band", ci=cis, color=color, ax=axes[0], lw=3)
+
+for i in range(divide):
+    axes[1].plot(.5*(binslist[i][1:]+binslist[i][:-1]), countslist[i,:], lw=3, label=("part %d" %(i+1)))
+
+# divide into 2 regions
+divide = 2
+countslist2, binslist2 = splithist(a, divide)
+sns.tsplot(.5*(binslist2[0][1:]+binslist2[0][:-1]), countslist2, err_style="ci_band", ci=cis, color=color, ax=axes[2])
+
+for i in range(divide):
+    axes[3].plot(.5*(binslist2[i][1:]+binslist2[i][:-1]), countslist2[i,:], lw=3, label=("part %d" %(i+1)))
+
+strcis=''.join([("%.1f " %i) for i in cis])
+axes[0].set_title("Divided into 4 with CI: %s " %strcis)
+axes[2].set_title("Divided into 2  with CI: %s " %strcis)
+axes[1].legend()
+axes[3].legend()
+
+plt.xlim(mindata, maxdata)
+end=time.time()
+print end-start
+plt.show()

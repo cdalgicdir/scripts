@@ -1,0 +1,162 @@
+#! /usr/bin/python
+
+from __future__ import division
+import math, sys
+#import time
+#start=time.time()
+
+class Data:
+    ''' Data class '''
+
+    def __init__(self,data):
+	self.data = data
+	self.length = len(self.data)
+	self.min = min(self.data)
+	self.max = max(self.data)
+	self.range = self.max - self.min
+	self.q1 = self._findq1()
+	self.q2 = self._findq2()
+	self.q3 = self._findq3()
+	self.median = self.q2
+	self.iqr = self.q3 - self.q1
+	#print "iqr %f" %(time.time()-start)
+	self.mode = self._findmode()
+	#print "mode %f" %(time.time()-start)
+	self.mean = self._calcmean()
+	#print "mean %f" %(time.time()-start)
+	self.var = self._calcvar()
+	#print "var %f" %(time.time()-start)
+	self.std = math.sqrt(self.var)
+	self.kurtosis = self._calckurtosis()
+	#print "kurtosis %f" %(time.time()-start)
+	self.skewness = self._calcskewness()
+	#print "skewness %f" %(time.time()-start)
+	self.entropy = self._calcentropy()
+	#print "entropy %f" %(time.time()-start)
+
+    def _findq1(self):
+	''' Finds 1st quartile '''
+	nq1 = math.ceil(self.length/4)
+	return sorted(self.data)[int(nq1-1)]
+
+    def _findq2(self):
+	''' Finds 2nd quartile '''
+	nq2 = math.ceil(self.length/2)
+	return sorted(self.data)[int(nq2)-1]
+
+    def _findq3(self):
+	''' Finds 3rd quartile '''
+	nq3 = math.ceil(3*self.length/4)
+	return sorted(self.data)[int(nq3)-1]
+
+    def _findmode(self):
+	''' Finds mode '''
+	self.counts = {}
+	self.primes = []
+	maxcount = 0
+	for item in self.data:
+	    self.counts[item] = self.counts.get(item,0) + 1
+	    if not self.counts[item] > 1:
+		self.primes.append(item)
+	    if maxcount < self.counts[item]:
+		maxcount = self.counts[item]
+		mode = item
+
+	# Multiple modes
+	if self.counts.values().count(maxcount) > 1:
+	    mode = []
+	    for item,count in self.counts.items():
+		if count == maxcount:
+		    mode.append(item)
+	return mode
+
+    def _calcmean(self):
+	''' Calculates mean '''
+	total = 0
+	for item in self.data:
+	    total += item
+	return total/self.length
+
+    def _calcvar(self):
+	''' Calculates variance '''
+	sumsqdiff = 0
+	for item in self.data:
+	    sumsqdiff += (item-self.mean)**2
+	return sumsqdiff/(self.length-1)
+
+    def _calcpopvar(self):
+	''' Calculates population variance '''
+	return self.var / self.length * (self.length-1)
+
+    def _calcpopstd(self):
+	''' Calculates population standard deviation '''
+	return math.sqrt(self.var / self.length * (self.length-1))
+
+    def _calckurtosis(self):
+	''' Calculates kurtosis '''
+	sumsqq = 0
+	for item in self.data:
+	    sumsqq += (item-self.mean)**4
+	return self.length*(self.length+1)/(self.length-1)/(self.length-2)/(self.length-3)*sumsqq/self.var**2-3*(self.length-1)**2/(self.length-2)/(self.length-3)
+
+    def _calcskewness(self):
+	''' Calculates skewness '''
+	sumsqt = 0
+	for item in self.data:
+	    sumsqt += (item-self.mean)**3
+	return sumsqt/self.std**3/(self.length-1)/(self.length-2)
+
+    def _calcentropy(self):
+	''' Calculates entropy '''
+	entropy = 0
+	done = []
+	for x in self.primes:
+	#for x in self.data:
+	#    if not x in done:
+	#	done.append(x)
+	#	p_x = self.data.count(x)/self.length
+		p_x = self.counts[x]/self.length
+		entropy -= p_x*math.log(p_x)
+	return entropy
+
+
+fin = open(sys.argv[1],'r')
+ncol = int(sys.argv[2])-1
+data = []
+
+while 1:
+    line = fin.readline()
+    if not line:
+	break
+    elif line[0] in ['#','@']:
+	pass
+    else:
+	txt = line.split()
+	data.append(float(txt[ncol]))
+
+
+fin.close()
+x = Data(data)
+#x = Data([1,2,3,4,5,6,1])
+#print 'Data\t\t:', x.data
+print 'Length\t\t: %d' %x.length
+print 'Min\t\t: %g' %x.min
+print 'Max\t\t: %g' %x.max
+print 'Range\t\t: %g' %x.range
+print 'Q1\t\t: %g' %x.q1
+print 'Q2\t\t: %g' %x.q2
+print 'Q3\t\t: %g' %x.q3
+print 'IQR\t\t: %g' %x.iqr
+if not type(x.mode) == type(data):
+    print 'Mode\t\t: %g' %x.mode
+else:
+    if len(x.mode) < 5:
+	print 'Mode\t\t: ', x.mode
+    else:
+	print 'Mode\t\t: Data has multiple modes!'
+print 'Mean\t\t: %g' %x.mean
+print 'Var\t\t: %g' %x.var
+print 'Std\t\t: %g' %x.std
+print 'Kurtosis\t: %g' %x.kurtosis
+print 'Skewness\t: %g' %x.skewness
+print 'Entropy\t\t: %g' %x.entropy

@@ -1,0 +1,35 @@
+#! /bin/bash
+
+if [[ $# != 2 ]]; then
+    echo "Insufficient arguments. Exiting..."
+    echo "Usage: $ splithist filename divide"
+    echo "ie.  : $ splithist timedata.xvg 4"
+    exit 1
+fi
+
+fname=${1}
+divide=${2}
+
+end_time=`tail -1 ${fname} | awk '{print $1}'`
+end=${end_time%.*}
+begin=0
+
+increment=$(((end-begin)/${divide}))
+
+outfile=${fname##*/}
+outfile=${outfile#time}
+outfile=hist${outfile#dihaver}
+outfile=${outfile%.xvg}
+
+echo "Total time in ${fname} is $end"
+
+for i in `seq 1 ${divide}`;do
+    end=$((begin+increment))
+    outname=${outfile}-${i}of${divide}.xvg
+    g_analyze -f ${fname} -dist ${outname} -bw 5 -b $begin -e $end
+    awk '{if (! $1 != /^[@#]/) print;else if ($1 >= -180 && $1 <= 180) print}' ${outname} > sil.123123
+    mv sil.123123 ${outname}
+    echo "Done ${outname}... Splitted from $begin to $end..."
+    begin=$((begin+increment))
+    end=$((end+increment))
+done

@@ -1,0 +1,134 @@
+#! /bin/bash
+
+#size='1600,1200'
+size='1920,1280'
+split='split-BARhist'
+deltaH='deltaH.xvg'
+dHdL='dHdL.xvg'
+histogramfile='histogram.xvg'
+savedH=''
+saveDH=''
+
+# Help on usage
+
+help () {
+    echo -e "Usage:\t$ pbar -s histogram.xvg (generates deltaH.xvg and dHdL.xvg using histogram.xvg)\n\
+	$ pbar (plots deltaH.xvg and dHdL.xvg)\n\
+	$ pbar -s 2 (splits the histograms into 2 equal portions)\n\
+	$ pbar -save (saves plots as gplot files)\n\
+	$ pbar deltaH-1.xvg deltaH-2.xvg (plots files using deltaH scheme)\n\
+	$ pbar dHdL-1.xvg dHdL-2.xvg (plots files using dHdL scheme)\n\
+	"
+    exit 0
+}
+
+plotdeltaH () {
+    plotcomms=''
+    IFS=$'\n'
+    deltaHlist=($(grep "legend \"N(\\\xD" $deltaH))
+    NdeltaHlist=${#deltaHlist[@]}
+    for i in `seq 0 $((NdeltaHlist-1))`;do
+	var=$(echo ${deltaHlist[$i]} | sed 's/^@ s.* legend //')
+	var=$(echo ${var} | sed 's/\"N(\\xD\\f{}H(\\xl\\f{}=//')
+	var=$(echo ${var} | sed 's/) | \\xl\\f{}//')
+	var=$(echo ${var} | sed 's/)\"//')
+	IFS=' '
+	var=(${var//=/ })
+	if [[ $plotover ]]; then
+	    for deltaH in ${deltaHfilelist[@]}; do
+		label=${deltaH%.xvg}
+		label=${label#deltaH}
+		label=${label#_}
+		[[ $label != '' ]] && label='-'$label
+		plotcomms=$plotcomms"'$deltaH' u $((2*i+1)):$((2*i+2)) w l t 'N({/Symbol D}H({/Symbol l}=${var[0]} | {/Symbol l}=${var[1]})$label',"
+	    done
+	else
+	    plotcomms=$plotcomms"'$deltaH' u $((2*i+1)):$((2*i+2)) w l t 'N({/Symbol D}H({/Symbol l}=${var[0]} | {/Symbol l}=${var[1]})',"
+	fi
+    done
+    plotcomms=${plotcomms:0:$((${#plotcomms}-1))}
+    gplot -c "set term wxt enhanced font \"Gill Sans,16\" size $size" -c "set key out" -x "{/Symbol D}H (kJ/mol)" -y "Samples" -t "N({/Symbol D}H)" -- "${plotcomms};$saveDH"
+}
+
+plotdHdL () {
+    plotcomms=''
+    IFS=$'\n'
+    dHdLlist=($(grep "legend \"N(dH" $dHdL))
+    NdHdLlist=${#dHdLlist[@]}
+    for i in `seq 0 $((NdHdLlist-1))`;do
+	var=$(echo ${dHdLlist[$i]} | sed 's/^@ s.* legend //')
+	var=$(echo ${var} | sed 's/\"N(dH\/d\\xl\\f{} | \\xl\\f{}=//')
+	var=$(echo ${var} | sed 's/)\"//')
+	if [[ $plotover ]]; then
+	    for dHdL in ${dHdLfilelist[@]}; do
+		label=${dHdL%.xvg}
+		label=${label#dHdL}
+		label=${label#_}
+		[[ $label != '' ]] && label='-'$label
+		plotcomms=$plotcomms"'$dHdL' u $((2*i+1)):$((2*i+2)) w l t 'N(dH/d{/Symbol l} | {/Symbol l}=$var)$label',"
+	    done
+	else
+	    plotcomms=$plotcomms"'$dHdL' u $((2*i+1)):$((2*i+2)) w l t 'N(dH/d{/Symbol l} | {/Symbol l}=$var)',"
+	fi
+    done
+    plotcomms=${plotcomms:0:$((${#plotcomms}-1))}
+    gplot -c "set term wxt enhanced font \"Gill Sans,16\" size $size" -c "set key out" -y "Samples" -x "{/Symbol d}H/{/Symbol d}L (kJ/mol)" -t "N({/Symbol d}h/{/Symbol d}L)" -- "${plotcomms};$savedH"
+}
+
+[[ $# -eq 0 ]] && plotdeltaH $@ && plotdHdL $@
+
+
+while [[ $# -ge 1 ]]; do
+case $1 in
+
+    -save)
+	savedH="save 'dHdL.gp'"
+	saveDH="save 'deltaH.gp'"
+	shift 1;;
+
+    -s)
+	[[ $# < 2 ]] && echo "Filename not found!" && help && exit 1
+	echo "Splitting $2 into deltaH and dHdL!"
+	histogramfile=$2
+	x=`split-BARhist ${histogramfile}`
+	echo $x
+	x=(${x// / })
+	dHdL=${x[2]}; deltaH=${x[4]}
+	plotdeltaH $@
+	plotdHdL $@
+	shift 2;;
+
+    deltaH*.xvg)
+	deltaH=$1
+	deltaHfilelist=(${deltaHfilelist[@]} $1)
+	[[ $plotover ]] && [[ $# -eq 1 ]] && plotdeltaH $@
+	[[ ! $plotover ]] && plotdeltaH $@
+	shift;;
+
+    dHdL*.xvg)
+	dHdL=$1
+	dHdLfilelist=(${dHdLfilelist[@]} $1)
+	[[ $plotover ]] && [[ $# -eq 1 ]] && plotdHdL $@
+	[[ ! $plotover ]] && plotdHdL $@
+	shift;;
+
+    -o)
+	plotover=true
+	shift;;
+
+    -h|-help|--h|--help)
+	help;;
+esac
+done
+
+
+###################################################################
+# OLD
+###################################################################
+#
+#if [[ -e deltaH.xvg ]] && [[ -e dHdL.xvg ]] ; then
+#    gplot -c "set term wxt enhanced" -x "{/Symbol D}H (kJ/mol)" -y "Samples" -t "N({/Symbol D}H)" -- "for [i=1:80:2] 'deltaH.xvg' u i:i+1 w l not" 2>/dev/null
+#    gplot -c "set term wxt enhanced" -y "Samples" -x "{/Symbol d}H/}{/Symbol d}L (kJ/mol)" -t "N({/Symbol d}h/{/Symbol d}L)" -- "for [i=1:80:2] 'dHdL.xvg' u i:i+1 w l not" 2>/dev/null
+#else
+#    echo "delta_H.xvg or dHdL.xvg not found! Please first generate these files using split-BARhist script!"
+#fi

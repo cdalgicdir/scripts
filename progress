@@ -1,0 +1,126 @@
+#! /bin/bash
+
+
+###################################################################
+# Script to show progress of pulling sims
+# Extracts time from md.log of d?.?? directories
+###################################################################
+
+printhelp () {
+echo -e "Usage: progress [OPTIONS]
+Options:
+\t-d d?.???\tsims are in directories d?.???
+\t-e 20000\tend time for simulations is 20000 ps, default is 10000 ps
+\t-ti\t\tthermodynamic integration, directories are Lambda_*
+\t-nc\t\tno color
+\t-nf\t\tdon't print out completed sims
+\t-h\t\tprints help"
+}
+
+
+# total time for simulation
+end=10000 
+closetoend=8000
+directories="d?.???/?-PULL"
+#subdir="?-PULL"
+noFinished=false
+noColor=false
+
+# option for no color
+while [[ $# -ge 1 ]]; do
+    case $1 in
+	-d)
+	    directories="$2"
+	    shift 2;;
+	-nf)
+	    option=$1
+	    noFinished=true
+	    shift;;
+	-nc)
+	    option=$1
+	    noColor=true
+	    shift;;
+	-e)
+	    end=$2
+	    closetoend=`echo "$end*0.8"|bc`
+	    shift 2;;
+	-ti)
+	    TI=true
+	    directories="Lambda_*/Production_MD"
+	    shift ;;
+
+	-h|-help|--help|--h|*)
+	    printhelp
+	    exit 0;;
+    esac
+done
+
+# COLORS
+###################################################################
+# Reset
+Color_Off='\e[0m'       # Text Reset
+
+# Bold
+BBlack='\e[1;30m'       # Black
+BRed='\e[1;31m'         # Red
+BGreen='\e[1;32m'       # Green
+BYellow='\e[1;33m'      # Yellow
+BBlue='\e[1;34m'        # Blue
+BPurple='\e[1;35m'      # Purple
+BCyan='\e[1;36m'        # Cyan
+BWhite='\e[1;37m'       # White
+
+
+lastoccur () {
+    file=$1
+    if [[ $file ]]; then
+	progress=`tac $file 2>/dev/null | grep "Time " -m 1 -B 1 | tac | tail -1 | awk '{print $2}'`
+	echo -n $progress
+    fi
+}
+
+definecolor () {
+    t=$1
+    if [[ $t ]] ; then
+	if [[ `echo "print $end>$t>$closetoend"|python` == 'True' ]]; then
+	    color=$BRed
+	elif [[ `echo "print $end==$t"|python` == 'True' ]]; then
+	    color=$BPurple
+	else
+	    color=$BGreen
+	fi
+	echo $color
+    fi
+}
+
+printout () {
+    file=$1
+    t=$2
+    color=$3
+    [[ $file == *part* ]] && tab='\t' || tab='\t\t'
+    if [[ $noColor == true ]]; then
+	echo -ne "$file :$tab" $t"\n" 
+    elif [[ $noFinished == true ]]; then
+	[[ "$color" != "$BPurple" ]] && echo -ne "$file :$tab" $color $t $Color_Off"\n"
+    else
+	echo -ne "$file :$tab" $color $t $Color_Off"\n"
+    fi
+}
+
+for dir in $directories;do
+    #pulldir=`ls -d $dir/$subdir  2>/dev/null`
+    pulldir=`ls -d $dir  2>/dev/null`
+    file=`ls -1 $pulldir/md*.log 2>/dev/null | tail -1` t=$(lastoccur $file) color=$(definecolor $t)
+    [[ -e $file ]] && printout $file $t $color
+    #if [[ -e $pulldir/md.log ]]; then
+    #    file="$pulldir/md.log" t=$(lastoccur $file) color=$(definecolor $t)
+    #    [[ $t ]] && printout $file $t $color
+    #elif [[  `ls $pulldir/md.part* 2>/dev/null` ]]; then
+    #    file=`ls -1 $pulldir/md.part00*|tail -1` t=$(lastoccur $file) color=$(definecolor $t)
+    #    [[ $t ]] && printout $file $t $color
+    #    #echo -n "$file : " && t=$(lastoccur $file) && echo -e $Bred $t $Color_Off
+    #elif [[ $TI == true ]]; then
+    #    file=`ls -1 $pulldir/md*.log | tail -1` t=$(lastoccur $file) color=$(definecolor $t)
+    #    [[ $t ]] && printout $file $t $color
+    #fi
+done

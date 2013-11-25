@@ -1,0 +1,15 @@
+#! /bin/bash
+
+templatedir="$HOME/SIMS/simreport"
+
+dorama () {
+    cp -r "$templatedir"/rama ramaXXX
+    cp rama.xvg ramaXXX/
+    cd ramaXXX/
+    gnuplot rama-pdf.gp
+    cp rama.pdf ../
+    cd ../
+    rm -rf ramaXXX/
+}
+
+dorama "$@"

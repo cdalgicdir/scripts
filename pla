@@ -1,0 +1,166 @@
+#! /bin/bash
+
+###################################################################
+# plot multiple files in gnuplot using bash wildcards
+###################################################################
+
+lw=3
+pointsize="0.01"
+#linetype="points"
+linetype="lines"
+#linetype="linespoints"
+using=" u 1:2 "
+q="'"
+potfile="*.pot.*"
+tabfile="*table*"
+max=30
+label=1
+keyout=''
+plotfiles=''
+terminal='set terminal wxt'
+range=[:][:]
+
+plot () {
+    [[ $noplot == true ]] && echo "$plotfiles" | sed 's/,/,\\\n /g' || gplot $output  -c "${extra}" -c "$keyout" -c "$terminal" -r $range -- "$plotfiles"
+}
+
+help () {
+    echo "Usage: $ pla file1 file2 file3"
+    echo "       $ pla file*             (sames as above)"
+    echo "       $ pla file* 4           (uses 4th column)"
+    echo "       $ pla file* u 4         (uses 4th column)"
+    echo "       $ pla file* -y 2        (sets max yrange)"
+    echo "Needs: gplot script from C. Junghans"
+}
+
+die() {
+  echo -e "$*" >&2
+  exit 1
+}
+
+###################################################################
+# Check taken from gplot script of C. Junghans
+###################################################################
+
+if [ "${1#'['}" != "$1" ]; then
+   #check for [??:??] or [??:??]{??:??}
+   [ -n "$(echo "$1" | grep -e '^\(\[[-.eE[:digit:]]*:[-.eE[:digit:]]*\]\)\{1,2\}$')" ] ||
+     die "Range ('$1') has to be in form [??:??]\<[??:??]\>"
+   range=$1
+   shift
+fi
+
+###################################################################
+# End of check
+###################################################################
+
+
+while [[ $# -ge 1 ]]; do
+    case $1 in
+	u)
+	    using=" u 1:${2} "
+	    shift 2;;
+
+	-n)
+	    noplot=true
+	    shift 1;;
+
+	w)
+	    linetype=$2
+	    shift 2;;
+
+	ps)
+	    pointsize=$2
+	    shift 2;;
+
+	lw)
+	    lw=$2
+	    shift 2;;
+
+	-y)
+	    range="[:][:$2]"
+	    shift 2;;
+
+#	\[:\]\[[0-9]*:[0-9]*\]|\[:\]\[:[0-9]*\]|\[:\]\[[0-9]*:\]|\[:[0-9]*\]\[:\]|\[[0-9]*:\]\[:\]|\[:\]\[:\]|\[[0-9]*:\]\[[0-9]*:[0-9]*\]|\[[0-9]*:[0-9]*\]\[[0-9]*:[0-9]*\]|\[:[0-9]*\]\[:[0-9]*\]|\[[0-9]*:\]\[:[0-9]*\]|\[[0-9]*:\]\[[0-9]*:\]|\[:[0-9]*\]\[[0-9]*:\]|\[:[0-9]*\]\[[0-9]*:[0-9]*\]|\[[0-9]*:[0-9]*\]\[[0-9]*:\]|\[[0-9]*:[0-9]*\]\[:[0-9]*\]|\[[0-9]*:[0-9]*\]\[:\])
+#	    range=$1
+#	    shift 1;;
+
+	not)
+	    label=0
+	    shift 1;;
+
+	-keyout|-ko)
+	    keyout='set key out'
+	    shift 1;;
+
+	-dih)
+	    range="[-180:180][:]"
+	    extra="set xtics 60;set xlabel 'Dihedral angle (degrees)';set ylabel 'Probability'"
+	    shift 1;;
+
+	-rama)
+	    terminal=$terminal' enhanced'
+	    range="[-180:180][-180:180]"
+	    extra="set xtics 60;set ytics 60;set xlabel '{/Symbol f} (degrees)';set ylabel '{/Symbol y} (degrees)'"
+	    shift 1;;
+
+	-dashed|-dash)
+	    terminal=$terminal' dashed'
+	    shift 1;;
+
+	-pdf)
+	    terminal='set terminal pdfcairo font "Gill Sans,12" linewidth 3 rounded'
+	    output='-o out.pdf'
+	    echo "Generating out.pdf"
+	    shift 1;;
+
+	[0-9]|[0-9][0-9])
+	    using=" u 1:${1} "
+	    shift ;;
+
+	-h | -help | --help | --h)
+	    help
+	    exit 0
+	    ;;
+	*)
+	    filelist=(${filelist[@]} $1)
+	    shift ;;
+
+    esac
+done
+
+if [ $linetype == "lines" ] || [ $linetype == "l" ] ; then
+    with=" with $linetype lw $lw "
+elif [ $linetype == "points" ] || [ $linetype == "p" ]; then
+    with=" with $linetype ps $pointsize "
+else
+    with=" with $linetype "
+fi
+
+[[ $linetype == "yerror" ]] && using=" u 1:2:3 "
+
+for file in ${filelist[@]}
+do
+    if [[ -f $file ]]; then
+	if [[ $file == $tabfile && $file != *table_d*.xvg && $file != *table_a*.xvg ]]; then
+	    using=" u 1:6 "
+	    #ymax=1.5
+	    range="[:][:2]"
+	fi
+	#plotfiles=$plotfiles$q$file$q$using$with't '$q$file$q',' 
+	plotfiles=$plotfiles$q$file$q$using$with
+	if [[ $label == 1 ]]; then
+	    plotfiles=$plotfiles't '$q$file$q',' 
+	else
+	    plotfiles=$plotfiles'not,'
+	fi
+    fi
+done
+
+# remove comma at the end of command
+plotfiles=${plotfiles:0:$((${#plotfiles}-1))}
+#echo $plotfiles
+
+# finally plot all
+plot $range $plotfiles
+#echo $plotfiles
