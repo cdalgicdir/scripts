@@ -1,0 +1,295 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+#HISTCONTROL=ignoredups:ignorespace
+HISTCONTROL=ignoredups
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+# Combine multiline commands into one in history
+shopt -s cmdhist
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=20000
+HISTFILESIZE=10000
+export HISTIGNORE="&:ls:[bf]g:exit"
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# vi mode
+#set -o vi
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033\[01;32m\]\u@\h\[\033\[00m\]:\[\033\[01;34m\]\w\[\033\[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+complete -f -X '!*.pdf' mupdf
+complete -f -X '!*.corr' ramaplot
+complete -f -X '!*.gp' gp
+
+###################################################################
+PROMPT_DIRTRIM=2
+PS1='\[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] '
+#PS1='\[\e[1;34m\](${PWD//\// })\[\e[m\] \[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] '
+#PS1='\[\e[1;34m\]\w\[\e[m\]\n\[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] '
+#PS1="\e[01;34m# `date +'%Y.%m.%d %R'` \w\[\e[m\]\n\[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] "
+###################################################################
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+
+CDPATH=".:~/SIMS/remote"
+export PATH=$PATH:$HOME/Documents/scripts/currentscripts:$HOME/Mendeley/bin
+#export PATH=$PATH:/usr/local/Espresso-2.2.0b/bin/
+#export PATH=$PATH:/usr/local/namd/
+#export PATH=$PATH:/home/cdalgicdir/gnuplotutils/bin
+source /usr/local/gromacs/gromacs-4.5.6/bin/GMXRC.bash
+export GMXLIB=/usr/local/gromacs/gromacs-4.5.6/share/gromacs/top
+votcadir=$HOME/Votca/votca-1.2.3
+source $votcadir/bin/VOTCARC.bash
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:$votcadir/lib64:$votcadir/lib
+export MANPATH=/usr/share/man/:/usr/local/gromacs-4.5.6/share/man:/opt/novell/man
+#calc(){ echo "scale=2;$@" | bc;}
+#calc(){ printf "%.4f\n" `echo $@ |bc -l`;}
+calc(){ echo $@ | octave -q;}
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias df='df -h'
+alias sl='ls'
+alias doc="cd $HOME/Documents"
+alias des="cd $HOME/Desktop"
+alias dow="cd $HOME/Downloads"
+alias scr="cd $HOME/Documents/scripts/currentscripts"
+alias sim="cd $HOME/SIMS"
+alias hamsi='ssh hamsi -X'
+alias lufer='ssh lufer -X'
+alias ichi='ssh ichi -X'
+alias yunus='ssh yunus -X'
+alias gp='gnuplot --persist'
+shopt -s extglob
+export VIMRUNTIME=/usr/share/vim/vimcurrent
+alias emerillon='export CLUTTER_VBLANK=none && emerillon'
+man () { yelp "man:$@"; }
+export SVNROOT=svn+ssh://cdalgicdir@88.255.97.68/home/svnroot
+export DSSP=$HOME/Documents/scripts/currentscripts/dsspold
+MANPATH=$MANPATH:/usr/local/texlive/2012/texmf/doc/man
+INFOPATH=:$INFOPATH:/usr/local/texlive/2012/texmf/doc/info
+PATH=$PATH:/usr/local/texlive/2012/bin/x86_64-linux
+# beginning CUDA variables
+export PATH=$PATH:/usr/local/cuda-5.0/bin
+export LD_LIBRARY_PATH=/usr/local/cuda-5.0/lib64:/lib
+# end of CUDA variables
+#alias psudo='sudo env PATH="$PATH"'
+alias diff-side-by-side='diff --side-by-side -W"`tput cols`"'
+alias diff-side-by-side-changes='diff --side-by-side --suppress-common-lines -W"`tput cols`"'
+#alias okular="okular 2>/dev/null"
+alias xp="virtualbox --startvm WinXP"
+alias xpsave="VBoxManage controlvm WinXP savestate"
+alias xpoff="VBoxManage controlvm WinXP acpipowerbutton"
+alias off="xset dpms force off"
+#alias adt="export PATH="/home/cdalgicdir/autodock/bin:"$PATH;adt"
+alias pymol="export PYTHONPATH=/opt/pymol/modules:$PYTHONPATH && pymol"
+## Up Arrow: search and complete from previous history
+bind '"\e[A": history-search-backward'
+## Down Arrow: search and complete from next history
+bind '"\e[B": history-search-forward'
+# Ctrl-v: (insert mode) switch to command mode and edit in vi
+bind '"\C-v": "\ev"'
+function gvim () { (/usr/bin/gvim -f "$@" &) }
+export PATH=$PATH:/usr/local/namd/namd-2.9-multicore
+export SCHRODINGER=/opt/schrodinger
+alias maestro="$SCHRODINGER/maestro %f &"
+alias matlab="$HOME/matlabR2013a/bin/matlab -desktop &"
+#alias ipython="ipython --profile=cdalgicdir"
+alias dsvisualizer="/home/cdalgicdir/Accelrys/DiscoveryStudio31/bin/DiscoveryStudio31 &"
+alias open="gnome-open"
+alias op="gnome-open"
+alias octave="octave -q"
+###################################################################
+# Shortcuts for Essential Books
+###################################################################
+alias mangro="mupdf $HOME/Documents/Manuals/gromacs-manual-4.5.6.pdf&"
+alias prot="evince $HOME/Documents/Books/Branden_Introduction\ to\ protein\ structure\ 2nd\ ed.djvu &"
+alias protp="evince /home/cdalgicdir/Documents/Books/Peptides/Protein_Physics.pdf &"
+alias md="evince $HOME/Documents/Books/MD_Simulation/Understanding_Molecular_Simulation.pdf &"
+alias mds="evince $HOME/Documents/Books/MD_Simulation/Molecular_Modeling_and_Simulation._An_Interdisciplinary_Guide.pdf &"
+alias leach="evince $HOME/Documents/Books/MD_Simulation/Leach-Molecular.modelling.Principles.djvu &"
+alias tild="evince $HOME/Documents/Books/MD_Simulation/[Allen_Tildesley]_Computer_simulation_of_liquids.pdf &"
+alias art="evince $HOME/Documents/Books/MD_Simulation/The\ Art\ of\ Molecular\ Dynamics.pdf &"
+alias mat="evince $HOME/Documents/Books/Mathematics/Mathematical\ Methods\ For\ Students\ of\ Physics\ and\ Related\ Fields\ -\ Hassani.pdf &"
+###################################################################
+alias cpuinfo='lscpu'
+alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
+alias dud='du -hsx * | sort -rh | head -10'
+alias uberwriter="/opt/extras.ubuntu.com/uberwriter/bin/uberwriter $@"
+
+### FUNCTIONS
+
+# Easy extract
+extract () {
+  if [ -f "$1" ] ; then
+      case "$1" in
+          *.tar.bz2)   tar xvjf "$1"    ;;
+          *.tar.gz)    tar xvzf "$1"    ;;
+          *.bz2)       bunzip2 "$1"     ;;
+          *.rar)       rar x "$1"       ;;
+          *.gz)        gunzip "$1"      ;;
+          *.tar)       tar xvf "$1"     ;;
+          *.tbz2)      tar xvjf "$1"    ;;
+          *.tgz)       tar xvzf "$1"    ;;
+          *.zip)       unzip "$1"       ;;
+          *.Z)         uncompress "$1"  ;;
+          *.7z)        7z x "$1"        ;;
+          *)           echo "don't know how to extract '$1'..." ;;
+      esac
+  else
+      echo "'$1' is not a valid file!"
+  fi
+}
+
+#Automatically do an ls after each cd
+cd() {
+
+   builtin cd "$@"
+   [[ $PWD == "$HOME/Downloads" ]] && ls -tr || ls
+#  local exceptlist=( "$HOME/Downloads" )
+#  if [ -n "$1" ] && [[ ! ${exceptlist[@]} =~ "$1" ]]; then
+#    builtin cd "$@" && ls
+#  elif [[ ${exceptlist[@]} =~ "$1" ]]; then
+#    builtin cd "$@" ~ && ls -tr
+#  else
+#    builtin cd ~ && ls
+#  fi
+}
+
+wiki() {
+    local link=`wikipedia2text -u "$1"`
+    chromium-browser "${link}"
+}
+
+fawk() {
+    # "fawk file 2 3" prints 2nd and 3rd columns of
+    # file w/o comment lines [@|#]
+    [[ $1 == "-p" ]] && option="-p" && shift
+    local file="$1" && shift
+    if [[ $# -gt 1 ]]; then
+	local columns="\$${1}" && shift
+	local nargs="$#"
+	local nargs=$((nargs-1))
+	for i in $@; do
+	    local columns=$columns",\$${i}"
+	done
+    elif [[ $# -eq 1 ]]; then
+	local columns="\$${1}"
+    else
+	echo "Error with number of arguments!"
+	exit 1
+    fi
+    local first="awk '{ if ( \$1 !~ /^[@|#]/) print "
+    local last="}'"
+    #local cmd="${first}\$${2}${last}"
+    local cmd="${first}${columns}${last}"
+    [[ $option == "-p" ]] && echo "# $cmd $file"
+    eval $cmd $file
+}
+
+function pawk {
+    local first="awk '{ if ( \$1 !~ /^[@|#]/) print "
+    local last="}'"
+    local cmd="${first}\$${1}${last}"
+    eval $cmd
+}
+alias mkcd='_(){ mkdir $1; cd $1; }; _'
+function mergegro {
+    local n1=`sed -n '2p' ${1} | tr -d ' '`
+    local n2=`sed -n '2p' ${2} | tr -d ' '`
+    local n3=$((n1+n2))
+    awk '{if (NF!=3)print}' ${1} > ${1}.xXx
+    awk '{if (NR>2)print}' ${2} > ${2}.xXx
+    cat ${1}.xXx ${2}.xXx > ${3}
+    sed -i '2s/'$n1'/'$n3'/' ${3}
+    rm ${1}.xXx ${2}.xXx
+}

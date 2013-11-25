@@ -1,0 +1,1039 @@
+############################################################################
+#cr                                                                       
+#cr            (C) Copyright 1995 The Board of Trustees of the            
+#cr                        University of Illinois                         
+#cr                         All Rights Reserved                           
+#cr                                                                       
+############################################################################
+
+############################################################################
+# RCS INFORMATION:
+#
+#       $RCSfile: .vmdrc,v $
+#       $Author: billh $        $Locker:  $                $State: Exp $
+#       $Revision: 1.3 $      $Date: 1995/03/21 00:36:21 $
+#
+############################################################################
+# DESCRIPTION:
+#
+# VMD startup script.  The commands here are executed as soon as VMD starts up
+############################################################################
+
+puts "executing special .vmdrc supporting loadseries command"
+# turn on lights 0 and 1
+light 0 on
+light 1 on
+light 2 off
+light 3 off
+
+# position the stage and axes
+#axes location lowerleft
+stage location off
+
+# position and turn on menus
+menu main move 5 5
+#menu display move 386 90
+#menu animate move 124 7
+#menu edit move 125 196
+#menu graphics move 5 455
+#menu files move 5 496
+#menu mol move 5 745
+
+#menu main on
+#menu edit on
+#menu animate on
+#menu display on
+#menu graphics on
+#menu mol on
+
+# start the scene a-rockin'
+#rock y by 1
+
+source ~/.vmd_plg.tcl
+source ~/Documents/scripts/vmd-scripts/trajectory_path.tcl
+source ~/.sscache.tcl
+
+display projection Orthographic
+#color Display Background white
+color Name H iceblue
+#mol modstyle 0 0 Points 3.000
+mol modstyle 0 0 Lines
+
+#vmd_plugin_scandirectory [file join $env(HOME) Documents software vmd-plugins [vmdinfo arch] molfile] *.so
+#pbc box -style lines|dashed|arrows|tubes
+
+# define global variable to store X window id.
+set vmd_opengl_wid -1
+global vmd_opengl_wid
+
+# callback function to be called when the top molecule changes
+proc vmd_change_opengl_name {args} {
+    global vmd_opengl_wid
+    if {[molinfo num] < 1} return
+
+    if {[llength $args] == 0} {
+        set name [join [molinfo top get name]]
+    } else {
+        set name [lindex $args 0]
+        if { [string equal $name vmd_molecule] } {
+            set name [join [molinfo top get name]]
+        }
+    }
+    if {$vmd_opengl_wid > 0} {
+        catch {exec xprop -id $vmd_opengl_wid \
+            -set WM_NAME "VMD [vmdinfo version]: $name"} 
+        catch {exec xprop -id $vmd_opengl_wid \
+            -set WM_ICON_NAME $name}
+    }
+}
+
+# activate callback
+trace variable vmd_molecule w vmd_change_opengl_name
+
+# record window id for automatic title change
+after idle {
+    global vmd_opengl_wid
+    if {![catch {exec xwininfo -name \
+        "VMD [vmdinfo version] OpenGL Display"} val ]} {
+        set vmd_opengl_wid [lindex $val 3]
+    }
+    vmd_change_opengl_name
+}
+
+# calculate center of mass of selection
+proc com {selection} {
+        # some error checking
+        if {[$selection num] <= 0} {
+                error "center_of_mass: needs a selection with atoms"
+        }
+        # set the center of mass to 0
+        set com [veczero]
+        # set the total mass to 0
+        set mass 0
+        # [$selection get {x y z}] returns the coordinates {x y z} 
+        # [$selection get {mass}] returns the masses
+        # so the following says "for each pair of {coordinates} and masses,
+	#  do the computation ..."
+        foreach coord [$selection get {x y z}] m [$selection get mass] {
+           # sum of the masses
+           set mass [expr $mass + $m]
+           # sum up the product of mass and coordinate
+           set com [vecadd $com [vecscale $m $coord]]
+        }
+        # and scale by the inverse of the number of atoms
+        if {$mass == 0} {
+                error "center_of_mass: total mass is zero"
+        }
+        # The "1.0" can't be "1", since otherwise integer division is done
+        return [vecscale [expr 1.0/$mass] $com]
+}
+
+proc gc {selection} {
+        # set the geometrical center to 0
+        set gc [veczero]
+        # [$selection get {x y z}] returns a list of {x y z} 
+        #    values (one per atoms) so get each term one by one
+        foreach coord [$selection get {x y z}] {
+           # sum up the coordinates
+           set gc [vecadd $gc $coord]
+        }
+        # and scale by the inverse of the number of atoms
+        return [vecscale [expr 1.0 /[$selection num]] $gc]
+}
+
+# shortcut keys
+user add key {.} { if {[molinfo top get numframes] == [ expr [molinfo top get frame] + 1] } {animate goto start; animate forward} {animate forward} }
+user add key Control-q {exit}
+user add key g { if {[menu graphics status] != "on" } {menu graphics on} {menu graphics off}}
+user add key o { if {[display get projection] != "Orthographic" } {display projection orthographic} {display projection perspective}}
+user add key d { if {[display get rendermode] != "Normal" } {display rendermode Normal} {display rendermode GLSL}}
+user add key D { if {[display get depthcue] != "on" } {display depthcue on} {display depthcue off}}
+user add key f {rotate x by 90}
+user add key F {rotate y by 90}
+user add key v {rotate z by 90}
+
+# shortcut for certain drawings
+user add key Up { if {[menu main status] != "on"} {menu main on} {menu main off } }
+user add key q { reset_viz [molinfo top] }
+user add key w { ss_viz [molinfo top] }
+#user add key W { protlig_viz_sketch [molinfo top] }
+user add key W { showWaterClose }
+user add key R {menu ramaplot on; variable ::RamaPlot::molid [molinfo top] }
+user add key T {menu timeline on }
+#user add key R { hires [molinfo top] }
+#user add key w { protlig_viz [molinfo top] }
+user add key a { ff_viz [molinfo top] }
+user add key m { kll_viz [molinfo top] }
+user add key K { kllred_viz [molinfo top] }
+user add key M { klnow_viz [molinfo top] }
+user add key n { kl_viz [molinfo top] }
+user add key N { klow_viz [molinfo top] }
+user add key Q { nowater_viz [molinfo top] }
+user add key H { showHbonds [molinfo top] }
+user add key P { if {[animate skip] == 1 } { animate skip 2 } elseif { [animate skip] == 2 } { animate skip 3 } elseif { [animate skip] == 3} {animate skip 4} elseif { [animate skip] == 4 } {animate skip 5} elseif { [animate skip] == 5} {animate skip 6} elseif { [animate skip] == 6} {animate skip 1}}
+user add key e { if {[color Display Background] != "black"} { color Display Background black;pbc box -on;axes location lowerright} {color Display Background white;pbc box -off;axes location off}}
+user add key C { if {[animate style] == "Once"} {animate style Loop} elseif {[animate style] == "Loop"} {animate style Rock} elseif {[animate style] == "Rock"} {animate style Once}}
+user add key i { smoothrep_inc [molinfo top] }
+user add key I { smoothrep_dec [molinfo top] }
+user add key {=} { display resetview; rotate x by -90 }
+user add key u { selupdate_all }
+user add key J { if {[molinfo top get rep] == "Lines"} { changerep [molinfo top] "Licorice 0.300000 10.000000 10.000000" } {changerep [molinfo top] "Lines"}}
+user add key L { addHeavyLabels [molinfo top] }
+user add key z { align [molinfo top] }
+user add key b { showbackbone [molinfo top] }
+#user add key B { align [molinfo top] "residue 1 to 15 and backbone" }
+#user add key V { align [molinfo top] "not water and mass 12 to 99" }
+
+user add key A {
+	# Applies representations from the top molecule to all other molecules
+	# based on save_state script by John Stone
+  set srcmol [molinfo top]
+  foreach mol [molinfo list] {
+    if {$mol == $srcmol} continue
+    #delete current representations
+    set numreps [molinfo $mol get numreps]
+    for {set i 0} {$i < $numreps} {incr i} {
+      mol delrep 0 $mol
+    }
+  }
+  for {set i 0} {$i < [molinfo $srcmol get numreps]} {incr i} {
+    set rep [molinfo $srcmol get "{rep $i} {selection $i} {color $i} {material $i}"]
+    lappend rep [mol showperiodic $srcmol $i]
+    lappend rep [mol numperiodic $srcmol $i]
+    lappend rep [mol showrep $srcmol $i]
+    lappend rep [mol selupdate $i $srcmol]
+    lappend rep [mol colupdate $i $srcmol]
+    lappend rep [mol scaleminmax $srcmol $i]
+    lappend rep [mol smoothrep $srcmol $i]
+    lappend rep [mol drawframes $srcmol $i]
+    foreach mol [molinfo list] {
+      if {$mol == $srcmol} continue
+      foreach {r s c m pbc numpbc on selupd colupd colminmax smooth framespec} $rep { break }
+      eval "mol representation $r"
+      eval "mol color $c"
+      eval "mol selection {$s}"
+      eval "mol material $m"
+      eval "mol addrep $mol"
+      if {[string length $pbc]} {
+        eval "mol showperiodic $mol $i $pbc"
+        eval "mol numperiodic $mol $i $numpbc"
+      }
+      eval "mol selupdate $i $mol $selupd"
+      eval "mol colupdate $i $mol $colupd"
+      eval "mol scaleminmax $mol $i $colminmax"
+      eval "mol smoothrep $mol $i $smooth"
+      eval "mol drawframes $mol $i {$framespec}"
+      if { !$on } {
+        eval "mol showrep $mol $i 0"
+      }
+    }
+  }
+}
+
+
+# start
+package require pbctools
+pbc box -on -style lines
+axes location lowerright
+display resetview
+#translate by 0.2 0.2 0.2
+rotate x by -90
+#mol selupdate 0 0 1
+
+proc kl_viz {molid {colhfobic "ResType"}} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # add new representations
+    # hydrophobic
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    #mol color ColorID 0
+    mol color ResType
+    #mol selection {resname LYS}
+    mol selection {not hydrophobic}
+    mol addrep $molid
+    # hydrophilic
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    #mol color ColorID 1
+    mol color $colhfobic
+    #mol selection {resname LEU}
+    mol selection {hydrophobic}
+    mol addrep $molid
+    # lysine sidechains
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol color Name
+    #mol selection {resname LYS and (sidechain or name CA) and not (resname ACE or resname NME)}
+    mol selection {not hydrophobic and (sidechain or name CA) and not (resname ACE or resname NME)}
+    mol addrep $molid
+    # ACE - N-termini
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol color ColorID 3
+    mol selection {resname ACE}
+    mol addrep $molid
+    # ions
+    mol color Name
+    mol representation VDW 0.3 15.0
+    mol selection {name CL and within 10 of (not hydrophobic and sidechain)}
+    mol selupdate 4 $molid
+    mol addrep $molid
+    # water
+    mol representation Lines
+    mol selection {water and within 4 of (hydrophobic and sidechain)}
+    mol selupdate 5 $molid
+    mol addrep $molid
+    start_sscache $molid
+    # all
+    # mol color Name
+    # mol representation Lines
+    # mol selection all
+    # mol material Opaque
+    # mol addrep $molid
+  } 
+}
+proc kl_viz_proxy {args} {
+  foreach {fname molid rw} $args {}
+  eval "after idle {kl_viz $molid}"
+}
+
+proc kll_viz {molid {colhfobic "ResType"} } {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # add new representations
+    # hydrophobic
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    #mol color ColorID 0
+    mol color ResType
+    #mol selection {resname LYS}
+    mol selection {not hydrophobic}
+    mol addrep $molid
+    # hydrophilic
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    #mol color ColorID 1
+    mol color $colhfobic
+    #mol selection {resname LEU}
+    mol selection {hydrophobic}
+    mol addrep $molid
+    # lysine sidechains
+    mol representation Licorice 0.300000 10.000000 10.000000
+    #mol color ColorID 0
+    mol color ResType
+    #mol selection {resname LYS and (sidechain or name CA) and not (resname NME or resname ACE)}
+    mol selection {not hydrophobic and (sidechain or name CA) and not (resname NME or resname ACE)}
+    mol addrep $molid
+    # leucine sidechains
+    mol representation Licorice 0.300000 10.000000 10.000000
+    #mol color ColorID 1
+    mol color $colhfobic
+    #mol selection {resname LEU and (sidechain or name CA) and not (resname NME or resname ACE)}
+    mol selection {hydrophobic and (sidechain or name CA) and not (resname NME or resname ACE)}
+    mol addrep $molid
+    # ACE - N-termini
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol color ColorID 3
+    mol selection {resname ACE}
+    mol addrep $molid
+    # ions
+    mol representation VDW 0.3 15.0
+    mol color Name
+    mol selection {name CL and within 10 of (not hydrophobic and sidechain)}
+    mol selupdate 5 $molid
+    mol addrep $molid
+    # water
+    mol representation Lines
+    mol selection {water and within 4 of (hydrophobic and sidechain)}
+    mol selupdate 6 $molid
+    mol addrep $molid
+    start_sscache $molid
+    # all
+    # mol color Name
+    # mol representation Lines
+    # mol selection all
+    # mol material Opaque
+    # mol addrep $molid
+  } 
+}
+proc kll_viz_proxy {args} {
+  foreach {fname molid rw} $args {}
+  eval "after idle {kl_viz $molid}"
+}
+proc kllred_viz {molid {colhfobic "ResType"} } {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # add new representations
+    # hydrophobic
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    mol color ColorID 0
+    mol selection {resname LYS}
+    mol addrep $molid
+    # hydrophilic
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    mol color ColorID 1
+    mol selection {resname LEU}
+    mol addrep $molid
+    # lysine sidechains
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol color ColorID 0
+    mol selection {resname LYS and (sidechain or name CA) and not (resname ACE or resname NME)}
+    mol addrep $molid
+    # leucine sidechains
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol color ColorID 1
+    mol selection {resname LEU and (sidechain or name CA) and not (resname ACE or resname NME)}
+    mol addrep $molid
+    # ACE - N-termini
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol color ColorID 3
+    mol selection {resname ACE}
+    mol addrep $molid
+  } 
+}
+proc kllred_viz_proxy {args} {
+  foreach {fname molid rw} $args {}
+  eval "after idle {kl_viz $molid}"
+}
+
+proc klnow_viz {molid {colhfobic "ResType"} } {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # add new representations
+    # hydrophobic
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    #mol color ColorID 0
+    mol color ResType
+    #mol selection {resname LYS}
+    mol selection {not hydrophobic}
+    mol addrep $molid
+    # hydrophilic
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    #mol color ColorID 1
+    mol color $colhfobic
+    #mol selection {resname LEU}
+    mol selection {hydrophobic}
+    mol addrep $molid
+    # lysine sidechains
+    mol representation Licorice 0.300000 10.000000 10.000000
+    #mol color ColorID 0
+    mol color $colhfobic
+    #mol selection {resname LYS and (sidechain or name CA) and not (resname ACE or resname NME)}
+    mol selection {not hydrophobic and (sidechain or name CA) and not (resname ACE or resname NME)}
+    mol addrep $molid
+    # leucine sidechains
+    mol representation Licorice 0.300000 10.000000 10.000000
+    #mol color ColorID 1
+    mol color ResType
+    #mol selection {resname LEU and (sidechain or name CA) and not (resname ACE or resname NME)}
+    mol selection {hydrophobic and (sidechain or name CA) and not (resname ACE or resname NME)}
+    mol addrep $molid
+    # ACE - N-termini
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol color ColorID 3
+    mol selection {resname ACE}
+    mol addrep $molid
+    # ions
+    start_sscache $molid
+    # all
+    # mol color Name
+    # mol representation Lines
+    # mol selection all
+    # mol material Opaque
+    # mol addrep $molid
+  } 
+}
+proc klnow_viz_proxy {args} {
+  foreach {fname molid rw} $args {}
+  eval "after idle {klnow_viz $molid}"
+}
+
+proc klow_viz {molid {colhfobic "ResType"} } {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # add new representations
+    # hydrophobic
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    #mol color ColorID 0
+    mol color ResType
+    #mol selection {resname LYS}
+    mol selection {not hydrophobic}
+    mol addrep $molid
+    # hydrophilic
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    #mol color ColorID 1
+    mol color $colhfobic
+    #mol selection {resname LEU}
+    mol selection {hydrophobic}
+    mol addrep $molid
+    # lysine sidechains
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol color Name
+    #mol selection {resname LYS and (sidechain or name CA) and not (resname NME or resname ACE)}
+    mol selection {not hydrophobic and (sidechain or name CA) and not (resname NME or resname ACE)}
+    mol addrep $molid
+    # ACE - N-termini
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol color ColorID 3
+    mol selection {resname ACE}
+    mol addrep $molid
+    # ions
+    mol color Name
+    mol representation VDW 0.3 15.0
+    mol selection {name CL and within 10 of (not hydrophobic and sidechain)}
+    mol selupdate 4 $molid
+    mol addrep $molid
+    # water
+    mol color ColorID 4
+    mol representation VDW 0.2 15.0
+    mol selection {name OW and within 4 of (hydrophobic and sidechain)}
+    mol selupdate 5 $molid
+    mol addrep $molid
+    start_sscache $molid
+    # all
+    # mol color Name
+    # mol representation Lines
+    # mol selection all
+    # mol material Opaque
+    # mol addrep $molid
+  } 
+}
+proc klow_viz_proxy {args} {
+  foreach {fname molid rw} $args {}
+  eval "after idle {klow_viz $molid}"
+}
+
+proc reset_viz {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # all
+    mol color Name
+    mol representation Lines
+    mol selection all
+    mol material Opaque
+    mol addrep $molid
+  } 
+}
+proc reset_viz_proxy {args} {
+  foreach {fname molid rw} $args {}
+  eval "after idle {reset_viz $molid}"
+}
+
+proc ss_viz {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # all
+    mol color Structure
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    mol selection all
+    mol material Opaque
+    mol addrep $molid
+    # add ligand
+    mol color Name
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection resname LIG
+    mol addrep $molid
+    start_sscache $molid
+  } 
+}
+proc ss_viz_proxy {args} {
+  foreach {fname molid rw} $args {}
+  eval "after idle {ss_viz $molid}"
+}
+
+proc protlig_viz {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # all
+    #mol color Structure
+    mol color colorID 4
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    mol selection protein
+    mol material Opaque
+    mol addrep $molid
+    #mol color Name
+    mol color colorID 0
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    #mol selection (resname LIG CEL UNK) and noh
+    mol selection resname ACE
+    mol addrep $molid
+    mol color Name
+    # water close to the ligand
+    #mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol representation Lines
+    #mol selection water and within 5 of (resname LIG CEL UNK)
+    mol selection not protein
+    mol addrep $molid
+    # hide the waters
+    #set numreps [molinfo $molid get numreps]
+    #set waterid [expr $numreps-1]
+    #mol showrep $molid $waterid off
+    start_sscache $molid
+  } 
+}
+proc protlig_viz_proxy {args} {
+  foreach {fname molid rw} $args {}
+  eval "after idle {protlig_viz $molid}"
+}
+
+proc protlig_viz_sketch {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # all
+    mol color ColorID 2
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    mol selection protein
+    mol material Opaque
+    mol addrep $molid
+    #mol representation VDW 1.0
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection (resname LIG S58 CEL UNK) and noh
+    mol color ColorID 1
+    mol addrep $molid
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol selection same fragment as water and within 4 of (resname LIG S58 CEL UNK)
+    #mol color Name
+    mol color ColorID 4
+    mol addrep $molid
+    set numreps [molinfo $molid get numreps]
+    set waterid [expr $numreps-1]
+    mol selupdate 2 $molid 1
+    #mol showrep $molid $waterid off
+    start_sscache $molid
+  } 
+}
+proc protlig_viz_proxy_sketch {args} {
+  foreach {fname molid rw} $args {}
+  eval "after idle {protlig_viz_sketch $molid}"
+}
+
+
+proc ff_viz {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # all
+    mol color Name
+    mol representation Lines
+    mol selection {not (protein or resname PHE)}
+    mol material Opaque
+    mol addrep $molid
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection {protein or resname PHE}
+    #mol selection {resname PHE}
+    mol addrep $molid
+  } 
+}
+proc ff_viz_proxy {args} {
+  foreach {fname molid rw} $args {}
+  eval "after idle {ff_viz $molid}"
+}
+
+proc nowater_viz {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # all
+    mol color Name
+    mol representation Lines
+    mol selection {not water}
+    mol material Opaque
+    mol addrep $molid
+    mol selection {water}
+    mol addrep $molid
+    set numreps [molinfo $molid get numreps]
+    set waterid [expr $numreps-1]
+    mol showrep $molid $waterid off
+  } 
+}
+proc nowater_viz_proxy {args} {
+  foreach {fname molid rw} $args {}
+  eval "after idle {reset_viz $molid}"
+}
+
+proc changerep {molid rep} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    set numrep [molinfo $molid get numreps]
+    for {set i 0} {$i < $numrep} {incr i} {
+      mol modstyle $i $molid $rep
+    }
+  } 
+}
+
+proc smoothrep_inc {molid} {
+  # operate only on existing molecules
+  set cur_numsmooth [mol smoothrep $molid 0]
+  set numsmooth [expr $cur_numsmooth+5]
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # set all representations to 5
+    set numrep [molinfo $molid get numreps]
+    for {set i 0} {$i < $numrep} {incr i 1} {
+      mol smoothrep $molid $i $numsmooth
+    }
+    }
+} 
+
+proc smoothrep_dec {molid} {
+  # operate only on existing molecules
+  set cur_numsmooth [mol smoothrep $molid 0]
+  if {$cur_numsmooth > 0} {
+  set numsmooth [expr $cur_numsmooth-5]
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # set all representations to 5
+    set numrep [molinfo $molid get numreps]
+    for {set i 0} {$i < $numrep} {incr i 1} {
+      mol smoothrep $molid $i $numsmooth
+	}
+    }
+    }
+} 
+
+proc selupdate_all {} {
+    #makes the selections of the top molecule to auto update each frame
+    set n [molinfo top get numreps]
+    for {set i 0} {$i < $n} {incr i} {
+	mol selupdate $i top on
+    }
+}
+
+proc addHeavyLabels {molid} {
+  # operate only on existing molecules
+  #set carbons [atomselect top "element C"]
+  set heavy [atomselect top "mass 12 to 99 and not (name OW or resname SOL CHE)"]
+  set numheavy [$heavy num]
+  if {$numheavy > 0} {
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    if {[color Display Background] != "black"} {color Labels Atoms black} {color Labels Atoms green}
+    foreach i [$heavy get index] {
+	label add Atoms $molid/$i
+	}
+    }
+    }
+} 
+
+proc align {molid {seltxt "protein and backbone"}} {
+  rmsdtt_tk_cb
+  set ref_frame 0
+  set sel_ref [atomselect top $seltxt frame $ref_frame]
+  set sel [atomselect top $seltxt]
+    for {set j 0} {$j < [molinfo $molid get numframes]} {incr j} {
+      if {$j == $ref_frame} {
+        continue
+      }
+      rmsdtt::align $sel $j $sel_ref
+    }
+}
+
+proc get_cell {{molid top}} { 
+  set all [atomselect $molid all] 
+  set minmax [measure minmax $all] 
+  set vec [vecsub [lindex $minmax 1] [lindex $minmax 0]] 
+  puts "cellBasisVector1 [lindex $vec 0] 0 0" 
+  puts "cellBasisVector2 0 [lindex $vec 1] 0" 
+  puts "cellBasisVector3 0 0 [lindex $vec 2]" 
+  set center [measure center $all] 
+  puts "cellOrigin $center" 
+  $all delete 
+} 
+
+proc centermol {selection} {
+#set selection "residue 22 23"
+set numframes [molinfo top get numframes]
+set boxvec [pbc get]
+set boxcenter "[expr [lindex ${boxvec} 0 0]/2] [expr [lindex ${boxvec} 0 1]/2] [expr [lindex ${boxvec} 0 2]/2]"
+
+for {set i 0} {$i < $numframes} {incr i} {
+    puts "frame $i"
+    animate goto $i
+    set all [atomselect top all]
+    #set center [measure center $all]
+    set refmol [atomselect top $selection]
+    set refmolcom [com $refmol]
+    set vec [vecsub $boxcenter $refmolcom ]
+    $all moveby $vec
+
+    # pbc
+    set fragments [$all get fragment]
+    set nfragments [lindex $fragments [expr [llength $fragments]-1]]
+    set boxx [lindex $boxvec 0 0]
+    set boxy [lindex $boxvec 0 1]
+    set boxz [lindex $boxvec 0 2]
+    set natomspassed 0
+    for {set j 0} {$j <= $nfragments} {incr j} {
+	set fragment [atomselect top "fragment $j"]
+	set fragcom [com $fragment]
+	set nextfragment [lsearch $fragments [expr $j+1]]
+	if {$nextfragment == -1} {set nextfragment [llength $fragments]}
+	set sl [lrange $fragments [lsearch $fragments $j] [expr $nextfragment-1 ]]
+	set natoms [llength $sl]
+	if {[lindex $fragcom 0] < 0} {
+		for {set k $natomspassed} {$k < [expr $natomspassed+$natoms]} {incr k} {
+		    set atom [atomselect top "index $k"]
+		    $atom moveby "$boxx 0 0"
+		    }
+		} elseif {[lindex $fragcom 0] > $boxx} {
+		for {set k $natomspassed} {$k < [expr $natomspassed+$natoms]} {incr k} {
+		    set atom [atomselect top "index $k"]
+		    $atom moveby "-$boxx 0 0"
+	    }
+	}
+	if {[lindex $fragcom 1] < 0} {
+		for {set k $natomspassed} {$k < [expr $natomspassed+$natoms]} {incr k} {
+		    set atom [atomselect top "index $k"]
+		    $atom moveby "0 $boxy 0"
+		    }
+		} elseif {[lindex $fragcom 1] > $boxy} {
+		for {set k $natomspassed} {$k < [expr $natomspassed+$natoms]} {incr k} {
+		    set atom [atomselect top "index $k"]
+		    $atom moveby "0 -$boxy 0"
+	    }
+	}
+	if {[lindex $fragcom 2] < 0} {
+		for {set k $natomspassed} {$k < [expr $natomspassed+$natoms]} {incr k} {
+		    set atom [atomselect top "index $k"]
+		    $atom moveby "0 0 $boxz"
+		    }
+		} elseif {[lindex $fragcom 2] > $boxz} {
+		for {set k $natomspassed} {$k < [expr $natomspassed+$natoms]} {incr k} {
+		    set atom [atomselect top "index $k"]
+		    $atom moveby "0 0 -$boxz"
+	    }
+	}
+	set natomspassed [expr $natomspassed + $natoms]
+    }
+}
+}
+
+proc draw_arrow {mol start end} {
+    # an arrow is made of a cylinder and a cone
+    draw color red
+    set middle [vecadd $start [vecscale 0.9 [vecsub $end $start]]]
+    graphics $mol cylinder $start $middle radius 0.25
+    graphics $mol cone $middle $end radius 1
+}
+
+proc draw_arrow_protcom {mol pullvec} {
+    # an arrow is made of a cylinder and a cone
+    draw color red
+    set protein [atomselect top "protein and backbone"]
+    set protcom [com $protein]
+    set pullvec2 [vecmul $pullvec {4 4 4}]
+    set vec [vecadd $protcom $pullvec2]
+    set middle [vecadd $protcom [vecscale 0.9 [vecsub $vec $protcom]]]
+    graphics $mol cylinder $protcom $middle radius 0.25
+    graphics $mol cone $middle $vec radius 1
+}
+
+proc label_atom {selection_string label_string} {
+    set sel [atomselect top $selection_string]
+    if {[$sel num] != 1} {
+        error "label_atom: '$selection_string' must select 1 atom"
+    }
+    # get the coordinates of the atom
+    lassign [$sel get {x y z}] coord
+    # and draw the text
+    draw text $coord $label_string
+}
+
+proc snapincr {{increment "1000"}} {
+    # take snapshots with increments
+    hires [molinfo top]
+    color Display Background white;pbc box -off;axes location off
+    display depthcue off
+    set nf [molinfo top get numframes]
+    for { set i 0} { $i < $nf } {incr i $increment} {
+	animate goto $i
+	#set j [expr $i/$increment]
+	set j [format %03d [expr $i/$increment]]
+	render Tachyon frame$j.dat tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o frame$j.png -mediumshade
+	file delete frame$j.dat
+    }   
+    lores [molinfo top]
+}
+
+proc snap {{molid "0"}} {
+  # take a snapshot, process and output as frame#.png
+    hires [molinfo top]
+    color Display Background white;pbc box -off;axes location off
+    display depthcue off
+    set frame [format %03d [molinfo $molid get frame]]
+    render Tachyon frame$frame.dat tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o frame$frame.png -mediumshade
+    file delete frame$j.dat
+    lores [molinfo top]
+}   
+
+proc hires {{molid "0"}} {
+  # increase resolutions of all representations
+  for {set i 0} {$i < [molinfo $molid get numreps]} {incr i} {
+    set rep [molinfo $molid get "{rep $i} {selection $i} {color $i} {material $i}"]
+      foreach {r s c m} $rep { break }
+    if { [lindex $r 0] == "NewCartoon" } { mol modstyle $i $molid NewCartoon [lindex $r 1] 100 [lindex $r 3] [lindex $r 4]
+    } elseif { [lindex $r 0] == "Licorice" } { mol modstyle $i $molid Licorice [lindex $r 1] 100 100
+    } elseif { [lindex $r 0] == "CPK" } { mol modstyle $i $molid CPK [lindex $r 1] [lindex $r 2] 100 100
+    } elseif { [lindex $r 0] == "VDW" } { mol modstyle $i $molid VDW [lindex $r 1] 100 }
+    }
+}
+
+proc lores {{molid "0"}} {
+  # decrease resolutions of all representations
+  for {set i 0} {$i < [molinfo $molid get numreps]} {incr i} {
+    set rep [molinfo $molid get "{rep $i} {selection $i} {color $i} {material $i}"]
+      foreach {r s c m} $rep { break }
+    if { [lindex $r 0] == "NewCartoon" } { mol modstyle $i $molid NewCartoon [lindex $r 1] 10 [lindex $r 3] [lindex $r 4]
+    } elseif { [lindex $r 0] == "Licorice" } { mol modstyle $i $molid Licorice [lindex $r 1] 10 10
+    } elseif { [lindex $r 0] == "CPK" } { mol modstyle $i $molid CPK [lindex $r 1] [lindex $r 2] 10 10
+    } elseif { [lindex $r 0] == "VDW" } { mol modstyle $i $molid VDW [lindex $r 1] 10 }
+    }
+}
+
+proc showHbonds {{molid "0"}} {
+    set lastrep [expr [molinfo $molid get numreps] - 1]
+    set rep [molinfo $molid get "{rep $lastrep}"]
+    if { [lindex $rep 0 0] == "HBonds" } {
+	set sel [molinfo $molid get "{rep $lastrep} {selection $lastrep}"]
+	if { [lindex $sel 1] == "protein" } {
+	        mol delrep $lastrep $molid
+		mol representation HBonds 3.500000 30.000000 3
+		mol selection {backbone}
+		mol addrep $molid
+} elseif { [lindex $sel 1] == "backbone" } {
+                mol delrep $lastrep $molid
+                mol representation HBonds 3.500000 30.000000 3
+                mol selection {protein or (water and within 3.5 of protein)}
+                mol addrep $molid
+} else {
+                mol delrep $lastrep $molid
+                mol representation HBonds 3.500000 30.000000 3
+                mol selection {protein}
+                mol addrep $molid }
+} {
+    mol representation HBonds 3.500000 30.000000 3
+    #mol color ColorID 0
+    mol selection {protein}
+    mol addrep $molid
+    }
+}
+
+proc showWaterClose {{molid "0"}} {
+    set lastrep [expr [molinfo $molid get numreps] - 1]
+    set rep [molinfo $molid get "{selection $lastrep}"]
+   if { [lindex $rep 0] == "water" } {
+	mol delrep $lastrep $molid
+	mol Color Name
+	mol representation Lines
+	mol selection {water and within 4 of protein}
+	mol addrep $molid
+	mol selupdate $molid $lastrep
+} elseif { [lindex $rep 0] == "water and within 4 of protein" } {
+        mol delrep $lastrep $molid
+} else {
+        mol representation Lines
+	mol Color Name
+        mol selection {water}
+        mol addrep $molid
+	mol selupdate $molid $lastrep
+    }
+}
+
+proc showbackbone {{molid "0"}} {
+  # Shows the backbone in licorice and the hydrogen bonds
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # add new representations
+    mol representation Licorice 0.300000 10.000000 4.500000 0
+    #mol color ColorID 0
+    mol selection {backbone}
+    mol addrep $molid
+    # Hydrogen bonds
+    mol representation HBonds 3.500000 30.000000 3.000000
+    mol color ColorID 1
+    mol selection {backbone}
+    mol addrep $molid
+    }
+}
+
+
+proc sas {} {
+kllred_viz [molinfo top]
+mol load pdb connelly.pdb
+mol modselect 0 1 "resname DOT"
+#mol modselect 0 1 "not (protein or resname ACE NME CL or water)"
+#mol modcolor 0 1 ColorID 0
+}
+
+set water [atomselect top "water"]
+set protein [atomselect top "protein"]
+set backbone [atomselect top "backbone"]
+set ca [atomselect top "name CA and protein"]
+set sidechain [atomselect top "sidechain"]
+puts "**** [molinfo top get numframes] frames exist"
+puts "**** [$water num] water atoms and [expr [$water num]/3] water molecules"
+puts "**** [$protein num] protein atoms"
+animate style Once
+
+## hook up the function.
+#trace variable vmd_initialize_structure w kl_viz_proxy
+#trace variable vmd_initialize_structure w kll_viz_proxy
+#trace variable vmd_initialize_structure w klow_viz_proxy
+#trace variable vmd_initialize_structure w klnow_viz_proxy
+#trace variable vmd_initialize_structure w reset_viz_proxy
+#trace variable vmd_initialize_structure w ss_viz_proxy
+#trace variable vmd_initialize_structure w ff_viz_proxy
+# take care of molecule loaded at start.
+# after idle { kl_viz 0 }
+#start_sscache 0
+#kllred_viz  [molinfo top]
