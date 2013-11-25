@@ -1,0 +1,19 @@
+#! /bin/bash
+
+[[ ! -e md.log ]] && cat md.part* > md.log || (echo "md.log exists!" && exit 1)
+pull=`ls pull*part*xvg`
+if [[ $pull != '' ]]; then
+    [[ ! -e pullf.xvg ]] && cat pullf.part* > pullf.xvg || (echo "pullf.xvg exists!" && exit 1)
+    [[ ! -e pullx.xvg ]] && cat pullx.part* > pullx.xvg || (echo "pullx.xvg exists!" && exit 1)
+fi
+[[ ! -e ener.edr ]] && eneconv -f ener.part* -o ener.edr || (echo "ener.edr exists!" && exit 1)
+[[ ! -e traj.xtc ]] && trjcat -f traj.part* -o traj.xtc || (echo "traj.xtc exists!" && exit 1)
+confout=`ls -1 confout* | tail -1`
+[[ ! -e confout.gro ]] && cp $confout confout.gro || (echo "confout.gro exists!" && exit 1)
+
+[[ -e md.log ]] && echo -e "md.log\t\tOK!"
+[[ -e pullf.xvg ]] && echo -e "pullf.xvg\tOK!"
+[[ -e pullx.xvg ]] && echo -e "pullx.xvg\tOK!"
+[[ -e ener.edr ]] && echo -e "ener.edr\tOK!"
+[[ -e traj.xtc ]] && echo -e "traj.xtc\tOK!"
+[[ -e traj.xtc ]] && echo -e "traj.xtc\tOK!"

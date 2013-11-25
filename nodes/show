@@ -1,0 +1,16 @@
+#! /bin/bash
+
+sleeptime=60
+clear
+tput sc
+
+while [ 1 ]
+do
+    tput el1
+    tput rc
+    tput setb 7
+    tput setf 1
+    echo -e "Every $sleeptime s: $@\t\t `date +'%T %a %b %d.%m.%Y'`\n"
+    $@
+    sleep $sleeptime
+done

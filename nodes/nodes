@@ -1,0 +1,148 @@
+#! /usr/bin/python
+
+import sys
+import re
+import platform
+from subprocess import Popen, PIPE
+
+class Node:
+  def __init__(self,name,used,total,q):
+    self.name=name
+    #self.id=re.split('-|\,',name)[1]+'.'+re.split('-|\,',name)[2]
+    self.used=used
+    self.total=total
+    self.queues=[q]
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ERROR = '\033[90m'
+    ENDC = '\033[0m'
+    BOLD = "\033[1m"
+
+    def disable(self):
+        self.HEADER = ''
+        self.OKBLUE = ''
+        self.OKGREEN = ''
+        self.WARNING = ''
+        self.FAIL = ''
+        self.ERROR = ''
+        self.ENDC = ''
+        self.BOLD = ''
+
+hostname=platform.node()
+
+try:
+    option=sys.argv[1]
+except IndexError:
+    option=None
+
+if option == '-h':
+    print "Usage:\t$ nodes [option]\
+	    \nOptions:\t-onlyres:	show only reserved nodes\
+	     \n\t\t-showall:	show all nodes (including reserved)\
+	     \n\t\t-nc:		don't use coloring"
+    sys.exit(0)
+
+#sub=re.compile(r'[\w]+.q')
+sub=re.compile(r'[\w.]+@')
+nodedict={}
+
+# the command you want to execute, followed by its arguments
+command = ('qstat', '-f')
+
+# spawn a new process, connect to its output and error pipes
+pipe = Popen(command, stdout=PIPE, stderr=PIPE)
+
+# print the output lines as they happen
+while True:
+    line = pipe.stdout.readline()
+    if not line:
+        break
+    if re.match(sub,line):
+	txt=line.split()
+	cpus=txt[2].split('/')
+	queues=txt[0].split('@')
+	if not txt[-1] == 'd':
+	    qname=queues[0]
+	    #nodename=queues[1]
+	    nodename=queues[1].split('.')[0]
+	    nused=int(cpus[1])
+	    ntotal=int(cpus[2])
+	    if not nodedict.has_key(nodename):
+		nodedict[nodename] = Node(nodename,nused,ntotal,(qname,nused,ntotal))
+	    else:
+		nodedict[nodename].used+=nused
+		nodedict[nodename].queues.append((qname,nused,ntotal))
+	    if ntotal > nodedict[nodename].total:
+		nodedict[nodename].total = ntotal
+
+if option == '-nc':
+    theColor = endtheColor = theBold = ''
+else:
+    theColor = bcolors.OKBLUE
+    theBold = bcolors.BOLD
+    endtheColor = bcolors.ENDC
+
+print theColor + "\n###################################################################" + endtheColor
+#print bcolors.OKBLUE + "\n###################################################################" + bcolors.ENDC
+###################################################################
+# lufer specific section
+# medium.q hosts are compute-0-0 to 0-7
+# long hosts are compute-0-0 to 0-11 except 0-3
+# skeskin hosts are compute-0-12 to 0-15 and compute-1-0 to 1-3
+###################################################################
+if hostname[0:5] == 'lufer':
+    print theColor + theBold + "medium.q hosts are compute-0-0 to 0-7".center(60) + endtheColor
+    print theColor + theBold + "long hosts are compute-0-0 to 0-11 except 0-3".center(60) + endtheColor
+    #print bcolors.OKBLUE + bcolors.BOLD + "reserves nodes are not shown".center(60) + bcolors.ENDC
+    print theColor + "###################################################################" + endtheColor
+###################################################################
+
+akabakcioglu_nodes=['compute-1-1']
+skeskin_nodes=['compute-0-12','compute-0-13','compute-0-14','compute-0-15','compute-1-0','compute-1-2','compute-1-3',]
+reservednodes=akabakcioglu_nodes + skeskin_nodes
+
+###################################################################
+# Functions for sorting the node names
+###################################################################
+def f(x):
+    num = x.split('-')[2]
+    if num.isdigit():
+	return int(num)
+    return x
+def g(x):
+    num = x.split('-')[1]
+    if num.isdigit():
+	return int(num)
+    return x
+###################################################################
+
+#for key in sorted(nodedict.keys()):
+for key in sorted(sorted(nodedict.keys(),key=f),key=g):
+    if option not in ['-showall','-onlyres'] and key in reservednodes:
+	continue
+    if option == '-onlyres' and key not in reservednodes:
+	continue
+    qstr=''
+    val = nodedict[key]
+    for item in val.queues:
+	if not item[1] == 0:
+	    qstr+="%s: %d/%d  " %(item[0],item[1],item[2])
+	    #qstr+="%s: %d/%d\t" %(item[0],item[1],item[2])
+    if option!='-nc':
+	if val.used == val.total:
+	    color=bcolors.FAIL
+	elif val.total-4 < val.used < val.total:
+	    color=bcolors.WARNING
+	elif val.used > val.total:
+	    color=bcolors.ERROR
+	else:
+	    color=bcolors.OKGREEN
+	print bcolors.BOLD + color + "%-15s" %(val.name) + bcolors.ENDC + bcolors.BOLD + "\t%2d/%d" %(val.used,val.total) + bcolors.ENDC + "\t%s" %qstr + bcolors.ENDC
+    else:
+	print "%-15s" %(val.name) + "\t%d/%d" %(val.used,val.total) + "\t%s" %qstr
+print theColor + "###################################################################\n" + endtheColor
