@@ -1,0 +1,53 @@
+#! /usr/bin/awk -f
+
+BEGIN {
+    nres=14; #for KL
+    maxframe=1e10;
+    increment=maxframe;
+    nparts=1;
+
+    if (ARGC > 2) {
+    if (ARGV[1] ~ /^[[:digit:]]/ && ARGV[2] ~ /^[[:digit:]]/) {
+	nparts=ARGV[1];
+	maxframe=ARGV[2];
+	ARGV[1] = "";
+	ARGV[2] = "";
+	increment=maxframe/nparts;
+	}
+    }
+}
+
+{
+    if ($1 ~ /@/ && $2 ~ /s[[:digit:]]/) {
+	 col=substr($2,2,2)+2;
+	 gsub("\"","");
+	 if ($4 in name) {
+	     print $4;
+	     continue;
+	     }
+	     else {
+	     N[col]=$4;
+	 }
+	}
+
+	else if (substr($1,1,1) != "@" && substr($1,1,1) != "#" && $1 != 0 && $1 <= maxframe) {
+	for(i=2;i<=NF;i++) {
+	    p=int($1/increment)+1;
+	    count[N[i],p]+=$i;
+	}
+	nf[p]++;
+    }
+}
+
+END {
+#    for (m in count) {
+#	split(m,sep,SUBSEP)
+#	print sep[1],"\t",sep[2];
+#	}
+    for (i in N) {
+	for (j=1;j<=nparts;j++) {
+	    perc=count[N[i],j]/nf[j]/nres;
+	    printf("%-10s%10s/%-10s%f\n",N[i],count[N[i],j],nf[j]*nres,perc);
+	}
+    }
+}

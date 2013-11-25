@@ -1,0 +1,185 @@
+#! /usr/bin/python
+
+import sys
+
+class ss:
+    ssdict = {}
+    countlist = {}
+    def __init__(self,name,col):
+	self.name = name
+	self.col = col
+	self.count = [0]
+	ss.ssdict[name] = self
+
+def parse(index):
+    for s in ss.ssdict.values():
+	if index == s.col:
+	    return s
+
+def newpart():
+    for s in ss.ssdict.values():
+	s.count.append(0)
+
+def writetofile(filename):
+    fout = open(filename,'w')
+    fout.write("#")
+    fout.write("%-10s" %"name")
+    for c in range(len(framelist)):
+	fout.write("\tpart %d/%d" %(c+1,len(framelist)))
+    fout.write("\n")
+    for s in sorted(ss.ssdict.values()):
+	fout.write("%-10s" %s.name)
+	for c in range(len(s.count)):
+	    perc = float(s.count[c])/framelist[c]/nres
+	    fout.write("\t%f" %perc)
+	fout.write("\n")
+
+def unquote(s):
+    return s[1+s.find('"'):s.rfind('"')]
+
+def printhelp():
+    print "$ parsescount.py scount.xvg"
+    print "$ parsescount.py [option]"
+    print "Options: -h --help prints help"
+    print "\t-split n :splits trajectory in into n equal parts"
+    print "\t-until n :parses until nth frame"
+    print "\t-eq n :parses beginning from nth frame"
+    print "\t-nopp: doesn't print out frame info for parts"
+    print "\t-w: writes to file"
+
+nargs=len(sys.argv)
+if nargs<2:
+    print "Insufficient arguments!"
+    printhelp()
+    sys.exit(1)
+
+def findMaxFrame(filelist):
+    maxframe = 0
+    for f in filelist:
+	fin = open(f,'r')
+	while 1:
+	    line = fin.readline()
+	    if not line:
+		break
+	    elif line[0] in ['#','@']:
+		continue
+	    else:
+		frame = int(line.split()[0])
+		if frame > maxframe:
+		    maxframe = frame
+    return maxframe
+
+MAX = 1e12
+nres = 14
+filelist = []
+eq = i = j = 0
+split = 1
+framelist = [0]
+noprintparts = write = False
+maxframe = MAX
+
+# parse options files
+while i < nargs-1:
+    i+=1
+    if sys.argv[i].startswith('--') or sys.argv[i].startswith('-'):
+	option = sys.argv[i]
+	if option == '-eq':
+	    eq = int(sys.argv[i+1])
+	    i+=1
+	elif option == '-split':
+	    split = int(sys.argv[i+1])
+	    i+=1
+	elif option == '-until':
+	    maxframe = int(sys.argv[i+1])
+	    i+=1
+	elif option == '-nopp':
+	    noprintparts = False
+	elif option == '-w':
+	    write = True
+	else:
+	    print "Wrong option! Exiting..."
+	    sys.exit(1)
+    else:
+	filelist.append(sys.argv[i])
+
+if split > 1:
+    if not maxframe == MAX:
+	maxframe = maxframe
+    else:
+	maxframe = findMaxFrame(filelist)
+    if maxframe % split:
+	maxframe = maxframe - maxframe%split
+    increment = maxframe/split
+    limit1 = 1
+    limit2 = increment
+else:
+    limit1 = 1
+    limit2 = MAX
+
+for f in filelist:
+    fin = open(f,'r')
+    while 1:
+	line = fin.readline()
+	if not line:
+	    break
+	if line[0] == '#':
+	    continue
+	elif line[0] == '@':
+	    txt = line.split()
+	    if txt[1][0] == 's' and txt[2] == 'legend':
+		# ith legend is (i+1)th element of list
+		sscol = int(txt[1][1])+1
+		ssname = unquote(txt[3])
+		if ssname not in ss.ssdict.keys():
+		    ss(ssname,sscol)
+		else:
+		    ss.ssdict[ssname].col = sscol
+	else:
+	    txt = line.split()
+	    frame = float(txt[0])
+	    if frame != 0 and frame > eq:
+		if frame > maxframe:
+		    continue
+		elif limit1 <= frame <= limit2:
+		    framelist[j] += 1
+		    for i in range(1,len(txt)):
+			s = parse(i)
+			s.count[j] += int(txt[i])
+		elif frame > limit2:
+		    limit1 = limit2 + 1
+		    limit2 += increment
+		    #print limit1,limit2,increment
+		    framelist.append(1)
+		    j+=1
+		    newpart()
+		    s = parse(i)
+		    s.count[j] += int(txt[i])
+
+fin.close()
+
+
+if split > 1 and not noprintparts:
+    print "###################################################################"
+    nf = 1
+    for i in range(split):
+	print "Part %d from frame %d to %d" %(i+1,nf,nf+increment-1)
+	nf += increment
+
+print "###################################################################"
+for s in sorted(ss.ssdict.values()):
+    #print s.count
+    #print framelist
+    for c in range(len(s.count)):
+	if split > 1:
+	    print "Part %d: %-10s\t%9d/%-9d\t = %f" %(c+1,s.name,s.count[c],framelist[c]*nres,float(s.count[c])/framelist[c]/nres)
+	else:
+	    print "%-10s\t%9d/%-9d\t = %f" %(s.name,s.count[c],framelist[c]*nres,float(s.count[c])/framelist[c]/nres)
+#    for i in xrange(len(ss.countlist[s.name])):
+#	    if ss.countlist[s.name][i][0] < 10:
+#		print ss.countlist[s.name][i][1]
+print "###################################################################"
+
+if write:
+    filename = "out.dat"
+    writetofile(filename)
+    print "Written to %s" %filename
