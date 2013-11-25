@@ -1,0 +1,32 @@
+set guifont=Monaco\ 13
+"colorscheme twilight
+syntax enable
+set background=dark
+colorscheme solarized
+"colorscheme less
+set guioptions-=T
+"let g:fullscreen = 1
+:au BufRead *.tex set spell
+:highlight SpellBad gui=underline guibg=NONE guifg=red
+if matchstr(expand("%"),".*\.tex") != ""
+"if matchstr(expand("%"),"manuscript\.tex$") != ""
+    :iab teh the
+    :iab aa amino-acid
+    :iab hfl hydrophilic
+    :iab hfb hydrophobic
+    :iab amf amphiphilic
+    :iab ss secondary structure
+    :iab sc sidechain
+    :iab bb backbone
+    :iab com center of mass
+    :iab bs beta-sheet
+    :iab rc random-coil
+    :iab ah alpha-helix
+    :iab hh half-helix
+    :iab ahc alpha-helical
+    :iab bw bulk water
+    :iab int air/water interface
+    :iab pmf potential of mean force
+    :iab pp peptide
+    :map <F2> viwb<ESC><ESC>i\emph{<ESC>ea}<ESC>
+endif

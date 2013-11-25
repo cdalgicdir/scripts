@@ -1,0 +1,158 @@
+:syntax on
+:autocmd FileType *      set formatoptions=tcql nocindent comments&
+:autocmd FileType c,cpp  set formatoptions=croql cindent comments=sr:/*,mb:*,ex:*/,://
+:autocmd FileType mdp.gromacs set omnifunc=mdpcomplete#Complete
+" imap <C-n> <C-x><C-o>
+:autocmd FileType python set omnifunc=pythoncomplete#Complete
+:autocmd BufWritePre *.gro call Update_number_of_atoms()
+:au BufNewFile,BufRead *.rtp    setf top.gromacs
+:au BufNewFile,BufRead *.comms    setf gnuplot
+":au BufRead *.tex set spell
+":highlight SpellBad gui=underline guibg=NONE guifg=NONE
+
+:map <F6> {v}!par -w75<CR>
+:vmap <F6> !par -w75<CR>
+":set formatprg=par\ -w60
+":map <F6> {v}!par -jw60<CR>
+":vmap <F6> !par -jw60<CR>
+
+" autocmd FileType mdp.gromacs imap <silent> <buffer> = = <C-n>
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+set runtimepath^=~/.vim/bundle/rainbow_parentheses.vim
+set runtimepath^=~/.vim/bundle/gundo
+set runtimepath^=~/.vim/bundle/vim-online-thesaurus
+
+
+":set autoindent
+:set autowrite
+:set ruler
+:ab #d #define
+:ab #i #include
+:ab #b /********************************************************
+:ab #c ###################################################################
+:ab #e ********************************************************/
+:ab #l /*------------------------------------------------------*/
+:set sw=4
+:set notextmode
+:set notextauto
+:set hlsearch
+:set incsearch
+:set history=1000
+:set undolevels=1000
+":set textwidth=100
+
+map <F8> :w <enter> :!/home/cdalgicdir/Documents/scripts/currentscripts/vimrun % <enter>
+map <F2> :w <enter> :!/home/cdalgicdir/Documents/scripts/currentscripts/latexcrop % <enter>
+"nnoremap    <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
+
+" LATEX PLUGIN options 
+
+" REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+filetype plugin on
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: This enables automatic indentation as you type.
+filetype indent on
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+"
+" Use spaces instead of tabs for python
+"set tabstop=4
+"set shiftwidth=4
+"set expandtab
+"retab
+
+" Bubble single lines
+nmap <C-Up> ddkP
+nmap <C-Down> ddp
+" " Bubble multiple lines
+vmap <C-Up> xkP`[V`]
+vmap <C-Down> xp`[V`]
+" Visually select the text that was last edited/pasted
+map gV `[v`]
+nore ; :
+nore , ;
+" nnoremap <Up> gk
+"let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 -src-specials -interaction=nonstopmode $*'
+"let g:Tex_ViewRule_pdf = 'okular --unique'
+"function! SyncTexForward()
+"    let s:syncfile = fnamemodify(fnameescape(Tex_GetMainFileName()), ":r").".pdf"
+"    let execstr = "silent !okular --unique ".s:syncfile."\\#src:".line(".").expand("%\:p").' &'
+"    exec execstr
+"endfunction
+"nnoremap <Leader>f :call SyncTexForward()<CR>
+"
+:set nocompatible
+:let g:notes_directory = '~/Documents/Notes'
+
+
+" Toggle fold state between closed and opened. 
+  " 
+  " If there is no fold at current line, just moves forward. 
+  " If it is present, reverse it's state. 
+  fun! ToggleFold() 
+  if foldlevel('.') == 0 
+  normal! l 
+  else 
+  if foldclosed('.') < 0 
+  . foldclose 
+  else 
+  . foldopen 
+  endif 
+  endif 
+  " Clear status line 
+  echo 
+  endfun 
+  " Map this function to Space key. 
+  noremap <space> :call ToggleFold()<CR>
+
+" Rainbowparentheses always on
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+" matchit
+:source ~/.vim/bundle/vim-matchit/plugin/matchit.vim
+
+" CtrlP
+" When invoked, unless a starting directory is specified, CtrlP will set its local working directory according to this variable:
+" let g:ctrlp_working_path_mode = 'cra'
+" Exclude files and directories using Vim's wildignore and CtrlP's own g:ctrl
+" p_custom_ignore:
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|bib|aux|pdf|bbl|blg|toc|lof|lot|cls|tdo|ilg|ind|idx|brf|png)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+set wildignore=*.log,*.aux,*.dvi,*.aut,*.aux,*.bbl,*.blg,*.dvi,*.fff,*.log,*.out,*.pdf,*.ps,*.toc,*.ttt
+set thesaurus+=~/.vim/thesaurus/mthesaur.txt
+set dictionary+=/usr/share/dict/words
+":command! -nargs=1 -range SuperRetab <line1>,<line2>s/\v%(^ *)@<= {<args>}/\t/g
