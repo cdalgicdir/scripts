@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{subcaption}
+%\usepackage{cite}
+%\usepackage{showkeys}
+\usepackage[pagebackref]{hyperref}
+\hypersetup{
+    colorlinks,%
+    citecolor=black,%
+    filecolor=black,%
+    linkcolor=black,%
+    urlcolor=black,%
+}
+\usepackage[all]{hypcap}
+
+\def\equationautorefname{Eq.}
+\def\figureautorefname{Fig.}
+
+\topmargin      0.0in
+\headheight     0.0in
+\headsep        0.0in
+\oddsidemargin  0.0in
+\evensidemargin 0.0in
+\textheight     9.0in
+\textwidth      6.5in
+
+\title{\bf  }
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.3\textwidth]{figures/protein-analysis/dssp}
+  \centering
+  \caption{Time evolution of secondary structure}
+  \label{fig:dssp}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+    FRAME
+  \caption{Snapshots of the simulation}
+  \label{fig:snapshots}
+\end{figure}
+
+\begin{figure}[!ht]
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[scale=0.6]{figures/protein-analysis/rmsd}
+    \caption{Root mean square deviation}
+    \label{fig:rmsd}
+  \end{minipage}
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[scale=0.6]{figures/protein-analysis/rmsf}
+    \caption{Root mean square fluctutation of C$_{\alpha}$ atoms}
+    \label{fig:rmsf}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[!ht]
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[scale=0.6]{figures/protein-analysis/rama}
+    \caption{Ramachandran plot}
+    \label{fig:rama}
+  \end{minipage}
+  \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[scale=0.3]{figures/protein-analysis/mdmat}
+    \caption{Mean smallest distance per residue}
+    \label{fig:mdmat}
+  \end{minipage}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/protein-analysis/end2end}
+  \centering
+  \caption{End to end distance of protein}
+  \label{fig:end2end}
+\end{figure}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=0.45\textwidth]{figures/protein-analysis/hb-mc-sc}
+  \includegraphics[width=0.45\textwidth]{figures/protein-analysis/hb-prot-sol}
+  \centering
+  \caption{Number of hydrogen bonds versus time. Mainchain-sidechain (left) and protein-water (right)}
+  \label{fig:hb}
+\end{figure}
+
+\end{document}
