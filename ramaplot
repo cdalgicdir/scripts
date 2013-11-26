@@ -200,7 +200,7 @@ do
 			exit -1
 		else
 			size="set size 0.5,0.5"
-			[[ ${2: -3} == '.png' ]] && fname=$2 || fname="$2.png"
+			[[ ${2: -4} == '.png' ]] && fname=$2 || fname="$2.png"
 			save="-o $fname"
 			terminal="set terminal pngcairo font \"Gill Sans,24\" enhanced size 3000,3000 crop"
 			echo "Saving to: " $fname
@@ -228,7 +228,7 @@ do
 			exit -1
 		else
 			size="set size 1,1"
-			[[ ${2: -3} == '.pdf' ]] && fname=$2 || fname="$2.pdf"
+			[[ ${2: -4} == '.pdf' ]] && fname=$2 || fname="$2.pdf"
 			echo $fname
 			#fname="$2.pdf"
 			save="-o $fname"
