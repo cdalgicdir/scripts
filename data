@@ -95,16 +95,22 @@ class Data:
     def _calckurtosis(self):
 	''' Calculates kurtosis '''
 	sumsqq = 0
-	for item in self.data:
-	    sumsqq += (item-self.mean)**4
-	return self.length*(self.length+1)/(self.length-1)/(self.length-2)/(self.length-3)*sumsqq/self.var**2-3*(self.length-1)**2/(self.length-2)/(self.length-3)
+	if self.var:
+	    for item in self.data:
+		sumsqq += (item-self.mean)**4
+	    return self.length*(self.length+1)/(self.length-1)/(self.length-2)/(self.length-3)*sumsqq/self.var**2-3*(self.length-1)**2/(self.length-2)/(self.length-3)
+	else:
+	    return None
 
     def _calcskewness(self):
 	''' Calculates skewness '''
 	sumsqt = 0
-	for item in self.data:
-	    sumsqt += (item-self.mean)**3
-	return sumsqt/self.std**3/(self.length-1)/(self.length-2)
+	if self.std:
+	    for item in self.data:
+		sumsqt += (item-self.mean)**3
+	    return sumsqt/self.std**3/(self.length-1)/(self.length-2)
+	else:
+	    return None
 
     def _calcentropy(self):
 	''' Calculates entropy '''
@@ -157,6 +163,8 @@ else:
 print 'Mean\t\t: %g' %x.mean
 print 'Var\t\t: %g' %x.var
 print 'Std\t\t: %g' %x.std
-print 'Kurtosis\t: %g' %x.kurtosis
-print 'Skewness\t: %g' %x.skewness
+if x.kurtosis: print 'Kurtosis\t: %g' %x.kurtosis
+else: print 'Kurtosis\t: ', x.kurtosis
+if x.skewness: print 'Skewness\t: %g' %x.skewness
+else: print 'Skewness\t: ', x.skewness
 print 'Entropy\t\t: %g' %x.entropy

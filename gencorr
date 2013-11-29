@@ -37,8 +37,8 @@ for arg in sys.argv:
 try:
     divide
 except NameError:
-    print "# Number of areas not specified. Using 12 instead."
-    divide = 12
+    divide = 40
+    print "# Number of areas not specified. Using %d instead." %divide
 
 #if len(sys.argv) > 1:
 #    divide = int(sys.argv[2])

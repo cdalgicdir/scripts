@@ -26,7 +26,7 @@ if ($1 ~ /^[@#]/) {
     }
     }
 else {
-    for (i=2;i<=NF;i++) {
+    for (i=1;i<=NF;i++) {
 	if (NR % increment == 0) n=int(NR/increment)-1;
 	else n=int(NR/increment);
 	sum[n,i]+=$i;
@@ -36,7 +36,7 @@ else {
     }
 }
 END{
-    for (i=2;i<=NF;i++){
+    for (i=1;i<=NF;i++){
 	#print "#","column",i;
 	#print "\033[1;31m#","column",i"\033[0m";
 	print "\033[1;31m#","column",i,legend[i-2]"\033[0m";

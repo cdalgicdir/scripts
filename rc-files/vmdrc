@@ -181,6 +181,8 @@ user add key J { if {[molinfo top get rep] == "Lines"} { changerep [molinfo top]
 user add key L { addHeavyLabels [molinfo top] }
 user add key z { align [molinfo top] }
 user add key b { showbackbone [molinfo top] }
+user add key F10 { unwrap [molinfo top] }
+user add key F11 { display depthcue off; color Display Background white;pbc box -off;axes location off }
 #user add key B { align [molinfo top] "residue 1 to 15 and backbone" }
 #user add key V { align [molinfo top] "not water and mass 12 to 99" }
 
@@ -907,7 +909,7 @@ proc snap {{molid "0"}} {
     display depthcue off
     set frame [format %03d [molinfo $molid get frame]]
     render Tachyon frame$frame.dat tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o frame$frame.png -mediumshade
-    file delete frame$j.dat
+    file delete frame$frame.dat
     lores [molinfo top]
 }   
 
@@ -1006,13 +1008,19 @@ proc showbackbone {{molid "0"}} {
     }
 }
 
-
 proc sas {} {
 kllred_viz [molinfo top]
 mol load pdb connelly.pdb
 mol modselect 0 1 "resname DOT"
 #mol modselect 0 1 "not (protein or resname ACE NME CL or water)"
 #mol modcolor 0 1 ColorID 0
+}
+
+proc unwrap {{molid "0"}} {
+pbc unwrap -sel "protein or resname NME ACE"
+align $molid
+menu rmsdtt on
+menu rmsdtt off
 }
 
 set water [atomselect top "water"]

@@ -1,10 +1,17 @@
-set guifont=Monaco\ 13
-"colorscheme twilight
 syntax enable
 set background=dark
-colorscheme solarized
-"colorscheme less
 set guioptions-=T
+
+if matchstr(expand("%"),".*\.md") != ""
+    colorscheme darkdevel
+    set guifont=Ubuntu\ Mono\ 15
+else
+    "colorscheme moria, twilight, solarized, inkpot, corporation
+    colorscheme jellybeans
+    set guifont=Inconsolata\ 15
+    "set guifont=Monaco\ 13
+endif
+
 "let g:fullscreen = 1
 :au BufRead *.tex set spell
 :highlight SpellBad gui=underline guibg=NONE guifg=red

@@ -204,7 +204,7 @@ alias mat="evince $HOME/Documents/Books/Mathematics/Mathematical\ Methods\ For\ 
 alias cpuinfo='lscpu'
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 alias dud='du -hsx * | sort -rh | head -10'
-alias uberwriter="/opt/extras.ubuntu.com/uberwriter/bin/uberwriter $@"
+#alias uberwriter="/opt/extras.ubuntu.com/uberwriter/bin/uberwriter $@"
 
 ### FUNCTIONS
 

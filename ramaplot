@@ -8,8 +8,8 @@
 IFS=$' \t\n'
 usage="Usage: ${0##*/} filename <options>"
 gplot="gplot"
-grid1=13
-grid2=13
+grid1=40
+grid2=40
 grid3=12
 using='u 1:2:3'
 range=""
