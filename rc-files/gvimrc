@@ -35,5 +35,7 @@ if matchstr(expand("%"),".*\.tex") != ""
     :iab int air/water interface
     :iab pmf potential of mean force
     :iab pp peptide
+    :iab leu leucine
+    :iab lys lysine
     :map <F2> viwb<ESC><ESC>i\emph{<ESC>ea}<ESC>
 endif

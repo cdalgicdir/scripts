@@ -27,6 +27,7 @@ class Data:
 	self.var = self._calcvar()
 	#print "var %f" %(time.time()-start)
 	self.std = math.sqrt(self.var)
+	self.stderr = self.std/math.sqrt(self.length)
 	self.kurtosis = self._calckurtosis()
 	#print "kurtosis %f" %(time.time()-start)
 	self.skewness = self._calcskewness()
@@ -163,6 +164,7 @@ else:
 print 'Mean\t\t: %g' %x.mean
 print 'Var\t\t: %g' %x.var
 print 'Std\t\t: %g' %x.std
+print 'Stderr\t\t: %g' %x.stderr
 if x.kurtosis: print 'Kurtosis\t: %g' %x.kurtosis
 else: print 'Kurtosis\t: ', x.kurtosis
 if x.skewness: print 'Skewness\t: %g' %x.skewness
