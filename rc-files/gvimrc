@@ -37,5 +37,8 @@ if matchstr(expand("%"),".*\.tex") != ""
     :iab pp peptide
     :iab leu leucine
     :iab lys lysine
+    :iab KL LK
+    :iab ie i.e.
+    :iab adn and
     :map <F2> viwb<ESC><ESC>i\emph{<ESC>ea}<ESC>
 endif
