@@ -41,16 +41,30 @@ def splithist(data, divide=4, nbins=200):
 	    binslist = bins
     return countslist, binslist
 
+def help(n=0):
+    ''' prints out help '''
+    print 'Usage: dohist file.xvg [column] [divide] [nbins]\n\
+	    [column] : column number\n\
+	    [divide] : divides the file into n with equal number of points\n\
+	    [nbins] : number of bins that will be used to plot histograms\n\
+    '
+
+    print 'Purpose: Divides the timeline data into n and plots histogram with\n\
+	    confidence intervals'
+    sys.exit(n)
+
+if len(sys.argv) > 5:
+    print "Error in number of arguments!"
+    help(1)
+elif '-h' in sys.argv:
+    help(0)
+
 try: n = int(sys.argv[2])
 except IndexError: n = 1
 try: divide = int(sys.argv[3])
 except IndexError: divide = 4
 try: nbins = int(sys.argv[4])
 except IndexError: nbins = 200
-
-if len(sys.argv) > 5:
-    print "Error in number of arguments!"
-    sys.exit(1)
 
 # numpy loadtxt function changed to take into account the comment 
 x = np.loadtxt(sys.argv[1])
