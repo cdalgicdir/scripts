@@ -1,5 +1,17 @@
 #! /usr/bin/python
 
+def help(n=0):
+    ''' prints out help '''
+    print 'Usage: dohist file.xvg [column] [divide] [nbins]\n\
+	    [column] : column number\n\
+	    [divide] : divides the file into n with equal number of points\n\
+	    [nbins] : number of bins that will be used to plot histograms\n\
+    '
+
+    print 'Purpose: Divides the timeline data into n and plots histogram with\n\
+	    confidence intervals'
+    sys.exit(n)
+
 #import multiprocessing
 import numpy as np
 import pandas as pd
@@ -41,22 +53,10 @@ def splithist(data, divide=4, nbins=200):
 	    binslist = bins
     return countslist, binslist
 
-def help(n=0):
-    ''' prints out help '''
-    print 'Usage: dohist file.xvg [column] [divide] [nbins]\n\
-	    [column] : column number\n\
-	    [divide] : divides the file into n with equal number of points\n\
-	    [nbins] : number of bins that will be used to plot histograms\n\
-    '
-
-    print 'Purpose: Divides the timeline data into n and plots histogram with\n\
-	    confidence intervals'
-    sys.exit(n)
-
 if len(sys.argv) > 5:
     print "Error in number of arguments!"
     help(1)
-elif '-h' in sys.argv:
+elif set(['-h','--h','-help','--help']) & set(sys.argv):
     help(0)
 
 try: n = int(sys.argv[2])
