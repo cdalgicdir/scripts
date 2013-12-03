@@ -91,7 +91,7 @@ class Data:
 	return math.sqrt(self.var / self.length * (self.length-1))
 
     def _calckurtosis(self):
-	''' Calculates kurtosis '''
+	''' Calculates unbiased sample kurtosis '''
 	sumsqq = 0
 	if self.var:
 	    for item in self.data:
@@ -101,7 +101,7 @@ class Data:
 	    return None
 
     def _calcskewness(self):
-	''' Calculates skewness '''
+	''' Calculates unbiased sample skewness '''
 	sumsqt = 0
 	if self.std:
 	    for item in self.data:
