@@ -11,7 +11,8 @@ def printhelp():
     ${0##*/} file.xvg 12 -bins"
 
 infilename = sys.argv[1]
-outfilename = infilename[:-3] + 'corr'
+#outfilename = infilename[:-3] + 'corr'
+outfilename = '.'.join(infilename.split('.')[0:-1])+'.corr'
 
 writeprob = True
 writematrix = printbins = rowsum = colsum = False
@@ -40,17 +41,12 @@ except NameError:
     divide = 40
     print "# Number of areas not specified. Using %d instead." %divide
 
-#if len(sys.argv) > 1:
-#    divide = int(sys.argv[2])
-#else:
-#    divide = 12
-
 print "# Dividing into %d by %d..." %(divide,divide)
 
 def FindMinMax(infilename):
     infile = open(infilename,'r')
     nlines = 0
-    minmax = [[99999999,-99999999],[99999999,-99999999]]
+    minmax = [[sys.maxint,-sys.maxint],[sys.maxint,-sys.maxint]]
     while 1:
 	txt = infile.readline()
 	if not txt:
