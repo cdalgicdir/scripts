@@ -21,9 +21,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.pyplot import plot, hist
 import sys
-import time
+#import time
 
-start=time.time()
+#start=time.time()
 
 def splithist(data, divide=4, nbins=200):
     ''' splits time data into divide regions, calculates histogram
@@ -59,7 +59,7 @@ if len(sys.argv) > 5:
 elif set(['-h','--h','-help','--help']) & set(sys.argv):
     help(0)
 
-try: n = int(sys.argv[2])
+try: n = int(sys.argv[2])-1
 except IndexError: n = 1
 try: divide = int(sys.argv[3])
 except IndexError: divide = 4
@@ -106,6 +106,6 @@ axes[1].legend()
 axes[3].legend()
 
 plt.xlim(mindata, maxdata)
-end=time.time()
-print end-start
+#end=time.time()
+#print end-start
 plt.show()
