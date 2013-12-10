@@ -974,7 +974,7 @@ proc showWaterClose {{molid "0"}} {
 	mol representation Lines
 	mol selection {water and within 4 of protein}
 	mol addrep $molid
-	mol selupdate $molid $lastrep
+	mol selupdate $molid $lastrep 1
 } elseif { [lindex $rep 0] == "water and within 4 of protein" } {
         mol delrep $lastrep $molid
 } else {
@@ -982,7 +982,7 @@ proc showWaterClose {{molid "0"}} {
 	mol Color Name
         mol selection {water}
         mol addrep $molid
-	mol selupdate $molid $lastrep
+	mol selupdate $molid $lastrep 1
     }
 }
 

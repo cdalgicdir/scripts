@@ -21,7 +21,11 @@ terminal='set terminal wxt'
 range=[:][:]
 
 plot () {
-    [[ $noplot == true ]] && echo "$plotfiles" | sed 's/,/,\\\n /g' || gplot $output  -c "${extra}" -c "$keyout" -c "$terminal" -r $range -- "$plotfiles"
+    gplot $output  -c "${extra}" -c "$keyout" -c "$terminal" -r $range -- "$plotfiles"
+}
+
+printcommands () {
+    echo "$plotfiles" | sed 's/,/,\\\n /g'
 }
 
 help () {
@@ -61,7 +65,7 @@ while [[ $# -ge 1 ]]; do
 	    using=" u 1:${2} "
 	    shift 2;;
 
-	-n)
+	-n | -nop | -noplot)
 	    noplot=true
 	    shift 1;;
 
@@ -80,10 +84,6 @@ while [[ $# -ge 1 ]]; do
 	-y)
 	    range="[:][:$2]"
 	    shift 2;;
-
-#	\[:\]\[[0-9]*:[0-9]*\]|\[:\]\[:[0-9]*\]|\[:\]\[[0-9]*:\]|\[:[0-9]*\]\[:\]|\[[0-9]*:\]\[:\]|\[:\]\[:\]|\[[0-9]*:\]\[[0-9]*:[0-9]*\]|\[[0-9]*:[0-9]*\]\[[0-9]*:[0-9]*\]|\[:[0-9]*\]\[:[0-9]*\]|\[[0-9]*:\]\[:[0-9]*\]|\[[0-9]*:\]\[[0-9]*:\]|\[:[0-9]*\]\[[0-9]*:\]|\[:[0-9]*\]\[[0-9]*:[0-9]*\]|\[[0-9]*:[0-9]*\]\[[0-9]*:\]|\[[0-9]*:[0-9]*\]\[:[0-9]*\]|\[[0-9]*:[0-9]*\]\[:\])
-#	    range=$1
-#	    shift 1;;
 
 	not)
 	    label=0
@@ -159,8 +159,11 @@ done
 
 # remove comma at the end of command
 plotfiles=${plotfiles:0:$((${#plotfiles}-1))}
-#echo $plotfiles
 
 # finally plot all
-plot $range $plotfiles
+if [[ $noplot == true ]]; then
+    printcommands
+else
+    plot $range $plotfiles
+fi
 #echo $plotfiles
