@@ -3,7 +3,7 @@
 
 ###################################################################
 # Script to show progress of pulling sims
-# Extracts time from md.log of d?.?? directories
+# Extracts time from md.log of d?.??? directories
 ###################################################################
 
 printhelp () {
@@ -22,9 +22,9 @@ Options:
 end=10000 
 closetoend=8000
 directories="d?.???/?-PULL"
-#subdir="?-PULL"
 noFinished=false
 noColor=false
+multipledir=true
 
 # option for no color
 while [[ $# -ge 1 ]]; do
@@ -46,8 +46,19 @@ while [[ $# -ge 1 ]]; do
 	    shift 2;;
 	-ti)
 	    TI=true
-	    directories="Lambda_*/Production_MD"
+	    directories=`ls -d Lambda*/Production_MD`
 	    shift ;;
+
+	-f)
+	    multipledir=false
+	    if [[ -n "$2" ]]; then
+		file=$2 
+		shift 2
+	    else
+		file='md.log'
+		shift
+	    fi
+	    ;;
 
 	-h|-help|--help|--h|*)
 	    printhelp
@@ -107,20 +118,13 @@ printout () {
     fi
 }
 
-for dir in $directories;do
-    #pulldir=`ls -d $dir/$subdir  2>/dev/null`
-    pulldir=`ls -d $dir  2>/dev/null`
-    file=`ls -1 $pulldir/md*.log 2>/dev/null | tail -1` t=$(lastoccur $file) color=$(definecolor $t)
-    [[ -e $file ]] && printout $file $t $color
-    #if [[ -e $pulldir/md.log ]]; then
-    #    file="$pulldir/md.log" t=$(lastoccur $file) color=$(definecolor $t)
-    #    [[ $t ]] && printout $file $t $color
-    #elif [[  `ls $pulldir/md.part* 2>/dev/null` ]]; then
-    #    file=`ls -1 $pulldir/md.part00*|tail -1` t=$(lastoccur $file) color=$(definecolor $t)
-    #    [[ $t ]] && printout $file $t $color
-    #    #echo -n "$file : " && t=$(lastoccur $file) && echo -e $Bred $t $Color_Off
-    #elif [[ $TI == true ]]; then
-    #    file=`ls -1 $pulldir/md*.log | tail -1` t=$(lastoccur $file) color=$(definecolor $t)
-    #    [[ $t ]] && printout $file $t $color
-    #fi
-done
+if [[ $multipledir == true ]]; then
+    for dir in ${directories[@]};do
+	pulldir=`ls -d $dir  2>/dev/null`
+	file=`ls -1 $pulldir/md*.log 2>/dev/null | tail -1` t=$(lastoccur $file) color=$(definecolor $t)
+	[[ -e $file ]] && printout $file $t $color
+    done
+else
+    t=$(lastoccur $file) color=$(definecolor $t)
+    printout $file $t $color
+fi
