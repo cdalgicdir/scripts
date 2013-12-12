@@ -166,7 +166,7 @@ user add key a { ff_viz [molinfo top] }
 user add key m { kll_viz [molinfo top] }
 user add key K { kllred_viz [molinfo top] }
 user add key M { klnow_viz [molinfo top] }
-user add key n { kl_viz [molinfo top] }
+user add key n { cgLK [molinfo top] }
 user add key N { klow_viz [molinfo top] }
 user add key Q { nowater_viz [molinfo top] }
 user add key H { showHbonds [molinfo top] }
@@ -1009,19 +1009,39 @@ proc showbackbone {{molid "0"}} {
 }
 
 proc sas {} {
-kllred_viz [molinfo top]
-mol load pdb connelly.pdb
-mol modselect 0 1 "resname DOT"
-#mol modselect 0 1 "not (protein or resname ACE NME CL or water)"
-#mol modcolor 0 1 ColorID 0
+    kllred_viz [molinfo top]
+    mol load pdb connelly.pdb
+    mol modselect 0 1 "resname DOT"
+    #mol modselect 0 1 "not (protein or resname ACE NME CL or water)"
+    #mol modcolor 0 1 ColorID 0
 }
 
 proc unwrap {{molid "0"}} {
-pbc unwrap -sel "protein or resname NME ACE"
-align $molid
-menu rmsdtt on
-menu rmsdtt off
+    pbc unwrap -sel "protein or resname NME ACE"
+    align $molid
+    menu rmsdtt on
+    menu rmsdtt off
 }
+
+proc cgLK {{molid "0"}} {
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol color ColorID 0
+    mol selection {name KC1 KC2 KC3 KC4 KC5 KC6 KN1 KN2 KN3 KN4 KN5 KN6}
+    mol addrep $molid
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol color ColorID 1
+    mol selection {name L1 L2 L3 L4 L5 L6 L7 L8}
+    mol addrep $molid
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol color ColorID 6
+    mol selection {name CA1 CA2 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11 CA12 CA13 CA14 CN1 CN2 CN3 CN4 CN5 CN6 CN7 CN8 CN8 CN9 CN10 CN11 CN12 CN13 CN14 CN15}
+    mol addrep $molid
+
+}
+
+color Name L red
+color Name K blue
+color Name C cyan
 
 set water [atomselect top "water"]
 set protein [atomselect top "protein"]
@@ -1045,3 +1065,4 @@ animate style Once
 # after idle { kl_viz 0 }
 #start_sscache 0
 #kllred_viz  [molinfo top]
+#

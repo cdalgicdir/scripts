@@ -9,7 +9,7 @@
 printhelp () {
 echo -e "Usage: progress [OPTIONS]
 Options:
-\t-d d?.???\tsims are in directories d?.???
+\t-d \"d?.???\"\tsims are in directories d?.???
 \t-e 20000\tend time for simulations is 20000 ps, default is 10000 ps
 \t-ti\t\tthermodynamic integration, directories are Lambda_*
 \t-nc\t\tno color
