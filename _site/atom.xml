@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>Papers Notebook</title>
+ <link href="/atom.xml" rel="self"/>
+ <link href=""/>
+ <updated>2014-01-03T11:56:19+02:00</updated>
+ <id></id>
+ <author>
+   <name></name>
+ </author>
+ <rights>CC0</rights>
+ 
+ <entry>
+   <title>Kl Dimer At Interface 2ndsim</title>
+   <link href="/2013/12/17/KL-dimer-at-interface-2ndsim.html"/>
+   <updated>2013-12-17T00:00:00+02:00</updated>
+   <id>/2013/12/17/KL-dimer-at-interface-2ndsim</id>
+    
+   <category term="/research/categories.html#kl" label="kl"/>
+   
+   <content type="html">&lt;p&gt;I have done the dimer again, this time starting from a parallel configuration and the distance vs angle correlation, as well as the histograms for the angle and distance are similar.&lt;/p&gt;
+&lt;p&gt;The main difference in correlation plot is the lack of parallel configuration. Although I started from a parallel orientation, the molecule switched to an anti-parallel orientation immediately and stayed that way. (The 1st sim was 1 microseconds and the 2nd one was only 300 ns)&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Kl Dimer Basins</title>
+   <link href="/2013/12/03/KL-dimer-basins.html"/>
+   <updated>2013-12-03T00:00:00+02:00</updated>
+   <id>/2013/12/03/KL-dimer-basins</id>
+    
+   <category term="/research/categories.html#kl" label="kl"/>
+   
+   <content type="html">&lt;ul&gt;
+&lt;li&gt;Why are these basins so discrete in terms of distance?&lt;/li&gt;
+&lt;li&gt;Are there other properties where we can differentiate between the left/right positioning of the peptides for the dimer? Because in &lt;em&gt;basin 3&lt;/em&gt; the number of leucine-leucine contacts is different for the left/right positioning.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Kl Random Coil End To End</title>
+   <link href="/2013/12/01/KL-random-coil-end-to-end.html"/>
+   <updated>2013-12-01T00:00:00+02:00</updated>
+   <id>/2013/12/01/KL-random-coil-end-to-end</id>
+    
+   <category term="/research/categories.html#kl" label="kl"/>
+   
+   <content type="html">&lt;p&gt;A single KL peptide has the same amount of exposure of the hydrophobic leucine sidechains to the hydrophilic water molecules when it adopts alpha-helix compared to the random-coil. Therefore in bulk water, the alpha-helix does not have an overwhelming favor against the random-coil.&lt;/p&gt;
+&lt;p&gt;One should differentiate between different forms of random coils, e.g. extended vs compact forms. Because in the compact form the exposure of hydrophobic leucine sidechains to the hydrophilic water molecules is reduced. Therefore there is no advantage of alpha-helix over the compact form of random-coil.&lt;/p&gt;
+&lt;p&gt;This may be the reason behind various secondary structures of a single KL peptide without an unique conformation in the bulk water. To this end, the end to end distance of the peptide could be calculated for the random coil structures and maybe correlated with the amount of water exposure of the leucine sidechains. Initiating a fully extended coil in bulk water and observing the change in its end to end distance and correlating this to the amount of water exposure could give an insight into the factors for conformational dynamics of the KL peptide.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Kl Basins</title>
+   <link href="/2013/11/29/KL-basins.html"/>
+   <updated>2013-11-29T00:00:00+02:00</updated>
+   <id>/2013/11/29/KL-basins</id>
+    
+   <category term="/research/categories.html#kl" label="kl"/>
+   
+   <content type="html">&lt;h3 id=&quot;questions&quot;&gt;Questions&lt;/h3&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;Why is the &lt;em&gt;basin3&lt;/em&gt; more populated than other basins? Possible answer:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;The distance between charged lysines are increased.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&quot;2&quot; type=&quot;1&quot;&gt;
+&lt;li&gt;Why is &lt;em&gt;antiparallel&lt;/em&gt; orientation more populated than the &lt;em&gt;parallel&lt;/em&gt; orientation?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&quot;number-of-water-molecules&quot;&gt;Number of water molecules&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;We should divide the trajectory into 4 and calculate an error, and then plot the results considering these error values. &lt;em&gt;error bars&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;What about the number of water mols around leu sidechains for the dimer case at the air/water interface?&lt;/li&gt;
+&lt;li&gt;add values for the trimer and pentamer&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Lk310</title>
+   <link href="/2013/11/19/LK310.html"/>
+   <updated>2013-11-19T00:00:00+02:00</updated>
+   <id>/2013/11/19/LK310</id>
+    
+   <category term="/research/categories.html#research" label="research"/>
+   
+   <content type="html">&lt;h2 id=&quot;lk_310-papers&quot;&gt;LK\(_{310}\) Papers&lt;/h2&gt;
+&lt;p&gt;The papers for LK 3-10 are:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://pubs.acs.org/doi/full/10.1021/ja011624n&quot;&gt;Assembly of \(\alpha\)-helical Peptide Coatings on Hydrophobic Surfaces&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://scitation.aip.org/content/avs/journal/jvstb/28/4/10.1116/1.3456176&quot;&gt;Weidner’s&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+</feed>
