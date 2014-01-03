@@ -1,0 +1,17 @@
+## Standard Jeyll config options
+permalink: /:year/:month/:day/:title.html
+exclude: [ _posts/source/, _posts/_private/, assets/figures]
+lunr_excludes: [atom.xml, 404.html, search.html, categories.md, tags.md, calendar.md]
+
+title: Papers Notebook
+tagline: Notes on journal articles
+paginate: 15
+#baseurl: /
+baseurl: /notes
+
+## Markdown Parser (standard Jekyll argument, extended to special parser)
+markdown: pandoc
+pandoc:
+  extensions:
+    - smart
+    - mathjax

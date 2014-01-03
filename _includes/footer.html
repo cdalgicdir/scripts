@@ -1,0 +1,29 @@
+<footer class="footer">
+
+<div class="row">
+  <div class="span11 offset1">
+    <div class="socialicons">
+      <p> <a alt="rss" type="application/atom+xml" href="{{ site.baseurl}}/blog.xml"  
+	  class="showtooltip" title="RSS feeds ==> {{ site.baseurl}}/atom.xml" 
+         onclick="recordOutboundLink(this, 'Outbound Links', 'RSS'); 
+         return false;"><i class="icon-rss"></i></a>
+
+     <style type="text/css">
+	 p {text-indent: 5px; }
+     </style>
+      <a href="{{ site.baseurl}}/archive.html"><i class="icon-calendar"></i> Sort by date</a>
+      <a href="{{ site.baseurl}}/categories.html"><i class="icon-list"></i> Sort by category</a>
+      <a href="{{ site.baseurl}}/tags.html"><i class="icon-tags"></i> Sort by tag</a>
+       </p>
+    </div>
+  </div> <!--end span9 -->
+</div> <!--end row -->
+
+
+
+  <div class="row">
+
+  </div>
+  {% include COINS.html %}
+
+</footer>
