@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-03T12:31:32+02:00</updated>
+ <updated>2014-01-03T14:29:30+02:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -12,12 +12,29 @@
  <rights>CC0</rights>
  
  <entry>
+   <title>Kl Cg</title>
+   <link href="/2014/01/03/KL-cg.html"/>
+   <updated>2014-01-03T00:00:00+02:00</updated>
+   <id>/2014/01/03/KL-cg</id>
+    
+   <category term="/research/categories.html#kl" label="kl"/>
+   
+   <content type="html">&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;obtain bonded distributions for tetramer and compare with bonded distibutions for a single KL in vacuum&lt;/li&gt;
+&lt;li&gt;Fit bonded distributions (possibly for 1 peak where available)&lt;/li&gt;
+&lt;li&gt;Do a trial CG simulation for tetramer in implicit water using generic repulsive LJ for nonbonded&lt;/li&gt;
+&lt;li&gt;Then, do IBI and generate nonbonded potentials&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>Kl Dimer At Interface 2ndsim</title>
    <link href="/2013/12/17/KL-dimer-at-interface-2ndsim.html"/>
    <updated>2013-12-17T00:00:00+02:00</updated>
    <id>/2013/12/17/KL-dimer-at-interface-2ndsim</id>
     
-   <category term="/categories.html#kl" label="kl"/>
+   <category term="/research/categories.html#kl" label="kl"/>
    
    <content type="html">&lt;p&gt;I have done the dimer again, this time starting from a parallel configuration and the distance vs angle correlation, as well as the histograms for the angle and distance are similar.&lt;/p&gt;
 &lt;p&gt;The main difference in correlation plot is the lack of parallel configuration. Although I started from a parallel orientation, the molecule switched to an anti-parallel orientation immediately and stayed that way. (The 1st sim was 1 microseconds and the 2nd one was only 300 ns)&lt;/p&gt;
@@ -30,7 +47,7 @@
    <updated>2013-12-03T00:00:00+02:00</updated>
    <id>/2013/12/03/KL-dimer-basins</id>
     
-   <category term="/categories.html#kl" label="kl"/>
+   <category term="/research/categories.html#kl" label="kl"/>
    
    <content type="html">&lt;ul&gt;
 &lt;li&gt;Why are these basins so discrete in terms of distance?&lt;/li&gt;
@@ -45,7 +62,7 @@
    <updated>2013-12-01T00:00:00+02:00</updated>
    <id>/2013/12/01/KL-random-coil-end-to-end</id>
     
-   <category term="/categories.html#kl" label="kl"/>
+   <category term="/research/categories.html#kl" label="kl"/>
    
    <content type="html">&lt;p&gt;A single KL peptide has the same amount of exposure of the hydrophobic leucine sidechains to the hydrophilic water molecules when it adopts alpha-helix compared to the random-coil. Therefore in bulk water, the alpha-helix does not have an overwhelming favor against the random-coil.&lt;/p&gt;
 &lt;p&gt;One should differentiate between different forms of random coils, e.g. extended vs compact forms. Because in the compact form the exposure of hydrophobic leucine sidechains to the hydrophilic water molecules is reduced. Therefore there is no advantage of alpha-helix over the compact form of random-coil.&lt;/p&gt;
@@ -59,7 +76,7 @@
    <updated>2013-11-29T00:00:00+02:00</updated>
    <id>/2013/11/29/KL-basins</id>
     
-   <category term="/categories.html#kl" label="kl"/>
+   <category term="/research/categories.html#kl" label="kl"/>
    
    <content type="html">&lt;h3 id=&quot;questions&quot;&gt;Questions&lt;/h3&gt;
 &lt;ol type=&quot;1&quot;&gt;
@@ -86,7 +103,7 @@
    <updated>2013-11-19T00:00:00+02:00</updated>
    <id>/2013/11/19/LK310</id>
     
-   <category term="/categories.html#research" label="research"/>
+   <category term="/research/categories.html#research" label="research"/>
    
    <content type="html">&lt;h2 id=&quot;lk_310-papers&quot;&gt;LK\(_{310}\) Papers&lt;/h2&gt;
 &lt;p&gt;The papers for LK 3-10 are:&lt;/p&gt;
