@@ -6417,3 +6417,8 @@ blockquote p {
 .affix {
   position: fixed;
 }
+::selection {
+    /*background: #A1B8F7;*/
+    background: #F1F582;
+    color: #555;
+}
