@@ -5,8 +5,8 @@ lunr_excludes: [atom.xml, 404.html, search.html, categories.md, tags.md, calenda
 
 title: Papers Notebook
 tagline: Notes on journal articles
-#paginate: 15
-#baseurl: /
+paginate: 25
+#baseurl: 
 baseurl: /research
 
 ## Markdown Parser (standard Jekyll argument, extended to special parser)
