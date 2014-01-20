@@ -1,0 +1,53 @@
+<!-- Navbar  ================================================== -->
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <!--a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"-->
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <!--div class="nav-collapse"-->
+        <ul class="nav">
+      <a class="brand" href="{{ site.baseurl}}/README.html"><i style="float:right;" class="icon-info-sign" alt="info"></i></span></a>
+          {% if page.url == "{{ site.baseurl}}/index.html" %}<li class="active">{% else %}<li>{% endif %}
+          <a href="{{ site.baseurl}}/index.html">Home</a></li>
+
+          {% if page.url == "{{ site.baseurl}}/papers.html" %}<li class="active">{% else %}<li>{% endif %}
+          <a href="{{ site.baseurl}}/papers.html">Papers</a></li>
+
+          {% if page.url == "{{ site.baseurl}}/lab-notebook.html" %}<li class="active">{% else %}<li>{% endif %}
+          <a href="{{ site.baseurl}}/lab-notebook.html">Lab Notebook</a></li>
+
+          {% if page.url == "{{ site.baseurl}}/CV.html" %}<li class="active">{% else %}<li>{% endif %}
+          <a href="{{ site.baseurl}}/CV.html">CV</a></li>
+
+        </ul>
+  <!-- ************* Buttons to toggle theme CSS ********************** -->
+        <form style="font-size:10px" class="pull-right">
+          <a onclick="switch_style('dark'); 
+                      recordOutboundLink(this, 'Outbound Links', 'dark theme'); 
+                      return false;" 
+             name="theme" value="dark" id="dark" 
+	     class="btn btn-mini showtooltip(placement: 'bottom')" title="switch to dark theme"><i class="icon-adjust"></i>
+                                   </span></a>
+          
+          <a onclick="switch_style('light'); 
+                      recordOutboundLink(this, 'Outbound Links', 'light theme'); 
+                      return false;" 
+             name="theme" value="light" id="light" 
+	     class="btn btn-mini showtooltip(placement: 'bottom')" title="switch to light theme"><i class="icon-certificate"></i>
+                                  </span></a>
+
+
+           <a onclick="switch_style('white'); 
+                      recordOutboundLink(this, 'Outbound Links', 'white theme'); 
+                      return false;" 
+             name="theme" value="white" id="white" 
+	     class="btn btn-mini showtooltip(placement: 'bottom')" title="switch to white theme"><i class="icon-circle-blank"></i>
+                                 </span></a>
+        </form>
+      </div><!--/.nav-collapse -->
+     </div> <!-- /container -->
+   </div> <!-- /navbar-inner -->
+ </div> <!-- /navbar -->
