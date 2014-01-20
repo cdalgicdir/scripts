@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-20T16:41:29+02:00</updated>
+ <updated>2014-01-20T17:24:05+02:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -33,8 +33,10 @@
 &lt;li&gt;Tetrapeptides as minimal models for amyloid fibril formation&lt;/li&gt;
 &lt;li&gt;fragment of a classic leucine zipper peptide and its mutant&lt;/li&gt;
 &lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;see 38-46 for different applications of REMD to study the dimers, trimers etc for their stability.&lt;/li&gt;
+&lt;li&gt;see Wolf et al [66] for a replica exchange approach for sampling along a peptide-peptide distance coordinate.&lt;/li&gt;
+&lt;li&gt;see Baumketner and Shea [39] for traditional REMD to generate FE surface for dimer formation&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;see 38-46 for different applications of REMD to study the dimers, trimers etc for their stability. see Wolf et al [66] for a replica exchange approach for sampling along a peptide-peptide distance coordinate.&lt;/p&gt;
 &lt;figure&gt;
 &lt;img src=&quot;/research/images/papers-images/gee2010-uremd.png&quot; alt=&quot;UREMD schematics&quot;&gt;&lt;figcaption&gt;UREMD schematics&lt;/figcaption&gt;
 &lt;/figure&gt;
