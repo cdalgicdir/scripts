@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-20T11:03:10+02:00</updated>
+ <updated>2014-01-20T11:05:47+02:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -38,7 +38,7 @@
 &lt;/ol&gt;
 &lt;p&gt;see 38-46 for different applications of REMD to study the dimers, trimers etc for their stability. see Wolf et al [66] for a replica exchange approach for sampling along a peptide-peptide distance coordinate.&lt;/p&gt;
 &lt;figure&gt;
-&lt;img src=&quot;/images/papers-images/gee2010-uremd.png&quot; alt=&quot;My helpful screenshot&quot;&gt;&lt;figcaption&gt;My helpful screenshot&lt;/figcaption&gt;
+&lt;img src=&quot;/research/images/papers-images/gee2010-uremd.png&quot; alt=&quot;My helpful screenshot&quot;&gt;&lt;figcaption&gt;My helpful screenshot&lt;/figcaption&gt;
 &lt;/figure&gt;
 </content>
  </entry>
