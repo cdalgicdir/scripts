@@ -4,12 +4,44 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-03T14:29:30+02:00</updated>
+ <updated>2014-01-20T11:03:10+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Papers Gee2010</title>
+   <link href="/2014/01/20/papers-gee2010.html"/>
+   <updated>2014-01-20T00:00:00+02:00</updated>
+   <id>/2014/01/20/papers-gee2010</id>
+    
+   <category term="/research/categories.html#papers" label="papers"/>
+   
+   <content type="html">&lt;h3 id=&quot;two-dimensional-replica-exchange-approach-for-peptidepeptide-interactions&quot;&gt;Two-dimensional replica exchange approach for peptide–peptide interactions&lt;/h3&gt;
+&lt;p&gt;Jason Gee and M. Scott Shell [2010]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;New method: UREMD = umbrella-sampling REMD&lt;/li&gt;
+&lt;li&gt;2 dimensions:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;temperature (as in REMD)&lt;/li&gt;
+&lt;li&gt;umbrella sampling coordinate between center of mass of the two peptides&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;Tests the approach on two peptide families:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;Tetrapeptides as minimal models for amyloid fibril formation&lt;/li&gt;
+&lt;li&gt;fragment of a classic leucine zipper peptide and its mutant&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;see 38-46 for different applications of REMD to study the dimers, trimers etc for their stability. see Wolf et al [66] for a replica exchange approach for sampling along a peptide-peptide distance coordinate.&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src=&quot;/images/papers-images/gee2010-uremd.png&quot; alt=&quot;My helpful screenshot&quot;&gt;&lt;figcaption&gt;My helpful screenshot&lt;/figcaption&gt;
+&lt;/figure&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Kl Cg</title>
