@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-20T11:05:47+02:00</updated>
+ <updated>2014-01-20T12:33:48+02:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -23,23 +23,28 @@
 &lt;p&gt;Jason Gee and M. Scott Shell [2010]&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;New method: UREMD = umbrella-sampling REMD&lt;/li&gt;
-&lt;li&gt;2 dimensions:&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;2 dimensions:
 &lt;ol type=&quot;1&quot;&gt;
 &lt;li&gt;temperature (as in REMD)&lt;/li&gt;
 &lt;li&gt;umbrella sampling coordinate between center of mass of the two peptides&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;Tests the approach on two peptide families:&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;Tests the approach on two peptide families:
 &lt;ol type=&quot;1&quot;&gt;
 &lt;li&gt;Tetrapeptides as minimal models for amyloid fibril formation&lt;/li&gt;
 &lt;li&gt;fragment of a classic leucine zipper peptide and its mutant&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;see 38-46 for different applications of REMD to study the dimers, trimers etc for their stability. see Wolf et al [66] for a replica exchange approach for sampling along a peptide-peptide distance coordinate.&lt;/p&gt;
 &lt;figure&gt;
-&lt;img src=&quot;/research/images/papers-images/gee2010-uremd.png&quot; alt=&quot;My helpful screenshot&quot;&gt;&lt;figcaption&gt;My helpful screenshot&lt;/figcaption&gt;
+&lt;img src=&quot;/research/images/papers-images/gee2010-uremd.png&quot; alt=&quot;UREMD schematics&quot;&gt;&lt;figcaption&gt;UREMD schematics&lt;/figcaption&gt;
 &lt;/figure&gt;
+&lt;ul&gt;
+&lt;li&gt;Normally if one has n replicas and m US distances, then one should have \(mxn\) windows. To reduce this, the US dimension is only used for the lowest temperature, and the temperature dimension is used for two US distances (namely the 2nd and the penultimate).&lt;/li&gt;
+&lt;li&gt;allows exchanges between temperature or umbrella state neighbors or both.&lt;/li&gt;
+&lt;li&gt;shape of PMF depends on the success of swap attempts between umbrella neighbors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;section&quot;&gt;-&lt;/h2&gt;
+&lt;p&gt;Q: If US windows are swapped, eg d=2.8 configuration is swapped with d=2.6, then one should get d=2.6 configuration in d=2.8 simulation. That simulation should come to equilibration at a certain number of steps, where one should wait and lose time. How do they solve this?&lt;/p&gt;
 </content>
  </entry>
  

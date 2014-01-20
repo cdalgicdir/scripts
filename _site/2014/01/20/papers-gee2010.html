@@ -97,23 +97,28 @@
 <p>Jason Gee and M. Scott Shell [2010]</p>
 <ul>
 <li>New method: UREMD = umbrella-sampling REMD</li>
-<li>2 dimensions:</li>
-</ul>
+<li>2 dimensions:
 <ol type="1">
 <li>temperature (as in REMD)</li>
 <li>umbrella sampling coordinate between center of mass of the two peptides</li>
-</ol>
-<ul>
-<li>Tests the approach on two peptide families:</li>
-</ul>
+</ol></li>
+<li>Tests the approach on two peptide families:
 <ol type="1">
 <li>Tetrapeptides as minimal models for amyloid fibril formation</li>
 <li>fragment of a classic leucine zipper peptide and its mutant</li>
-</ol>
+</ol></li>
+</ul>
 <p>see 38-46 for different applications of REMD to study the dimers, trimers etc for their stability. see Wolf et al [66] for a replica exchange approach for sampling along a peptide-peptide distance coordinate.</p>
 <figure>
-<img src="/research/images/papers-images/gee2010-uremd.png" alt="My helpful screenshot"><figcaption>My helpful screenshot</figcaption>
+<img src="/research/images/papers-images/gee2010-uremd.png" alt="UREMD schematics"><figcaption>UREMD schematics</figcaption>
 </figure>
+<ul>
+<li>Normally if one has n replicas and m US distances, then one should have \(mxn\) windows. To reduce this, the US dimension is only used for the lowest temperature, and the temperature dimension is used for two US distances (namely the 2nd and the penultimate).</li>
+<li>allows exchanges between temperature or umbrella state neighbors or both.</li>
+<li>shape of PMF depends on the success of swap attempts between umbrella neighbors</li>
+</ul>
+<h2 id="section">-</h2>
+<p>Q: If US windows are swapped, eg d=2.8 configuration is swapped with d=2.6, then one should get d=2.6 configuration in d=2.8 simulation. That simulation should come to equilibration at a certain number of steps, where one should wait and lose time. How do they solve this?</p>
 
     </article>
   </div>
