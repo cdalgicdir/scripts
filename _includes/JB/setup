@@ -1,7 +1,6 @@
 {% capture jbcache %}
   <!--
   - Dynamically set liquid variables for working with URLs/paths
-site.JB.BASE_PATH=/research
   -->
   {% if site.JB.setup.provider == "custom" %}
     {% include custom/setup %}
