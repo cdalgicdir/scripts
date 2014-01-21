@@ -5,7 +5,7 @@
       type="image/ico" 
       href="/research/ico/favicon.ico">
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-  <title>Papers Gee2010</title>
+  <title>Meeting Msayar</title>
   <meta name="author" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- CSS Stylesheets (alternate sheets toggled with javascript or browsers supporting rel='alternative stylesheet') -->
@@ -85,7 +85,7 @@
     <div class="container"> <!-- Responsive grid layout --> 
 
       <header class="jumbotron">
-<h4 class="entry-title">Papers Gee2010</h4>
+<h4 class="entry-title">Meeting Msayar</h4>
   <h5></h5>
 </header>
 
@@ -93,34 +93,8 @@
 <div class="row">
   <div class="span8">
     <article>
-    <h3 id="two-dimensional-replica-exchange-approach-for-peptidepeptide-interactions">Two-dimensional replica exchange approach for peptide–peptide interactions</h3>
-<p>Jason Gee and M. Scott Shell [2010]</p>
-<ul>
-<li>New method: UREMD = umbrella-sampling REMD</li>
-<li>2 dimensions:
-<ol type="1">
-<li>temperature (as in REMD)</li>
-<li>umbrella sampling coordinate between center of mass of the two peptides</li>
-</ol></li>
-<li>Tests the approach on two peptide families:
-<ol type="1">
-<li>Tetrapeptides as minimal models for amyloid fibril formation</li>
-<li>fragment of a classic leucine zipper peptide and its mutant</li>
-</ol></li>
-<li>see 38-46 for different applications of REMD to study the dimers, trimers etc for their stability.</li>
-<li>see Wolf et al [66] for a replica exchange approach for sampling along a peptide-peptide distance coordinate.</li>
-<li>see Baumketner and Shea [39] for traditional REMD to generate FE surface for dimer formation</li>
-</ul>
-<figure>
-<img src="/research/images/papers-images/gee2010-uremd.png" alt="UREMD schematics"><figcaption>UREMD schematics</figcaption>
-</figure>
-<ul>
-<li>Normally if one has n replicas and m US distances, then one should have \(mxn\) windows. To reduce this, the US dimension is only used for the lowest temperature, and the temperature dimension is used for two US distances (namely the 2nd and the penultimate).</li>
-<li>allows exchanges between temperature or umbrella state neighbors or both.</li>
-<li>shape of PMF depends on the success of swap attempts between umbrella neighbors</li>
-</ul>
-<h2 id="section">-</h2>
-<p>Q: If US windows are swapped, eg d=2.8 configuration is swapped with d=2.6, then one should get d=2.6 configuration in d=2.8 simulation. That simulation should come to equilibration at a certain number of steps, where one should wait and lose time. How do they solve this?</p>
+    <p>TO DO: 1. For REMD analysis add DSSP data for each replica for both bw and interface 2. AH ratio vs T: do block averaging: are the differences significant 3. For dimer PMF of bw and int: do block averaging 4. Add snapshots of each basin for the dimer 5. Better match for dimer PMF anti-par vs Boltzmann-invert of free 6. Aggregate PMF: repulsion at large distances? 7. For dimer, why is there so much difference with increasing time? (especially for the dimer) 8. Add the second free dimer at interface simulation data: esp distance vs angle</p>
+<p>Questions: 1. Why is the tetramer most stable? 2. Is the repulsion for aggregates at large distances in PMFs real? 3. Why is the 3rd basin for dimer most stable? (possible answer: charge-charge repulsion)</p>
 
     </article>
   </div>
@@ -129,7 +103,7 @@
 	  <p><i class="icon-list"></i> Posted in
     
       <a rel="dc:subject" class="category" 
-         href="/research/categories.html#papers">papers</a>
+         href="/research/categories.html#meeting">meeting</a>
     
     </p>
 
@@ -137,34 +111,22 @@
     
     <!-- http://schema.org/BlogPosting/keywords -->
     <a rel="og:tag" class="tag" 
-       href="/research/tags.html#papers">#papers</a>, 
-    
-    <!-- http://schema.org/BlogPosting/keywords -->
-    <a rel="og:tag" class="tag" 
-       href="/research/tags.html#REMD">#REMD</a>, 
-    
-    <!-- http://schema.org/BlogPosting/keywords -->
-    <a rel="og:tag" class="tag" 
-       href="/research/tags.html#Umbrella+sampling">#Umbrella sampling</a>, 
-    
-    <!-- http://schema.org/BlogPosting/keywords -->
-    <a rel="og:tag" class="tag" 
-       href="/research/tags.html#Replica+exchange">#Replica exchange</a>
+       href="/research/tags.html#meeting">#meeting</a>
     </p>
 
 <aside prefix="dc: http://purl.org/dc/terms/">
   <p> <i class="icon-calendar"></i>
-<time datetime="2014-01-20T00:00:00+02:00" 
-      property="dc:created">20 Jan 2014</time></p>
+<time datetime="2014-01-21T00:00:00+02:00" 
+      property="dc:created">21 Jan 2014</time></p>
 
 </br>
 
   
-  <p><a class="btn btn-mini showtooltip" title="Kl Cg" rel="prev" href='/research/2014/01/03/KL-cg.html'><i class="icon-chevron-left"></i>previous</a>
+  <p><a class="btn btn-mini showtooltip" title="Papers Gee2010" rel="prev" href='/research/2014/01/20/papers-gee2010.html'><i class="icon-chevron-left"></i>previous</a>
   
   
-  <a class="btn btn-mini showtooltip" title="Meeting Msayar" rel="next" href='/research/2014/01/21/meeting-msayar.html'>next <i class="icon-chevron-right"></i></a></p>
-  
+    </p>
+    
 
 
     </div>
@@ -205,12 +167,12 @@
       title="ctx_ver=Z39.88-2004
       &amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc
       &amp;rfr_id=info%3Asid%2Focoins.info%3Agenerator
-      &amp;rft.title=Papers Gee2010
+      &amp;rft.title=Meeting Msayar
       &amp;rft.creator=
-      &amp;rft.date=2014-01-20
+      &amp;rft.date=2014-01-21
       &amp;rft.language=EN
       &amp;rft.rights=CC0
-      &amp;rft_id=/2014/01/20/papers-gee2010.html">
+      &amp;rft_id=/2014/01/21/meeting-msayar.html">
   </span>
 
 

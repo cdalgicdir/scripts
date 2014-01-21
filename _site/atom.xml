@@ -4,12 +4,25 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-20T17:24:05+02:00</updated>
+ <updated>2014-01-21T15:51:11+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Meeting Msayar</title>
+   <link href="/2014/01/21/meeting-msayar.html"/>
+   <updated>2014-01-21T00:00:00+02:00</updated>
+   <id>/2014/01/21/meeting-msayar</id>
+    
+   <category term="/research/categories.html#meeting" label="meeting"/>
+   
+   <content type="html">&lt;p&gt;TO DO: 1. For REMD analysis add DSSP data for each replica for both bw and interface 2. AH ratio vs T: do block averaging: are the differences significant 3. For dimer PMF of bw and int: do block averaging 4. Add snapshots of each basin for the dimer 5. Better match for dimer PMF anti-par vs Boltzmann-invert of free 6. Aggregate PMF: repulsion at large distances? 7. For dimer, why is there so much difference with increasing time? (especially for the dimer) 8. Add the second free dimer at interface simulation data: esp distance vs angle&lt;/p&gt;
+&lt;p&gt;Questions: 1. Why is the tetramer most stable? 2. Is the repulsion for aggregates at large distances in PMFs real? 3. Why is the 3rd basin for dimer most stable? (possible answer: charge-charge repulsion)&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Papers Gee2010</title>
