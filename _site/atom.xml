@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-21T15:51:11+02:00</updated>
+ <updated>2014-01-21T15:58:17+02:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -19,8 +19,23 @@
     
    <category term="/research/categories.html#meeting" label="meeting"/>
    
-   <content type="html">&lt;p&gt;TO DO: 1. For REMD analysis add DSSP data for each replica for both bw and interface 2. AH ratio vs T: do block averaging: are the differences significant 3. For dimer PMF of bw and int: do block averaging 4. Add snapshots of each basin for the dimer 5. Better match for dimer PMF anti-par vs Boltzmann-invert of free 6. Aggregate PMF: repulsion at large distances? 7. For dimer, why is there so much difference with increasing time? (especially for the dimer) 8. Add the second free dimer at interface simulation data: esp distance vs angle&lt;/p&gt;
-&lt;p&gt;Questions: 1. Why is the tetramer most stable? 2. Is the repulsion for aggregates at large distances in PMFs real? 3. Why is the 3rd basin for dimer most stable? (possible answer: charge-charge repulsion)&lt;/p&gt;
+   <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO DO:&lt;/h2&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;For REMD analysis add DSSP data for each replica for both bw and interface&lt;/li&gt;
+&lt;li&gt;AH ratio vs T: do block averaging: are the differences significant&lt;/li&gt;
+&lt;li&gt;For dimer PMF of bw and int: do block averaging&lt;/li&gt;
+&lt;li&gt;Add snapshots of each basin for the dimer&lt;/li&gt;
+&lt;li&gt;Better match for dimer PMF anti-par vs Boltzmann-invert of free&lt;/li&gt;
+&lt;li&gt;Aggregate PMF: repulsion at large distances?&lt;/li&gt;
+&lt;li&gt;For dimer, why is there so much difference with increasing time? (especially for the dimer)&lt;/li&gt;
+&lt;li&gt;Add the second free dimer at interface simulation data: esp distance vs angle&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&quot;questions&quot;&gt;Questions:&lt;/h2&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;Why is the tetramer most stable?&lt;/li&gt;
+&lt;li&gt;Is the repulsion for aggregates at large distances in PMFs real?&lt;/li&gt;
+&lt;li&gt;Why is the 3rd basin for dimer most stable? (possible answer: charge-charge repulsion)&lt;/li&gt;
+&lt;/ol&gt;
 </content>
  </entry>
  
