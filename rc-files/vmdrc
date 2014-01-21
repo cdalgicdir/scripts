@@ -773,7 +773,9 @@ proc align {molid {seltxt "protein and backbone"}} {
       if {$j == $ref_frame} {
         continue
       }
+      menu rmsdtt on
       rmsdtt::align $sel $j $sel_ref
+      menu rmsdtt off
     }
 }
 
@@ -1021,8 +1023,6 @@ proc sas {} {
 proc unwrap {{molid "0"}} {
     pbc unwrap -sel "protein or resname NME ACE"
     align $molid
-    menu rmsdtt on
-    menu rmsdtt off
 }
 
 proc cgLK {{molid "0"}} {
@@ -1046,7 +1046,6 @@ proc periodicZ {{molid "0"}} {
     for {set i 0} {$i < $numrep} {incr i} { 
 	mol showperiodic $molid $i zZ
 	mol numperiodic $molid $i 1
-	}
     }
 }
 
@@ -1054,9 +1053,9 @@ proc periodicZoff {{molid "0"}} {
     set numrep [molinfo $molid get numreps]
     for {set i 0} {$i < $numrep} {incr i} { 
 	mol showperiodic $molid $i 0
-	}
     }
 }
+
 color Name L red
 color Name K blue
 color Name C cyan

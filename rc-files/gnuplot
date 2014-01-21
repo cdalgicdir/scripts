@@ -66,6 +66,6 @@ ll="set style data line"
 #
 #set xtics pi
 #set format x '%.0Pπ'
-KL="/home/cdalgicdir/SIMS/remote/ichi/sg5/KL/"
-IBI="/home/cdalgicdir/SIMS/remote/ichi/sg5/IBI/"
-FF="/home/cdalgicdir/SIMS/remote/ichi/sg5/FF/"
+KL="/home/cdalgicdir/remote/ichi/sg5/KL/"
+IBI="/home/cdalgicdir/remote/ichi/sg5/IBI/"
+FF="/home/cdalgicdir/remote/ichi/sg5/FF/"

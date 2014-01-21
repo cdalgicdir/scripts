@@ -120,14 +120,15 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 
-CDPATH=".:~/SIMS/remote"
+CDPATH=".:~/remote"
 export PATH=$PATH:$HOME/Documents/scripts/currentscripts:$HOME/Mendeley/bin
 #export PATH=$PATH:/usr/local/Espresso-2.2.0b/bin/
 #export PATH=$PATH:/usr/local/namd/
 #export PATH=$PATH:/home/cdalgicdir/gnuplotutils/bin
-source /usr/local/gromacs/gromacs-4.5.6/bin/GMXRC.bash
-export GMXLIB=/usr/local/gromacs/gromacs-4.5.6/share/gromacs/top
+GROMACSDIR=/usr/local/gromacs/gromacs-4.5.6
 votcadir=$HOME/Votca/votca-1.2.3
+source $GROMACSDIR/bin/GMXRC.bash
+export GMXLIB=$GROMACSDIR/share/gromacs/top
 source $votcadir/bin/VOTCARC.bash
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:$votcadir/lib64:$votcadir/lib
 export MANPATH=/usr/share/man/:/usr/local/gromacs-4.5.6/share/man:/opt/novell/man
@@ -191,15 +192,16 @@ alias octave="octave -q"
 ###################################################################
 # Shortcuts for Essential Books
 ###################################################################
+alias books="echo -e 'prot: Branden\nprotp: Protein Physics\nmd: Frenkel\nmds: Schankar\nleach: Leach\ntildesley: Tildesley\nart: Art of MD\nmath: Hassani'"
 alias mangro="mupdf $HOME/Documents/Manuals/gromacs-manual-4.5.6.pdf&"
 alias prot="evince $HOME/Documents/Books/Branden_Introduction\ to\ protein\ structure\ 2nd\ ed.djvu &"
 alias protp="evince /home/cdalgicdir/Documents/Books/Peptides/Protein_Physics.pdf &"
 alias md="evince $HOME/Documents/Books/MD_Simulation/Understanding_Molecular_Simulation.pdf &"
 alias mds="evince $HOME/Documents/Books/MD_Simulation/Molecular_Modeling_and_Simulation._An_Interdisciplinary_Guide.pdf &"
 alias leach="evince $HOME/Documents/Books/MD_Simulation/Leach-Molecular.modelling.Principles.djvu &"
-alias tild="evince $HOME/Documents/Books/MD_Simulation/[Allen_Tildesley]_Computer_simulation_of_liquids.pdf &"
+alias tildesley="evince $HOME/Documents/Books/MD_Simulation/[Allen_Tildesley]_Computer_simulation_of_liquids.pdf &"
 alias art="evince $HOME/Documents/Books/MD_Simulation/The\ Art\ of\ Molecular\ Dynamics.pdf &"
-alias mat="evince $HOME/Documents/Books/Mathematics/Mathematical\ Methods\ For\ Students\ of\ Physics\ and\ Related\ Fields\ -\ Hassani.pdf &"
+alias math="evince $HOME/Documents/Books/Mathematics/Mathematical\ Methods\ For\ Students\ of\ Physics\ and\ Related\ Fields\ -\ Hassani.pdf &"
 ###################################################################
 alias cpuinfo='lscpu'
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'

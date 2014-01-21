@@ -10,6 +10,23 @@ def printhelp():
     ${0##*/} file.xvg 12 (-rowsum|-colsum)\n \
     ${0##*/} file.xvg 12 -bins"
 
+def prob2ener(probs):
+    N_A = 6.02*(10**(23)) # Avogadro's Number
+    kB = 1.3806503*10**(-23)
+    T = 298 # K
+    NkT = N_A * kB * T
+    energs = []
+    for pl in probs:
+	ener = []
+	for p in pl:
+	    if p == 0:
+		ener.append(10.)
+	    else:
+		ener.append(-1. * NkT * math.log(p))
+	energs.append(ener)
+    return energs
+
+
 infilename = sys.argv[1]
 #outfilename = infilename[:-3] + 'corr'
 outfilename = '.'.join(infilename.split('.')[0:-1])+'.corr'
@@ -29,6 +46,10 @@ for arg in sys.argv:
     elif arg == '-bins':
 	printbins = True
 	writeprob = False
+    elif arg == '-ener':
+	writeprob = False
+	writeener = True
+	outfilename = outfilename[:-4] + 'ener'
     elif re.search(r'^\d+',arg):
 	divide = int(arg)
     elif arg in ['-h','-help','help','--h','--help']:
@@ -198,4 +219,7 @@ if colsum:
     printMatrixCol(sumcol(probs))
 if writeprob:
     writeXYP(minmax,increment,probs)
+    print "%s created!" %outfilename
+elif writeener:
+    writeXYP(minmax,increment,prob2ener(probs))
     print "%s created!" %outfilename
