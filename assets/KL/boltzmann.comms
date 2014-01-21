@@ -1,0 +1,424 @@
+# bonds
+# CN-CA
+#hist n 101
+hist set scale bond
+hist bond_CN1-CA1.xvg 1:bond_CN-CA:1
+hist bond_CN2-CA2.xvg 1:bond_CN-CA:2
+hist bond_CN3-CA3.xvg 1:bond_CN-CA:3
+hist bond_CN4-CA4.xvg 1:bond_CN-CA:4
+hist bond_CN5-CA5.xvg 1:bond_CN-CA:5
+hist bond_CN6-CA6.xvg 1:bond_CN-CA:6
+hist bond_CN7-CA7.xvg 1:bond_CN-CA:7
+hist bond_CN8-CA8.xvg 1:bond_CN-CA:8
+hist bond_CN9-CA9.xvg 1:bond_CN-CA:9
+hist bond_CN10-CA10.xvg 1:bond_CN-CA:10
+hist bond_CN11-CA11.xvg 1:bond_CN-CA:11
+hist bond_CN12-CA12.xvg 1:bond_CN-CA:12
+hist bond_CN13-CA13.xvg 1:bond_CN-CA:13
+hist bond_CN14-CA14.xvg 1:bond_CN-CA:14
+hist bond_CN-CA_avg.xvg 1:bond_CN-CA:*
+
+# CA-CN
+hist set scale bond
+hist bond_CA1-CN2.xvg 1:bond_CA-CN:1
+hist bond_CA2-CN3.xvg 1:bond_CA-CN:2
+hist bond_CA3-CN4.xvg 1:bond_CA-CN:3
+hist bond_CA4-CN5.xvg 1:bond_CA-CN:4
+hist bond_CA5-CN6.xvg 1:bond_CA-CN:5
+hist bond_CA6-CN7.xvg 1:bond_CA-CN:6
+hist bond_CA7-CN8.xvg 1:bond_CA-CN:7
+hist bond_CA8-CN9.xvg 1:bond_CA-CN:8
+hist bond_CA9-CN10.xvg 1:bond_CA-CN:9
+hist bond_CA10-CN11.xvg 1:bond_CA-CN:10
+hist bond_CA11-CN12.xvg 1:bond_CA-CN:11
+hist bond_CA12-CN13.xvg 1:bond_CA-CN:12
+hist bond_CA13-CN14.xvg 1:bond_CA-CN:13
+hist bond_CA14-CN15.xvg 1:bond_CA-CN:14
+hist bond_CA-CN_avg.xvg 1:bond_CA-CN:*
+
+# CA-L
+hist set scale bond
+hist bond_CA1-L1.xvg 1:bond_CA-L:1
+hist bond_CA4-L2.xvg 1:bond_CA-L:2
+hist bond_CA5-L3.xvg 1:bond_CA-L:3
+hist bond_CA7-L4.xvg 1:bond_CA-L:4
+hist bond_CA8-L5.xvg 1:bond_CA-L:5
+hist bond_CA11-L6.xvg 1:bond_CA-L:6
+hist bond_CA12-L7.xvg 1:bond_CA-L:7
+hist bond_CA14-L8.xvg 1:bond_CA-L:8
+hist bond_CA14-L8.xvg 1:bond_CA-L:8
+hist bond_CA-L_avg.xvg 1:bond_CA-L:*
+
+# CA-KC
+hist set scale bond
+hist bond_CA2-KC1.xvg 1:bond_CA-KC:1
+hist bond_CA3-KC2.xvg 1:bond_CA-KC:2
+hist bond_CA6-KC3.xvg 1:bond_CA-KC:3
+hist bond_CA9-KC4.xvg 1:bond_CA-KC:4
+hist bond_CA10-KC5.xvg 1:bond_CA-KC:5
+hist bond_CA13-KC6.xvg 1:bond_CA-KC:6
+hist bond_CA-KC_avg.xvg 1:bond_CA-KC:*
+
+# KC-KN
+hist set scale bond
+hist bond_KC1-KN1.xvg 1:bond_KC-KN:1
+hist bond_KC2-KN2.xvg 1:bond_KC-KN:2
+hist bond_KC3-KN3.xvg 1:bond_KC-KN:3
+hist bond_KC4-KN4.xvg 1:bond_KC-KN:4
+hist bond_KC5-KN5.xvg 1:bond_KC-KN:5
+hist bond_KC6-KN6.xvg 1:bond_KC-KN:6
+hist bond_KC-KN_avg.xvg 1:bond_KC-KN:*
+
+# angles
+# CN-CA-CN
+hist set scale angle
+hist ang_CN1-CA1-CN2.xvg 1:ang_CN-CA-CN:1
+hist ang_CN2-CA2-CN3.xvg 1:ang_CN-CA-CN:2
+hist ang_CN3-CA3-CN4.xvg 1:ang_CN-CA-CN:3
+hist ang_CN4-CA4-CN5.xvg 1:ang_CN-CA-CN:4
+hist ang_CN5-CA5-CN6.xvg 1:ang_CN-CA-CN:5
+hist ang_CN6-CA6-CN7.xvg 1:ang_CN-CA-CN:6
+hist ang_CN7-CA7-CN8.xvg 1:ang_CN-CA-CN:7
+hist ang_CN8-CA8-CN9.xvg 1:ang_CN-CA-CN:8
+hist ang_CN9-CA9-CN10.xvg 1:ang_CN-CA-CN:9
+hist ang_CN10-CA10-CN11.xvg 1:ang_CN-CA-CN:10
+hist ang_CN11-CA11-CN12.xvg 1:ang_CN-CA-CN:11
+hist ang_CN12-CA12-CN13.xvg 1:ang_CN-CA-CN:12
+hist ang_CN13-CA13-CN14.xvg 1:ang_CN-CA-CN:13
+hist ang_CN14-CA14-CN15.xvg 1:ang_CN-CA-CN:14
+hist ang_CN-CA-CN_avg.xvg 1:ang_CN-CA-CN:*
+
+# CA-CN-CA
+hist set scale angle
+hist ang_CA1-CN2-CA2.xvg 1:ang_CA-CN-CA:1
+hist ang_CA2-CN3-CA3.xvg 1:ang_CA-CN-CA:2
+hist ang_CA3-CN4-CA4.xvg 1:ang_CA-CN-CA:3
+hist ang_CA4-CN5-CA5.xvg 1:ang_CA-CN-CA:4
+hist ang_CA5-CN6-CA6.xvg 1:ang_CA-CN-CA:5
+hist ang_CA6-CN7-CA7.xvg 1:ang_CA-CN-CA:6
+hist ang_CA7-CN8-CA8.xvg 1:ang_CA-CN-CA:7
+hist ang_CA8-CN9-CA9.xvg 1:ang_CA-CN-CA:8
+hist ang_CA9-CN10-CA10.xvg 1:ang_CA-CN-CA:9
+hist ang_CA10-CN11-CA11.xvg 1:ang_CA-CN-CA:10
+hist ang_CA11-CN12-CA12.xvg 1:ang_CA-CN-CA:11
+hist ang_CA12-CN13-CA13.xvg 1:ang_CA-CN-CA:12
+hist ang_CA13-CN14-CA14.xvg 1:ang_CA-CN-CA:13
+hist ang_CA-CN-CA_avg.xvg 1:ang_CA-CN-CA:*
+
+# CN-CA-L
+hist set scale angle
+hist ang_CN1-CA1-L1.xvg 1:ang_CN-CA-L:1
+hist ang_CN4-CA4-L2.xvg 1:ang_CN-CA-L:2
+hist ang_CN5-CA5-L3.xvg 1:ang_CN-CA-L:3
+hist ang_CN7-CA7-L4.xvg 1:ang_CN-CA-L:4
+hist ang_CN8-CA8-L5.xvg 1:ang_CN-CA-L:5
+hist ang_CN11-CA11-L6.xvg 1:ang_CN-CA-L:6
+hist ang_CN12-CA12-L7.xvg 1:ang_CN-CA-L:7
+hist ang_CN14-CA14-L8.xvg 1:ang_CN-CA-L:8
+hist ang_CN-CA-L_avg.xvg 1:ang_CN-CA-L:*
+
+# CN-CA-KC
+hist set scale angle
+hist ang_CN2-CA2-KC1.xvg 1:ang_CN-CA-KC:1
+hist ang_CN3-CA3-KC2.xvg 1:ang_CN-CA-KC:2
+hist ang_CN6-CA6-KC3.xvg 1:ang_CN-CA-KC:3
+hist ang_CN9-CA9-KC4.xvg 1:ang_CN-CA-KC:4
+hist ang_CN10-CA10-KC5.xvg 1:ang_CN-CA-KC:5
+hist ang_CN13-CA13-KC6.xvg 1:ang_CN-CA-KC:6
+hist ang_CN-CA-KC_avg.xvg 1:ang_CN-CA-KC:*
+
+# CA-KC-KN
+hist set scale angle
+hist ang_CA2-KC1-KN1.xvg 1:ang_CA-KC-KN:1
+hist ang_CA3-KC2-KN2.xvg 1:ang_CA-KC-KN:2
+hist ang_CA6-KC3-KN3.xvg 1:ang_CA-KC-KN:3
+hist ang_CA9-KC4-KN4.xvg 1:ang_CA-KC-KN:4
+hist ang_CA10-KC5-KN5.xvg 1:ang_CA-KC-KN:5
+hist ang_CA13-KC6-KN6.xvg 1:ang_CA-KC-KN:6
+hist ang_CA-KC-KN_avg.xvg 1:ang_CA-KC-KN:*
+
+# dihedrals
+# CN-CA-CN-CA
+hist set scale no
+hist dih_CN1-CA1-CN2-CA2.xvg 1:dih_CN-CA-CN-CA:1
+hist dih_CN2-CA2-CN3-CA3.xvg 1:dih_CN-CA-CN-CA:2
+hist dih_CN3-CA3-CN4-CA4.xvg 1:dih_CN-CA-CN-CA:3
+hist dih_CN4-CA4-CN5-CA5.xvg 1:dih_CN-CA-CN-CA:4
+hist dih_CN5-CA5-CN6-CA6.xvg 1:dih_CN-CA-CN-CA:5
+hist dih_CN6-CA6-CN7-CA7.xvg 1:dih_CN-CA-CN-CA:6
+hist dih_CN7-CA7-CN8-CA8.xvg 1:dih_CN-CA-CN-CA:7
+hist dih_CN8-CA8-CN9-CA9.xvg 1:dih_CN-CA-CN-CA:8
+hist dih_CN9-CA9-CN10-CA10.xvg 1:dih_CN-CA-CN-CA:9
+hist dih_CN10-CA10-CN11-CA11.xvg 1:dih_CN-CA-CN-CA:10
+hist dih_CN11-CA11-CN12-CA12.xvg 1:dih_CN-CA-CN-CA:11
+hist dih_CN12-CA12-CN13-CA13.xvg 1:dih_CN-CA-CN-CA:12
+hist dih_CN13-CA13-CN14-CA14.xvg 1:dih_CN-CA-CN-CA:13
+hist dih_CN-CA-CN-CA_avg.xvg 1:dih_CN-CA-CN-CA:*
+
+# CA-CN-CA-CN
+hist set scale no
+hist dih_CA1-CN1-CA2-CN2.xvg 1:dih_CA-CN-CA-CN:1
+hist dih_CA2-CN2-CA3-CN3.xvg 1:dih_CA-CN-CA-CN:2
+hist dih_CA3-CN3-CA4-CN4.xvg 1:dih_CA-CN-CA-CN:3
+hist dih_CA4-CN4-CA5-CN5.xvg 1:dih_CA-CN-CA-CN:4
+hist dih_CA5-CN5-CA6-CN6.xvg 1:dih_CA-CN-CA-CN:5
+hist dih_CA6-CN6-CA7-CN7.xvg 1:dih_CA-CN-CA-CN:6
+hist dih_CA7-CN7-CA8-CN8.xvg 1:dih_CA-CN-CA-CN:7
+hist dih_CA8-CN8-CA9-CN9.xvg 1:dih_CA-CN-CA-CN:8
+hist dih_CA9-CN9-CA10-CN10.xvg 1:dih_CA-CN-CA-CN:9
+hist dih_CA10-CN10-CA11-CN11.xvg 1:dih_CA-CN-CA-CN:10
+hist dih_CA11-CN11-CA12-CN12.xvg 1:dih_CA-CN-CA-CN:11
+hist dih_CA12-CN12-CA13-CN13.xvg 1:dih_CA-CN-CA-CN:12
+hist dih_CA13-CN13-CA14-CN14.xvg 1:dih_CA-CN-CA-CN:13
+hist dih_CA-CN-CA-CN_avg.xvg 1:dih_CA-CN-CA-CN:*
+
+# CA-CN-CA-KC
+hist set scale no
+hist dih_CA1-CN2-CA2-KC1.xvg 1:dih_CA-CN-CA-KC:1
+hist dih_CA2-CN3-CA3-KC2.xvg 1:dih_CA-CN-CA-KC:2
+hist dih_CA5-CN6-CA6-KC3.xvg 1:dih_CA-CN-CA-KC:3
+hist dih_CA8-CN9-CA9-KC4.xvg 1:dih_CA-CN-CA-KC:4
+hist dih_CA9-CN10-CA10-KC5.xvg 1:dih_CA-CN-CA-KC:5
+hist dih_CA12-CN13-CA13-KC6.xvg 1:dih_CA-CN-CA-KC:6
+hist dih_CA-CN-CA-KC_avg.xvg 1:dih_CA-CN-CA-KC:*
+
+# CN-CA-KC-KN
+hist set scale no
+hist dih_CN2-CA2-KC1-KN1.xvg 1:dih_CN-CA-KC-KN:1
+hist dih_CN3-CA3-KC2-KN2.xvg 1:dih_CN-CA-KC-KN:2
+hist dih_CN6-CA6-KC3-KN3.xvg 1:dih_CN-CA-KC-KN:3
+hist dih_CN9-CA9-KC4-KN4.xvg 1:dih_CN-CA-KC-KN:4
+hist dih_CN10-CA10-KC5-KN5.xvg 1:dih_CN-CA-KC-KN:5
+hist dih_CN13-CA13-KC6-KN6.xvg 1:dih_CN-CA-KC-KN:6
+hist dih_CN-CA-KC-KN_avg.xvg 1:dih_CN-CA-KC-KN:*
+
+# CA-CN-CA-L
+hist set scale no
+hist dih_CA3-CN4-CA4-L2.xvg 1:dih_CA-CN-CA-L:1
+hist dih_CA4-CN5-CA5-L3.xvg 1:dih_CA-CN-CA-L:2
+hist dih_CA6-CN7-CA7-L4.xvg 1:dih_CA-CN-CA-L:3
+hist dih_CA7-CN8-CA8-L5.xvg 1:dih_CA-CN-CA-L:4
+hist dih_CA10-CN11-CA11-L6.xvg 1:dih_CA-CN-CA-L:5
+hist dih_CA11-CN12-CA12-L7.xvg 1:dih_CA-CN-CA-L:6
+hist dih_CA13-CN14-CA14-L8.xvg 1:dih_CA-CN-CA-L:7
+hist dih_CA-CN-CA-L_avg.xvg 1:dih_CA-CN-CA-L:*
+
+# impropers
+# CA-CN-CN-L
+hist set scale no
+hist imp_CA1-CN1-CN2-L1.xvg 1:imp_CA-CN-CN-L:1
+hist imp_CA4-CN4-CN5-L2.xvg 1:imp_CA-CN-CN-L:2
+hist imp_CA5-CN5-CN6-L3.xvg 1:imp_CA-CN-CN-L:3
+hist imp_CA7-CN7-CN8-L4.xvg 1:imp_CA-CN-CN-L:4
+hist imp_CA8-CN8-CN9-L5.xvg 1:imp_CA-CN-CN-L:5
+hist imp_CA11-CN11-CN12-L6.xvg 1:imp_CA-CN-CN-L:6
+hist imp_CA12-CN12-CN13-L7.xvg 1:imp_CA-CN-CN-L:7
+hist imp_CA14-CN14-CN15-L8.xvg 1:imp_CA-CN-CN-L:8
+hist imp_CA-CN-CN-L_avg.xvg 1:imp_CA-CN-CN-L:*
+
+# CA-CN-KC-CN
+hist set scale no
+hist imp_CA2-CN2-KC1-CN3.xvg 1:imp_CA-CN-KC-CN:1
+hist imp_CA3-CN3-KC2-CN4.xvg 1:imp_CA-CN-KC-CN:2
+hist imp_CA6-CN6-KC3-CN7.xvg 1:imp_CA-CN-KC-CN:3
+hist imp_CA9-CN9-KC4-CN10.xvg 1:imp_CA-CN-KC-CN:4
+hist imp_CA10-CN10-KC5-CN11.xvg 1:imp_CA-CN-KC-CN:5
+hist imp_CA13-CN13-KC6-CN14.xvg 1:imp_CA-CN-KC-CN:6
+hist imp_CA-CN-KC-CN_avg.xvg 1:imp_CA-CN-KC-CN:*
+
+# values
+#
+# bonds
+# CN-CA
+vals time_bond_CN1-CA1.xvg 1:bond_CN-CA:1
+vals time_bond_CN2-CA2.xvg 1:bond_CN-CA:2
+vals time_bond_CN3-CA3.xvg 1:bond_CN-CA:3
+vals time_bond_CN4-CA4.xvg 1:bond_CN-CA:4
+vals time_bond_CN5-CA5.xvg 1:bond_CN-CA:5
+vals time_bond_CN6-CA6.xvg 1:bond_CN-CA:6
+vals time_bond_CN7-CA7.xvg 1:bond_CN-CA:7
+vals time_bond_CN8-CA8.xvg 1:bond_CN-CA:8
+vals time_bond_CN9-CA9.xvg 1:bond_CN-CA:9
+vals time_bond_CN10-CA10.xvg 1:bond_CN-CA:10
+vals time_bond_CN11-CA11.xvg 1:bond_CN-CA:11
+vals time_bond_CN12-CA12.xvg 1:bond_CN-CA:12
+vals time_bond_CN13-CA13.xvg 1:bond_CN-CA:13
+vals time_bond_CN14-CA14.xvg 1:bond_CN-CA:14
+
+# CA-CN
+vals time_bond_CA1-CN2.xvg 1:bond_CA-CN:1
+vals time_bond_CA2-CN3.xvg 1:bond_CA-CN:2
+vals time_bond_CA3-CN4.xvg 1:bond_CA-CN:3
+vals time_bond_CA4-CN5.xvg 1:bond_CA-CN:4
+vals time_bond_CA5-CN6.xvg 1:bond_CA-CN:5
+vals time_bond_CA6-CN7.xvg 1:bond_CA-CN:6
+vals time_bond_CA7-CN8.xvg 1:bond_CA-CN:7
+vals time_bond_CA8-CN9.xvg 1:bond_CA-CN:8
+vals time_bond_CA9-CN10.xvg 1:bond_CA-CN:9
+vals time_bond_CA10-CN11.xvg 1:bond_CA-CN:10
+vals time_bond_CA11-CN12.xvg 1:bond_CA-CN:11
+vals time_bond_CA12-CN13.xvg 1:bond_CA-CN:12
+vals time_bond_CA13-CN14.xvg 1:bond_CA-CN:13
+
+# CA-L
+vals time_bond_CA1-L1.xvg 1:bond_CA-L:1
+vals time_bond_CA4-L2.xvg 1:bond_CA-L:2
+vals time_bond_CA5-L3.xvg 1:bond_CA-L:3
+vals time_bond_CA7-L4.xvg 1:bond_CA-L:4
+vals time_bond_CA8-L5.xvg 1:bond_CA-L:5
+vals time_bond_CA11-L6.xvg 1:bond_CA-L:6
+vals time_bond_CA12-L7.xvg 1:bond_CA-L:7
+vals time_bond_CA14-L8.xvg 1:bond_CA-L:8
+
+# CA-KC
+vals time_bond_CA2-KC1.xvg 1:bond_CA-KC:1
+vals time_bond_CA3-KC2.xvg 1:bond_CA-KC:2
+vals time_bond_CA6-KC3.xvg 1:bond_CA-KC:3
+vals time_bond_CA9-KC4.xvg 1:bond_CA-KC:4
+vals time_bond_CA10-KC5.xvg 1:bond_CA-KC:5
+vals time_bond_CA13-KC6.xvg 1:bond_CA-KC:6
+
+# KC-KN
+vals time_bond_KC1-KN1.xvg 1:bond_KC-KN:1
+vals time_bond_KC2-KN2.xvg 1:bond_KC-KN:2
+vals time_bond_KC3-KN3.xvg 1:bond_KC-KN:3
+vals time_bond_KC4-KN4.xvg 1:bond_KC-KN:4
+vals time_bond_KC5-KN5.xvg 1:bond_KC-KN:5
+vals time_bond_KC6-KN6.xvg 1:bond_KC-KN:6
+
+# angles
+# CN-CA-CN
+vals time_ang_CN1-CA1-CN2.xvg 1:ang_CN-CA-CN:1
+vals time_ang_CN2-CA2-CN3.xvg 1:ang_CN-CA-CN:2
+vals time_ang_CN3-CA3-CN4.xvg 1:ang_CN-CA-CN:3
+vals time_ang_CN4-CA4-CN5.xvg 1:ang_CN-CA-CN:4
+vals time_ang_CN5-CA5-CN6.xvg 1:ang_CN-CA-CN:5
+vals time_ang_CN6-CA6-CN7.xvg 1:ang_CN-CA-CN:6
+vals time_ang_CN7-CA7-CN8.xvg 1:ang_CN-CA-CN:7
+vals time_ang_CN8-CA8-CN9.xvg 1:ang_CN-CA-CN:8
+vals time_ang_CN9-CA9-CN10.xvg 1:ang_CN-CA-CN:9
+vals time_ang_CN10-CA10-CN11.xvg 1:ang_CN-CA-CN:10
+vals time_ang_CN11-CA11-CN12.xvg 1:ang_CN-CA-CN:11
+vals time_ang_CN12-CA12-CN13.xvg 1:ang_CN-CA-CN:12
+vals time_ang_CN13-CA13-CN14.xvg 1:ang_CN-CA-CN:13
+vals time_ang_CN14-CA14-CN15.xvg 1:ang_CN-CA-CN:14
+
+# CA-CN-CA
+vals time_ang_CA1-CN2-CA2.xvg 1:ang_CA-CN-CA:1
+vals time_ang_CA2-CN3-CA3.xvg 1:ang_CA-CN-CA:2
+vals time_ang_CA3-CN4-CA4.xvg 1:ang_CA-CN-CA:3
+vals time_ang_CA4-CN5-CA5.xvg 1:ang_CA-CN-CA:4
+vals time_ang_CA5-CN6-CA6.xvg 1:ang_CA-CN-CA:5
+vals time_ang_CA6-CN7-CA7.xvg 1:ang_CA-CN-CA:6
+vals time_ang_CA7-CN8-CA8.xvg 1:ang_CA-CN-CA:7
+vals time_ang_CA8-CN9-CA9.xvg 1:ang_CA-CN-CA:8
+vals time_ang_CA9-CN10-CA10.xvg 1:ang_CA-CN-CA:9
+vals time_ang_CA10-CN11-CA11.xvg 1:ang_CA-CN-CA:10
+vals time_ang_CA11-CN12-CA12.xvg 1:ang_CA-CN-CA:11
+vals time_ang_CA12-CN13-CA13.xvg 1:ang_CA-CN-CA:12
+vals time_ang_CA13-CN14-CA14.xvg 1:ang_CA-CN-CA:13
+
+# CN-CA-L
+vals time_ang_CN1-CA1-L1.xvg 1:ang_CN-CA-L:1
+vals time_ang_CN4-CA4-L2.xvg 1:ang_CN-CA-L:2
+vals time_ang_CN5-CA5-L3.xvg 1:ang_CN-CA-L:3
+vals time_ang_CN7-CA7-L4.xvg 1:ang_CN-CA-L:4
+vals time_ang_CN8-CA8-L5.xvg 1:ang_CN-CA-L:5
+vals time_ang_CN11-CA11-L6.xvg 1:ang_CN-CA-L:6
+vals time_ang_CN12-CA12-L7.xvg 1:ang_CN-CA-L:7
+vals time_ang_CN14-CA14-L8.xvg 1:ang_CN-CA-L:8
+
+# CN-CA-KC
+vals time_ang_CN2-CA2-KC1.xvg 1:ang_CN-CA-KC:1
+vals time_ang_CN3-CA3-KC2.xvg 1:ang_CN-CA-KC:2
+vals time_ang_CN6-CA6-KC3.xvg 1:ang_CN-CA-KC:3
+vals time_ang_CN9-CA9-KC4.xvg 1:ang_CN-CA-KC:4
+vals time_ang_CN10-CA10-KC5.xvg 1:ang_CN-CA-KC:5
+vals time_ang_CN13-CA13-KC6.xvg 1:ang_CN-CA-KC:6
+
+# CA-KC-KN
+vals time_ang_CA2-KC1-KN1.xvg 1:ang_CA-KC-KN:1
+vals time_ang_CA3-KC2-KN2.xvg 1:ang_CA-KC-KN:2
+vals time_ang_CA6-KC3-KN3.xvg 1:ang_CA-KC-KN:3
+vals time_ang_CA9-KC4-KN4.xvg 1:ang_CA-KC-KN:4
+vals time_ang_CA10-KC5-KN5.xvg 1:ang_CA-KC-KN:5
+vals time_ang_CA13-KC6-KN6.xvg 1:ang_CA-KC-KN:6
+
+# dihedrals
+# CN-CA-CN-CA
+vals time_dih_CN1-CA1-CN2-CA2.xvg 1:dih_CN-CA-CN-CA:1
+vals time_dih_CN2-CA2-CN3-CA3.xvg 1:dih_CN-CA-CN-CA:2
+vals time_dih_CN3-CA3-CN4-CA4.xvg 1:dih_CN-CA-CN-CA:3
+vals time_dih_CN4-CA4-CN5-CA5.xvg 1:dih_CN-CA-CN-CA:4
+vals time_dih_CN5-CA5-CN6-CA6.xvg 1:dih_CN-CA-CN-CA:5
+vals time_dih_CN6-CA6-CN7-CA7.xvg 1:dih_CN-CA-CN-CA:6
+vals time_dih_CN7-CA7-CN8-CA8.xvg 1:dih_CN-CA-CN-CA:7
+vals time_dih_CN8-CA8-CN9-CA9.xvg 1:dih_CN-CA-CN-CA:8
+vals time_dih_CN9-CA9-CN10-CA10.xvg 1:dih_CN-CA-CN-CA:9
+vals time_dih_CN10-CA10-CN11-CA11.xvg 1:dih_CN-CA-CN-CA:10
+vals time_dih_CN11-CA11-CN12-CA12.xvg 1:dih_CN-CA-CN-CA:11
+vals time_dih_CN12-CA12-CN13-CA13.xvg 1:dih_CN-CA-CN-CA:12
+vals time_dih_CN13-CA13-CN14-CA14.xvg 1:dih_CN-CA-CN-CA:13
+
+# CA-CN-CA-CN
+vals time_dih_CA1-CN1-CA2-CN2.xvg 1:dih_CA-CN-CA-CN:1
+vals time_dih_CA2-CN2-CA3-CN3.xvg 1:dih_CA-CN-CA-CN:2
+vals time_dih_CA3-CN3-CA4-CN4.xvg 1:dih_CA-CN-CA-CN:3
+vals time_dih_CA4-CN4-CA5-CN5.xvg 1:dih_CA-CN-CA-CN:4
+vals time_dih_CA5-CN5-CA6-CN6.xvg 1:dih_CA-CN-CA-CN:5
+vals time_dih_CA6-CN6-CA7-CN7.xvg 1:dih_CA-CN-CA-CN:6
+vals time_dih_CA7-CN7-CA8-CN8.xvg 1:dih_CA-CN-CA-CN:7
+vals time_dih_CA8-CN8-CA9-CN9.xvg 1:dih_CA-CN-CA-CN:8
+vals time_dih_CA9-CN9-CA10-CN10.xvg 1:dih_CA-CN-CA-CN:9
+vals time_dih_CA10-CN10-CA11-CN11.xvg 1:dih_CA-CN-CA-CN:10
+vals time_dih_CA11-CN11-CA12-CN12.xvg 1:dih_CA-CN-CA-CN:11
+vals time_dih_CA12-CN12-CA13-CN13.xvg 1:dih_CA-CN-CA-CN:12
+vals time_dih_CA13-CN13-CA14-CN14.xvg 1:dih_CA-CN-CA-CN:13
+vals time_dih_CA-CN-CA-CN_avg.xvg 1:dih_CA-CN-CA-CN:*
+
+
+# CA-CN-CA-KC
+vals time_dih_CA1-CN2-CA2-KC1.xvg 1:dih_CA-CN-CA-KC:1
+vals time_dih_CA2-CN3-CA3-KC2.xvg 1:dih_CA-CN-CA-KC:2
+vals time_dih_CA5-CN6-CA6-KC3.xvg 1:dih_CA-CN-CA-KC:3
+vals time_dih_CA8-CN9-CA9-KC4.xvg 1:dih_CA-CN-CA-KC:4
+vals time_dih_CA9-CN10-CA10-KC5.xvg 1:dih_CA-CN-CA-KC:5
+vals time_dih_CA12-CN13-CA13-KC6.xvg 1:dih_CA-CN-CA-KC:6
+
+# CN-CA-KC-KN
+vals time_dih_CN2-CA2-KC1-KN1.xvg 1:dih_CN-CA-KC-KN:1
+vals time_dih_CN3-CA3-KC2-KN2.xvg 1:dih_CN-CA-KC-KN:2
+vals time_dih_CN6-CA6-KC3-KN3.xvg 1:dih_CN-CA-KC-KN:3
+vals time_dih_CN9-CA9-KC4-KN4.xvg 1:dih_CN-CA-KC-KN:4
+vals time_dih_CN10-CA10-KC5-KN5.xvg 1:dih_CN-CA-KC-KN:5
+vals time_dih_CN13-CA13-KC6-KN6.xvg 1:dih_CN-CA-KC-KN:6
+
+# CA-CN-CA-L
+vals time_dih_CA3-CN4-CA4-L2.xvg 1:dih_CA-CN-CA-L:1
+vals time_dih_CA4-CN5-CA5-L3.xvg 1:dih_CA-CN-CA-L:2
+vals time_dih_CA6-CN7-CA7-L4.xvg 1:dih_CA-CN-CA-L:3
+vals time_dih_CA7-CN8-CA8-L5.xvg 1:dih_CA-CN-CA-L:4
+vals time_dih_CA10-CN11-CA11-L6.xvg 1:dih_CA-CN-CA-L:5
+vals time_dih_CA11-CN12-CA12-L7.xvg 1:dih_CA-CN-CA-L:6
+vals time_dih_CA13-CN14-CA14-L8.xvg 1:dih_CA-CN-CA-L:7
+
+# impropers
+# CA-CN-CN-L
+vals time_imp_CA1-CN1-CN2-L1.xvg 1:imp_CA-CN-CN-L:1
+vals time_imp_CA4-CN4-CN5-L2.xvg 1:imp_CA-CN-CN-L:2
+vals time_imp_CA5-CN5-CN6-L3.xvg 1:imp_CA-CN-CN-L:3
+vals time_imp_CA7-CN7-CN8-L4.xvg 1:imp_CA-CN-CN-L:4
+vals time_imp_CA8-CN8-CN9-L5.xvg 1:imp_CA-CN-CN-L:5
+vals time_imp_CA11-CN11-CN12-L6.xvg 1:imp_CA-CN-CN-L:6
+vals time_imp_CA12-CN12-CN13-L7.xvg 1:imp_CA-CN-CN-L:7
+vals time_imp_CA14-CN14-CN15-L8.xvg 1:imp_CA-CN-CN-L:8
+
+# CA-CN-KC-CN
+vals time_imp_CA2-CN2-KC1-CN3.xvg 1:imp_CA-CN-KC-CN:1
+vals time_imp_CA3-CN3-KC2-CN4.xvg 1:imp_CA-CN-KC-CN:2
+vals time_imp_CA6-CN6-KC3-CN7.xvg 1:imp_CA-CN-KC-CN:3
+vals time_imp_CA9-CN9-KC4-CN10.xvg 1:imp_CA-CN-KC-CN:4
+vals time_imp_CA10-CN10-KC5-CN11.xvg 1:imp_CA-CN-KC-CN:5
+vals time_imp_CA13-CN13-KC6-CN14.xvg 1:imp_CA-CN-KC-CN:6
+
+q
