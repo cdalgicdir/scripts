@@ -1,0 +1,87 @@
+<cg_molecule>
+  <name>PHE</name>
+	<ident>Protein</ident>
+  <topology>
+    <cg_beads>
+	<cg_bead>
+        <name>P1</name>
+        <type>P1</type>
+        <mapping>P</mapping>
+        <beads>1:PHE:CG 1:PHE:CD1 1:PHE:HD1 1:PHE:CD2 1:PHE:HD2 1:PHE:CE1 1:PHE:HE1  1:PHE:CE2 1:PHE:HE2 1:PHE:CZ 1:PHE:HZ</beads>
+      </cg_bead>
+	<cg_bead>
+        <name>C1</name>
+        <type>C1</type>
+        <mapping>C</mapping>
+        <beads>1:PHE:CA</beads>
+      </cg_bead>
+	<cg_bead>
+        <name>C2</name>
+        <type>C2</type>
+        <mapping>C</mapping>
+        <beads>2:PHE:CA</beads>
+      </cg_bead>
+	<cg_bead>
+        <name>P2</name>
+        <type>P2</type>
+        <mapping>P</mapping>
+        <beads>2:PHE:CG 2:PHE:CD1 2:PHE:HD1 2:PHE:CD2 2:PHE:HD2 2:PHE:CE1 2:PHE:HE1  2:PHE:CE2 2:PHE:HE2 2:PHE:CZ 2:PHE:HZ</beads>
+      </cg_bead>
+    </cg_beads>
+
+<cg_bonded>
+    <bond>
+	<name>bond_P1C1</name>
+	<beads>
+	    P1 C1
+	</beads>
+    </bond>
+
+    <bond>
+	<name>bond_C1C2</name>
+	<beads>
+	    C1 C2
+	</beads>
+    </bond>
+
+    <bond>
+	<name>bond_P2C2</name>
+	<beads>
+	    P2 C2
+	</beads>
+    </bond>
+
+    <angle>
+	<name>angle_P1C1C2</name>
+	<beads>
+	    P1 C1 C2
+	</beads>
+    </angle>
+
+    <angle>
+	<name>angle_C1C2P2</name>
+	<beads>
+	    C1 C2 P2
+	</beads>
+    </angle>
+
+    <dihedral>
+	<name>dihedral_P1C1C2P2</name>
+	<beads>
+	    P1 C1 C2 P2
+	</beads>
+    </dihedral>
+</cg_bonded>
+  </topology>
+
+  <maps>
+    <map>
+      <name>C</name>
+      <weights>72.0871</weights>
+    </map>
+    <map>
+      <name>P</name>
+      <weights>12.011 12.011 1.008 12.011 1.008 12.011 1.008 12.011 1.008 12.011 1.008</weights>
+    </map>
+  </maps>
+</cg_molecule>

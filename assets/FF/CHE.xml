@@ -1,0 +1,21 @@
+<cg_molecule>
+  <name>CHE</name>
+	<ident>CHE</ident>
+  <topology>
+    <cg_beads>
+	<cg_bead>
+        <name>C</name>
+        <type>C</type>
+        <mapping>C</mapping>
+        <beads>1:CHE:C1 1:CHE:C2 1:CHE:C3 1:CHE:C4 1:CHE:C5 1:CHE:C6</beads>
+      </cg_bead>
+    </cg_beads>
+  </topology>
+
+  <maps>
+    <map>
+      <name>C</name>
+      <weights>14.027 14.027 14.027 14.027 14.027 14.027</weights>
+    </map>
+  </maps>
+</cg_molecule>
