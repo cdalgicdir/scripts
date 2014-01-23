@@ -25,8 +25,11 @@ plot () {
 }
 
 printcommands () {
-    echo "$plotfiles"
-    #echo "$plotfiles" | sed 's/,/,\\\n /g'
+    if [[ $noplottab == true ]]; then
+	echo "$plotfiles" | sed 's/,/,\\\n /g'
+    else
+	echo "$plotfiles"
+    fi
 }
 
 help () {
@@ -63,11 +66,22 @@ fi
 while [[ $# -ge 1 ]]; do
     case $1 in
 	u)
-	    using=" u 1:${2} "
+	    if [[ "${2}" == *:* ]]; then
+		x="${2}"
+		xl=(${x//:/ })
+		using=' u '"${xl[0]}"':'"${xl[1]}"
+	    fi
+	    #using=" u 1:${2} "
 	    shift 2;;
 
 	-n | -nop | -noplot)
 	    noplot=true
+	    noplottab=false
+	    shift 1;;
+
+	-ns | -nops)
+	    noplot=true
+	    noplottab=true
 	    shift 1;;
 
 	w)

@@ -57,7 +57,8 @@ fin.close()
 #for atom in mol.atomlist:
 #    print atom
 
-fout = open(filename[:-4]+'.translated.top','w')
+outfilename = filename[:-4]+'.translated.top'
+fout = open(outfilename,'w')
 fin = open(filename,'r')
 commentlist = ['#','@',';']
 while 1:
@@ -117,4 +118,5 @@ while 1:
 
 
 fout.close()
+print "%s generated!" %outfilename
 fin.close()
