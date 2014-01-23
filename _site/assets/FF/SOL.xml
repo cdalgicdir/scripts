@@ -1,0 +1,22 @@
+<cg_molecule>
+  <name>SOL</name>
+	<ident>SOL</ident>
+  <topology>
+    <cg_beads>
+	<cg_bead>
+        <name>S</name>
+        <type>S</type>
+        <mapping>S</mapping>
+        <beads>1:SOL:OW 1:SOL:HW1 1:SOL:HW2</beads>
+      </cg_bead>
+
+    </cg_beads>
+  </topology>
+
+  <maps>
+    <map>
+      <name>S</name>
+      <weights>16 1 1</weights>
+    </map>
+  </maps>
+</cg_molecule>

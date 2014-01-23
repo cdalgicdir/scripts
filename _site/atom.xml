@@ -4,12 +4,33 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-21T15:58:17+02:00</updated>
+ <updated>2014-01-23T15:57:13+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Meeting Klcg</title>
+   <link href="/2014/01/23/meeting-KLcg.html"/>
+   <updated>2014-01-23T00:00:00+02:00</updated>
+   <id>/2014/01/23/meeting-KLcg</id>
+    
+   <category term="/research/categories.html#meeting" label="meeting"/>
+   
+   <content type="html">&lt;h3 id=&quot;klcg&quot;&gt;KLcg&lt;/h3&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;Dihedral CN-CA-CN-CA remove the extra well, fit to a harmonic function&lt;/li&gt;
+&lt;li&gt;Dihedral CA-CN-CA-CN remove the extra well, fit to a harmonic function&lt;/li&gt;
+&lt;li&gt;Difference in dih: CA-CN-CA-KC and CA-CN-CA-L (convention?):
+&lt;ul&gt;
+&lt;li&gt;Take an atomistic minimized configuration of KL at AH and map into CG, then energy minimize mapped conf: should give similar distributions.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;4.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Meeting Msayar</title>
