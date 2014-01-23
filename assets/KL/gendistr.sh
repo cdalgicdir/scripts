@@ -3,7 +3,7 @@
 bondlist=('CN-CA' 'CA-CN' 'CA-L' 'CA-KC' 'KC-KN')
 bondRlist=('0.2112' '0.196' '0.263' '0.259' '0.3194')
 anglist=('CN-CA-CN' 'CA-CN-CA' 'CN-CA-L' 'CN-CA-KC' 'CA-KC-KN')
-dihlist=('CN-CA-CN-CA' 'CA-CN-CA-CN')
+dihlist=('CN-CA-CN-CA' 'CA-CN-CA-CN' 'CA-CN-CA-KC' 'CN-CA-KC-KN' 'CA-CN-CA-L')
 implist=('CA-CN-CN-L' 'CA-CN-KC-CN')
 
 for i in `seq 0 $((${#bondlist[@]}-1))`; do

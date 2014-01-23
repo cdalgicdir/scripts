@@ -143,6 +143,31 @@
 40 42 43 46	;8  2  1; 1:dih_CA-CN-CA-CN:12
 43 46 47 49	;8  2  1; 1:dih_CA-CN-CA-CN:13
 
+[ dih_CA-CN-CA-KC ]
+2 4 5 6		;8 NA  1; 1:dih_CA-CN-CA-KC:1
+5 8 9 10	;8 NA  1; 1:dih_CA-CN-CA-KC:2
+16 18 19 20	;8 NA  1; 1:dih_CA-CN-CA-KC:3
+26 28 29 30	;8 NA  1; 1:dih_CA-CN-CA-KC:4
+29 32 33 34	;8 NA  1; 1:dih_CA-CN-CA-KC:5
+40 42 43 44	;8 NA  1; 1:dih_CA-CN-CA-KC:6
+
+[ dih_CN-CA-KC-KN ]
+4 5 6 7		;8 NA  1; 1:dih_CN-CA-KC-KN:1
+8 9 10 11	;8 NA  1; 1:dih_CN-CA-KC-KN:2
+18 19 20 21	;8 NA  1; 1:dih_CN-CA-KC-KN:3
+28 29 30 31	;8 NA  1; 1:dih_CN-CA-KC-KN:4
+32 33 34 35	;8 NA  1; 1:dih_CN-CA-KC-KN:5
+42 43 44 45	;8 NA  1; 1:dih_CN-CA-KC-KN:6
+
+[ dih_CA-CN-CA-L ]
+9 12 13 14	;8 NA  1; 1:dih_CA-CN-CA-L:1
+13 15 16 17	;8 NA  1; 1:dih_CA-CN-CA-L:2
+19 22 23 24	;8 NA  1; 1:dih_CA-CN-CA-L:3
+23 25 26 27	;8 NA  1; 1:dih_CA-CN-CA-L:4
+33 36 37 38	;8 NA  1; 1:dih_CA-CN-CA-L:5
+37 39 40 41	;8 NA  1; 1:dih_CA-CN-CA-L:6
+43 46 47 48	;8 NA  1; 1:dih_CA-CN-CA-L:7
+
 [ imp_CA-CN-CN-L ]
 2 1 4 3		;8  3  1; 1:imp_CA-CN-CN-L:1
 13 12 15 14	;8  3  1; 1:imp_CA-CN-CN-L:2
