@@ -981,6 +981,13 @@ proc showWaterClose {{molid "0"}} {
 	mol selupdate $molid $lastrep 1
 } elseif { [lindex $rep 0] == "water and within 4 of protein" } {
         mol delrep $lastrep $molid
+} elseif { [lindex $rep 0] == "all" } {
+        mol delrep $lastrep $molid
+	mol representation Lines
+	mol Color Name
+	mol selection {not water}
+	mol addrep $molid
+	mol selupdate $molid $lastrep 1
 } else {
         mol representation Lines
 	mol Color Name
