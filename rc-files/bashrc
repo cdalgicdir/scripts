@@ -82,27 +82,6 @@ PS1='\[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] '
 #PS1="\e[01;34m# `date +'%Y.%m.%d %R'` \w\[\e[m\]\n\[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] "
 ###################################################################
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -122,11 +101,7 @@ fi
 
 CDPATH=".:~/remote"
 export PATH=$PATH:$HOME/Documents/scripts/currentscripts:$HOME/Mendeley/bin
-#export PATH=$PATH:/usr/local/Espresso-2.2.0b/bin/
-#export PATH=$PATH:/usr/local/namd/
-#export PATH=$PATH:/home/cdalgicdir/gnuplotutils/bin
 GROMACSDIR=/usr/local/gromacs/gromacs-4.5.6
-#votcadir=$HOME/Votca/votca-1.2.3
 votcadir=$HOME/Votca/votca-1.2.3-dodebugfixed
 source $GROMACSDIR/bin/GMXRC.bash
 export GMXLIB=$GROMACSDIR/share/gromacs/top
@@ -136,22 +111,6 @@ export MANPATH=/usr/share/man/:/usr/local/gromacs-4.5.6/share/man:/opt/novell/ma
 #calc(){ echo "scale=2;$@" | bc;}
 #calc(){ printf "%.4f\n" `echo $@ |bc -l`;}
 calc(){ echo $@ | octave -q;}
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias df='df -h'
-alias sl='ls'
-alias doc="cd $HOME/Documents"
-alias des="cd $HOME/Desktop"
-alias dow="cd $HOME/Downloads"
-alias scr="cd $HOME/Documents/scripts/currentscripts"
-alias sim="cd $HOME/SIMS"
-alias hamsi='ssh hamsi -X'
-alias lufer='ssh lufer -X'
-alias ichi='ssh ichi -X'
-alias yunus='ssh yunus -X'
-alias tric='ssh tric -X'
-alias gp='gnuplot --persist'
 shopt -s extglob
 export VIMRUNTIME=/usr/share/vim/vimcurrent
 alias emerillon='export CLUTTER_VBLANK=none && emerillon'
@@ -165,16 +124,6 @@ PATH=$PATH:/usr/local/texlive/2012/bin/x86_64-linux
 export PATH=$PATH:/usr/local/cuda-5.0/bin
 export LD_LIBRARY_PATH=/usr/local/cuda-5.0/lib64:/lib
 # end of CUDA variables
-#alias psudo='sudo env PATH="$PATH"'
-alias diff-side-by-side='diff --side-by-side -W"`tput cols`"'
-alias diff-side-by-side-changes='diff --side-by-side --suppress-common-lines -W"`tput cols`"'
-#alias okular="okular 2>/dev/null"
-alias xp="virtualbox --startvm WinXP"
-alias xpsave="VBoxManage controlvm WinXP savestate"
-alias xpoff="VBoxManage controlvm WinXP acpipowerbutton"
-alias off="xset dpms force off"
-#alias adt="export PATH="/home/cdalgicdir/autodock/bin:"$PATH;adt"
-alias pymol="export PYTHONPATH=/opt/pymol/modules:$PYTHONPATH && pymol"
 ## Up Arrow: search and complete from previous history
 bind '"\e[A": history-search-backward'
 ## Down Arrow: search and complete from next history
@@ -184,17 +133,6 @@ bind '"\C-v": "\ev"'
 function gvim () { (/usr/bin/gvim -f "$@" &) }
 export PATH=$PATH:/usr/local/namd/namd-2.9-multicore
 export SCHRODINGER=/opt/schrodinger
-alias maestro="$SCHRODINGER/maestro %f &"
-alias matlab="$HOME/matlabR2013a/bin/matlab -desktop &"
-alias dsvisualizer="/home/cdalgicdir/Accelrys/DiscoveryStudio31/bin/DiscoveryStudio31 &"
-alias open="gnome-open"
-alias op="gnome-open"
-alias octave="octave -q"
-alias cpuinfo='lscpu'
-alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
-alias dud='du -hsx * | sort -rh | head -10'
-alias gv='gvim'
-alias mkcd='_(){ mkdir $1; cd $1; }; _'
 
 ### FUNCTIONS
 
