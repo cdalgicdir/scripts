@@ -41,6 +41,7 @@ done
 mkdir -p report
 mv *pdf report/
 cd report/
+cp $HOME/SIMS/KL/plots/distributions.tex .
 pdflatex -shell-escape -interaction=nonstopmode distributions.tex
 rm *.aux *.log
 cd ../
