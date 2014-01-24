@@ -150,6 +150,7 @@ alias hamsi='ssh hamsi -X'
 alias lufer='ssh lufer -X'
 alias ichi='ssh ichi -X'
 alias yunus='ssh yunus -X'
+alias tric='ssh tric -X'
 alias gp='gnuplot --persist'
 shopt -s extglob
 export VIMRUNTIME=/usr/share/vim/vimcurrent
@@ -185,30 +186,15 @@ export PATH=$PATH:/usr/local/namd/namd-2.9-multicore
 export SCHRODINGER=/opt/schrodinger
 alias maestro="$SCHRODINGER/maestro %f &"
 alias matlab="$HOME/matlabR2013a/bin/matlab -desktop &"
-#alias ipython="ipython --profile=cdalgicdir"
 alias dsvisualizer="/home/cdalgicdir/Accelrys/DiscoveryStudio31/bin/DiscoveryStudio31 &"
 alias open="gnome-open"
 alias op="gnome-open"
 alias octave="octave -q"
-###################################################################
-# Shortcuts for Essential Books
-###################################################################
-alias books="echo -e 'prot: Branden\nprotp: Protein Physics\nmd: Frenkel\nmds: Schankar\nleach: Leach\ntildesley: Tildesley\nart: Art of MD\nmath: Hassani'"
-alias mangro="mupdf $HOME/Documents/Manuals/gromacs-manual-4.5.6.pdf&"
-alias prot="evince $HOME/Documents/Books/Branden_Introduction\ to\ protein\ structure\ 2nd\ ed.djvu &"
-alias protp="evince /home/cdalgicdir/Documents/Books/Peptides/Protein_Physics.pdf &"
-alias md="evince $HOME/Documents/Books/MD_Simulation/Understanding_Molecular_Simulation.pdf &"
-alias mds="evince $HOME/Documents/Books/MD_Simulation/Molecular_Modeling_and_Simulation._An_Interdisciplinary_Guide.pdf &"
-alias leach="evince $HOME/Documents/Books/MD_Simulation/Leach-Molecular.modelling.Principles.djvu &"
-alias tildesley="evince $HOME/Documents/Books/MD_Simulation/[Allen_Tildesley]_Computer_simulation_of_liquids.pdf &"
-alias art="evince $HOME/Documents/Books/MD_Simulation/The\ Art\ of\ Molecular\ Dynamics.pdf &"
-alias math="evince $HOME/Documents/Books/Mathematics/Mathematical\ Methods\ For\ Students\ of\ Physics\ and\ Related\ Fields\ -\ Hassani.pdf &"
-###################################################################
 alias cpuinfo='lscpu'
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 alias dud='du -hsx * | sort -rh | head -10'
-#alias uberwriter="/opt/extras.ubuntu.com/uberwriter/bin/uberwriter $@"
 alias gv='gvim'
+alias mkcd='_(){ mkdir $1; cd $1; }; _'
 
 ### FUNCTIONS
 
@@ -239,14 +225,6 @@ cd() {
 
    builtin cd "$@"
    [[ $PWD == "$HOME/Downloads" ]] && ls -tr || ls
-#  local exceptlist=( "$HOME/Downloads" )
-#  if [ -n "$1" ] && [[ ! ${exceptlist[@]} =~ "$1" ]]; then
-#    builtin cd "$@" && ls
-#  elif [[ ${exceptlist[@]} =~ "$1" ]]; then
-#    builtin cd "$@" ~ && ls -tr
-#  else
-#    builtin cd ~ && ls
-#  fi
 }
 
 wiki() {
@@ -285,15 +263,4 @@ function pawk {
     local last="}'"
     local cmd="${first}\$${1}${last}"
     eval $cmd
-}
-alias mkcd='_(){ mkdir $1; cd $1; }; _'
-function mergegro {
-    local n1=`sed -n '2p' ${1} | tr -d ' '`
-    local n2=`sed -n '2p' ${2} | tr -d ' '`
-    local n3=$((n1+n2))
-    awk '{if (NF!=3)print}' ${1} > ${1}.xXx
-    awk '{if (NR>2)print}' ${2} > ${2}.xXx
-    cat ${1}.xXx ${2}.xXx > ${3}
-    sed -i '2s/'$n1'/'$n3'/' ${3}
-    rm ${1}.xXx ${2}.xXx
 }
