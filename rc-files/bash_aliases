@@ -1,0 +1,61 @@
+#! /bin/bash
+
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias df='df -h'
+alias sl='ls'
+alias doc="cd $HOME/Documents"
+alias des="cd $HOME/Desktop"
+alias dow="cd $HOME/Downloads"
+alias scr="cd $HOME/Documents/scripts/currentscripts"
+alias sim="cd $HOME/SIMS"
+alias hamsi='ssh hamsi -X'
+alias lufer='ssh lufer -X'
+alias ichi='ssh ichi -X'
+alias yunus='ssh yunus -X'
+alias tric='ssh tric -X'
+alias gp='gnuplot --persist'
+alias emerillon='export CLUTTER_VBLANK=none && emerillon'
+#alias psudo='sudo env PATH="$PATH"'
+alias diff-side-by-side='diff --side-by-side -W"`tput cols`"'
+alias diff-side-by-side-changes='diff --side-by-side --suppress-common-lines -W"`tput cols`"'
+alias xp="virtualbox --startvm WinXP"
+alias xpsave="VBoxManage controlvm WinXP savestate"
+alias xpoff="VBoxManage controlvm WinXP acpipowerbutton"
+alias off="xset dpms force off"
+alias pymol="export PYTHONPATH=/opt/pymol/modules:$PYTHONPATH && pymol"
+alias maestro="$SCHRODINGER/maestro %f &"
+alias matlab="$HOME/matlabR2013a/bin/matlab -desktop &"
+alias dsvisualizer="/home/cdalgicdir/Accelrys/DiscoveryStudio31/bin/DiscoveryStudio31 &"
+alias open="gnome-open"
+alias op="gnome-open"
+alias octave="octave -q"
+alias cpuinfo='lscpu'
+alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
+alias dud='du -hsx * | sort -rh | head -10'
+alias gv='gvim'
+alias mkcd='_(){ mkdir $1; cd $1; }; _'
+alias mangro="gnome-open $HOME/Documents/Manuals/gromacs-manual-4.5.6.pdf" &
