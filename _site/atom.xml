@@ -4,12 +4,33 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-23T15:57:13+02:00</updated>
+ <updated>2014-01-27T23:42:35+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Klcg Todo</title>
+   <link href="/2014/01/27/KLcg-todo.html"/>
+   <updated>2014-01-27T00:00:00+02:00</updated>
+   <id>/2014/01/27/KLcg-todo</id>
+    
+   <category term="/research/categories.html#klcg" label="klcg"/>
+   
+   <content type="html">&lt;h2 id=&quot;klcg&quot;&gt;KLcg&lt;/h2&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;Fix dihedral issue for CG, L&lt;/li&gt;
+&lt;li&gt;compare atm and CG i,i+4 CN distances and H-bond distance histograms&lt;/li&gt;
+&lt;li&gt;generate Ramachandran map for CG backbone dihs and compare w/ atm
+&lt;ul&gt;
+&lt;li&gt;if does not match use pair intrxns for i, i+4 and tune it to match&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;add charge and check bonded&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Meeting Klcg</title>

@@ -341,7 +341,6 @@
 	    CA11 CN12
 	    CA12 CN13
 	    CA13 CN14
-	    CA14 CN15
 	  </beads>
       </bond>
       <bond>
@@ -473,19 +472,19 @@
       <dihedral>
 	  <name>dih_CA-CN-CA-CN</name>
 	  <beads>
-	    CA1 CN1 CA2 CN2
-	    CA2 CN2 CA3 CN3
-	    CA3 CN3 CA4 CN4
-	    CA4 CN4 CA5 CN5
-	    CA5 CN5 CA6 CN6
-	    CA6 CN6 CA7 CN7
-	    CA7 CN7 CA8 CN8
-	    CA8 CN8 CA9 CN9
-	    CA9 CN9 CA10 CN10
-	    CA10 CN10 CA11 CN11
-	    CA11 CN11 CA12 CN12
-	    CA12 CN12 CA13 CN13
-	    CA13 CN13 CA14 CN14
+	    CA1 CN2 CA2 CN3
+	    CA2 CN3 CA3 CN4
+	    CA3 CN4 CA4 CN5
+	    CA4 CN5 CA5 CN6
+	    CA5 CN6 CA6 CN7
+	    CA6 CN7 CA7 CN8
+	    CA7 CN8 CA8 CN9
+	    CA8 CN9 CA9 CN10
+	    CA9 CN10 CA10 CN11
+	    CA10 CN11 CA11 CN12
+	    CA11 CN12 CA12 CN13
+	    CA12 CN13 CA13 CN14
+	    CA13 CN14 CA14 CN15
 	  </beads>
       </dihedral>
       <dihedral>
