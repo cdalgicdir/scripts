@@ -97,6 +97,16 @@
 39 40 41  ; 8 3  1; 1:ang_CN-CA-L:7
 46 47 48  ; 8 3  1; 1:ang_CN-CA-L:8
 
+[ ang_L-CA-CN ]
+3  2  4   ; 8 3  1; 1:ang_L-CA-CN:1
+14 13 15  ; 8 3  1; 1:ang_L-CA-CN:2
+17 16 18  ; 8 3  1; 1:ang_L-CA-CN:3
+24 23 25  ; 8 3  1; 1:ang_L-CA-CN:4
+27 26 28  ; 8 3  1; 1:ang_L-CA-CN:5
+38 37 39  ; 8 3  1; 1:ang_L-CA-CN:6
+41 40 42  ; 8 3  1; 1:ang_L-CA-CN:7
+48 47 49  ; 8 3  1; 1:ang_L-CA-CN:8
+
 [ ang_CN-CA-KC ]
 4 5 6     ; 8 4  1; 1:ang_CN-CA-KC:1
 8 9 10    ; 8 4  1; 1:ang_CN-CA-KC:2
@@ -104,6 +114,14 @@
 28 29 30  ; 8 4  1; 1:ang_CN-CA-KC:4
 32 33 34  ; 8 4  1; 1:ang_CN-CA-KC:5
 42 43 44  ; 8 4  1; 1:ang_CN-CA-KC:6
+
+[ ang_KC-CA-CN ]
+6  5  7   ; 8 4  1; 1:ang_KC-CA-CN:1
+10 9  11  ; 8 4  1; 1:ang_KC-CA-CN:2
+20 19 21  ; 8 4  1; 1:ang_KC-CA-CN:3
+30 29 31  ; 8 4  1; 1:ang_KC-CA-CN:4
+34 33 35  ; 8 4  1; 1:ang_KC-CA-CN:5
+44 43 45  ; 8 4  1; 1:ang_KC-CA-CN:6
 
 [ ang_CA-KC-KN ]
 5 6 7     ; 8 5  1; 1:ang_CA-KC-KN:1
