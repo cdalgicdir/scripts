@@ -4,12 +4,40 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-27T23:42:35+02:00</updated>
+ <updated>2014-01-28T14:02:07+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Meeting Christine</title>
+   <link href="/2014/01/28/meeting-christine.html"/>
+   <updated>2014-01-28T00:00:00+02:00</updated>
+   <id>/2014/01/28/meeting-christine</id>
+    
+   <category term="/research/categories.html#meeting" label="meeting"/>
+   
+   <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;To-do&lt;/h2&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;Calculate the distributions for L-CA-CN and KC-CA-CN even though you don’t explicitly give those&lt;/li&gt;
+&lt;li&gt;?? L-CA-CN and KC-CA-CN (the reverse of the given angles) could be given ??&lt;/li&gt;
+&lt;li&gt;put charges, then put pair interxns for CN_i-CN_i+4, then leucine-leucine interxns&lt;/li&gt;
+&lt;li&gt;? Generate analogue of FF case&lt;/li&gt;
+&lt;li&gt;? Try double min potential that slightly favors the desired conformation&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Next meeting 5 Feb 11 TR time&lt;/p&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;Use pair intrxn pot for C_i-C_i+4
+&lt;ul&gt;
+&lt;li&gt;How deep the intrx pot should be? (1 kT?)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;If pair intrxns work, then replace tetramer backbone dihs w/ vacuum dihs&lt;/li&gt;
+&lt;li&gt;If the replacement of vac backbone dihs fail, increase the depth of CN-CN intrxn (? try the BInv of atomistic)&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Klcg Todo</title>
