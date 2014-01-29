@@ -13,6 +13,7 @@ Votca generates bonded histograms by
 1. normalizes to make the area equal to 1.
 
 *check*:
+
 - tools/src/libtools/histogram.cc for generating histograms
 
 Does gromacs scale the bonded histograms?
