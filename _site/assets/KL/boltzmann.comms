@@ -179,19 +179,19 @@ hist dih_CN-CA-CN-CA_avg.xvg 1:dih_CN-CA-CN-CA:*
 
 # CA-CN-CA-CN
 hist set scale no
-hist dih_CA1-CN1-CA2-CN2.xvg 1:dih_CA-CN-CA-CN:1
-hist dih_CA2-CN2-CA3-CN3.xvg 1:dih_CA-CN-CA-CN:2
-hist dih_CA3-CN3-CA4-CN4.xvg 1:dih_CA-CN-CA-CN:3
-hist dih_CA4-CN4-CA5-CN5.xvg 1:dih_CA-CN-CA-CN:4
-hist dih_CA5-CN5-CA6-CN6.xvg 1:dih_CA-CN-CA-CN:5
-hist dih_CA6-CN6-CA7-CN7.xvg 1:dih_CA-CN-CA-CN:6
-hist dih_CA7-CN7-CA8-CN8.xvg 1:dih_CA-CN-CA-CN:7
-hist dih_CA8-CN8-CA9-CN9.xvg 1:dih_CA-CN-CA-CN:8
-hist dih_CA9-CN9-CA10-CN10.xvg 1:dih_CA-CN-CA-CN:9
-hist dih_CA10-CN10-CA11-CN11.xvg 1:dih_CA-CN-CA-CN:10
-hist dih_CA11-CN11-CA12-CN12.xvg 1:dih_CA-CN-CA-CN:11
-hist dih_CA12-CN12-CA13-CN13.xvg 1:dih_CA-CN-CA-CN:12
-hist dih_CA13-CN13-CA14-CN14.xvg 1:dih_CA-CN-CA-CN:13
+hist dih_CA1-CN2-CA2-CN3.xvg 1:dih_CA-CN-CA-CN:1
+hist dih_CA2-CN3-CA3-CN4.xvg 1:dih_CA-CN-CA-CN:2
+hist dih_CA3-CN4-CA4-CN5.xvg 1:dih_CA-CN-CA-CN:3
+hist dih_CA4-CN5-CA5-CN6.xvg 1:dih_CA-CN-CA-CN:4
+hist dih_CA5-CN6-CA6-CN7.xvg 1:dih_CA-CN-CA-CN:5
+hist dih_CA6-CN7-CA7-CN8.xvg 1:dih_CA-CN-CA-CN:6
+hist dih_CA7-CN8-CA8-CN9.xvg 1:dih_CA-CN-CA-CN:7
+hist dih_CA8-CN9-CA9-CN10.xvg 1:dih_CA-CN-CA-CN:8
+hist dih_CA9-CN10-CA10-CN11.xvg 1:dih_CA-CN-CA-CN:9
+hist dih_CA10-CN11-CA11-CN12.xvg 1:dih_CA-CN-CA-CN:10
+hist dih_CA11-CN12-CA12-CN13.xvg 1:dih_CA-CN-CA-CN:11
+hist dih_CA12-CN13-CA13-CN14.xvg 1:dih_CA-CN-CA-CN:12
+hist dih_CA13-CN14-CA14-CN15.xvg 1:dih_CA-CN-CA-CN:13
 hist dih_CA-CN-CA-CN_avg.xvg 1:dih_CA-CN-CA-CN:*
 
 # CA-CN-CA-KC
@@ -247,6 +247,21 @@ hist imp_CA9-CN9-KC4-CN10.xvg 1:imp_CA-CN-KC-CN:4
 hist imp_CA10-CN10-KC5-CN11.xvg 1:imp_CA-CN-KC-CN:5
 hist imp_CA13-CN13-KC6-CN14.xvg 1:imp_CA-CN-KC-CN:6
 hist imp_CA-CN-KC-CN_avg.xvg 1:imp_CA-CN-KC-CN:*
+
+# distances
+# CNi-CNi4
+hist dist_CN1-CN5.xvg 1:dist_CNi-CNi4:1
+hist dist_CN2-CN6.xvg 1:dist_CNi-CNi4:2
+hist dist_CN3-CN7.xvg 1:dist_CNi-CNi4:3
+hist dist_CN4-CN8.xvg 1:dist_CNi-CNi4:4
+hist dist_CN5-CN9.xvg 1:dist_CNi-CNi4:5
+hist dist_CN6-CN10.xvg 1:dist_CNi-CNi4:6
+hist dist_CN7-CN11.xvg 1:dist_CNi-CNi4:7
+hist dist_CN8-CN12.xvg 1:dist_CNi-CNi4:8
+hist dist_CN9-CN13.xvg 1:dist_CNi-CNi4:9
+hist dist_CN10-CN14.xvg 1:dist_CNi-CNi4:10
+hist dist_CN11-CN15.xvg 1:dist_CNi-CNi4:11
+hist dist_CN-CN_avg.xvg 1:dist_CNi-CNi4:*
 
 # values
 #
@@ -350,6 +365,16 @@ vals time_ang_CN11-CA11-L6.xvg 1:ang_CN-CA-L:6
 vals time_ang_CN12-CA12-L7.xvg 1:ang_CN-CA-L:7
 vals time_ang_CN14-CA14-L8.xvg 1:ang_CN-CA-L:8
 
+# L-CA-CN
+vals time_ang_L1-CA1-CN2.xvg 1:ang_L-CA-CN-1
+vals time_ang_L2-CA4-CN5.xvg 1:ang_L-CA-CN-2
+vals time_ang_L3-CA5-CN6.xvg 1:ang_L-CA-CN-3
+vals time_ang_L4-CA7-CN8.xvg 1:ang_L-CA-CN-4
+vals time_ang_L5-CA8-CN9.xvg 1:ang_L-CA-CN-5
+vals time_ang_L6-CA11-CN12.xvg 1:ang_L-CA-CN-6
+vals time_ang_L7-CA12-CN13.xvg 1:ang_L-CA-CN-7
+vals time_ang_L8-CA14-CN15.xvg 1:ang_L-CA-CN-8
+
 # CN-CA-KC
 vals time_ang_CN2-CA2-KC1.xvg 1:ang_CN-CA-KC:1
 vals time_ang_CN3-CA3-KC2.xvg 1:ang_CN-CA-KC:2
@@ -357,6 +382,14 @@ vals time_ang_CN6-CA6-KC3.xvg 1:ang_CN-CA-KC:3
 vals time_ang_CN9-CA9-KC4.xvg 1:ang_CN-CA-KC:4
 vals time_ang_CN10-CA10-KC5.xvg 1:ang_CN-CA-KC:5
 vals time_ang_CN13-CA13-KC6.xvg 1:ang_CN-CA-KC:6
+
+# KC-CA-CN
+vals time_ang_KC1-CA2-CN3.xvg 1:ang_KC-CA-CN-1
+vals time_ang_KC2-CA3-CN4.xvg 1:ang_KC-CA-CN-2
+vals time_ang_KC3-CA6-CN7.xvg 1:ang_KC-CA-CN-3
+vals time_ang_KC4-CA9-CN10.xvg 1:ang_KC-CA-CN-4
+vals time_ang_KC5-CA10-CN11.xvg 1:ang_KC-CA-CN-5
+vals time_ang_KC6-CA13-CN14.xvg 1:ang_KC-CA-CN-6
 
 # CA-KC-KN
 vals time_ang_CA2-KC1-KN1.xvg 1:ang_CA-KC-KN:1
@@ -442,5 +475,19 @@ vals time_imp_CA6-CN6-KC3-CN7.xvg 1:imp_CA-CN-KC-CN:3
 vals time_imp_CA9-CN9-KC4-CN10.xvg 1:imp_CA-CN-KC-CN:4
 vals time_imp_CA10-CN10-KC5-CN11.xvg 1:imp_CA-CN-KC-CN:5
 vals time_imp_CA13-CN13-KC6-CN14.xvg 1:imp_CA-CN-KC-CN:6
+
+# distances
+# CNi-CNi4
+vals time_dist_CN1-CN5.xvg 1:dist_CNi-CNi4:1
+vals time_dist_CN2-CN6.xvg 1:dist_CNi-CNi4:2
+vals time_dist_CN3-CN7.xvg 1:dist_CNi-CNi4:3
+vals time_dist_CN4-CN8.xvg 1:dist_CNi-CNi4:4
+vals time_dist_CN5-CN9.xvg 1:dist_CNi-CNi4:5
+vals time_dist_CN6-CN10.xvg 1:dist_CNi-CNi4:6
+vals time_dist_CN7-CN11.xvg 1:dist_CNi-CNi4:7
+vals time_dist_CN8-CN12.xvg 1:dist_CNi-CNi4:8
+vals time_dist_CN9-CN13.xvg 1:dist_CNi-CNi4:9
+vals time_dist_CN10-CN14.xvg 1:dist_CNi-CNi4:10
+vals time_dist_CN11-CN15.xvg 1:dist_CNi-CNi4:11
 
 q
