@@ -1,5 +1,6 @@
 #! /bin/bash
 
+hom=`pwd`
 remotedir="$HOME/remote"
 nKLdir="$remotedir/scratch8/n-KL"
 
@@ -26,7 +27,11 @@ kl2intdir="$remotedir/scratch4/130624_2KL-int/7-INT-nodistconstr/map/histograms-
 nKLhome="/home/cdalgicdir/SIMS/KL/n-KL-distributions"
 tetdir="$nKLhome/4KL"
 
-flist=('bond_CA-CN_avg.xvg' 'bond_CA-KC_avg.xvg' 'bond_CA-L_avg.xvg' 'bond_CN-CA_avg.xvg' 'bond_KC-KN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'ang_CN-CA-CN_avg.xvg' 'ang_CN-CA-KC_avg.xvg' 'ang_CN-CA-L_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CN-CA-KC_avg.xvg' 'dih_CA-CN-CA-L_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CN-CA-KC-KN_avg.xvg' 'imp_CA-CN-CN-L_avg.xvg' 'imp_CA-CN-KC-CN_avg.xvg')
+# HISTOGRAMS directory
+histdir='bonded-histograms'
+cd ${histdir}
+
+flist=('bond_CA-CN_avg.xvg' 'bond_CA-KC_avg.xvg' 'bond_CA-L_avg.xvg' 'bond_CN-CA_avg.xvg' 'bond_KC-KN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'ang_CN-CA-CN_avg.xvg' 'ang_CN-CA-KC_avg.xvg' 'ang_CN-CA-L_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CN-CA-KC_avg.xvg' 'dih_CA-CN-CA-L_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CN-CA-KC-KN_avg.xvg' 'imp_CA-CN-CN-L_avg.xvg' 'imp_CA-CN-KC-CN_avg.xvg' 'ang_L-CA-CN_avg.xvg' 'ang_KC-CA-CN_avg.xvg')
 
 #for f in bond*avg*xvg ang*avg*xvg dih*avg*xvg* imp*avg*xvg; do
 for f in ${flist[@]}; do
@@ -42,15 +47,33 @@ for f in ${flist[@]}; do
     #gplot -o "`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/'`" --term "pdfcairo font \"Gill Sans,16\" lw 3 rounded" -t "${f%.xvg}" $kl7vacdir/$f u 1:2 w l t \'KL7-vac-excl\'\, \'$vacdir/$f\' u 1:2 w l t \'KL14-vac-excl\'\,\'$tetdir/$f\' u 1:2 w l t \'tetramer\'\,\'$bozsindir/$bozf\' u 1:2 w l t \'boz-sinmol\'\,\'$bozsinexdir/$bozf\' u 1:2 w l t \'boz-sinmol-excl\'
 done
 
-for hist in hist_*; do
+
+bondlist=('CN-CA' 'CA-CN' 'CA-L' 'CA-KC' 'KC-KN')
+bondNlist=('14' '14' '8' '6' '6')
+q="'"
+
+for i in `seq 0 $((${#bondlist[@]}-1))`; do
+    plcomms=''
+    for j in `seq 1 ${bondNlist[$i]}`; do
+        b=${bondlist[$i]}
+	file="hist_bond_${b}"
+	plcomms="$plcomms""${q}${file}-${j}.xvg${q} u 1:2 t ${q}${j}${q},"
+    done
+    plcomms=${plcomms:0:$((${#plcomms}-1))}
+    gplot -c "set style data line" -o "`echo ${file}-all.pdf | sed 's/_/-/g'`" --term "pdfcairo font \"Gill Sans,16\" lw 3 rounded" -t "${file}" -- "${plcomms}"
+done
+
+for hist in hist_dih_* hist_ang_* hist_imp*; do
     if [[ ${hist} != hist_*all*.xvg ]]; then
-	python split-hists.py ${hist}
-	bash plallcols.sh ${hist%.xvg}_all.xvg
+	python ${hom}/split-hists.py ${hist}
+	bash ${hom}/plallcols.sh ${hist%.xvg}_all.xvg
     fi
 done
 
+cd -
+
 mkdir -p report
-mv *pdf report/
+mv ${histdir}/*pdf report/
 cd report/
 cp $HOME/SIMS/KL/plots/distributions-all.tex .
 pdflatex -shell-escape -interaction=nonstopmode distributions-all.tex

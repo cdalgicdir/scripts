@@ -14,4 +14,8 @@ plcomms=${plcomms:0:$((${#plcomms}-1))}
 
 #echo $plcomms
 #gplot -c "set style data line" -- "${plcomms}"
-gplot -o "`echo ${file} | sed 's/_/-/g' | sed 's/xvg/pdf/'`" --term "pdfcairo font \"Gill Sans,16\" lw 1 rounded"  -c "set style data line" -t "${file%.xvg}" -- "${plcomms}"
+if [[ ${file} == 'hist_dih_CN-CA-KC-KN_all.xvg' ]]; then
+    gplot -c "set yrange [:0.04]" -o "`echo ${file} | sed 's/_/-/g' | sed 's/xvg/pdf/'`" --term "pdfcairo font \"Gill Sans,16\" lw 1 rounded"  -c "set style data line" -t "${file%.xvg}" -- "${plcomms}"
+else
+    gplot -o "`echo ${file} | sed 's/_/-/g' | sed 's/xvg/pdf/'`" --term "pdfcairo font \"Gill Sans,16\" lw 1 rounded"  -c "set style data line" -t "${file%.xvg}" -- "${plcomms}"
+fi

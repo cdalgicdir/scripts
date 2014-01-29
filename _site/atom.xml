@@ -4,12 +4,27 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-28T14:02:07+02:00</updated>
+ <updated>2014-01-29T12:38:46+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Cg Votca Bonded Histogram</title>
+   <link href="/2014/01/29/CG-votca-bonded-histogram.html"/>
+   <updated>2014-01-29T00:00:00+02:00</updated>
+   <id>/2014/01/29/CG-votca-bonded-histogram</id>
+    
+   <category term="/research/categories.html#cg" label="cg"/>
+   
+   <content type="html">&lt;h2 id=&quot;calculating-bonded-histograms-using-votca&quot;&gt;Calculating bonded histograms using Votca&lt;/h2&gt;
+&lt;p&gt;Votca generates bonded histograms by 1. counting the number of items in each bin (number of steps*number of arrays) 1. scales according to bond (1/\(r^2\)) or angle (1/sin(\(\phi\))) 1. normalizes to make the area equal to 1.&lt;/p&gt;
+&lt;p&gt;check: tools/src/libtools/histogram.cc for generating histograms&lt;/p&gt;
+&lt;p&gt;Does gromacs scale the bonded histograms?&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Meeting Christine</title>
