@@ -1,0 +1,608 @@
+<cg_molecule>
+  <name>LK</name>
+	<ident>LK</ident>
+  <topology>
+    <cg_beads>
+	<cg_bead>
+        <name>CN1</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN1</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA1</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA1</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>L1</name>
+        <type>L</type>
+        <mapping>L</mapping>
+        <beads>1:LK:L1</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN2</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+	<beads>1:LK:CN2</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA2</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA2</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KC1</name>
+        <type>KC</type>
+        <mapping>KC</mapping>
+        <beads>1:LK:KC1</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KN1</name>
+        <type>KN</type>
+        <mapping>KN</mapping>
+        <beads>1:LK:KN1</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN3</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN3</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA3</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA3</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KC2</name>
+        <type>KC</type>
+        <mapping>KC</mapping>
+        <beads>1:LK:KC2</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KN2</name>
+        <type>KN</type>
+        <mapping>KN</mapping>
+        <beads>1:LK:KN2</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN4</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN4</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA4</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA4</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>L2</name>
+        <type>L</type>
+        <mapping>L</mapping>
+        <beads>1:LK:L2</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN5</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN5</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA5</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA5</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>L3</name>
+        <type>L</type>
+        <mapping>L</mapping>
+        <beads>1:LK:L3</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN6</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN6</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA6</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA6</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KC3</name>
+        <type>KC</type>
+        <mapping>KC</mapping>
+        <beads>1:LK:KC3</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KN3</name>
+        <type>KN</type>
+        <mapping>KN</mapping>
+        <beads>1:LK:KN3</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN7</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN7</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA7</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA7</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>L4</name>
+        <type>L</type>
+        <mapping>L</mapping>
+        <beads>1:LK:L4</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN8</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN8</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA8</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA8</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>L5</name>
+        <type>L</type>
+        <mapping>L</mapping>
+        <beads>1:LK:L5</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN9</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN9</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA9</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA9</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KC4</name>
+        <type>KC</type>
+        <mapping>KC</mapping>
+        <beads>1:LK:KC4</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KN4</name>
+        <type>KN</type>
+        <mapping>KN</mapping>
+        <beads>1:LK:KN4</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN10</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN10</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA10</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA10</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KC5</name>
+        <type>KC</type>
+        <mapping>KC</mapping>
+        <beads>1:LK:KC5</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KN5</name>
+        <type>KN</type>
+        <mapping>KN</mapping>
+        <beads>1:LK:KN5</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN11</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN11</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA11</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA11</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>L6</name>
+        <type>L</type>
+        <mapping>L</mapping>
+        <beads>1:LK:L6</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN12</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN12</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA12</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA12</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>L7</name>
+        <type>L</type>
+        <mapping>L</mapping>
+        <beads>1:LK:L7</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN13</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN13</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA13</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA13</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KC6</name>
+        <type>KC</type>
+        <mapping>KC</mapping>
+        <beads>1:LK:KC6</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>KN6</name>
+        <type>KN</type>
+        <mapping>KN</mapping>
+        <beads>1:LK:KN6</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN14</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN14</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CA14</name>
+        <type>CA</type>
+        <mapping>CA</mapping>
+        <beads>1:LK:CA14</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>L8</name>
+        <type>L</type>
+        <mapping>L</mapping>
+        <beads>1:LK:L8</beads>
+      </cg_bead>
+      <cg_bead>
+        <name>CN15</name>
+        <type>CN</type>
+        <mapping>CN</mapping>
+        <beads>1:LK:CN15</beads>
+      </cg_bead>
+    </cg_beads>
+
+  <cg_bonded>
+      <bond>
+	  <name>dist_CNi-CNi4</name>
+	  <beads>
+	    CN1  CN5
+	    CN2  CN6
+	    CN3  CN7
+	    CN4  CN8
+	    CN5  CN9
+	    CN6  CN10
+	    CN7  CN11
+	    CN8  CN12
+	    CN9  CN13
+	    CN10 CN14
+	    CN11 CN15
+	  </beads>
+      </bond>
+      <bond>
+	  <name>bond_CN-CA</name>
+	  <beads>
+	    CN1 CA1
+	    CN2 CA2
+	    CN3 CA3
+	    CN4 CA4
+	    CN5 CA5
+	    CN6 CA6
+	    CN7 CA7
+	    CN8 CA8
+	    CN9 CA9
+	    CN10 CA10
+	    CN11 CA11
+	    CN12 CA12
+	    CN13 CA13
+	    CN14 CA14
+	  </beads>
+      </bond>
+      <bond>
+	  <name>bond_CA-CN</name>
+	  <beads>
+	    CA1 CN2
+	    CA2 CN3
+	    CA3 CN4
+	    CA4 CN5
+	    CA5 CN6
+	    CA6 CN7
+	    CA7 CN8
+	    CA8 CN9
+	    CA9 CN10
+	    CA10 CN11
+	    CA11 CN12
+	    CA12 CN13
+	    CA13 CN14
+	    CA14 CN15
+	  </beads>
+      </bond>
+      <bond>
+	  <name>bond_CA-L</name>
+	  <beads>
+	    CA1 L1
+	    CA4 L2
+	    CA5 L3
+	    CA7 L4
+	    CA8 L5
+	    CA11 L6
+	    CA12 L7
+	    CA14 L8
+	  </beads>
+      </bond>
+      <bond>
+	  <name>bond_CA-KC</name>
+	  <beads>
+	    CA2 KC1
+	    CA3 KC2
+	    CA6 KC3
+	    CA9 KC4
+	    CA10 KC5
+	    CA13 KC6
+	  </beads>
+      </bond>
+      <bond>
+	  <name>bond_KC-KN</name>
+	  <beads>
+	    KC1 KN1
+	    KC2 KN2
+	    KC3 KN3
+	    KC4 KN4
+	    KC5 KN5
+	    KC6 KN6
+	  </beads>
+      </bond>
+
+      <angle>
+	  <name>ang_CN-CA-CN</name>
+	  <beads>
+	    CN1 CA1 CN2
+	    CN2 CA2 CN3
+	    CN3 CA3 CN4
+	    CN4 CA4 CN5
+	    CN5 CA5 CN6
+	    CN6 CA6 CN7
+	    CN7 CA7 CN8
+	    CN8 CA8 CN9
+	    CN9 CA9 CN10
+	    CN10 CA10 CN11
+	    CN11 CA11 CN12
+	    CN12 CA12 CN13
+	    CN13 CA13 CN14
+	    CN14 CA14 CN15
+	  </beads>
+      </angle>
+      <angle>
+	  <name>ang_CA-CN-CA</name>
+	  <beads>
+	    CA1 CN2 CA2
+	    CA2 CN3 CA3
+	    CA3 CN4 CA4
+	    CA4 CN5 CA5
+	    CA5 CN6 CA6
+	    CA6 CN7 CA7
+	    CA7 CN8 CA8
+	    CA8 CN9 CA9
+	    CA9 CN10 CA10
+	    CA10 CN11 CA11
+	    CA11 CN12 CA12
+	    CA12 CN13 CA13
+	    CA13 CN14 CA14
+	  </beads>
+      </angle>
+      <angle>
+	  <name>ang_CN-CA-L</name>
+	  <beads>
+	    CN1 CA1 L1
+	    CN4 CA4 L2
+	    CN5 CA5 L3
+	    CN7 CA7 L4
+	    CN8 CA8 L5
+	    CN11 CA11 L6
+	    CN12 CA12 L7
+	    CN14 CA14 L8
+	  </beads>
+      </angle>
+      <angle>
+	  <name>ang_L-CA-CN</name>
+	  <beads>
+	    L1 CA1 CN2
+	    L2 CA4 CN5
+	    L3 CA5 CN6
+	    L4 CA7 CN8
+	    L5 CA8 CN9
+	    L6 CA11 CN12
+	    L7 CA12 CN13
+	    L8 CA14 CN15
+	  </beads>
+      </angle>
+      <angle>
+	  <name>ang_CN-CA-KC</name>
+	  <beads>
+	    CN2 CA2 KC1
+	    CN3 CA3 KC2
+	    CN6 CA6 KC3
+	    CN9 CA9 KC4
+	    CN10 CA10 KC5
+	    CN13 CA13 KC6
+	  </beads>
+      </angle>
+      <angle>
+	  <name>ang_KC-CA-CN</name>
+	  <beads>
+	    KC1 CA2 CN3
+	    KC2 CA3 CN4
+	    KC3 CA6 CN7
+	    KC4 CA9 CN10
+	    KC5 CA10 CN11
+	    KC6 CA13 CN14
+	  </beads>
+      </angle>
+      <angle>
+	  <name>ang_CA-KC-KN</name>
+	  <beads>
+	    CA2 KC1 KN1
+	    CA3 KC2 KN2
+	    CA6 KC3 KN3
+	    CA9 KC4 KN4
+	    CA10 KC5 KN5
+	    CA13 KC6 KN6
+	  </beads>
+      </angle>
+      <dihedral>
+	  <name>dih_CN-CA-CN-CA</name>
+	  <beads>
+	    CN1 CA1 CN2 CA2
+	    CN2 CA2 CN3 CA3
+	    CN3 CA3 CN4 CA4
+	    CN4 CA4 CN5 CA5
+	    CN5 CA5 CN6 CA6
+	    CN6 CA6 CN7 CA7
+	    CN7 CA7 CN8 CA8
+	    CN8 CA8 CN9 CA9
+	    CN9 CA9 CN10 CA10
+	    CN10 CA10 CN11 CA11
+	    CN11 CA11 CN12 CA12
+	    CN12 CA12 CN13 CA13
+	    CN13 CA13 CN14 CA14
+	  </beads>
+      </dihedral>
+      <dihedral>
+	  <name>dih_CA-CN-CA-CN</name>
+	  <beads>
+	    CA1 CN2 CA2 CN3
+	    CA2 CN3 CA3 CN4
+	    CA3 CN4 CA4 CN5
+	    CA4 CN5 CA5 CN6
+	    CA5 CN6 CA6 CN7
+	    CA6 CN7 CA7 CN8
+	    CA7 CN8 CA8 CN9
+	    CA8 CN9 CA9 CN10
+	    CA9 CN10 CA10 CN11
+	    CA10 CN11 CA11 CN12
+	    CA11 CN12 CA12 CN13
+	    CA12 CN13 CA13 CN14
+	    CA13 CN14 CA14 CN15
+	  </beads>
+      </dihedral>
+      <dihedral>
+	  <name>dih_CA-CN-CA-KC</name>
+	  <beads>
+	    CA1 CN2 CA2 KC1
+	    CA2 CN3 CA3 KC2
+	    CA5 CN6 CA6 KC3
+	    CA8 CN9 CA9 KC4
+	    CA9 CN10 CA10 KC5
+	    CA12 CN13 CA13 KC6
+	  </beads>
+      </dihedral>
+      <dihedral>
+	  <name>dih_CN-CA-KC-KN</name>
+	  <beads>
+	    CN2 CA2 KC1 KN1
+	    CN3 CA3 KC2 KN2
+	    CN6 CA6 KC3 KN3
+	    CN9 CA9 KC4 KN4
+	    CN10 CA10 KC5 KN5
+	    CN13 CA13 KC6 KN6
+	  </beads>
+      </dihedral>
+      <dihedral>
+	  <name>dih_CA-CN-CA-L</name>
+	  <beads>
+	    CA3 CN4 CA4 L2
+	    CA4 CN5 CA5 L3
+	    CA6 CN7 CA7 L4
+	    CA7 CN8 CA8 L5
+	    CA10 CN11 CA11 L6
+	    CA11 CN12 CA12 L7
+	    CA13 CN14 CA14 L8
+	  </beads>
+      </dihedral>
+      <dihedral>
+	  <name>imp_CA-CN-CN-L</name>
+	  <beads>
+	    CA1 CN1 CN2 L1
+	    CA4 CN4 CN5 L2
+	    CA5 CN5 CN6 L3
+	    CA7 CN7 CN8 L4
+	    CA8 CN8 CN9 L5
+	    CA11 CN11 CN12 L6
+	    CA12 CN12 CN13 L7
+	    CA14 CN14 CN15 L8
+	  </beads>
+      </dihedral>
+      <dihedral>
+	  <name>imp_CA-CN-KC-CN</name>
+	  <beads>
+	    CA2 CN2 KC1 CN3
+	    CA3 CN3 KC2 CN4
+	    CA6 CN6 KC3 CN7
+	    CA9 CN9 KC4 CN10
+	    CA10 CN10 KC5 CN11
+	    CA13 CN13 KC6 CN14
+	  </beads>
+      </dihedral>
+  </cg_bonded>
+  </topology>
+
+  <maps>
+    <map>
+      <name>CN</name>
+      <weights>43.025</weights>
+    </map>
+    <map>
+      <name>CA</name>
+      <weights>13.019</weights>
+    </map>
+    <map>
+      <name>L</name>
+      <weights>57.116</weights>
+    </map>
+    <map>
+      <name>KC</name>
+      <weights>42.081</weights>
+    </map>
+    <map>
+      <name>KN</name>
+      <weights>31.058</weights>
+    </map>
+  </maps>
+</cg_molecule>
