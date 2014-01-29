@@ -19,7 +19,7 @@ keyout=''
 plotfiles=''
 terminal='set terminal wxt'
 range=[:][:]
-userset=false
+userset="false"
 
 plot () {
     gplot $output  -c "${extra}" -c "$keyout" -c "$terminal" -r $range -- "$plotfiles"
@@ -72,7 +72,7 @@ while [[ $# -ge 1 ]]; do
 		xl=(${x//:/ })
 		using=' u '"${xl[0]}"':'"${xl[1]}"
 	    fi
-	    userset=true
+	    userset="true"
 	    #using=" u 1:${2} "
 	    shift 2;;
 
@@ -133,6 +133,7 @@ while [[ $# -ge 1 ]]; do
 
 	[0-9]|[0-9][0-9])
 	    using=" u 1:${1} "
+	    userset="true"
 	    shift ;;
 
 	-h | -help | --help | --h)
@@ -160,7 +161,7 @@ for file in ${filelist[@]}
 do
     if [[ -f $file ]]; then
 	if [[ $file == $tabfile && $file != *table_d*.xvg && $file != *table_a*.xvg && $file != *table_b*.xvg ]]; then
-	    if [[ ! $userset ]]; then
+	    if [[ $userset == "false" ]]; then
 		using=" u 1:6 "
 		#ymax=1.5
 		range="[:][:2]"
