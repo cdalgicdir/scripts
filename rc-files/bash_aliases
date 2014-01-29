@@ -58,4 +58,5 @@ alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 alias dud='du -hsx * | sort -rh | head -10'
 alias gv='gvim'
 alias mkcd='_(){ mkdir $1; cd $1; }; _'
-alias mangro="gnome-open $HOME/Documents/Manuals/gromacs-manual-4.5.6.pdf" &
+alias mangro="gnome-open $HOME/Documents/Manuals/gromacs-manual-4.5.6.pdf &"
+alias github="cd $HOME/Dropbox/github"
