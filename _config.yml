@@ -1,6 +1,6 @@
 ## Standard Jeyll config options
 permalink: /:year/:month/:day/:title.html
-exclude: [ _posts/source/, _posts/_private/ ]
+exclude: [ _posts/source/, _posts/_private/, assets ]
 lunr_excludes: [atom.xml, 404.html, search.html, categories.md, tags.md, calendar.md]
 
 title: Papers Notebook
