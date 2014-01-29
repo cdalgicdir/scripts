@@ -46,7 +46,6 @@ hist bond_CA8-L5.xvg 1:bond_CA-L:5
 hist bond_CA11-L6.xvg 1:bond_CA-L:6
 hist bond_CA12-L7.xvg 1:bond_CA-L:7
 hist bond_CA14-L8.xvg 1:bond_CA-L:8
-hist bond_CA14-L8.xvg 1:bond_CA-L:8
 hist bond_CA-L_avg.xvg 1:bond_CA-L:*
 
 # CA-KC
