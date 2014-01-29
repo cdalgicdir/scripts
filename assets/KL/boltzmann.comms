@@ -1,7 +1,7 @@
 # bonds
 # CN-CA
 #hist n 101
-hist set scale bond
+hist set scale no
 hist bond_CN1-CA1.xvg 1:bond_CN-CA:1
 hist bond_CN2-CA2.xvg 1:bond_CN-CA:2
 hist bond_CN3-CA3.xvg 1:bond_CN-CA:3
@@ -19,7 +19,7 @@ hist bond_CN14-CA14.xvg 1:bond_CN-CA:14
 hist bond_CN-CA_avg.xvg 1:bond_CN-CA:*
 
 # CA-CN
-hist set scale bond
+hist set scale no
 hist bond_CA1-CN2.xvg 1:bond_CA-CN:1
 hist bond_CA2-CN3.xvg 1:bond_CA-CN:2
 hist bond_CA3-CN4.xvg 1:bond_CA-CN:3
@@ -37,7 +37,7 @@ hist bond_CA14-CN15.xvg 1:bond_CA-CN:14
 hist bond_CA-CN_avg.xvg 1:bond_CA-CN:*
 
 # CA-L
-hist set scale bond
+hist set scale no
 hist bond_CA1-L1.xvg 1:bond_CA-L:1
 hist bond_CA4-L2.xvg 1:bond_CA-L:2
 hist bond_CA5-L3.xvg 1:bond_CA-L:3
@@ -50,7 +50,7 @@ hist bond_CA14-L8.xvg 1:bond_CA-L:8
 hist bond_CA-L_avg.xvg 1:bond_CA-L:*
 
 # CA-KC
-hist set scale bond
+hist set scale no
 hist bond_CA2-KC1.xvg 1:bond_CA-KC:1
 hist bond_CA3-KC2.xvg 1:bond_CA-KC:2
 hist bond_CA6-KC3.xvg 1:bond_CA-KC:3
@@ -60,7 +60,7 @@ hist bond_CA13-KC6.xvg 1:bond_CA-KC:6
 hist bond_CA-KC_avg.xvg 1:bond_CA-KC:*
 
 # KC-KN
-hist set scale bond
+hist set scale no
 hist bond_KC1-KN1.xvg 1:bond_KC-KN:1
 hist bond_KC2-KN2.xvg 1:bond_KC-KN:2
 hist bond_KC3-KN3.xvg 1:bond_KC-KN:3
@@ -71,7 +71,7 @@ hist bond_KC-KN_avg.xvg 1:bond_KC-KN:*
 
 # angles
 # CN-CA-CN
-hist set scale angle
+hist set scale no
 hist ang_CN1-CA1-CN2.xvg 1:ang_CN-CA-CN:1
 hist ang_CN2-CA2-CN3.xvg 1:ang_CN-CA-CN:2
 hist ang_CN3-CA3-CN4.xvg 1:ang_CN-CA-CN:3
@@ -89,7 +89,7 @@ hist ang_CN14-CA14-CN15.xvg 1:ang_CN-CA-CN:14
 hist ang_CN-CA-CN_avg.xvg 1:ang_CN-CA-CN:*
 
 # CA-CN-CA
-hist set scale angle
+hist set scale no
 hist ang_CA1-CN2-CA2.xvg 1:ang_CA-CN-CA:1
 hist ang_CA2-CN3-CA3.xvg 1:ang_CA-CN-CA:2
 hist ang_CA3-CN4-CA4.xvg 1:ang_CA-CN-CA:3
@@ -106,7 +106,7 @@ hist ang_CA13-CN14-CA14.xvg 1:ang_CA-CN-CA:13
 hist ang_CA-CN-CA_avg.xvg 1:ang_CA-CN-CA:*
 
 # CN-CA-L
-hist set scale angle
+hist set scale no
 hist ang_CN1-CA1-L1.xvg 1:ang_CN-CA-L:1
 hist ang_CN4-CA4-L2.xvg 1:ang_CN-CA-L:2
 hist ang_CN5-CA5-L3.xvg 1:ang_CN-CA-L:3
@@ -118,7 +118,7 @@ hist ang_CN14-CA14-L8.xvg 1:ang_CN-CA-L:8
 hist ang_CN-CA-L_avg.xvg 1:ang_CN-CA-L:*
 
 # L-CA-CN
-hist set scale angle
+hist set scale no
 hist ang_L1-CA1-CN2.xvg 1:ang_L-CA-CN-1
 hist ang_L2-CA4-CN5.xvg 1:ang_L-CA-CN-2
 hist ang_L3-CA5-CN6.xvg 1:ang_L-CA-CN-3
@@ -130,7 +130,7 @@ hist ang_L8-CA14-CN15.xvg 1:ang_L-CA-CN-8
 hist ang_L-CA-CN_avg.xvg 1:ang_L-CA-CN:*
 
 # CN-CA-KC
-hist set scale angle
+hist set scale no
 hist ang_CN2-CA2-KC1.xvg 1:ang_CN-CA-KC:1
 hist ang_CN3-CA3-KC2.xvg 1:ang_CN-CA-KC:2
 hist ang_CN6-CA6-KC3.xvg 1:ang_CN-CA-KC:3
@@ -140,7 +140,7 @@ hist ang_CN13-CA13-KC6.xvg 1:ang_CN-CA-KC:6
 hist ang_CN-CA-KC_avg.xvg 1:ang_CN-CA-KC:*
 
 # KC-CA-CN
-hist set scale angle
+hist set scale no
 hist ang_KC1-CA2-CN3.xvg 1:ang_KC-CA-CN-1
 hist ang_KC2-CA3-CN4.xvg 1:ang_KC-CA-CN-2
 hist ang_KC3-CA6-CN7.xvg 1:ang_KC-CA-CN-3
@@ -150,7 +150,7 @@ hist ang_KC6-CA13-CN14.xvg 1:ang_KC-CA-CN-6
 hist ang_KC-CA-CN_avg.xvg 1:ang_KC-CA-CN:*
 
 # CA-KC-KN
-hist set scale angle
+hist set scale no
 hist ang_CA2-KC1-KN1.xvg 1:ang_CA-KC-KN:1
 hist ang_CA3-KC2-KN2.xvg 1:ang_CA-KC-KN:2
 hist ang_CA6-KC3-KN3.xvg 1:ang_CA-KC-KN:3
