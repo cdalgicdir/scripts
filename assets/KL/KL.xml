@@ -307,6 +307,22 @@
 
   <cg_bonded>
       <bond>
+	  <name>dist_CNi-CNi4</name>
+	  <beads>
+	    CN1  CN5
+	    CN2  CN6
+	    CN3  CN7
+	    CN4  CN8
+	    CN5  CN9
+	    CN6  CN10
+	    CN7  CN11
+	    CN8  CN12
+	    CN9  CN13
+	    CN10 CN14
+	    CN11 CN15
+	  </beads>
+      </bond>
+      <bond>
 	  <name>bond_CN-CA</name>
 	  <beads>
 	    CN1 CA1
