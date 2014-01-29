@@ -260,7 +260,7 @@ hist dist_CN8-CN12.xvg 1:dist_CNi-CNi4:8
 hist dist_CN9-CN13.xvg 1:dist_CNi-CNi4:9
 hist dist_CN10-CN14.xvg 1:dist_CNi-CNi4:10
 hist dist_CN11-CN15.xvg 1:dist_CNi-CNi4:11
-hist dist_CN-CN_avg.xvg 1:dist_CNi-CNi4:*
+hist dist_CNi-CNi4_avg.xvg 1:dist_CNi-CNi4:*
 
 # values
 #
