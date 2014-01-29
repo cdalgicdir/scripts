@@ -94,8 +94,13 @@
   <div class="span8">
     <article>
     <h2 id="calculating-bonded-histograms-using-votca">Calculating bonded histograms using Votca</h2>
-<p>Votca generates bonded histograms by 1. counting the number of items in each bin (number of steps*number of arrays) 1. scales according to bond (1/\(r^2\)) or angle (1/sin(\(\phi\))) 1. normalizes to make the area equal to 1.</p>
-<p>check: tools/src/libtools/histogram.cc for generating histograms</p>
+<p>Votca generates bonded histograms by</p>
+<ol type="1">
+<li>counting the number of items in each bin (number of steps*number of arrays)</li>
+<li>scales according to bond (1/\(r^2\)) or angle (1/sin(\(\phi\)))</li>
+<li>normalizes to make the area equal to 1.</li>
+</ol>
+<p><em>check</em>: - tools/src/libtools/histogram.cc for generating histograms</p>
 <p>Does gromacs scale the bonded histograms?</p>
 
     </article>
