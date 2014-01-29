@@ -47,7 +47,11 @@ for f in ${plots[@]}; do
 	let j=$j+1
     else
 	plcomms=${plcomms}${q}${f}${q}" using 1:2 t 'avg'"
-	gplot -c "set style data line" -o "`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/' | sed 's/-avg/-all/g' `" --term "pdfcairo font \"Gill Sans,16\" lw 2 rounded"  -t "${f%_avg.xvg}" -- ${plcomms}
+	if [[ ${f} == "dih_CN-CA-KC-KN_avg.xvg" ]]; then
+	    gplot -c "set yrange [0:1]" -c "set style data line" -o "`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/' | sed 's/-avg/-all/g' `" --term "pdfcairo font \"Gill Sans,16\" lw 2 rounded"  -t "${f%_avg.xvg}" -- ${plcomms}
+	else
+	    gplot -c "set style data line" -o "`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/' | sed 's/-avg/-all/g' `" --term "pdfcairo font \"Gill Sans,16\" lw 2 rounded"  -t "${f%_avg.xvg}" -- ${plcomms}
+	fi
 	plcomms=""
 	j=1
     fi
