@@ -56,7 +56,7 @@ for f in ${flist[@]}; do
     done
     outname="`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/'`"
     pdflist+=("$outname")
-    if [[ ${f} == "dih_CN-CA-KC-KN_avg.xvg" ]]; then
+    if [[ ${f} == "dih_CN-CA-KC-KN_avg.xvg" ]] && [[ ! "${dirlist[@]}" =~ $vacdir ]] ; then
 	gplot -c "set yrange[0:1]" -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
     else
 	gplot -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
@@ -81,7 +81,6 @@ for f in ${plots[@]}; do
     else
 	plcomms=${plcomms}${q}${histdir}/${f}${q}${u}"'avg'"
 	outname=`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/' | sed 's/avg/all/'`
-	pdflist+=("$outname")
 	if [[ ${f} == "dih_CN-CA-KC-KN_avg.xvg" ]]; then
 	    gplot -c "set yrange [0:1]" -c "set style data line" -o "${outname}" --term "${terminal}" -t "${f%_avg.xvg}" -- ${plcomms}
 	else
