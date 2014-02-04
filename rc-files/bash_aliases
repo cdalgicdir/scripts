@@ -47,6 +47,7 @@ alias xpsave="VBoxManage controlvm WinXP savestate"
 alias xpoff="VBoxManage controlvm WinXP acpipowerbutton"
 alias off="xset dpms force off"
 alias pymol="export PYTHONPATH=/opt/pymol/modules:$PYTHONPATH && pymol"
+export SCHRODINGER=/opt/schrodinger
 alias maestro="$SCHRODINGER/maestro %f &"
 alias matlab="$HOME/matlabR2013a/bin/matlab -desktop &"
 alias dsvisualizer="/home/cdalgicdir/Accelrys/DiscoveryStudio31/bin/DiscoveryStudio31 &"

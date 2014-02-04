@@ -863,8 +863,8 @@ proc draw_arrow {mol start end} {
     # an arrow is made of a cylinder and a cone
     draw color red
     set middle [vecadd $start [vecscale 0.9 [vecsub $end $start]]]
-    graphics $mol cylinder $start $middle radius 0.25
-    graphics $mol cone $middle $end radius 1
+    graphics $mol cylinder $start $middle radius 0.25 resolution 100
+    graphics $mol cone $middle $end radius 1 resolution 100
 }
 
 proc draw_arrow_protcom {mol pullvec} {
