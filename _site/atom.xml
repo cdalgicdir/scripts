@@ -4,12 +4,81 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-01-29T14:42:49+02:00</updated>
+ <updated>2014-02-04T15:26:29+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Study Bootstrap</title>
+   <link href="/2014/02/04/study-bootstrap.html"/>
+   <updated>2014-02-04T00:00:00+02:00</updated>
+   <id>/2014/02/04/study-bootstrap</id>
+    
+   <category term="/research/categories.html#study" label="study"/>
+   
+   <content type="html">&lt;h3 id=&quot;bootstrap-method&quot;&gt;Bootstrap Method&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Bootstrapping is a resampling technique that can be applied to estimate the uncertainty of a quantity A(a\(_1\), …, a\(_n\)) which is computed from a large set of n observations a\(_l\) (l ) 1, …, n). (from hub2010-gwham paper)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;From An Introduction to the Bootstrap by Efron &amp;amp; Tibshirani&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src=&quot;/research/images/papers-images/bootstrap.png&quot; alt=&quot;Bootstrap algorithm&quot;&gt;&lt;figcaption&gt;Bootstrap algorithm&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;figure&gt;
+&lt;img src=&quot;/research/images/papers-images/bootstrap-schematics.png&quot; alt=&quot;Bootstrap schematics&quot;&gt;&lt;figcaption&gt;Bootstrap schematics&lt;/figcaption&gt;
+&lt;/figure&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Papers Hub2010 Gwham</title>
+   <link href="/2014/02/04/papers-hub2010-gwham.html"/>
+   <updated>2014-02-04T00:00:00+02:00</updated>
+   <id>/2014/02/04/papers-hub2010-gwham</id>
+    
+   <category term="/research/categories.html#papers" label="papers"/>
+   
+   <content type="html">&lt;h3 id=&quot;g_wham-a-free-weighted-histogram-analysis-implementation-including-robust-error-and-autocorrelation-estimates&quot;&gt;g_wham: A Free Weighted Histogram Analysis Implementation Including Robust Error and Autocorrelation Estimates&lt;/h3&gt;
+&lt;h4 id=&quot;jochen-s.-hub-bert-l.-de-groot-and-david-van-der-spoel&quot;&gt;Jochen S. Hub, Bert L. de Groot, and David van der Spoel&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;the idea of WHAM is to estimate the statistical uncertainty of the unbiased probability distribution given the umbrella histograms, and subsequently to compute the PMF that corresponds to the smallest uncertainty.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;three-methods-to-calculate-uncertainties-in-the-pmf&quot;&gt;Three methods to calculate uncertainties in the PMF:&lt;/h4&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;“bootstrapping of hypothetical trajectories based on the umbrella histograms together with the respective autocorrelation time”
+&lt;ul&gt;
+&lt;li&gt;each window is run once and the corresponding trajectory is bootstrapped (new trajectories are generated)&lt;/li&gt;
+&lt;li&gt;provides an accurate error estimate if (and only if) the histograms are sufficiently converged.&lt;/li&gt;
+&lt;/ul&gt;
+-&lt;/li&gt;
+&lt;li&gt;“by bootstrapping complete histograms”
+&lt;ul&gt;
+&lt;li&gt;where an umbrella window is simulated multiple times each with different initial configurations. Then the histograms are pooled and a group of “complete histograms” is generated. Each histogram (including the multiple runs for each window) is treated as an “individual observation” and a new set of Nw histograms are selected out of this “complete histograms” group, where multiple selections are allowed. Compared to method 1, no new trajectories or histograms are generated in this method, instead the already available histograms are bootstrapped.&lt;/li&gt;
+&lt;li&gt;better for limited sampling&lt;/li&gt;
+&lt;li&gt;the probability of choosing one histogram out of n histograms is 1/n. (n=Nw*sum(m_i) where m_i is the number of multiple runs for ith window) one should be careful that the bootstrapped histograms should overlap. To this end, the histograms can be grouped along the reaction coordinate and each group can be separately bootstrapped to avoid hollow regions in the reaction coordinate.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;“by using the Bayesian bootstrap of complete histograms, that is, by assigning random weights to the histograms.”
+&lt;ul&gt;
+&lt;li&gt;just like method 2, but instead assigns random weights to all histograms within each bootstrap to avoid non-overlapping of histograms. So the probability of choosing a histogram becomes w_i instead of 1/n.&lt;/li&gt;
+&lt;li&gt;“the continuous weights w_i are almost never exactly zero” so that a gap along the reaction coordinate using the set of bootstrapped histograms is avoided.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;If the histograms are affected by long autocorrelations, as frequently occurrs in simulations of large biomolecules, methods ii and iii provide a more accurate error estimate.&amp;quot;&lt;/li&gt;
+&lt;li&gt;“In nonhomogeneous systems such as a protein channel or a lipid membrane surrounded by bulk water, the autocorrelation times may substantially vary along the reaction coordinate and thus not cancel from the WHAM equations.”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;notes&quot;&gt;NOTES:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;If the molecules have slow motions so that the simulation cannot sample all the configurations, then the suggestion is to sample the same window multiple times using different initial configurations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure&gt;
+&lt;img src=&quot;/research/images/papers-images/hub2010-wham.png&quot; alt=&quot;Obtaining unbiased probability distribution through WHAM&quot;&gt;&lt;figcaption&gt;Obtaining unbiased probability distribution through WHAM&lt;/figcaption&gt;
+&lt;/figure&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Cg Votca Bonded Histogram</title>

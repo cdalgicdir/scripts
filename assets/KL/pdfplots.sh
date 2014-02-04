@@ -33,6 +33,9 @@ vacdir="$nKLhome/vac-excl-nocharge"
 histdir='histograms'
 #cd ${histdir}
 
+dirlist=("." "$HOME/SIMS/KL/map/genitp/140129_cg-fixLdih" "$tetdir" "$vacdir")
+tlist=("cg" "cg-nopair" "tetramer" "vacuum-excl")
+
 ###################################################################
 # Plot Comparisons of Averages
 ###################################################################
@@ -43,9 +46,6 @@ q="'"
 u=" using 1:2 with line title "
 terminal="pdfcairo font \"Gill Sans,16\" lw 3 rounded"
 pdflist=()
-
-dirlist=("." "$HOME/SIMS/KL/map/genitp/140129_cg-fixLdih" "$tetdir" "$vacdir")
-tlist=("cg" "cg-nopair" "tetramer" "vacuum-excl")
 
 for f in ${flist[@]}; do
     plcomms=""

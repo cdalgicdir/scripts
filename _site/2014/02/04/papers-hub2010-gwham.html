@@ -5,7 +5,7 @@
       type="image/ico" 
       href="/research/ico/favicon.ico">
   <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-  <title>Cg Votca Bonded Histogram</title>
+  <title>Papers Hub2010 Gwham</title>
   <meta name="author" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- CSS Stylesheets (alternate sheets toggled with javascript or browsers supporting rel='alternative stylesheet') -->
@@ -85,7 +85,7 @@
     <div class="container"> <!-- Responsive grid layout --> 
 
       <header class="jumbotron">
-<h4 class="entry-title">Cg Votca Bonded Histogram</h4>
+<h4 class="entry-title">Papers Hub2010 Gwham</h4>
   <h5></h5>
 </header>
 
@@ -93,18 +93,42 @@
 <div class="row">
   <div class="span8">
     <article>
-    <h2 id="calculating-bonded-histograms-using-votca">Calculating bonded histograms using Votca</h2>
-<p>Votca generates bonded histograms by</p>
+    <h3 id="g_wham-a-free-weighted-histogram-analysis-implementation-including-robust-error-and-autocorrelation-estimates">g_wham: A Free Weighted Histogram Analysis Implementation Including Robust Error and Autocorrelation Estimates</h3>
+<h4 id="jochen-s.-hub-bert-l.-de-groot-and-david-van-der-spoel">Jochen S. Hub, Bert L. de Groot, and David van der Spoel</h4>
+<blockquote>
+<p>the idea of WHAM is to estimate the statistical uncertainty of the unbiased probability distribution given the umbrella histograms, and subsequently to compute the PMF that corresponds to the smallest uncertainty.</p>
+</blockquote>
+<h4 id="three-methods-to-calculate-uncertainties-in-the-pmf">Three methods to calculate uncertainties in the PMF:</h4>
 <ol type="1">
-<li>counting the number of items in each bin (number of steps*number of arrays)</li>
-<li>scales according to bond (1/\(r^2\)) or angle (1/sin(\(\phi\)))</li>
-<li>normalizes to make the area equal to 1.</li>
-</ol>
-<p><em>check</em>:</p>
+<li>“bootstrapping of hypothetical trajectories based on the umbrella histograms together with the respective autocorrelation time”
 <ul>
-<li>tools/src/libtools/histogram.cc for generating histograms</li>
+<li>each window is run once and the corresponding trajectory is bootstrapped (new trajectories are generated)</li>
+<li>provides an accurate error estimate if (and only if) the histograms are sufficiently converged.</li>
 </ul>
-<p>Does gromacs scale the bonded histograms?</p>
+-</li>
+<li>“by bootstrapping complete histograms”
+<ul>
+<li>where an umbrella window is simulated multiple times each with different initial configurations. Then the histograms are pooled and a group of “complete histograms” is generated. Each histogram (including the multiple runs for each window) is treated as an “individual observation” and a new set of Nw histograms are selected out of this “complete histograms” group, where multiple selections are allowed. Compared to method 1, no new trajectories or histograms are generated in this method, instead the already available histograms are bootstrapped.</li>
+<li>better for limited sampling</li>
+<li>the probability of choosing one histogram out of n histograms is 1/n. (n=Nw*sum(m_i) where m_i is the number of multiple runs for ith window) one should be careful that the bootstrapped histograms should overlap. To this end, the histograms can be grouped along the reaction coordinate and each group can be separately bootstrapped to avoid hollow regions in the reaction coordinate.</li>
+</ul></li>
+<li>“by using the Bayesian bootstrap of complete histograms, that is, by assigning random weights to the histograms.”
+<ul>
+<li>just like method 2, but instead assigns random weights to all histograms within each bootstrap to avoid non-overlapping of histograms. So the probability of choosing a histogram becomes w_i instead of 1/n.</li>
+<li>“the continuous weights w_i are almost never exactly zero” so that a gap along the reaction coordinate using the set of bootstrapped histograms is avoided.</li>
+</ul></li>
+</ol>
+<ul>
+<li>If the histograms are affected by long autocorrelations, as frequently occurrs in simulations of large biomolecules, methods ii and iii provide a more accurate error estimate.&quot;</li>
+<li>“In nonhomogeneous systems such as a protein channel or a lipid membrane surrounded by bulk water, the autocorrelation times may substantially vary along the reaction coordinate and thus not cancel from the WHAM equations.”</li>
+</ul>
+<h3 id="notes">NOTES:</h3>
+<ul>
+<li>If the molecules have slow motions so that the simulation cannot sample all the configurations, then the suggestion is to sample the same window multiple times using different initial configurations.</li>
+</ul>
+<figure>
+<img src="/research/images/papers-images/hub2010-wham.png" alt="Obtaining unbiased probability distribution through WHAM"><figcaption>Obtaining unbiased probability distribution through WHAM</figcaption>
+</figure>
 
     </article>
   </div>
@@ -113,7 +137,7 @@
 	  <p><i class="icon-list"></i> Posted in
     
       <a rel="dc:subject" class="category" 
-         href="/research/categories.html#cg">cg</a>
+         href="/research/categories.html#papers">papers</a>
     
     </p>
 
@@ -121,29 +145,33 @@
     
     <!-- http://schema.org/BlogPosting/keywords -->
     <a rel="og:tag" class="tag" 
-       href="/research/tags.html#CG">#CG</a>, 
+       href="/research/tags.html#papers">#papers</a>, 
     
     <!-- http://schema.org/BlogPosting/keywords -->
     <a rel="og:tag" class="tag" 
-       href="/research/tags.html#votca">#votca</a>, 
+       href="/research/tags.html#g_wham">#g_wham</a>, 
     
     <!-- http://schema.org/BlogPosting/keywords -->
     <a rel="og:tag" class="tag" 
-       href="/research/tags.html#histogram">#histogram</a>
+       href="/research/tags.html#umbrella+sampling">#umbrella sampling</a>, 
+    
+    <!-- http://schema.org/BlogPosting/keywords -->
+    <a rel="og:tag" class="tag" 
+       href="/research/tags.html#WHAM">#WHAM</a>
     </p>
 
 <aside prefix="dc: http://purl.org/dc/terms/">
   <p> <i class="icon-calendar"></i>
-<time datetime="2014-01-29T00:00:00+02:00" 
-      property="dc:created">29 Jan 2014</time></p>
+<time datetime="2014-02-04T00:00:00+02:00" 
+      property="dc:created">04 Feb 2014</time></p>
 
 </br>
 
   
-  <p><a class="btn btn-mini showtooltip" title="Meeting Christine" rel="prev" href='/research/2014/01/28/meeting-christine.html'><i class="icon-chevron-left"></i>previous</a>
+  <p><a class="btn btn-mini showtooltip" title="Cg Votca Bonded Histogram" rel="prev" href='/research/2014/01/29/CG-votca-bonded-histogram.html'><i class="icon-chevron-left"></i>previous</a>
   
   
-  <a class="btn btn-mini showtooltip" title="Papers Hub2010 Gwham" rel="next" href='/research/2014/02/04/papers-hub2010-gwham.html'>next <i class="icon-chevron-right"></i></a></p>
+  <a class="btn btn-mini showtooltip" title="Study Bootstrap" rel="next" href='/research/2014/02/04/study-bootstrap.html'>next <i class="icon-chevron-right"></i></a></p>
   
 
 
@@ -185,12 +213,12 @@
       title="ctx_ver=Z39.88-2004
       &amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc
       &amp;rfr_id=info%3Asid%2Focoins.info%3Agenerator
-      &amp;rft.title=Cg Votca Bonded Histogram
+      &amp;rft.title=Papers Hub2010 Gwham
       &amp;rft.creator=
-      &amp;rft.date=2014-01-29
+      &amp;rft.date=2014-02-04
       &amp;rft.language=EN
       &amp;rft.rights=CC0
-      &amp;rft_id=/2014/01/29/CG-votca-bonded-histogram.html">
+      &amp;rft_id=/2014/02/04/papers-hub2010-gwham.html">
   </span>
 
 
