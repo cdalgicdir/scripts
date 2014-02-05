@@ -2,6 +2,8 @@
 
 hom=`pwd`
 remotedir="$HOME/remote"
+KLdir="$HOME/SIMS/KL"
+mapdir="$HOME/SIMS/KL/map/genitp"
 nKLdir="$remotedir/scratch8/n-KL"
 
 tetdir="$nKLdir/120608_KL4BbwLF/4-SIM/map"
@@ -27,14 +29,14 @@ kl2intdir="$remotedir/scratch4/130624_2KL-int/7-INT-nodistconstr/map/"
 # @HOME
 nKLhome="$HOME/SIMS/KL/n-KL-distributions"
 tetdir="$nKLhome/4KL"
-vacdir="$nKLhome/vac-excl-nocharge"
+vacdir="$nKLhome/vacuum/140205_all-cutoff"
 
 # HISTOGRAMS directory
 histdir='histograms'
 #cd ${histdir}
 
-dirlist=("." "$HOME/SIMS/KL/map/genitp/140129_cg-fixLdih" "$tetdir" "$vacdir")
-tlist=("cg" "cg-nopair" "tetramer" "vacuum-excl")
+dirlist=("." "$mapdir/140129_cg-ii4pair-match" "$tetdir" "$vacdir")
+tlist=("cg-bbdih" "cg-vacdih" "tetramer" "vacuum-excl")
 
 ###################################################################
 # Plot Comparisons of Averages
@@ -47,6 +49,8 @@ u=" using 1:2 with line title "
 terminal="pdfcairo font \"Gill Sans,16\" lw 3 rounded"
 pdflist=()
 
+keyleftlist=('dih_CA-CN-CA-CN_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'ang_KC-CA-CN_avg.xvg' 'ang_L-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'bond_KC-KN_avg.xvg' 'bond_CA-KC_avg.xvg')
+
 for f in ${flist[@]}; do
     plcomms=""
     for i in `seq 0 $((${#dirlist[@]}-1))`; do
@@ -58,6 +62,8 @@ for f in ${flist[@]}; do
     pdflist+=("$outname")
     if [[ ${f} == "dih_CN-CA-KC-KN_avg.xvg" ]] && [[ ! "${dirlist[@]}" =~ $vacdir ]] ; then
 	gplot -c "set yrange[0:1]" -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
+    elif [[ ${keyleftlist[@]} == *"${f}"* ]]; then
+	gplot -o "${outname}" --term "${terminal}" -c "set key left top" -t "${f%.xvg}" -- "${plcomms}"
     else
 	gplot -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
     fi
