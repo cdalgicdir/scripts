@@ -35,8 +35,8 @@ vacdir="$nKLhome/vacuum/140205_all-cutoff"
 histdir='histograms'
 #cd ${histdir}
 
-dirlist=("." "$mapdir/140129_cg-ii4pair-match" "$tetdir" "$vacdir")
-tlist=("cg-bbdih" "cg-vacdih" "tetramer" "vacuum-excl")
+dirlist=("$mapdir/140205_cg-vacBBdih-ii4psc0.25" "$mapdir/140205_cg-vacBBdih-ii4psc0.5" "$mapdir/140205_cg-vacBBdih-ii4psc0.75" "$mapdir/140205_cg-vacBBdih-ii4p")
+tlist=("ii4-scale-0.25" "ii4-scale-0.5" "ii4-scale-0.75" "ii4-scale-1")
 
 ###################################################################
 # Plot Comparisons of Averages
@@ -58,6 +58,7 @@ for f in ${flist[@]}; do
 	t=${tlist[$i]}
 	plcomms="${plcomms}""${q}${dir}/${f}${q}${u}${q}${t}${q},"
     done
+    echo $plcomms
     outname="`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/'`"
     pdflist+=("$outname")
     if [[ ${f} == "dih_CN-CA-KC-KN_avg.xvg" ]] && [[ ! "${dirlist[@]}" =~ $vacdir ]] ; then
@@ -74,6 +75,8 @@ done
 # Plot All
 ###################################################################
 
+plotall=0
+if [[ $plotall == 1 ]]; then
 plots=`egrep "^hist [badi]" boltzmann.comms | awk '{print $2}'`
 
 q="'"
@@ -96,8 +99,8 @@ for f in ${plots[@]}; do
 	plcomms=""
 	j=1
     fi
-
 done
+fi
 
 mkdir -p report
 for pdf in ${pdflist[@]}; do
