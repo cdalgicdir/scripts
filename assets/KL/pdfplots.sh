@@ -58,7 +58,6 @@ for f in ${flist[@]}; do
 	t=${tlist[$i]}
 	plcomms="${plcomms}""${q}${dir}/${f}${q}${u}${q}${t}${q},"
     done
-    echo $plcomms
     outname="`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/'`"
     pdflist+=("$outname")
     if [[ ${f} == "dih_CN-CA-KC-KN_avg.xvg" ]] && [[ ! "${dirlist[@]}" =~ $vacdir ]] ; then
