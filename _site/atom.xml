@@ -4,12 +4,36 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-02-04T15:30:59+02:00</updated>
+ <updated>2014-02-05T15:10:20+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Klcg</title>
+   <link href="/2014/02/05/KLcg.html"/>
+   <updated>2014-02-05T00:00:00+02:00</updated>
+   <id>/2014/02/05/KLcg</id>
+    
+   <category term="/research/categories.html#meeting" label="meeting"/>
+   
+   <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;replica 298 K gen distr.&lt;/li&gt;
+&lt;li&gt;add all reverse distributions to the report&lt;/li&gt;
+&lt;li&gt;KLatm: take the center 8 residues and consider their CoM for angle calculation
+&lt;ul&gt;
+&lt;li&gt;also do it for CoM distance&lt;/li&gt;
+&lt;li&gt;use the principal axis&lt;/li&gt;
+&lt;li&gt;first compare the previous method vs this new one&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Next meeting is on 12 Feb Wednesday 12.30 am&lt;/p&gt;
+&lt;p&gt;Next meeting discuss measure of hydrophobic contacts: SASA or counting no. of contacts.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Study Bootstrap</title>
