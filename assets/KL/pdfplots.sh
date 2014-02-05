@@ -35,8 +35,8 @@ vacdir="$nKLhome/vacuum/140205_all-cutoff"
 histdir='histograms'
 #cd ${histdir}
 
-dirlist=("$mapdir/140205_cg-vacBBdih-ii4psc0.25" "$mapdir/140205_cg-vacBBdih-ii4psc0.5" "$mapdir/140205_cg-vacBBdih-ii4psc0.75" "$mapdir/140205_cg-vacBBdih-ii4p")
-tlist=("ii4-scale-0.25" "ii4-scale-0.5" "ii4-scale-0.75" "ii4-scale-1")
+dirlist=("$mapdir/140205_cg-vacBBdih-ii4psc0.25" "$mapdir/140205_cg-vacBBdih-ii4psc0.5" "$mapdir/140205_cg-vacBBdih-ii4psc0.6" "$mapdir/140205_cg-vacBBdih-ii4psc0.75" "$mapdir/140205_cg-vacBBdih-ii4p")
+tlist=("ii4-scale-0.25" "ii4-scale-0.5" "ii4-scale-0.6" "ii4-scale-0.75" "ii4-scale-1")
 
 ###################################################################
 # Plot Comparisons of Averages
@@ -49,7 +49,7 @@ u=" using 1:2 with line title "
 terminal="pdfcairo font \"Gill Sans,16\" lw 3 rounded"
 pdflist=()
 
-keyleftlist=('dih_CA-CN-CA-CN_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'ang_KC-CA-CN_avg.xvg' 'ang_L-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'bond_KC-KN_avg.xvg' 'bond_CA-KC_avg.xvg')
+keyleftlist=('dih_CA-CN-CA-CN_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'ang_KC-CA-CN_avg.xvg' 'ang_CN-CA-L_avg.xvg' 'ang_L-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'bond_KC-KN_avg.xvg' 'bond_CA-KC_avg.xvg')
 
 for f in ${flist[@]}; do
     plcomms=""
