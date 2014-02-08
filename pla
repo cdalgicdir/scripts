@@ -31,7 +31,8 @@ plot () {
 
 printcommands () {
     if [[ $noplottab == true ]]; then
-	echo "plot $plotfiles" | sed 's/,/,\\\n /g'
+	#echo "plot $plotfiles" | sed 's/,/,\\\n /g'
+	echo -e "plot\\\\\n $plotfiles" | sed 's/,/,\\\n /g'
     else
 	echo "plot $plotfiles"
     fi
