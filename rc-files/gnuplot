@@ -57,11 +57,13 @@ set style line 7 lt 7 lc rgb 'cyan'          lw 3
 #
 pdf="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 3 rounded"
 out="set output \"out.pdf\";rep;set output"
-pdfout="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 3 rounded;set output \"out.pdf\";rep;set output"
+pdfout="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 3 rounded;set output \"out.pdf\";rep;set output;set term wxt"
+po="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 3 rounded;set output \"out.pdf\";rep;set output;set term wxt"
 #set terminal pdfcairo font "Gill Sans,16" linewidth 3 rounded;set output "out.pdf";rep;set output
 pngout="set terminal pngcairo size 800,600 enhanced font 'Gill Sans,16' linewidth 3 rounded;set output \"out.png\";rep;set output"
 dih="set xlabel '{/Symbol F}_{PBBP}';set ylabel 'P ({/Symbol F})';set xtics 60;set xrange [-180:180]"
 pmf="set xlabel 'separation distance (nm)';set ylabel 'V(r) (kJ/mol)'"
+pot="set xlabel 'r (nm)';set ylabel 'V(r) (kJ/mol)'"
 ll="set style data line"
 #
 #set xtics pi

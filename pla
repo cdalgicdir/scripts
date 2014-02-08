@@ -27,9 +27,9 @@ plot () {
 
 printcommands () {
     if [[ $noplottab == true ]]; then
-	echo "$plotfiles" | sed 's/,/,\\\n /g'
+	echo "plot $plotfiles" | sed 's/,/,\\\n /g'
     else
-	echo "$plotfiles"
+	echo "plot $plotfiles"
     fi
 }
 
