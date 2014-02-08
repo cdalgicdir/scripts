@@ -15,14 +15,15 @@ potfile="*.pot.*"
 tabfile="*table*xvg"
 max=30
 label=1
-keyout=''
+keypos=''
 plotfiles=''
 terminal='set terminal wxt'
 range=[:][:]
 userset="false"
+doshift=0
 
 plot () {
-    gplot $output  -c "${extra}" -c "$keyout" -c "$terminal" -r $range -- "$plotfiles"
+    gplot $output  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
 }
 
 printcommands () {
@@ -107,7 +108,15 @@ while [[ $# -ge 1 ]]; do
 	    shift 1;;
 
 	-keyout|-ko)
-	    keyout='set key out'
+	    keypos='set key out'
+	    shift 1;;
+
+	-keybot|-kb)
+	    keypos='set key right bottom'
+	    shift 1;;
+
+	-keyleft|-kl)
+	    keypos='set key left'
 	    shift 1;;
 
 	-dih)
@@ -131,6 +140,11 @@ while [[ $# -ge 1 ]]; do
 	    echo "Generating out.pdf"
 	    shift 1;;
 
+	-shift)
+	    doshift=1
+	    keypos='set key right bottom'
+	    shift;;
+
 	[0-9]|[0-9][0-9])
 	    using=" u 1:${1} "
 	    userset="true"
@@ -147,16 +161,27 @@ while [[ $# -ge 1 ]]; do
     esac
 done
 
+# shift to zero for PMFs (only works for the second column
+if [[ $doshift == 1 ]]; then
+    shiftlist=()
+    for f in ${filelist[@]}; do
+	shift=`tail -1 ${f} | awk '{print $2}'`
+	shiftlist+=("$shift")
+    done
+fi
+
+# linetypes
 if [ $linetype == "lines" ] || [ $linetype == "l" ] ; then
     with=" with $linetype lw $lw "
 elif [ $linetype == "points" ] || [ $linetype == "p" ]; then
     with=" with $linetype ps $pointsize "
+elif [[ $linetype == "yerror" ]]; then
+    using=" u 1:2:3 "
 else
     with=" with $linetype "
 fi
 
-[[ $linetype == "yerror" ]] && using=" u 1:2:3 "
-
+i=0
 for file in ${filelist[@]}
 do
     if [[ -f $file ]]; then
@@ -168,7 +193,8 @@ do
 	    fi
 	fi
 	#plotfiles=$plotfiles$q$file$q$using$with't '$q$file$q',' 
-	plotfiles=$plotfiles$q$file$q$using$with
+	[[ $doshift == 1 ]] && theshift=${shiftlist[$i]} && using=" u 1:(\$2-$theshift) " && let i=i+1
+	plotfiles=${plotfiles}${q}${file}${q}${using}${with}
 	if [[ $label == 1 ]]; then
 	    plotfiles=$plotfiles't '$q$file$q',' 
 	else
