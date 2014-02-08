@@ -21,6 +21,9 @@ terminal='set terminal wxt'
 range=[:][:]
 userset="false"
 doshift=0
+entcorr=0
+kT=2.4777 #for T=298K
+#kT=2.4943 #for T=300
 
 plot () {
     gplot $output  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
@@ -145,6 +148,10 @@ while [[ $# -ge 1 ]]; do
 	    keypos='set key right bottom'
 	    shift;;
 
+	-entcorr|-ec)
+	    doentcorr=1
+	    shift;;
+
 	[0-9]|[0-9][0-9])
 	    using=" u 1:${1} "
 	    userset="true"
@@ -164,8 +171,11 @@ done
 # shift to zero for PMFs (only works for the second column
 if [[ $doshift == 1 ]]; then
     shiftlist=()
+    shiftRlist=()
     for f in ${filelist[@]}; do
+	shiftR=`tail -1 ${f} | awk '{print $1}'`
 	shift=`tail -1 ${f} | awk '{print $2}'`
+	shiftRlist+=("$shiftR")
 	shiftlist+=("$shift")
     done
 fi
@@ -192,14 +202,24 @@ do
 		range="[:][:2]"
 	    fi
 	fi
-	#plotfiles=$plotfiles$q$file$q$using$with't '$q$file$q',' 
-	[[ $doshift == 1 ]] && theshift=${shiftlist[$i]} && using=" u 1:(\$2-$theshift) " && let i=i+1
+	# shift to zero and entropic correction (for second cols only)
+	if [[ $doshift == 1 ]] && [[ $doentcorr == 0 ]]; then
+	    theshift=${shiftlist[$i]} 
+	    using=" u 1:(\$2-$theshift) "
+	elif [[ $doshift == 0 ]] && [[ $doentcorr == 1 ]]; then
+	    using=" u 1:(\$2+2*$kT*log(\$1)) "
+	elif [[ $doshift == 1 ]] && [[ $doentcorr == 1 ]]; then
+	    theshift=${shiftlist[$i]} 
+	    theshiftR=${shiftRlist[$i]} 
+	    using=" u 1:(\$2+2*$kT*(log(\$1/$theshiftR))-$theshift) "
+	fi
 	plotfiles=${plotfiles}${q}${file}${q}${using}${with}
 	if [[ $label == 1 ]]; then
 	    plotfiles=$plotfiles't '$q$file$q',' 
 	else
 	    plotfiles=$plotfiles'not,'
 	fi
+	let i=i+1
     fi
 done
 
