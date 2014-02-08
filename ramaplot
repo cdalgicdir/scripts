@@ -196,8 +196,13 @@ do
 
 	    -png)
 		if [ -z $2 ]; then
-			echo "Error: Please enter a filename"
-			exit -1
+			fname="${file%.corr}.png"
+			save="-o $fname"
+			terminal="set terminal pngcairo font \"Gill Sans,32\" enhanced size 3000,3000 crop"
+			echo "Saving to: " $fname
+			shift
+			#echo "Error: Please enter a filename"
+			#exit -1
 		else
 			size="set size 0.5,0.5"
 			[[ ${2: -4} == '.png' ]] && fname=$2 || fname="$2.png"

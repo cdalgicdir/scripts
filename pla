@@ -85,7 +85,7 @@ while [[ $# -ge 1 ]]; do
 	    noplottab=false
 	    shift 1;;
 
-	-ns | -nops)
+	-nt | -nopt)
 	    noplot=true
 	    noplottab=true
 	    shift 1;;
@@ -150,6 +150,12 @@ while [[ $# -ge 1 ]]; do
 
 	-entcorr|-ec)
 	    doentcorr=1
+	    shift;;
+	    
+	-pmf)
+	    doshift=1
+	    doentcorr=1
+	    keypos='set key right bottom'
 	    shift;;
 
 	[0-9]|[0-9][0-9])
