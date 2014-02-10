@@ -49,7 +49,9 @@ u=" using 1:2 with line title "
 terminal="pdfcairo font \"Gill Sans,16\" lw 3 rounded"
 pdflist=()
 
-keyleftlist=('dih_CA-CN-CA-CN_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'ang_KC-CA-CN_avg.xvg' 'ang_CN-CA-L_avg.xvg' 'ang_L-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'bond_KC-KN_avg.xvg' 'bond_CA-KC_avg.xvg')
+keyleftlist=('dih_CA-CN-CA-CN_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'ang_KC-CA-CN_avg.xvg' 'ang_CN-CA-L_avg.xvg' 'ang_L-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'bond_KC-KN_avg.xvg' 'bond_CA-KC_avg.xvg' 'dih_L-CA-CN-CA_avg.xvg' 'dih_KC-CA-CN-CA_avg.xvg')
+
+yrangelist=('dih_CN-CA-KC-KN_avg.xvg' 'dih_KN-KC-CA-CN_avg.xvg')
 
 for f in ${flist[@]}; do
     plcomms=""
@@ -60,7 +62,7 @@ for f in ${flist[@]}; do
     done
     outname="`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/'`"
     pdflist+=("$outname")
-    if [[ ${f} == "dih_CN-CA-KC-KN_avg.xvg" ]] && [[ ! "${dirlist[@]}" =~ $vacdir ]] ; then
+    if [[ ${f} == *${yrangelist[@]}* ]] && [[ ! "${dirlist[@]}" =~ $vacdir ]] ; then
 	gplot -c "set yrange[0:1]" -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
     elif [[ ${keyleftlist[@]} == *"${f}"* ]]; then
 	gplot -o "${outname}" --term "${terminal}" -c "set key left top" -t "${f%.xvg}" -- "${plcomms}"
