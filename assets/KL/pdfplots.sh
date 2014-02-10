@@ -62,7 +62,7 @@ for f in ${flist[@]}; do
     done
     outname="`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/'`"
     pdflist+=("$outname")
-    if [[ ${f} == *${yrangelist[@]}* ]] && [[ ! "${dirlist[@]}" =~ $vacdir ]] ; then
+    if [[ ${yrangelist[@]} == *${f}*]] && [[ ! "${dirlist[@]}" =~ $vacdir ]] ; then
 	gplot -c "set yrange[0:1]" -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
     elif [[ ${keyleftlist[@]} == *"${f}"* ]]; then
 	gplot -o "${outname}" --term "${terminal}" -c "set key left top" -t "${f%.xvg}" -- "${plcomms}"
