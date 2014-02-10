@@ -35,14 +35,14 @@ vacdir="$nKLhome/vacuum/140205_all-cutoff"
 histdir='histograms'
 #cd ${histdir}
 
-dirlist=("$mapdir/140205_cg-vacBBdih-ii4psc0.25" "$mapdir/140205_cg-vacBBdih-ii4psc0.5" "$mapdir/140205_cg-vacBBdih-ii4psc0.6" "$mapdir/140205_cg-vacBBdih-ii4psc0.75" "$mapdir/140205_cg-vacBBdih-ii4p")
-tlist=("ii4-scale-0.25" "ii4-scale-0.5" "ii4-scale-0.6" "ii4-scale-0.75" "ii4-scale-1")
+dirlist=("." "$tetdir" "$vacdir")
+tlist=("cg-wall" "tetramer" "vac-excl")
 
 ###################################################################
 # Plot Comparisons of Averages
 ###################################################################
 
-flist=('bond_CN-CA_avg.xvg' 'bond_CA-CN_avg.xvg' 'bond_CA-L_avg.xvg' 'bond_CA-KC_avg.xvg' 'bond_KC-KN_avg.xvg' 'ang_CN-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CN-CA-L_avg.xvg' 'ang_L-CA-CN_avg.xvg' 'ang_CN-CA-KC_avg.xvg' 'ang_KC-CA-CN_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CN-CA-KC_avg.xvg' 'dih_CN-CA-KC-KN_avg.xvg' 'dih_CA-CN-CA-L_avg.xvg' 'imp_CA-CN-CN-L_avg.xvg' 'imp_CA-CN-KC-CN_avg.xvg' 'dist_CNi-CNi4_avg.xvg')
+flist=('bond_CN-CA_avg.xvg' 'bond_CA-CN_avg.xvg' 'bond_CA-L_avg.xvg' 'bond_CA-KC_avg.xvg' 'bond_KC-KN_avg.xvg' 'ang_CN-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CN-CA-L_avg.xvg' 'ang_L-CA-CN_avg.xvg' 'ang_CN-CA-KC_avg.xvg' 'ang_KC-CA-CN_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CN-CA-KC_avg.xvg' 'dih_KC-CA-CN-CA_avg.xvg' 'dih_CN-CA-KC-KN_avg.xvg' 'dih_KN-KC-CA-CN_avg.xvg' 'dih_CA-CN-CA-L_avg.xvg' 'dih_L-CA-CN-CA_avg.xvg' 'imp_CA-CN-CN-L_avg.xvg' 'imp_CA-CN-KC-CN_avg.xvg' 'dist_CNi-CNi4_avg.xvg')
 
 q="'"
 u=" using 1:2 with line title "
