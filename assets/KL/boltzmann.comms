@@ -203,6 +203,16 @@ hist dih_CA-CN-CA-KC-5.xvg 1:dih_CA-CN-CA-KC:5
 hist dih_CA-CN-CA-KC-6.xvg 1:dih_CA-CN-CA-KC:6
 hist dih_CA-CN-CA-KC_avg.xvg 1:dih_CA-CN-CA-KC:*
 
+# KC_CA-CN-CA
+hist set scale no
+hist dih_KC-CA-CN-CA-1.xvg 1:dih_KC-CA-CN-CA:1
+hist dih_KC-CA-CN-CA-2.xvg 1:dih_KC-CA-CN-CA:2
+hist dih_KC-CA-CN-CA-3.xvg 1:dih_KC-CA-CN-CA:3
+hist dih_KC-CA-CN-CA-4.xvg 1:dih_KC-CA-CN-CA:4
+hist dih_KC-CA-CN-CA-5.xvg 1:dih_KC-CA-CN-CA:5
+hist dih_KC-CA-CN-CA-6.xvg 1:dih_KC-CA-CN-CA:6
+hist dih_KC-CA-CN-CA_avg.xvg 1:dih_KC-CA-CN-CA:*
+
 # CN-CA-KC-KN
 hist set scale no
 hist dih_CN-CA-KC-KN-1.xvg 1:dih_CN-CA-KC-KN:1
@@ -212,6 +222,16 @@ hist dih_CN-CA-KC-KN-4.xvg 1:dih_CN-CA-KC-KN:4
 hist dih_CN-CA-KC-KN-5.xvg 1:dih_CN-CA-KC-KN:5
 hist dih_CN-CA-KC-KN-6.xvg 1:dih_CN-CA-KC-KN:6
 hist dih_CN-CA-KC-KN_avg.xvg 1:dih_CN-CA-KC-KN:*
+
+# KN-KC-CA-CN
+hist set scale no
+hist dih_KN-KC-CA-CN-1.xvg 1:dih_KN-KC-CA-CN:1
+hist dih_KN-KC-CA-CN-2.xvg 1:dih_KN-KC-CA-CN:2
+hist dih_KN-KC-CA-CN-3.xvg 1:dih_KN-KC-CA-CN:3
+hist dih_KN-KC-CA-CN-4.xvg 1:dih_KN-KC-CA-CN:4
+hist dih_KN-KC-CA-CN-5.xvg 1:dih_KN-KC-CA-CN:5
+hist dih_KN-KC-CA-CN-6.xvg 1:dih_KN-KC-CA-CN:6
+hist dih_KN-KC-CA-CN_avg.xvg 1:dih_KN-KC-CA-CN:*
 
 # CA-CN-CA-L
 hist set scale no
@@ -223,6 +243,17 @@ hist dih_CA-CN-CA-L-5.xvg 1:dih_CA-CN-CA-L:5
 hist dih_CA-CN-CA-L-6.xvg 1:dih_CA-CN-CA-L:6
 hist dih_CA-CN-CA-L-7.xvg 1:dih_CA-CN-CA-L:7
 hist dih_CA-CN-CA-L_avg.xvg 1:dih_CA-CN-CA-L:*
+
+# L-CA-CN-CA
+hist set scale no
+hist dih_L-CA-CN-CA-1.xvg 1:dih_L-CA-CN-CA:1
+hist dih_L-CA-CN-CA-2.xvg 1:dih_L-CA-CN-CA:2
+hist dih_L-CA-CN-CA-3.xvg 1:dih_L-CA-CN-CA:3
+hist dih_L-CA-CN-CA-4.xvg 1:dih_L-CA-CN-CA:4
+hist dih_L-CA-CN-CA-5.xvg 1:dih_L-CA-CN-CA:5
+hist dih_L-CA-CN-CA-6.xvg 1:dih_L-CA-CN-CA:6
+hist dih_L-CA-CN-CA-7.xvg 1:dih_L-CA-CN-CA:7
+hist dih_L-CA-CN-CA_avg.xvg 1:dih_L-CA-CN-CA:*
 
 # impropers
 # CA-CN-CN-L

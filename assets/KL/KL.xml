@@ -447,17 +447,17 @@
 	  </beads>
       </angle>
       <angle>
-          <name>ang_L-CA-CN</name>
-          <beads>
-            L1 CA1 CN2
-            L2 CA4 CN5
-            L3 CA5 CN6
-            L4 CA7 CN8
-            L5 CA8 CN9
-            L6 CA11 CN12
-            L7 CA12 CN13
-            L8 CA14 CN15
-          </beads>
+	  <name>ang_L-CA-CN</name>
+	  <beads>
+	    L1 CA1 CN2
+	    L2 CA4 CN5
+	    L3 CA5 CN6
+	    L4 CA7 CN8
+	    L5 CA8 CN9
+	    L6 CA11 CN12
+	    L7 CA12 CN13
+	    L8 CA14 CN15
+	  </beads>
       </angle>
       <angle>
 	  <name>ang_CN-CA-KC</name>
@@ -471,15 +471,15 @@
 	  </beads>
       </angle>
       <angle>
-          <name>ang_KC-CA-CN</name>
-          <beads>
-            KC1 CA2 CN3
-            KC2 CA3 CN4
-            KC3 CA6 CN7
-            KC4 CA9 CN10
-            KC5 CA10 CN11
-            KC6 CA13 CN14
-          </beads>
+	  <name>ang_KC-CA-CN</name>
+	  <beads>
+	    KC1 CA2 CN3
+	    KC2 CA3 CN4
+	    KC3 CA6 CN7
+	    KC4 CA9 CN10
+	    KC5 CA10 CN11
+	    KC6 CA13 CN14
+	  </beads>
       </angle>
       <angle>
 	  <name>ang_CA-KC-KN</name>
@@ -593,7 +593,7 @@
 	    L4 CA7 CN8 CA8
 	    L5 CA8 CN9 CA9
 	    L6 CA11 CN12 CA12
-	    L7 CA12 CN13 CA13 
+	    L7 CA12 CN13 CA13
 	  </beads>
       </dihedral>
 
