@@ -74,7 +74,7 @@ done
 # Plot All
 ###################################################################
 
-plotall=0
+plotall=1
 if [[ $plotall == 1 ]]; then
 plots=`egrep "^hist [badi]" boltzmann.comms | awk '{print $2}'`
 
