@@ -1,8 +1,8 @@
 #! /bin/bash
 
-trj='$trj'
+trj='traj.xtc'
 tpr='topol.tpr'
-ndx='$ndx'
+ndx='bonded.ndx'
 
 bondlist=('CN-CA' 'CA-CN' 'CA-L' 'CA-KC' 'KC-KN')
 bondRlist=('0.2112' '0.196' '0.263' '0.259' '0.3194')
@@ -11,7 +11,7 @@ anglist=('CN-CA-CN' 'CA-CN-CA' 'CN-CA-L' 'L-CA-CN' 'CN-CA-KC' 'KC-CA-CN' 'CA-KC-
 dihlist=('CN-CA-CN-CA' 'CA-CN-CA-CN' 'CA-CN-CA-KC' 'KC-CA-CN-CA' 'CN-CA-KC-KN' 'KN-KC-CA-CN' 'CA-CN-CA-L' 'L-CA-CN-CA')
 implist=('CA-CN-CN-L' 'CA-CN-KC-CN')
 
-if [[ -f $trj ]]; then
+if [[ -e $trj ]]; then
 
 mkdir -p histograms time-data
 
