@@ -44,7 +44,7 @@
         <name>KN1</name>
         <type>KN</type>
         <mapping>KN</mapping>
-        <beads>3:LYS:CE 3:LYS:NZ 3:LYS:HZ1 3:LYS:HZ2 3:LYS:HZ3</beads>
+        <beads>3:LYS:CE 3:LYS:NZ 3:LYS:HZ1 3:LYS:HZ2</beads>
       </cg_bead>
       <cg_bead>
         <name>CN3</name>
@@ -69,7 +69,7 @@
         <name>KN2</name>
         <type>KN</type>
         <mapping>KN</mapping>
-        <beads>4:LYS:CE 4:LYS:NZ 4:LYS:HZ1 4:LYS:HZ2 4:LYS:HZ3</beads>
+        <beads>4:LYS:CE 4:LYS:NZ 4:LYS:HZ1 4:LYS:HZ2</beads>
       </cg_bead>
       <cg_bead>
         <name>CN4</name>
@@ -130,7 +130,7 @@
         <name>KN3</name>
         <type>KN</type>
         <mapping>KN</mapping>
-        <beads>7:LYS:CE 7:LYS:NZ 7:LYS:HZ1 7:LYS:HZ2 7:LYS:HZ3</beads>
+        <beads>7:LYS:CE 7:LYS:NZ 7:LYS:HZ1 7:LYS:HZ2</beads>
       </cg_bead>
       <cg_bead>
         <name>CN7</name>
@@ -191,7 +191,7 @@
         <name>KN4</name>
         <type>KN</type>
         <mapping>KN</mapping>
-        <beads>10:LYS:CE 10:LYS:NZ 10:LYS:HZ1 10:LYS:HZ2 10:LYS:HZ3</beads>
+        <beads>10:LYS:CE 10:LYS:NZ 10:LYS:HZ1 10:LYS:HZ2</beads>
       </cg_bead>
       <cg_bead>
         <name>CN10</name>
@@ -216,7 +216,7 @@
         <name>KN5</name>
         <type>KN</type>
         <mapping>KN</mapping>
-        <beads>11:LYS:CE 11:LYS:NZ 11:LYS:HZ1 11:LYS:HZ2 11:LYS:HZ3</beads>
+        <beads>11:LYS:CE 11:LYS:NZ 11:LYS:HZ1 11:LYS:HZ2</beads>
       </cg_bead>
       <cg_bead>
         <name>CN11</name>
@@ -277,7 +277,7 @@
         <name>KN6</name>
         <type>KN</type>
         <mapping>KN</mapping>
-        <beads>14:LYS:CE 14:LYS:NZ 14:LYS:HZ1 14:LYS:HZ2 14:LYS:HZ3</beads>
+        <beads>14:LYS:CE 14:LYS:NZ 14:LYS:HZ1 14:LYS:HZ2</beads>
       </cg_bead>
       <cg_bead>
         <name>CN14</name>
@@ -645,7 +645,7 @@
     </map>
     <map>
       <name>KN</name>
-      <weights>14.027 14.0067 1.008 1.008 1.008</weights>
+      <weights>14.027 14.0067 1.008 1.008</weights>
     </map>
   </maps>
 </cg_molecule>
