@@ -469,6 +469,14 @@ vals time_dih_CA-CN-CA-KC-4.xvg 1:dih_CA-CN-CA-KC:4
 vals time_dih_CA-CN-CA-KC-5.xvg 1:dih_CA-CN-CA-KC:5
 vals time_dih_CA-CN-CA-KC-6.xvg 1:dih_CA-CN-CA-KC:6
 
+# KC_CA-CN-CA
+vals time_dih_KC-CA-CN-CA-1.xvg 1:dih_KC-CA-CN-CA:1
+vals time_dih_KC-CA-CN-CA-2.xvg 1:dih_KC-CA-CN-CA:2
+vals time_dih_KC-CA-CN-CA-3.xvg 1:dih_KC-CA-CN-CA:3
+vals time_dih_KC-CA-CN-CA-4.xvg 1:dih_KC-CA-CN-CA:4
+vals time_dih_KC-CA-CN-CA-5.xvg 1:dih_KC-CA-CN-CA:5
+vals time_dih_KC-CA-CN-CA-6.xvg 1:dih_KC-CA-CN-CA:6
+
 # CN-CA-KC-KN
 vals time_dih_CN-CA-KC-KN-1.xvg 1:dih_CN-CA-KC-KN:1
 vals time_dih_CN-CA-KC-KN-2.xvg 1:dih_CN-CA-KC-KN:2
@@ -476,6 +484,14 @@ vals time_dih_CN-CA-KC-KN-3.xvg 1:dih_CN-CA-KC-KN:3
 vals time_dih_CN-CA-KC-KN-4.xvg 1:dih_CN-CA-KC-KN:4
 vals time_dih_CN-CA-KC-KN-5.xvg 1:dih_CN-CA-KC-KN:5
 vals time_dih_CN-CA-KC-KN-6.xvg 1:dih_CN-CA-KC-KN:6
+
+# KN-KC-CA-CN
+vals time_dih_KN-KC-CA-CN-1.xvg 1:dih_KN-KC-CA-CN:1
+vals time_dih_KN-KC-CA-CN-2.xvg 1:dih_KN-KC-CA-CN:2
+vals time_dih_KN-KC-CA-CN-3.xvg 1:dih_KN-KC-CA-CN:3
+vals time_dih_KN-KC-CA-CN-4.xvg 1:dih_KN-KC-CA-CN:4
+vals time_dih_KN-KC-CA-CN-5.xvg 1:dih_KN-KC-CA-CN:5
+vals time_dih_KN-KC-CA-CN-6.xvg 1:dih_KN-KC-CA-CN:6
 
 # CA-CN-CA-L
 vals time_dih_CA-CN-CA-L-1.xvg 1:dih_CA-CN-CA-L:1
@@ -485,6 +501,15 @@ vals time_dih_CA-CN-CA-L-4.xvg 1:dih_CA-CN-CA-L:4
 vals time_dih_CA-CN-CA-L-5.xvg 1:dih_CA-CN-CA-L:5
 vals time_dih_CA-CN-CA-L-6.xvg 1:dih_CA-CN-CA-L:6
 vals time_dih_CA-CN-CA-L-7.xvg 1:dih_CA-CN-CA-L:7
+
+# L-CA-CN-CA
+vals time_dih_L-CA-CN-CA-1.xvg 1:dih_L-CA-CN-CA:1
+vals time_dih_L-CA-CN-CA-2.xvg 1:dih_L-CA-CN-CA:2
+vals time_dih_L-CA-CN-CA-3.xvg 1:dih_L-CA-CN-CA:3
+vals time_dih_L-CA-CN-CA-4.xvg 1:dih_L-CA-CN-CA:4
+vals time_dih_L-CA-CN-CA-5.xvg 1:dih_L-CA-CN-CA:5
+vals time_dih_L-CA-CN-CA-6.xvg 1:dih_L-CA-CN-CA:6
+vals time_dih_L-CA-CN-CA-7.xvg 1:dih_L-CA-CN-CA:7
 
 # impropers
 # CA-CN-CN-L
