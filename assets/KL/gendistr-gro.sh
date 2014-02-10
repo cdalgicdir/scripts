@@ -34,7 +34,7 @@ for i in `seq 0 $((${#bondlist[@]}-1))`; do
 done
 
 for a in ${anglist[@]}; do
-    echo ang_${a} | g_angle -f $trj -s $tpr -n $ndx -type angle -od ang_${a}_avg.xvg -ov time_ang_${a}.xvg -all
+    echo ang_${a} | g_angle -f $trj -n $ndx -type angle -od ang_${a}_avg.xvg -ov time_ang_${a}.xvg -all
     g_analyze -f time_ang_${a}.xvg -dist ang_${a}.xvg -bw 1
     python split-hists.py ang_${a}.xvg
     rm ang_${a}.xvg
@@ -48,7 +48,7 @@ for a in ${anglist[@]}; do
 done
 
 for d in ${dihlist[@]}; do
-    echo dih_${d} | g_angle -f $trj -s $tpr -n $ndx -type dihedral -od dih_${d}_avg.xvg -ov time_dih_${d}.xvg -all
+    echo dih_${d} | g_angle -f $trj -n $ndx -type dihedral -od dih_${d}_avg.xvg -ov time_dih_${d}.xvg -all
     g_analyze -f time_dih_${d}.xvg -dist dih_${d}.xvg -bw 1
     python split-hists.py dih_${d}.xvg
     rm dih_${d}.xvg
@@ -62,7 +62,7 @@ for d in ${dihlist[@]}; do
 done
 
 for i in ${implist[@]}; do
-    echo imp_${i} | g_angle -f $trj -s $tpr -n $ndx -type improper -od imp_${i}_avg.xvg -ov time_imp_${i}.xvg -all
+    echo imp_${i} | g_angle -f $trj -n $ndx -type improper -od imp_${i}_avg.xvg -ov time_imp_${i}.xvg -all
     g_analyze -f time_imp_${i}.xvg -dist imp_${i}.xvg -bw 1
     python split-hists.py imp_${i}.xvg
     for f in `ls imp_${i}*.xvg`; do
