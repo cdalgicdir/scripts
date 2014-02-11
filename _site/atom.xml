@@ -4,12 +4,29 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-02-05T15:10:20+02:00</updated>
+ <updated>2014-02-11T23:08:15+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Meeting Klvac</title>
+   <link href="/2014/02/11/meeting-KLvac.html"/>
+   <updated>2014-02-11T00:00:00+02:00</updated>
+   <id>/2014/02/11/meeting-KLvac</id>
+    
+   <category term="/research/categories.html#meeting" label="meeting"/>
+   
+   <content type="html">&lt;h3 id=&quot;section&quot;&gt;14-02-12&lt;/h3&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;after mapping atomistic interface, calculate the position of interface using density profiles, then measure the distance of L grains to the interface. invert to get the potential&lt;/li&gt;
+&lt;li&gt;smooth and fit the deepest curve for dist-CNi-CNi4 atomistic, invert and do cg sim.&lt;/li&gt;
+&lt;li&gt;check error analysis, block averaging for end-to-end distance of KL in vacuum (atm)&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Klcg</title>
