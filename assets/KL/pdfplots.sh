@@ -91,7 +91,7 @@ for f in ${plots[@]}; do
     else
 	plcomms=${plcomms}${q}${histdir}/${f}${q}${u}"'avg'"
 	outname=`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/' | sed 's/avg/all/'`
-	if [[ ${f} == "dih_CN-CA-KC-KN_avg.xvg" ]]; then
+	if [[ "${yrangelist[@]}" =~ ${f} ]]; then
 	    gplot -c "set yrange [0:1]" -c "set style data line" -o "${outname}" --term "${terminal}" -t "${f%_avg.xvg}" -- ${plcomms}
 	else
 	    gplot -c "set style data line" -o "${outname}" --term "${terminal}" -t "${f%_avg.xvg}" -- ${plcomms}
