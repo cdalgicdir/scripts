@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-02-11T23:08:15+02:00</updated>
+ <updated>2014-02-12T14:07:53+02:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -29,10 +29,25 @@
  </entry>
  
  <entry>
-   <title>Klcg</title>
-   <link href="/2014/02/05/KLcg.html"/>
+   <title>Klcg Wall</title>
+   <link href="/2014/02/11/KLcg-wall.html"/>
+   <updated>2014-02-11T00:00:00+02:00</updated>
+   <id>/2014/02/11/KLcg-wall</id>
+    
+   <category term="/research/categories.html#klcg" label="klcg"/>
+   
+   <content type="html">&lt;h3 id=&quot;wall&quot;&gt;Wall&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Decreasing the depth of the wall-L intrx to ~11 kJ/mol distorts the helical structure (with BB dihs from vacuum-excluded case, and pair intrxn inverse of tetramer)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Meeting Klcg</title>
+   <link href="/2014/02/05/meeting-KLcg.html"/>
    <updated>2014-02-05T00:00:00+02:00</updated>
-   <id>/2014/02/05/KLcg</id>
+   <id>/2014/02/05/meeting-KLcg</id>
     
    <category term="/research/categories.html#meeting" label="meeting"/>
    
