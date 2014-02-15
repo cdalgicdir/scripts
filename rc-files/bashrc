@@ -73,6 +73,7 @@ esac
 complete -f -X '!*.pdf' mupdf
 complete -f -X '!*.corr' ramaplot
 complete -f -X '!*.gp' gp
+complete -f -X '!*.gp' gpp
 
 ###################################################################
 PROMPT_DIRTRIM=2
@@ -96,6 +97,7 @@ fi
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
+    . ~/.bash_completion.d/books
 fi
 
 

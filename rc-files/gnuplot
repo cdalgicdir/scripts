@@ -70,4 +70,6 @@ ll="set style data line"
 #set format x '%.0Pπ'
 KL="'/home/cdalgicdir/remote/tric/sg6/KL"
 IBI="'/home/cdalgicdir/remote/tric/sg5/IBI"
-FF="'/home/cdalgicdir/remote/tric/sg5/FF"
+#FF="'/home/cdalgicdir/remote/tric/sg5/FF"
+SG6="'/home/cdalgicdir/remote/tric/sg6/KL/"
+SG5="'/home/cdalgicdir/remote/tric/sg5/KL/"

@@ -61,3 +61,4 @@ alias gv='gvim'
 alias mkcd='_(){ mkdir $1; cd $1; }; _'
 alias mangro="gnome-open $HOME/Documents/Manuals/gromacs-manual-4.5.6.pdf &"
 alias github="cd $HOME/Dropbox/github"
+alias eclipse="$HOME/Courses/comp130/eclipse/eclipse &"
