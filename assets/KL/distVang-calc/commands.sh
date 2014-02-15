@@ -17,7 +17,9 @@ for i in `seq 1 $n`; do
     rm coord-p${i}[ab].dat coord-p${i}-ab.dat coord-p$i-diff.xvg
 done
 
-for i in `seq 1 $n`; do
+[[ $n == 2 ]] && m=$((n-1)) || m=$n
+
+for i in `seq 1 $m`; do
     [[ $i == $n ]] && j=1 || j=$((i+1))
     angfile=ang_p${i}-p${j}.xvg
     distfile=dist_p${i}-p${j}.xvg
@@ -25,9 +27,10 @@ for i in `seq 1 $n`; do
     paste coord-p${i}-diff.dat coord-p${j}-diff.dat > coord-p${i}p${j}-diff.dat
     python calcangle.py coord-p${i}p${j}-diff.dat $angfile
     g_analyze -f $angfile -bw 1 -dist hist_${angfile}
+    egrep -v "#|@" $angfile | awk '{print $2}' > ${angfile%.xvg}.dat
     echo Backbone_chain$i Backbone_chain$j | g_dist -f $trajfile -o $distfile -s $tpr -n $ndx
     egrep -v "#|@" $distfile | awk '{print $2}' > ${distfile%.xvg}.dat
-    awk '{print $1}' $angfile | paste ${distfile%.xvg}.dat - > ${distVangfile}
+    awk '{print $1}' ${angfile%.xvg}.dat | paste ${distfile%.xvg}.dat - > ${distVangfile}
 # correlation
     ###################################################################
     # only print columns with same no of lines
@@ -37,7 +40,7 @@ for i in `seq 1 $n`; do
     gencorr ${distVangfile} 40
     cp ${distfile%.xvg}.dat ${distfile%.xvg}.dat.xvg
     g_analyze -f ${distfile%.xvg}.dat.xvg -bw 0.01 -dist hist_${distfile}
-    rm ${distfile%.xvg}.dat.xvg 
+    rm ${distfile%.xvg}.dat.xvg ${angfile%.xvg}.dat
 done
 
 #awk '{if (NR%13!=0)printf "%f ",$3," ";else print $3}' distVangle.corr > xxx 
