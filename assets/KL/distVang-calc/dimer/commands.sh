@@ -24,8 +24,6 @@ for i in `seq 1 $((n-1))`; do
     distVangfile=distVang_p${i}-p${j}.xvg
     paste coord-p${i}-diff.dat coord-p${j}-diff.dat > coord-p${i}p${j}-diff.dat
     python calcangle.py coord-p${i}p${j}-diff.dat $angfile
-    paste time.dat $angfile > ang.tmp
-    rm $angfile && mv ang.tmp $angfile
     g_analyze -f $angfile -bw 1 -dist hist_${angfile}
     echo Backbone_chain$i Backbone_chain$j | g_dist -f $trajfile -o $distfile -s $tpr -n $ndx
     egrep -v "#|@" $distfile | awk '{print $2}' > ${distfile%.xvg}.dat
