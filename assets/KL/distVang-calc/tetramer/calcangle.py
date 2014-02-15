@@ -23,9 +23,17 @@ while 1:
 	pass
     else:
 	tmp = txt.split()
-	vec1 = [float(tmp[0]), float(tmp[1]), float(tmp[2])]
-	vec2 = [float(tmp[3]), float(tmp[4]), float(tmp[5])]
-	angle = math.acos((vec1[0]*vec2[0]+vec1[1]*vec2[1]+vec1[2]*vec2[2])/(math.sqrt(vec1[0]**2+vec1[1]**2+vec1[2]**2)*(math.sqrt(vec2[0]**2+vec2[1]**2+vec2[2]**2))))
-	print >> outfile, angle/math.pi*180
+	#vec1 = [float(tmp[0]), float(tmp[1]), float(tmp[2])]
+	#vec2 = [float(tmp[3]), float(tmp[4]), float(tmp[5])]
+	# added time info column for both vectors
+	time1 = float(tmp[0])
+	time2 = float(tmp[4])
+	if time1 == time2:
+	    vec1 = [float(tmp[1]), float(tmp[2]), float(tmp[3])]
+	    vec2 = [float(tmp[5]), float(tmp[6]), float(tmp[7])]
+	    angle = math.acos((vec1[0]*vec2[0]+vec1[1]*vec2[1]+vec1[2]*vec2[2])/(math.sqrt(vec1[0]**2+vec1[1]**2+vec1[2]**2)*(math.sqrt(vec2[0]**2+vec2[1]**2+vec2[2]**2))))
+	    print >> outfile, time1, angle/math.pi*180
+	else:
+	    print "Time steps do not match: %f vs %f" %(time1, time2)
 
 print "%s generated!" %outfilename

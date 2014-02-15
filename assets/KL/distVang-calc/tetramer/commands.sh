@@ -13,7 +13,7 @@ for i in `seq 1 $n`; do
     done
     paste coord-p${i}a.dat coord-p${i}b.dat > coord-p${i}-ab.dat
     awk '{print $1,$6-$2,$7-$3,$8-$4}' coord-p${i}-ab.dat > coord-p${i}-diff.xvg
-    awk '{print $2,$3,$4}' coord-p${i}-diff.xvg > coord-p${i}-diff.dat
+    awk '{print $1,$2,$3,$4}' coord-p${i}-diff.xvg > coord-p${i}-diff.dat
     rm coord-p${i}[ab].dat coord-p${i}-ab.dat coord-p$i-diff.xvg
 done
 
@@ -24,6 +24,8 @@ for i in `seq 1 $n`; do
     distVangfile=distVang_p${i}-p${j}.xvg
     paste coord-p${i}-diff.dat coord-p${j}-diff.dat > coord-p${i}p${j}-diff.dat
     python calcangle.py coord-p${i}p${j}-diff.dat $angfile
+    paste time.dat $angfile > ang.tmp
+    rm $angfile && mv ang.tmp $angfile
     g_analyze -f $angfile -bw 1 -dist hist_${angfile}
     echo Backbone_chain$i Backbone_chain$j | g_dist -f $trajfile -o $distfile -s $tpr -n $ndx
     egrep -v "#|@" $distfile | awk '{print $2}' > ${distfile%.xvg}.dat
