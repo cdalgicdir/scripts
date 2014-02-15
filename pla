@@ -107,6 +107,10 @@ while [[ $# -ge 1 ]]; do
 	    range="[:][:$2]"
 	    shift 2;;
 
+	-nxy)
+	    nxy=1
+	    shift ;;
+
 	not)
 	    label=0
 	    shift 1;;
@@ -220,11 +224,25 @@ do
 	    theshiftR=${shiftRlist[$i]} 
 	    using=" u 1:(\$2+2*$kT*(log(\$1/$theshiftR))-$theshift) "
 	fi
-	plotfiles=${plotfiles}${q}${file}${q}${using}${with}
-	if [[ $label == 1 ]]; then
-	    plotfiles=$plotfiles't '$q$file$q',' 
+
+	if [[ $nxy == 1 ]]; then
+	    NF=`tail -1 ${file} | awk '{print NF}'`
+	    for i in `seq 2 $NF`; do
+		using=" u 1:$i "
+		plotfiles=${plotfiles}${q}${file}${q}${using}${with}
+		if [[ $label == 1 ]]; then
+		    plotfiles=$plotfiles't '$q${i}$q',' 
+		else
+		    plotfiles=$plotfiles'not,'
+		fi
+	    done
 	else
-	    plotfiles=$plotfiles'not,'
+	    plotfiles=${plotfiles}${q}${file}${q}${using}${with}
+	    if [[ $label == 1 ]]; then
+		plotfiles=$plotfiles't '$q$file$q',' 
+	    else
+		plotfiles=$plotfiles'not,'
+	    fi
 	fi
 	let i=i+1
     fi
