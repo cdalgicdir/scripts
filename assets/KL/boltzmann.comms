@@ -544,4 +544,47 @@ vals time_dist_CNi-CNi4-9.xvg 1:dist_CNi-CNi4:9
 vals time_dist_CNi-CNi4-10.xvg 1:dist_CNi-CNi4:10
 vals time_dist_CNi-CNi4-11.xvg 1:dist_CNi-CNi4:11
 
+# tables
+#
+tab set smooth_pot 1
+# bonds
+tab set scale bond
+tab table_bond_CN-CA.xvg 1:bond_CN-CA:*
+tab table_bond_CA-CN.xvg 1:bond_CA-CN:*
+tab table_bond_CA-L.xvg 1:bond_CA-L:*
+tab table_bond_CA-KC.xvg 1:bond_CA-KC:*
+tab table_bond_KC-KN.xvg 1:bond_KC-KN:*
+
+# angles
+tab set scale angle
+tab table_ang_CN-CA-CN.xvg 1:ang_CN-CA-CN:*
+tab table_ang_CA-CN-CA.xvg 1:ang_CA-CN-CA:*
+tab table_ang_CN-CA-L.xvg 1:ang_CN-CA-L:*
+tab table_ang_L-CA-CN.xvg 1:ang_L-CA-CN:*
+tab table_ang_CN-CA-KC.xvg 1:ang_CN-CA-KC:*
+tab table_ang_KC-CA-CN.xvg 1:ang_KC-CA-CN:*
+tab table_ang_CA-KC-KN.xvg 1:ang_CA-KC-KN:*
+
+# dihedrals
+tab set scale no
+tab set periodic 1
+tab table_dih_CN-CA-CN-CA.xvg 1:dih_CN-CA-CN-CA:*
+tab table_dih_CA-CN-CA-CN.xvg 1:dih_CA-CN-CA-CN:*
+tab table_dih_CA-CN-CA-KC.xvg 1:dih_CA-CN-CA-KC:*
+tab table_dih_KC-CA-CN-CA.xvg 1:dih_KC-CA-CN-CA:*
+tab table_dih_CN-CA-KC-KN.xvg 1:dih_CN-CA-KC-KN:*
+tab table_dih_KN-KC-CA-CN.xvg 1:dih_KN-KC-CA-CN:*
+tab table_dih_CA-CN-CA-L.xvg 1:dih_CA-CN-CA-L:*
+tab table_dih_L-CA-CN-CA.xvg 1:dih_L-CA-CN-CA:*
+
+# impropers
+tab table_imp_CA-CN-CN-L.xvg 1:imp_CA-CN-CN-L:*
+tab table_imp_CA-CN-KC-CN.xvg 1:imp_CA-CN-KC-CN:*
+
+# distances
+tab set scale bond
+# CNi-CNi4
+tab dist_CNi-CNi4-1.xvg 1:dist_CNi-CNi4:1
+tab dist_CNi-CNi4.xvg 1:dist_CNi-CNi4:*
+
 q
