@@ -584,7 +584,6 @@ tab table_imp_CA-CN-KC-CN.xvg 1:imp_CA-CN-KC-CN:*
 # distances
 tab set scale bond
 # CNi-CNi4
-tab dist_CNi-CNi4-1.xvg 1:dist_CNi-CNi4:1
-tab dist_CNi-CNi4.xvg 1:dist_CNi-CNi4:*
+tab table_dist_CNi-CNi4.xvg 1:dist_CNi-CNi4:*
 
 q
