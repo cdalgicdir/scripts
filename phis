@@ -12,6 +12,11 @@ q="'"
     gplot -t "$title" -x $xlabel -y $ylabel -c "set key out" -- "$plotcommand"
     }
 
+    printcommand () {
+	echo "$plotcommand"
+    }
+
+
     help () {
 	echo "Usage: $ phis filename [ -f namesfile ] [ begin [end] ]"
 }
@@ -62,3 +67,4 @@ fi
 
 # Now plot all!
 plot $@
+printcommand
