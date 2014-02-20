@@ -1,0 +1,85 @@
+#!/bin/bash
+###################################################################
+# SGE options:
+#
+#$ -S /bin/bash
+#$ -cwd
+#$ -j y
+#$ -notify
+#$ -l h_rt=6:00:00
+#$ -pe smp 8
+#$ -N kl5-doEQ
+#
+# end of SGE stuff
+###################################################################
+echo -e "\n###################################################################"
+echo Running on host: `hostname`.
+echo In directory: `pwd`
+echo Starting on: `date`
+echo SGE job id: $JOB_ID
+echo This job runs on the following processors:
+cat $TMPDIR/machines
+echo This job has allocated $NSLOTS processors
+echo -e "###################################################################\n"
+###################################################################
+# now execute my job:
+
+source $HOME/progs/gromacs-4.5.6/bin/GMXRC
+
+###################################################################
+#  run_sim function
+###################################################################
+
+run_sim () {
+    dir=$1
+    lastdir=$2
+    mdpfile=$3
+    conffile=$4
+    mkdir -p $dir
+    cp topol.top index.ndx *itp $mdpfile $dir/
+    cp $lastdir/$conffile $dir/conf.gro
+    pushd $dir
+    if [[ $dir == *EM* || $dir == *NVT-posres* ]]; then
+	grompp -f $mdpfile -c conf.gro -p topol.top -n index.ndx
+    else
+	cp ../$lastdir/state.cpt last.cpt
+	grompp -f $mdpfile -c conf.gro -p topol.top -n index.ndx -t last.cpt
+    fi
+    [[ $dir != *PULL* ]] && mdrun -nice 0 -nt $NSLOTS || (cp ../xsubmit-thread . && /opt/gridengine/bin/lx26-amd64/qsub xsubmit-thread)
+    #START=$(date +%s)
+    #END=$(date +%s)
+    #DIFF=$((END-START))
+    # Exit if command takes less than 20 secs to execute
+    #[[ $DIFF -lt 20 ]] && echo "Error! Command took less than 5 minutes. Check if simulations are OK!" && exit 1
+    #echo System | trjconv -f confout.gro -s topol.tpr -o compact.gro -ur compact -pbc mol
+    popd
+}
+
+###################################################################
+#  Main
+###################################################################
+
+# name of directories to be created
+simlist=('em' 'nvt-posres' 'nvt-bbres' 'nvt-cares' 'npt-posres' 'npt' 'pull' )
+
+j=1
+dir=`pwd`
+for i in `seq 0 $((${#dirlist[@]}-1))`; do
+    lastdir=$dir
+    dirname=`echo ${simlist[$i]} | tr [:lower:] [:upper:]`
+    dir="$j-${dirname}"
+    mdp="${simlist[$i]}.mdp"
+    [[ $i -eq 0 ]] && conf='conf.gro' || conf='confout.gro'
+    [[ ! -f $dir/confout.gro ]] && run_sim $dir $lastdir $mdp $conf || echo "$dir/confout.gro exists! Passing $dir..."
+    j=$((j+1))
+done
+
+echo "DONE!"
+
+nf=${#dirlist[@]} nf=$((nf-1))
+finaldir=${dirlist[$nf]}
+# Resubmit if confout.gro is not found
+#[[ ! -f $finaldir/confout.gro ]] && [[ $simOK == 'True' ]] && /opt/gridengine/bin/lx26-amd64/qsub xsubmit-thread || echo "DONE! confout.gro exists."
+
+# end of job script
+###################################################################
