@@ -19,6 +19,7 @@ fourierspacing	 	 = 0.12		; max. spacing for the FFT grid
 pme_order		 = 4		; interpolation order
 ewald_geometry		 = 3d
 ewald_rtol		 = 1e-5
+optimize_fft		 = yes
 
 ; Temperature coupling
 tcoupl	 		 = v-rescale

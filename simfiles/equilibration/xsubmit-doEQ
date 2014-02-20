@@ -8,7 +8,7 @@
 #$ -notify
 #$ -l h_rt=6:00:00
 #$ -pe smp 8
-#$ -N kl5-doEQ
+#$ -N eq
 #
 # end of SGE stuff
 ###################################################################
@@ -39,13 +39,21 @@ run_sim () {
     cp topol.top index.ndx *itp $mdpfile $dir/
     cp $lastdir/$conffile $dir/conf.gro
     pushd $dir
-    if [[ $dir == *EM* || $dir == *NVT-posres* ]]; then
+    # continue from last velocities
+    if [[ $dir == *EM* || $dir == *NVT* ]]; then
 	grompp -f $mdpfile -c conf.gro -p topol.top -n index.ndx
     else
 	cp ../$lastdir/state.cpt last.cpt
 	grompp -f $mdpfile -c conf.gro -p topol.top -n index.ndx -t last.cpt
     fi
-    [[ $dir != *PULL* ]] && mdrun -nice 0 -nt $NSLOTS || (cp ../xsubmit-thread . && /opt/gridengine/bin/lx26-amd64/qsub xsubmit-thread)
+    # if pulldir then end equilibration
+    if [[ $dir != *PULL* ]]; then
+	mdrun -nice 0 -nt $NSLOTS 
+	[[ ! -f confout.gro ]] && echo "confout.gro not found!" && exit 1
+    else
+	cp ../xsubmit-thread .
+	/opt/gridengine/bin/lx26-amd64/qsub xsubmit-thread
+    fi
     #START=$(date +%s)
     #END=$(date +%s)
     #DIFF=$((END-START))
@@ -60,11 +68,11 @@ run_sim () {
 ###################################################################
 
 # name of directories to be created
-simlist=('em' 'nvt-posres' 'nvt-bbres' 'nvt-cares' 'npt-posres' 'npt' 'pull' )
+simlist=('em' 'nvt' 'npt' 'pull')
 
 j=1
 dir=`pwd`
-for i in `seq 0 $((${#dirlist[@]}-1))`; do
+for i in `seq 0 $((${#simlist[@]}-1))`; do
     lastdir=$dir
     dirname=`echo ${simlist[$i]} | tr [:lower:] [:upper:]`
     dir="$j-${dirname}"
@@ -78,8 +86,6 @@ echo "DONE!"
 
 nf=${#dirlist[@]} nf=$((nf-1))
 finaldir=${dirlist[$nf]}
-# Resubmit if confout.gro is not found
-#[[ ! -f $finaldir/confout.gro ]] && [[ $simOK == 'True' ]] && /opt/gridengine/bin/lx26-amd64/qsub xsubmit-thread || echo "DONE! confout.gro exists."
 
 # end of job script
 ###################################################################

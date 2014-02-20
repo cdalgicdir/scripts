@@ -19,7 +19,6 @@ fourierspacing	 	 = 0.12			; max. spacing for the FFT grid
 pme_order		 = 4			; interpolation order
 ewald_geometry		 = 3d
 ewald_rtol		 = 1e-5
-optimize_fft		 = yes
 
 ; Temperature coupling
 tcoupl	 		 = v-rescale
@@ -68,3 +67,18 @@ gen_vel                  = yes
 gen_seed                 = 179876
 ld_seed                  = 179876
 continuation		 = yes
+
+; Pulling
+pull                     = constraint
+pull_geometry            = distance
+pull_dim                 = Y Y Y        ; in z direction
+pull_ngroups             = 1
+pull_group0              = Backbone_chain1
+pull_group1              = Backbone_chain2
+pull_rate1               = 0.0          ;nm/ps
+pull_k1                  = 1000         ; kJ/molnm^2
+pull_init1               = 0
+pull_start               = yes
+pull_constr_tol          = 1E-6
+pull_nstxout             = 10
+pull_nstfout             = 10
