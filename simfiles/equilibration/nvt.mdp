@@ -24,9 +24,9 @@ optimize_fft		 = yes
 ; Temperature coupling
 tcoupl	 		 = v-rescale
 tc-grps		 	 = Protein Water_and_ions
-tau_t                    = 1.0
-ref_t                    = 298
-nsttcouple		 = 10			; equals nstlist!
+tau_t                    = 1.0 1.0
+ref_t                    = 298 298
+nsttcouple		 = 10 10		; equals nstlist!
 
 ; Pressure coupling
 pcoupl			 = no
