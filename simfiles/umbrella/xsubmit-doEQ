@@ -84,8 +84,8 @@ done
 
 echo "DONE!"
 
-nf=${#simlist[@]} nf=$((nf-1))
-finaldir=${simlist[$nf]}
+nf=${#dirlist[@]} nf=$((nf-1))
+finaldir=${dirlist[$nf]}
 
 # end of job script
 ###################################################################
