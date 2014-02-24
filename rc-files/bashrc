@@ -71,6 +71,7 @@ xterm*|rxvt*)
 esac
 
 complete -f -X '!*.pdf' mupdf
+complete -f -X '!*.pdf' pdfviewer
 complete -f -X '!*.corr' ramaplot
 complete -f -X '!*.gp' gp
 complete -f -X '!*.gp' gpp

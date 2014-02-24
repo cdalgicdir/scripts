@@ -67,4 +67,4 @@ fi
 
 # Now plot all!
 plot $@
-printcommand
+#printcommand

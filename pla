@@ -210,7 +210,7 @@ do
 	    if [[ $userset == "false" ]]; then
 		using=" u 1:6 "
 		#ymax=1.5
-		range="[:][:2]"
+		[[ $range == "[:][:]" ]] && range="[:][:5]"
 	    fi
 	fi
 	# shift to zero and entropic correction (for second cols only)

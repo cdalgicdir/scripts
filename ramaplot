@@ -201,7 +201,7 @@ do
 		;;
 
 	    -png)
-		if [ -z $2 ]; then
+		if [[ -z $2 ]] || [[ $2 != -* ]]; then
 			fname="${file%.corr}.png"
 			save="-o $fname"
 			terminal="set terminal pngcairo font \"Gill Sans,32\" enhanced size 1500,1500 crop"
