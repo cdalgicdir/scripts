@@ -141,6 +141,7 @@ proc gc {selection} {
         return [vecscale [expr 1.0 /[$selection num]] $gc]
 }
 
+vmd_install_extension bendix bendix "Analysis/Bendix"
 # shortcut keys
 user add key {.} { if {[molinfo top get numframes] == [ expr [molinfo top get frame] + 1] } {animate goto start; animate forward} {animate forward} }
 user add key Control-q {exit}

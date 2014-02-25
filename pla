@@ -198,6 +198,7 @@ elif [ $linetype == "points" ] || [ $linetype == "p" ]; then
     with=" with $linetype ps $pointsize "
 elif [[ $linetype == "yerror" ]]; then
     using=" u 1:2:3 "
+    with=" with $linetype "
 else
     with=" with $linetype "
 fi
