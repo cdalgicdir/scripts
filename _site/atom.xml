@@ -4,12 +4,121 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-02-12T14:07:53+02:00</updated>
+ <updated>2014-02-26T16:43:23+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Papers Phillips2007</title>
+   <link href="/2014/02/26/papers-phillips2007.html"/>
+   <updated>2014-02-26T00:00:00+02:00</updated>
+   <id>/2014/02/26/papers-phillips2007</id>
+    
+   <category term="/research/categories.html#papers" label="papers"/>
+   
+   <content type="html">&lt;h3 id=&quot;side-chain-chain-length-and-sequence-effects-on-amphiphilic-peptide-adsorption-at-hydrophobic-and-hydrophilic-surfaces-studied-by-sum-frequency-generation-vibrational-spectroscopy-and-quartz-crystal-microbalance&quot;&gt;Side Chain, Chain Length, and Sequence Effects on Amphiphilic Peptide Adsorption at Hydrophobic and Hydrophilic Surfaces Studied by Sum-Frequency Generation Vibrational Spectroscopy and Quartz Crystal Microbalance&lt;/h3&gt;
+&lt;p&gt;Diana C. Phillips ,†‡ Roger L. York ,†‡ Ozzy Mermut ,†‡ Keith R. McCrea ,§ Robert S. Ward ,§ and Gabor A. Somorjai *†‡&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;observed alpha helix in solution but concentration may be higher than critical level (see Notes)&lt;/li&gt;
+&lt;li&gt;For LK\(_14\) monotonic adsorption on PS surface and multistep adsorption on SiO\(_2\).&lt;/li&gt;
+&lt;li&gt;LK14 nonpolar sidechains are aligned on hydrophobic surfaces&lt;/li&gt;
+&lt;li&gt;LK14 adopts alpha helix in solution (CD data-final page)&lt;/li&gt;
+&lt;li&gt;LK14 maintains the helix “to some degree” upon adsorption on silica&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“…amphiphilic nature of these peptides may allow for the hydrophobic side chains to interact with hydrophobic polysty- rene surface, while the charged hydrophilic chains face the bulk water interface.”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;section&quot;&gt;??&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The amide A band observed in the SFG spectrum indicates that we measure a molecular scale secondary structure interaction with the silica surface in contrast to the local interaction measured for adsorbed peptides on polystyrene.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;see&quot;&gt;SEE&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;10, 27, 28: below peptide concentrations of 0.01mM, LK14 is random-coil&lt;/li&gt;
+&lt;li&gt;tetramer induces helical structure?&lt;/li&gt;
+&lt;li&gt;25, 39: hydrophobic residues are aligned at hydrophobic surfaces&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&quot;k_2la_x-x681012&quot;&gt;27: K\(_2\)(LA)\(_x\) (x=6,8,10,12):&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;x=6: adopts antiparallel beta-sheet but in lower concentrations adopts random coil, suggesting the origin of the beta-sheet structure is intermolecular.
+x=8: both alpha helix and beta sheet
+x=10,12: alpha helix dominant at all concentrations&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Since lysine residues are known to support helical structures, the 7 residues present presumably stabilize this structure at the air/water interface.(Creighton-Proteins)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&quot;check&quot;&gt;Check&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;31: aminoacids at the air-water interface&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Papers Otherklpeptides</title>
+   <link href="/2014/02/26/papers-otherKLpeptides.html"/>
+   <updated>2014-02-26T00:00:00+02:00</updated>
+   <id>/2014/02/26/papers-otherKLpeptides</id>
+    
+   <category term="/research/categories.html#papers" label="papers"/>
+   
+   <content type="html">&lt;h2 id=&quot;other-k-and-l-based-peptides&quot;&gt;Other K and L based peptides&lt;/h2&gt;
+&lt;p&gt;http://www.sciencedirect.com/science/article/pii/S0006349596795711?np=y&lt;/p&gt;
+&lt;p&gt;http://www.sciencedirect.com/science/article/pii/S0005273699001753?np=y&lt;/p&gt;
+&lt;h5 id=&quot;cornut1996&quot;&gt;cornut1996&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;amphipathic L15K7: at air/water interface &amp;gt;These peptides were proved to fold mainly into an a-helix (Comut et al., 1993, 1994). &amp;gt;This is particularly clear for L15K7; it was designed to be able to form an ideal amphipathic helix, and the data herein prove it behaves as a pure a-helix lying at the interface. &amp;gt;It is clear that the experimental PMIRRAS spectrum of L15K7 (Fig. 4 b) favors an orientation of the a-helix parallel to the air/water interface.&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Papers Mermut2006</title>
+   <link href="/2014/02/26/papers-mermut2006.html"/>
+   <updated>2014-02-26T00:00:00+02:00</updated>
+   <id>/2014/02/26/papers-mermut2006</id>
+    
+   <category term="/research/categories.html#papers" label="papers"/>
+   
+   <content type="html">&lt;h3 id=&quot;in-situ-adsorption-studies-of-a-14-amino-acid-leucine-lysine-peptide-onto-hydrophobic-polystyrene-and-hydrophilic-silica-surfaces-using-quartz-crystal-microbalance-atomic-force-microscopy-and-sum-frequency-generation-vibrational-spectroscopy&quot;&gt;In Situ Adsorption Studies of a 14-Amino Acid Leucine-Lysine Peptide onto Hydrophobic Polystyrene and Hydrophilic Silica Surfaces Using Quartz Crystal Microbalance, Atomic Force Microscopy, and Sum Frequency Generation Vibrational Spectroscopy&lt;/h3&gt;
+&lt;p&gt;Ozzy Mermut ,†‡ Diana C. Phillips ,†‡ Roger L. York ,†‡ Keith R. McCrea ,§ Robert S. Ward ,§ and Gabor A. Somorjai *†‡&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;all experiments performed at low peptide concentration (0.1 mg/mL)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Adsorption behavior of LK\(_14\) was tested in two different surfaces:&lt;/li&gt;
+&lt;li&gt;hydrophobic polystyrene (PS) surface&lt;/li&gt;
+&lt;li&gt;hydrophilic SiO\(_2\) surface&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;-&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Surface was rougher for SiO\(_2\) than that of PS.&lt;/li&gt;
+&lt;li&gt;rigid film on PS surface&lt;/li&gt;
+&lt;li&gt;Adsoprtion lasted ~30 min for SiO\(_2\) and less than 2 min for PS&lt;/li&gt;
+&lt;li&gt;From small spherical islands of ~200 nm wide to larger up to 1.5 \(\mu\)m in 30 min for SiO\(_2\) surface&lt;/li&gt;
+&lt;li&gt;multiple peptide layers are formed in hydrophilic (negatively charged) SiO\(_2\) surface.&lt;/li&gt;
+&lt;li&gt;peptide adopts different orientations at these interfaces&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;water arrangement is also different (check next paper)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;In hydrophobic PS surface, hydrophobic leucine sidechains are oriented towards the surface.&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;In hydrophilic SiO\(_2\) surface, hydrophilic lysine sidechains are oriented towards the surface.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Meeting Christine</title>
+   <link href="/2014/02/12/meeting-christine.html"/>
+   <updated>2014-02-12T00:00:00+02:00</updated>
+   <id>/2014/02/12/meeting-christine</id>
+    
+   <category term="/research/categories.html#meeting" label="meeting"/>
+   
+   <content type="html">&lt;h3 id=&quot;february-2013&quot;&gt;12 February 2013&lt;/h3&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;Generate the same report as Christoph’s&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Next meeting 19 Feb 2013 11 am (TR)&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Meeting Klvac</title>
