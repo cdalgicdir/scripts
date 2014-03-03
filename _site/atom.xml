@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-02-26T16:43:23+02:00</updated>
+ <updated>2014-03-03T15:06:29+02:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -23,7 +23,7 @@
 &lt;p&gt;Diana C. Phillips ,†‡ Roger L. York ,†‡ Ozzy Mermut ,†‡ Keith R. McCrea ,§ Robert S. Ward ,§ and Gabor A. Somorjai *†‡&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;observed alpha helix in solution but concentration may be higher than critical level (see Notes)&lt;/li&gt;
-&lt;li&gt;For LK\(_14\) monotonic adsorption on PS surface and multistep adsorption on SiO\(_2\).&lt;/li&gt;
+&lt;li&gt;For LK\(_{14}\) monotonic adsorption on PS surface and multistep adsorption on SiO\(_2\).&lt;/li&gt;
 &lt;li&gt;LK14 nonpolar sidechains are aligned on hydrophobic surfaces&lt;/li&gt;
 &lt;li&gt;LK14 adopts alpha helix in solution (CD data-final page)&lt;/li&gt;
 &lt;li&gt;LK14 maintains the helix “to some degree” upon adsorption on silica&lt;/li&gt;
@@ -41,10 +41,10 @@
 &lt;li&gt;tetramer induces helical structure?&lt;/li&gt;
 &lt;li&gt;25, 39: hydrophobic residues are aligned at hydrophobic surfaces&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h5 id=&quot;k_2la_x-x681012&quot;&gt;27: K\(_2\)(LA)\(_x\) (x=6,8,10,12):&lt;/h5&gt;
-&lt;pre&gt;&lt;code&gt;x=6: adopts antiparallel beta-sheet but in lower concentrations adopts random coil, suggesting the origin of the beta-sheet structure is intermolecular.
-x=8: both alpha helix and beta sheet
-x=10,12: alpha helix dominant at all concentrations&lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&quot;k_2la_x-x681012&quot;&gt;27: K\(_2\)(LA)\(_x\) (x=6,8,10,12)&lt;/h5&gt;
+&lt;pre&gt;&lt;code&gt;- x=6: adopts antiparallel beta-sheet but in lower concentrations adopts random coil, suggesting the origin of the beta-sheet structure is intermolecular.
+- x=8: both alpha helix and beta sheet
+- x=10,12: alpha helix dominant at all concentrations&lt;/code&gt;&lt;/pre&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Since lysine residues are known to support helical structures, the 7 residues present presumably stabilize this structure at the air/water interface.(Creighton-Proteins)&lt;/p&gt;
 &lt;/blockquote&gt;
