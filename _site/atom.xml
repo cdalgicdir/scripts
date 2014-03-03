@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-03-03T15:15:03+02:00</updated>
+ <updated>2014-03-03T15:16:11+02:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -42,12 +42,13 @@
 &lt;li&gt;25, 39: hydrophobic residues are aligned at hydrophobic surfaces&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&quot;k_2la_x-x681012&quot;&gt;27: K\(_2\)(LA)\(_x\) (x=6,8,10,12)&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;- x=6: adopts antiparallel beta-sheet but in lower concentrations adopts random coil, suggesting the origin of the beta-sheet structure is intermolecular.
-- x=8: both alpha helix and beta sheet
-- x=10,12: alpha helix dominant at all concentrations&lt;/code&gt;&lt;/pre&gt;
-&lt;blockquote&gt;
-&lt;p&gt;Since lysine residues are known to support helical structures, the 7 residues present presumably stabilize this structure at the air/water interface.(Creighton-Proteins)&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;x=6: adopts antiparallel beta-sheet but in lower concentrations adopts random coil, suggesting the origin of the beta-sheet structure is intermolecular.
+&lt;ul&gt;
+&lt;li&gt;x=8: both alpha helix and beta sheet&lt;/li&gt;
+&lt;li&gt;x=10,12: alpha helix dominant at all concentrations &amp;gt;Since lysine residues are known to support helical structures, the 7 residues present presumably stabilize this structure at the air/water interface.(Creighton-Proteins)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&quot;check&quot;&gt;Check&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;31: aminoacids at the air-water interface&lt;/li&gt;
