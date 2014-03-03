@@ -30,7 +30,7 @@ Diana C. Phillips ,†‡ Roger L. York ,†‡ Ozzy Mermut ,†‡ Keith R. McC
   - tetramer induces helical structure?
   - 25, 39: hydrophobic residues are aligned at hydrophobic surfaces
 
-#####27= K$_2$(LA)$_x$ (x=6,8,10,12)
+#####27: K$_2$(LA)$_x$ (x:6,8,10,12)
     - x=6: adopts antiparallel beta-sheet but in lower concentrations adopts random coil, suggesting the origin of the beta-sheet structure is intermolecular.
     - x=8: both alpha helix and beta sheet
     - x=10,12: alpha helix dominant at all concentrations
