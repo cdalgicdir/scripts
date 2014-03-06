@@ -4,9 +4,9 @@ tags: [papers, KL, experimental]
 category: papers
 ---
 
-### Side Chain, Chain Length, and Sequence Effects on Amphiphilic Peptide Adsorption at Hydrophobic and Hydrophilic Surfaces Studied by Sum-Frequency Generation Vibrational Spectroscopy and Quartz Crystal Microbalance
-Diana C. Phillips ,†‡ Roger L. York ,†‡ Ozzy Mermut ,†‡ Keith R. McCrea ,§ Robert S. Ward ,§ and Gabor A. Somorjai *†‡
+**Side Chain, Chain Length, and Sequence Effects on Amphiphilic Peptide Adsorption at Hydrophobic and Hydrophilic Surfaces Studied by Sum-Frequency Generation Vibrational Spectroscopy and Quartz Crystal Microbalance**
 
+_Diana C. Phillips ,†‡ Roger L. York ,†‡ Ozzy Mermut ,†‡ Keith R. McCrea ,§ Robert S. Ward ,§ and Gabor A. Somorjai *†‡_
 
 - observed alpha helix in solution but concentration may be higher than critical level (see Notes)
 - For LK$_{14}$ monotonic adsorption on PS surface and multistep adsorption on SiO$_2$.

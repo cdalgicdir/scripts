@@ -4,9 +4,9 @@ tags: [papers, g_wham, umbrella sampling, WHAM]
 category: papers
 ---
 
-### g_wham: A Free Weighted Histogram Analysis Implementation Including Robust Error and Autocorrelation Estimates
+**g_wham: A Free Weighted Histogram Analysis Implementation Including Robust Error and Autocorrelation Estimates**
 
-#### Jochen S. Hub, Bert L. de Groot, and David van der Spoel
+_Jochen S. Hub, Bert L. de Groot, and David van der Spoel_
 
 > the idea of WHAM is to estimate the statistical uncertainty of the unbiased
 > probability distribution given the umbrella histograms, and subsequently to

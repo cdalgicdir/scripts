@@ -29,7 +29,8 @@ Usage:
       	{% if page.url == node.url %}
       	<li class="active"><a href="{{ site.baseurl }}{{node.url}}" class="active">{{node.title}}</a></li>
       	{% else %}
-      	<li><a href="{{ site.baseurl }}{{node.url}}">{{node.title }}</a> <span style="text-align:right; font-style:italic; font-size:85%;"> {{node.date | date_to_string }} </span></li>
+	{% capture first_word %}{{ node.title | truncatewords:1 | remove:"..."}}{% endcapture %}
+      	<li><a href="{{ site.baseurl }}{{node.url}}">{{node.title | remove:first_word }}</a> <span style="text-align:right; font-style:italic; font-size:85%;"> {{node.date | date_to_string }} </span></li>
       	{% endif %}
       {% endif %}
     {% endif %}
