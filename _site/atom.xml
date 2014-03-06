@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-03-06T16:11:24+02:00</updated>
+ <updated>2014-03-06T16:14:28+02:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -17,7 +17,7 @@
    <updated>2014-02-26T00:00:00+02:00</updated>
    <id>/2014/02/26/papers-phillips2007</id>
     
-   <category term="/categories.html#papers" label="papers"/>
+   <category term="/research/categories.html#papers" label="papers"/>
    
    <content type="html">&lt;p&gt;&lt;strong&gt;Side Chain, Chain Length, and Sequence Effects on Amphiphilic Peptide Adsorption at Hydrophobic and Hydrophilic Surfaces Studied by Sum-Frequency Generation Vibrational Spectroscopy and Quartz Crystal Microbalance&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Diana C. Phillips ,†‡ Roger L. York ,†‡ Ozzy Mermut ,†‡ Keith R. McCrea ,§ Robert S. Ward ,§ and Gabor A. Somorjai *†‡&lt;/em&gt;&lt;/p&gt;
@@ -63,7 +63,7 @@
    <updated>2014-02-26T00:00:00+02:00</updated>
    <id>/2014/02/26/papers-otherKLpeptides</id>
     
-   <category term="/categories.html#papers" label="papers"/>
+   <category term="/research/categories.html#papers" label="papers"/>
    
    <content type="html">&lt;h2 id=&quot;other-k-and-l-based-peptides&quot;&gt;Other K and L based peptides&lt;/h2&gt;
 &lt;p&gt;http://www.sciencedirect.com/science/article/pii/S0006349596795711?np=y&lt;/p&gt;
@@ -81,7 +81,7 @@
    <updated>2014-02-26T00:00:00+02:00</updated>
    <id>/2014/02/26/papers-mermut2006</id>
     
-   <category term="/categories.html#papers" label="papers"/>
+   <category term="/research/categories.html#papers" label="papers"/>
    
    <content type="html">&lt;p&gt;&lt;strong&gt;In Situ Adsorption Studies of a 14-Amino Acid Leucine-Lysine Peptide onto Hydrophobic Polystyrene and Hydrophilic Silica Surfaces Using Quartz Crystal Microbalance, Atomic Force Microscopy, and Sum Frequency Generation Vibrational Spectroscopy&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Ozzy Mermut ,†‡ Diana C. Phillips ,†‡ Roger L. York ,†‡ Keith R. McCrea ,§ Robert S. Ward ,§ and Gabor A. Somorjai *†‡&lt;/em&gt;&lt;/p&gt;
@@ -109,7 +109,7 @@
    <updated>2014-02-12T00:00:00+02:00</updated>
    <id>/2014/02/12/meeting-christine</id>
     
-   <category term="/categories.html#meeting" label="meeting"/>
+   <category term="/research/categories.html#meeting" label="meeting"/>
    
    <content type="html">&lt;h3 id=&quot;february-2013&quot;&gt;12 February 2013&lt;/h3&gt;
 &lt;ol type=&quot;1&quot;&gt;
@@ -125,7 +125,7 @@
    <updated>2014-02-11T00:00:00+02:00</updated>
    <id>/2014/02/11/meeting-KLvac</id>
     
-   <category term="/categories.html#meeting" label="meeting"/>
+   <category term="/research/categories.html#meeting" label="meeting"/>
    
    <content type="html">&lt;h3 id=&quot;section&quot;&gt;14-02-12&lt;/h3&gt;
 &lt;ol type=&quot;1&quot;&gt;
@@ -142,7 +142,7 @@
    <updated>2014-02-11T00:00:00+02:00</updated>
    <id>/2014/02/11/KLcg-wall</id>
     
-   <category term="/categories.html#klcg" label="klcg"/>
+   <category term="/research/categories.html#klcg" label="klcg"/>
    
    <content type="html">&lt;h3 id=&quot;wall&quot;&gt;Wall&lt;/h3&gt;
 &lt;ul&gt;
@@ -157,7 +157,7 @@
    <updated>2014-02-05T00:00:00+02:00</updated>
    <id>/2014/02/05/meeting-KLcg</id>
     
-   <category term="/categories.html#meeting" label="meeting"/>
+   <category term="/research/categories.html#meeting" label="meeting"/>
    
    <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
 &lt;ol type=&quot;1&quot;&gt;
@@ -181,7 +181,7 @@
    <updated>2014-02-04T00:00:00+02:00</updated>
    <id>/2014/02/04/study-bootstrap</id>
     
-   <category term="/categories.html#study" label="study"/>
+   <category term="/research/categories.html#study" label="study"/>
    
    <content type="html">&lt;h3 id=&quot;bootstrap-method&quot;&gt;Bootstrap Method&lt;/h3&gt;
 &lt;ul&gt;
@@ -189,10 +189,10 @@
 &lt;/ul&gt;
 &lt;p&gt;From An Introduction to the Bootstrap by Efron &amp;amp; Tibshirani&lt;/p&gt;
 &lt;figure&gt;
-&lt;img src=&quot;/images/papers-images/bootstrap.png&quot; alt=&quot;Bootstrap algorithm&quot;&gt;&lt;figcaption&gt;Bootstrap algorithm&lt;/figcaption&gt;
+&lt;img src=&quot;/research/images/papers-images/bootstrap.png&quot; alt=&quot;Bootstrap algorithm&quot;&gt;&lt;figcaption&gt;Bootstrap algorithm&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;figure&gt;
-&lt;img src=&quot;/images/papers-images/bootstrap-schematics.png&quot; alt=&quot;Bootstrap schematics&quot;&gt;&lt;figcaption&gt;Bootstrap schematics&lt;/figcaption&gt;
+&lt;img src=&quot;/research/images/papers-images/bootstrap-schematics.png&quot; alt=&quot;Bootstrap schematics&quot;&gt;&lt;figcaption&gt;Bootstrap schematics&lt;/figcaption&gt;
 &lt;/figure&gt;
 </content>
  </entry>
@@ -203,7 +203,7 @@
    <updated>2014-02-04T00:00:00+02:00</updated>
    <id>/2014/02/04/papers-hub2010-gwham</id>
     
-   <category term="/categories.html#papers" label="papers"/>
+   <category term="/research/categories.html#papers" label="papers"/>
    
    <content type="html">&lt;p&gt;&lt;strong&gt;g_wham: A Free Weighted Histogram Analysis Implementation Including Robust Error and Autocorrelation Estimates&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Jochen S. Hub, Bert L. de Groot, and David van der Spoel&lt;/em&gt;&lt;/p&gt;
@@ -238,7 +238,7 @@
 &lt;li&gt;If the molecules have slow motions so that the simulation cannot sample all the configurations, then the suggestion is to sample the same window multiple times using different initial configurations.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure&gt;
-&lt;img src=&quot;/images/papers-images/hub2010-wham.png&quot; alt=&quot;Obtaining unbiased probability distribution through WHAM&quot;&gt;&lt;figcaption&gt;Obtaining unbiased probability distribution through WHAM&lt;/figcaption&gt;
+&lt;img src=&quot;/research/images/papers-images/hub2010-wham.png&quot; alt=&quot;Obtaining unbiased probability distribution through WHAM&quot;&gt;&lt;figcaption&gt;Obtaining unbiased probability distribution through WHAM&lt;/figcaption&gt;
 &lt;/figure&gt;
 </content>
  </entry>
@@ -249,7 +249,7 @@
    <updated>2014-01-29T00:00:00+02:00</updated>
    <id>/2014/01/29/CG-votca-bonded-histogram</id>
     
-   <category term="/categories.html#cg" label="cg"/>
+   <category term="/research/categories.html#cg" label="cg"/>
    
    <content type="html">&lt;h2 id=&quot;calculating-bonded-histograms-using-votca&quot;&gt;Calculating bonded histograms using Votca&lt;/h2&gt;
 &lt;p&gt;Votca generates bonded histograms by&lt;/p&gt;
@@ -272,7 +272,7 @@
    <updated>2014-01-28T00:00:00+02:00</updated>
    <id>/2014/01/28/meeting-christine</id>
     
-   <category term="/categories.html#meeting" label="meeting"/>
+   <category term="/research/categories.html#meeting" label="meeting"/>
    
    <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;To-do&lt;/h2&gt;
 &lt;ol type=&quot;1&quot;&gt;
@@ -300,7 +300,7 @@
    <updated>2014-01-27T00:00:00+02:00</updated>
    <id>/2014/01/27/KLcg-todo</id>
     
-   <category term="/categories.html#klcg" label="klcg"/>
+   <category term="/research/categories.html#klcg" label="klcg"/>
    
    <content type="html">&lt;h2 id=&quot;klcg&quot;&gt;KLcg&lt;/h2&gt;
 &lt;ol type=&quot;1&quot;&gt;
@@ -321,7 +321,7 @@
    <updated>2014-01-23T00:00:00+02:00</updated>
    <id>/2014/01/23/meeting-KLcg</id>
     
-   <category term="/categories.html#meeting" label="meeting"/>
+   <category term="/research/categories.html#meeting" label="meeting"/>
    
    <content type="html">&lt;h3 id=&quot;klcg&quot;&gt;KLcg&lt;/h3&gt;
 &lt;ol type=&quot;1&quot;&gt;
@@ -342,7 +342,7 @@
    <updated>2014-01-21T00:00:00+02:00</updated>
    <id>/2014/01/21/meeting-msayar</id>
     
-   <category term="/categories.html#meeting" label="meeting"/>
+   <category term="/research/categories.html#meeting" label="meeting"/>
    
    <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO DO:&lt;/h2&gt;
 &lt;ol type=&quot;1&quot;&gt;
@@ -370,7 +370,7 @@
    <updated>2014-01-20T00:00:00+02:00</updated>
    <id>/2014/01/20/papers-gee2010</id>
     
-   <category term="/categories.html#papers" label="papers"/>
+   <category term="/research/categories.html#papers" label="papers"/>
    
    <content type="html">&lt;p&gt;&lt;strong&gt;Two-dimensional replica exchange approach for peptide–peptide interactions&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Jason Gee and M. Scott Shell [2010]&lt;/em&gt;&lt;/p&gt;
@@ -391,7 +391,7 @@
 &lt;li&gt;see Baumketner and Shea [39] for traditional REMD to generate FE surface for dimer formation&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure&gt;
-&lt;img src=&quot;/images/papers-images/gee2010-uremd.png&quot; alt=&quot;UREMD schematics&quot;&gt;&lt;figcaption&gt;UREMD schematics&lt;/figcaption&gt;
+&lt;img src=&quot;/research/images/papers-images/gee2010-uremd.png&quot; alt=&quot;UREMD schematics&quot;&gt;&lt;figcaption&gt;UREMD schematics&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;ul&gt;
 &lt;li&gt;Normally if one has n replicas and m US distances, then one should have \(mxn\) windows. To reduce this, the US dimension is only used for the lowest temperature, and the temperature dimension is used for two US distances (namely the 2nd and the penultimate).&lt;/li&gt;
@@ -409,7 +409,7 @@
    <updated>2014-01-03T00:00:00+02:00</updated>
    <id>/2014/01/03/KL-cg</id>
     
-   <category term="/categories.html#kl" label="kl"/>
+   <category term="/research/categories.html#kl" label="kl"/>
    
    <content type="html">&lt;ol type=&quot;1&quot;&gt;
 &lt;li&gt;obtain bonded distributions for tetramer and compare with bonded distibutions for a single KL in vacuum&lt;/li&gt;
@@ -426,7 +426,7 @@
    <updated>2013-12-17T00:00:00+02:00</updated>
    <id>/2013/12/17/KL-dimer-at-interface-2ndsim</id>
     
-   <category term="/categories.html#kl" label="kl"/>
+   <category term="/research/categories.html#kl" label="kl"/>
    
    <content type="html">&lt;p&gt;I have done the dimer again, this time starting from a parallel configuration and the distance vs angle correlation, as well as the histograms for the angle and distance are similar.&lt;/p&gt;
 &lt;p&gt;The main difference in correlation plot is the lack of parallel configuration. Although I started from a parallel orientation, the molecule switched to an anti-parallel orientation immediately and stayed that way. (The 1st sim was 1 microseconds and the 2nd one was only 300 ns)&lt;/p&gt;
@@ -439,7 +439,7 @@
    <updated>2013-12-03T00:00:00+02:00</updated>
    <id>/2013/12/03/KL-dimer-basins</id>
     
-   <category term="/categories.html#kl" label="kl"/>
+   <category term="/research/categories.html#kl" label="kl"/>
    
    <content type="html">&lt;ul&gt;
 &lt;li&gt;Why are these basins so discrete in terms of distance?&lt;/li&gt;
@@ -454,7 +454,7 @@
    <updated>2013-12-01T00:00:00+02:00</updated>
    <id>/2013/12/01/KL-random-coil-end-to-end</id>
     
-   <category term="/categories.html#kl" label="kl"/>
+   <category term="/research/categories.html#kl" label="kl"/>
    
    <content type="html">&lt;p&gt;A single KL peptide has the same amount of exposure of the hydrophobic leucine sidechains to the hydrophilic water molecules when it adopts alpha-helix compared to the random-coil. Therefore in bulk water, the alpha-helix does not have an overwhelming favor against the random-coil.&lt;/p&gt;
 &lt;p&gt;One should differentiate between different forms of random coils, e.g. extended vs compact forms. Because in the compact form the exposure of hydrophobic leucine sidechains to the hydrophilic water molecules is reduced. Therefore there is no advantage of alpha-helix over the compact form of random-coil.&lt;/p&gt;
@@ -468,7 +468,7 @@
    <updated>2013-11-29T00:00:00+02:00</updated>
    <id>/2013/11/29/KL-basins</id>
     
-   <category term="/categories.html#kl" label="kl"/>
+   <category term="/research/categories.html#kl" label="kl"/>
    
    <content type="html">&lt;h3 id=&quot;questions&quot;&gt;Questions&lt;/h3&gt;
 &lt;ol type=&quot;1&quot;&gt;
@@ -495,7 +495,7 @@
    <updated>2013-11-19T00:00:00+02:00</updated>
    <id>/2013/11/19/LK310</id>
     
-   <category term="/categories.html#research" label="research"/>
+   <category term="/research/categories.html#research" label="research"/>
    
    <content type="html">&lt;h2 id=&quot;lk_310-papers&quot;&gt;LK\(_{310}\) Papers&lt;/h2&gt;
 &lt;p&gt;The papers for LK 3-10 are:&lt;/p&gt;
