@@ -2,8 +2,9 @@
 
 ###################################################################
 # calculates angle between 2 vectors: v1 and v2
-# infile comprises of 6 columns with 1st 3 corresponding to v1
-# last 3 columns correspond to v2
+# infile comprises of 8 columns with 1st 4 corresponding to v1
+# last 4 columns correspond to v2: time, x, y, z
+# if time of v1 and v2 are equal, then prints out angle btw v1 & v2
 # prints out angles in degrees
 ###################################################################
 
