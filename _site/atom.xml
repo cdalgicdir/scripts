@@ -4,12 +4,38 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-03-06T16:14:28+02:00</updated>
+ <updated>2014-03-07T12:47:25+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Kl Atm Analysis</title>
+   <link href="/2014/03/07/KL-atm-analysis.html"/>
+   <updated>2014-03-07T00:00:00+02:00</updated>
+   <id>/2014/03/07/KL-atm-analysis</id>
+    
+   <category term="/research/categories.html#kl" label="kl"/>
+   
+   <content type="html">&lt;h3 id=&quot;analysis-of-the-atomistic-aggregates-in-bulk-water&quot;&gt;Analysis of the atomistic aggregates in bulk water&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;For each aggregate of n-KL where n&amp;gt;1:&lt;/li&gt;
+&lt;li&gt;SASA&lt;/li&gt;
+&lt;li&gt;DSSP&lt;/li&gt;
+&lt;li&gt;Snapshots&lt;/li&gt;
+&lt;li&gt;Relative orientation within the aggregate&lt;/li&gt;
+&lt;li&gt;? Inter-dimer distance vs inter-dimer angle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;analysis-for-airwater-interface-simulations&quot;&gt;Analysis for air/water interface simulations&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Orientation of the Leucines with respect to the interface (is there a slight tilt)&lt;/li&gt;
+&lt;li&gt;DSSP&lt;/li&gt;
+&lt;li&gt;Snapshots&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Papers Phillips2007</title>
