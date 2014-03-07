@@ -184,7 +184,7 @@ user add key J { if {[molinfo top get rep] == "Lines"} { changerep [molinfo top]
 user add key L { addHeavyLabels [molinfo top] }
 user add key z { align [molinfo top] }
 user add key b { showbackbone [molinfo top] }
-user add key F10 { unwrap [molinfo top] }
+user add key F10 { snap [molinfo top] }
 user add key F11 { display depthcue off; color Display Background white;pbc box -off;axes location off }
 #user add key B { align [molinfo top] "residue 1 to 15 and backbone" }
 #user add key V { align [molinfo top] "not water and mass 12 to 99" }
@@ -899,23 +899,36 @@ proc snapincr {{increment "1000"}} {
     set nf [molinfo top get numframes]
     for { set i 0} { $i < $nf } {incr i $increment} {
 	animate goto $i
-	#set j [expr $i/$increment]
-	set j [format %03d [expr $i/$increment]]
-	render Tachyon frame$j.dat tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o frame$j.png -mediumshade
-	file delete frame$j.dat
+	set frame [format %04d [expr $i/$increment]]
+	set file "frame$frame.png"
+	render Tachyon frame$frame.dat tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
+	file delete frame$frame.dat
+	set trimfile [string map {".png" "-trim.png"} $file]
+	eval exec {convert -density 300 -trim $file $trimfile}
+	file delete $file
+	file rename $trimfile $file
     }   
     lores [molinfo top]
 }
 
 proc snap {{molid "0"}} {
   # take a snapshot, process and output as frame#.png
-    hires [molinfo top]
-    color Display Background white;pbc box -off;axes location off
-    display depthcue off
-    set frame [format %03d [molinfo $molid get frame]]
-    render Tachyon frame$frame.dat tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o frame$frame.png -mediumshade
+    hires $molid
+    #color Display Background white;pbc box -off;axes location off
+    #display depthcue off
+    set frame [format %04d [molinfo $molid get frame]]
+    set file "frame$frame.png"
+    set i 96 
+    # ascii a=97
+    while {[file exists $file] == 1} { set i [expr $i+1] ; set c [format %c $i]; set file "frame$frame$c.png"}
+    render Tachyon frame$frame.dat tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
     file delete frame$frame.dat
-    lores [molinfo top]
+    set trimfile [string map {".png" "-trim.png"} $file]
+    eval exec {convert -density 300 -trim $file $trimfile}
+    file delete $file
+    file rename $trimfile $file
+    lores $molid
+    puts "Generated snapshot $file"
 }   
 
 proc hires {{molid "0"}} {

@@ -7,7 +7,7 @@
 #set style line 5 lt 5 lc rgb 'dark-violet'   lw 3
 #set style line 6 lt 6 lc rgb 'cyan'          lw 3
 #set style line 7 lt 7 lc rgb 'dark-green'    lw 3
-set style line 8 lt 8 lc rgb 'orange'        lw 3
+set style line 8 lt 8 lc rgb 'red'        lw 3
 set style line 9 lt 9 lc rgb 'magenta'       lw 3
 set style line 10 lt 1 lc rgb 'olive'        lw 3
 set style line 11 lt 1 lc rgb 'dark-red'     lw 3
@@ -49,7 +49,7 @@ set style line 2 lt rgb "#00A000" lw 3 pt 6
 set style line 3 lt rgb "#5060D0" lw 3 pt 2
 set style line 4 lt rgb "#F25900" lw 3 pt 9
 set style line 5 lt 5 lc rgb 'black'         lw 3
-set style line 6 lt 6 lc rgb 'red'           lw 3
+set style line 6 lt 6 lc rgb 'dark-violet'           lw 3
 set style line 7 lt 7 lc rgb 'cyan'          lw 3
 
 #set log x

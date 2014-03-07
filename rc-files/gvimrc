@@ -35,7 +35,7 @@ if matchstr(expand("%"),".*\.tex") != ""
     :iab ahc alpha-helical
     :iab 1bw bulk water
     :iab 1int air/water interface
-    :iab pmf potential of mean force
+    :iab 1pmf potential of mean force
     :iab pp peptide
     :iab leu leucine
     :iab lys lysine
