@@ -32,7 +32,7 @@ cat > tmp.gp << EOF
 set key outside right top vertical Right noreverse enhanced autotitles nobox
 set xrange [ * : * ] noreverse nowriteback
 set yrange [ * : * ] noreverse nowriteback
-set ylabel "dimer-(chain1+chain2)" 
+set ylabel "aggregate-(sum of chains)" 
 set xlabel "time (ns)" 
 set macros
 ev="1000"
