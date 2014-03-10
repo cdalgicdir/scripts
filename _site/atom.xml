@@ -4,12 +4,30 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-03-09T00:27:59+02:00</updated>
+ <updated>2014-03-10T12:14:23+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Meeting Christine</title>
+   <link href="/2014/03/10/meeting-christine.html"/>
+   <updated>2014-03-10T00:00:00+02:00</updated>
+   <id>/2014/03/10/meeting-christine</id>
+    
+   <category term="/research/categories.html#meeting" label="meeting"/>
+   
+   <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;random KL at interface: start from a more familiar structure (not fully extended where the backbone torsions might be fully off)&lt;/li&gt;
+&lt;li&gt;Extend all sims to 1 \(\mu\)s (including the random coil sim)&lt;/li&gt;
+&lt;li&gt;Send Christoph the simulation setups&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;4.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Kl Atm Analysis</title>
