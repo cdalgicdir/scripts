@@ -59,6 +59,8 @@ color Name H iceblue
 #mol modstyle 0 0 Points 3.000
 mol modstyle 0 0 Lines
 
+set colorlist {blue red gray orange yellow tan silver green white pink cyan purple lime mauve ochre iceblue black yellow2 yellow3 green2 green3 cyan2 cyan3 blue2 blue3 violet violet2 magenta magenta2 red2 red3 orange2 orange3} 
+
 #vmd_plugin_scandirectory [file join $env(HOME) Documents software vmd-plugins [vmdinfo arch] molfile] *.so
 #pbc box -style lines|dashed|arrows|tubes
 
@@ -862,7 +864,7 @@ for {set i 0} {$i < $numframes} {incr i} {
 
 proc draw_arrow {mol start end} {
     # an arrow is made of a cylinder and a cone
-    draw color red
+    draw color lime
     set middle [vecadd $start [vecscale 0.9 [vecsub $end $start]]]
     graphics $mol cylinder $start $middle radius 0.25 resolution 100
     graphics $mol cone $middle $end radius 1 resolution 100

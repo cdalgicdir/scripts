@@ -196,7 +196,7 @@ if [ $linetype == "lines" ] || [ $linetype == "l" ] ; then
     with=" with $linetype lw $lw "
 elif [ $linetype == "points" ] || [ $linetype == "p" ]; then
     with=" with $linetype ps $pointsize "
-elif [[ $linetype == "yerror" ]]; then
+elif [[ $linetype == *yer* ]]; then
     using=" u 1:2:3 "
     with=" with $linetype "
 else
