@@ -4,12 +4,44 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-03-10T12:14:23+02:00</updated>
+ <updated>2014-03-26T16:03:24+02:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Meeting</title>
+   <link href="/2014/03/26/meeting.html"/>
+   <updated>2014-03-26T00:00:00+02:00</updated>
+   <id>/2014/03/26/meeting</id>
+    
+   <category term="/research/categories.html#meeting" label="meeting"/>
+   
+   <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;Start single KL random coil at interface (see if it folds)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;1.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Meeting</title>
+   <link href="/2014/03/25/meeting.html"/>
+   <updated>2014-03-25T00:00:00+02:00</updated>
+   <id>/2014/03/25/meeting</id>
+    
+   <category term="/research/categories.html#meeting" label="meeting"/>
+   
+   <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;PMF parallel vs anti-parallel: add inverted free sim histogram and check distances. shift the axis&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Meeting Christine</title>
