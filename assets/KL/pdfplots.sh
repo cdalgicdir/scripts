@@ -1,48 +1,21 @@
 #! /bin/bash
 
+source $HOME/SIMS/KLcg/dirs.sh
 hom=`pwd`
-remotedir="$HOME/remote"
-KLdir="$HOME/SIMS/KL"
-mapdir="$HOME/SIMS/KL/map/genitp"
-nKLdir="$remotedir/scratch8/n-KL"
 
-tetdir="$nKLdir/120608_KL4BbwLF/4-SIM/map"
-#vacdir="$remotedir/yunus/KL/131216_vacuum-excl/trial-2/map/distributions"
-kl7vacdir="$remotedir/yunus/KL/131216_vacuum-excl/7KL/map/distributions"
-#bozsindir="$remotedir/bozgur-bonded/aa_SINMOL"
-#bozsinexdir="$remotedir/bozgur-bonded/aa_SINMOL_excl"
-bozsinexdir="$HOME/SIMS/bozgur/aa_SINMOL_excl"
-
-# Bulk water
-kl1dir="$nKLdir/131021_KLsbwL/map/"
-kl2dir="$nKLdir/130121_2KL/map/"
-kl3dir="$nKLdir/130408_3KL-cubic/7-NPT/map/"
-kl4dir="$nKLdir/120608_KL4BbwLF/4-SIM/map/"
-kl5dir="$nKLdir/130326_5KL/7-NPT/map/"
-kl6dir="$remotedir/scratch7/KL/131204_6KL/7-Production/map/"
-kl8dir="$nKLdir/130620_8KL/7-NPT/map/"
-
-# Interface
-kl1intdir="$remotedir/scratch10/120529_KLSiLF-54/4-SIM/map/"
-kl2intdir="$remotedir/scratch4/130624_2KL-int/7-INT-nodistconstr/map/"
-
-# @HOME
-nKLhome="$HOME/SIMS/KL/n-KL-distributions"
-tetdir="$nKLhome/4KL"
-vacdir="$nKLhome/vacuum/140205_all-cutoff"
+dirlist=("." "../140228_cgw0.2-vBB-noii4-nb1" "../140228_cgw0.5-vBB-noii4-nb1" "../140205_cg-vacBBdih-ii4p" "$tetdir" "$vacdir")
+tlist=("cgw0.1" "cgw0.2" "cgw0.5" "cg-vBB-ii4" "tetramer" "vac-excl")
 
 # HISTOGRAMS directory
 histdir='histograms'
 #cd ${histdir}
 
-dirlist=("." "$tetdir" "$vacdir")
-tlist=("cg-wall" "tetramer" "vac-excl")
 
 ###################################################################
 # Plot Comparisons of Averages
 ###################################################################
 
-flist=('bond_CN-CA_avg.xvg' 'bond_CA-CN_avg.xvg' 'bond_CA-L_avg.xvg' 'bond_CA-KC_avg.xvg' 'bond_KC-KN_avg.xvg' 'ang_CN-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CN-CA-L_avg.xvg' 'ang_L-CA-CN_avg.xvg' 'ang_CN-CA-KC_avg.xvg' 'ang_KC-CA-CN_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CN-CA-KC_avg.xvg' 'dih_KC-CA-CN-CA_avg.xvg' 'dih_CN-CA-KC-KN_avg.xvg' 'dih_KN-KC-CA-CN_avg.xvg' 'dih_CA-CN-CA-L_avg.xvg' 'dih_L-CA-CN-CA_avg.xvg' 'imp_CA-CN-CN-L_avg.xvg' 'imp_CA-CN-KC-CN_avg.xvg' 'dist_CNi-CNi4_avg.xvg')
+flist=('bond_CN-CA_avg.xvg' 'bond_CA-CN_avg.xvg' 'bond_CA-L_avg.xvg' 'bond_CA-KC_avg.xvg' 'bond_KC-KN_avg.xvg' 'ang_CN-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CN-CA-L_avg.xvg' 'ang_L-CA-CN_avg.xvg' 'ang_CN-CA-KC_avg.xvg' 'ang_KC-CA-CN_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CN-CA-KC_avg.xvg' 'dih_KC-CA-CN-CA_avg.xvg' 'dih_CN-CA-KC-KN_avg.xvg' 'dih_KN-KC-CA-CN_avg.xvg' 'dih_CA-CN-CA-L_avg.xvg' 'dih_L-CA-CN-CA_avg.xvg' 'imp_CA-CN-CN-L_avg.xvg' 'imp_CA-CN-KC-CN_avg.xvg' 'dist_CNi-CNi4_avg.xvg' 'table_L_wall0.xvg' 'tablep.xvg')
 
 q="'"
 u=" using 1:2 with line title "
@@ -56,8 +29,15 @@ yrangelist=('dih_CN-CA-KC-KN_avg.xvg' 'dih_KN-KC-CA-CN_avg.xvg')
 for f in ${flist[@]}; do
     plcomms=""
     for i in `seq 0 $((${#dirlist[@]}-1))`; do
-	dir=${dirlist[$i]}/$histdir
 	t=${tlist[$i]}
+	# plotting tabular potentials
+	if [[ $f == table* ]]; then
+	   dir="${dirlist[$i]}"
+	   u=" using 1:6 with line title "
+	else
+	   dir=${dirlist[$i]}/$histdir
+	   u=" using 1:2 with line title "
+       fi
 	plcomms="${plcomms}""${q}${dir}/${f}${q}${u}${q}${t}${q},"
     done
     outname="`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/'`"
@@ -66,6 +46,8 @@ for f in ${flist[@]}; do
 	gplot -c "set yrange[0:1]" -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
     elif [[ ${keyleftlist[@]} == *"${f}"* ]]; then
 	gplot -o "${outname}" --term "${terminal}" -c "set key left top" -t "${f%.xvg}" -- "${plcomms}"
+    elif [[ $f == table* ]]; then
+	gplot -c "set yrange[*:100]" -c "set xrange[0:1.5]" -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
     else
 	gplot -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
     fi
@@ -81,6 +63,7 @@ if [[ $plotall == 1 ]]; then
 plots=`egrep "^hist [badi]" boltzmann.comms | awk '{print $2}'`
 
 q="'"
+u=" using 1:2 with line title "
 plcomms=''
 terminal="pdfcairo font \"Gill Sans,16\" lw 2 rounded"
 
@@ -109,7 +92,7 @@ for pdf in ${pdflist[@]}; do
 done
 #mv ${histdir}/*pdf report/
 cd report/
-cp $HOME/SIMS/KL/plots/distributions-all.tex .
+#cp $HOME/SIMS/KL/plots/distributions-all.tex .
 pdflatex -shell-escape -interaction=nonstopmode distributions-all.tex
 rm *.aux *.log
 mupdf distributions-all.pdf &
