@@ -3,8 +3,10 @@
 source $HOME/SIMS/KLcg/dirs.sh
 hom=`pwd`
 
-dirlist=("." "../140228_cgw0.2-vBB-noii4-nb1" "../140228_cgw0.5-vBB-noii4-nb1" "../140205_cg-vacBBdih-ii4p" "$tetdir" "$vacdir")
-tlist=("cgw0.1" "cgw0.2" "cgw0.5" "cg-vBB-ii4" "tetramer" "vac-excl")
+dirlist=("." "../140228_cgw0.5-vBB-noii4-nb1" "../140205_cg-vacBBdih-ii4p" "../140224_cg-wall-vacBBdih-noii4p-nb")
+tlist=("cg" "cgw0.5" "cg-vBB-ii4" "cgw1")
+#dirlist=("." "../140228_cgw0.2-vBB-noii4-nb1" "../140228_cgw0.5-vBB-noii4-nb1" "../140205_cg-vacBBdih-ii4p" "$tetdir" "$vacdir")
+#tlist=("cgw0.1" "cgw0.2" "cgw0.5" "cg-vBB-ii4" "tetramer" "vac-excl")
 
 # HISTOGRAMS directory
 histdir='histograms'
@@ -31,7 +33,7 @@ for f in ${flist[@]}; do
     for i in `seq 0 $((${#dirlist[@]}-1))`; do
 	t=${tlist[$i]}
 	# plotting tabular potentials
-	if [[ $f == table* ]]; then
+	if [[ $f == table*.xvg ]]; then
 	   dir="${dirlist[$i]}"
 	   u=" using 1:6 with line title "
 	else
@@ -46,7 +48,7 @@ for f in ${flist[@]}; do
 	gplot -c "set yrange[0:1]" -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
     elif [[ ${keyleftlist[@]} == *"${f}"* ]]; then
 	gplot -o "${outname}" --term "${terminal}" -c "set key left top" -t "${f%.xvg}" -- "${plcomms}"
-    elif [[ $f == table* ]]; then
+    elif [[ $f == table*.xvg ]]; then
 	gplot -c "set yrange[*:100]" -c "set xrange[0:1.5]" -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
     else
 	gplot -o "${outname}" --term "${terminal}" -t "${f%.xvg}" -- "${plcomms}"
