@@ -92,7 +92,7 @@ for pdf in ${pdflist[@]}; do
 done
 #mv ${histdir}/*pdf report/
 cd report/
-#cp $HOME/SIMS/KL/plots/distributions-all.tex .
+cp $HOME/SIMS/KL/plots/distributions-all.tex .
 pdflatex -shell-escape -interaction=nonstopmode distributions-all.tex
 rm *.aux *.log
 mupdf distributions-all.pdf &
