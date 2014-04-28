@@ -8,6 +8,7 @@ tagline: Notes on journal articles
 paginate: 25
 #baseurl: 
 baseurl: /research
+encoding: "utf-8"
 
 ## Markdown Parser (standard Jekyll argument, extended to special parser)
 markdown: pandoc
