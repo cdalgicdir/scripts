@@ -4,12 +4,34 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-04-28T09:51:55+03:00</updated>
+ <updated>2014-04-29T11:54:46+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Kl Sasa</title>
+   <link href="/2014/04/29/kl-sasa.html"/>
+   <updated>2014-04-29T00:00:00+03:00</updated>
+   <id>/2014/04/29/kl-sasa</id>
+    
+   <category term="/research/categories.html#kl" label="kl"/>
+   
+   <content type="html">&lt;h3 id=&quot;sasa-calculations&quot;&gt;SASA Calculations&lt;/h3&gt;
+&lt;h5 id=&quot;single-peptide-in-bulk-water&quot;&gt;Single peptide in bulk water:&lt;/h5&gt;
+&lt;p&gt;echo Protein Protein | g_sas -f -s -n -dt 100 -o area-PP.xvg&lt;/p&gt;
+&lt;h5 id=&quot;single-peptide-at-airwater-interface&quot;&gt;Single peptide at air/water interface:&lt;/h5&gt;
+&lt;p&gt;echo System Protein | g_sas -f -s -n -dt 100 -o area-SP.xvg echo Protein Protein | g_sas -f -s -n -dt 100 -o area-PP.xvg - difference between area-PP and area-SP (ie [area-PP - area-SP]) will give the water-exposed area.&lt;/p&gt;
+&lt;h5 id=&quot;dimer-in-bulk-water&quot;&gt;Dimer in bulk water:&lt;/h5&gt;
+&lt;p&gt;echo Protein Protein_chain1 | g_sas -f -s -n -dt 100 -o area-Pp1.xvg - area-Pp1 will give the water-exposed area for chain 1&lt;/p&gt;
+&lt;h5 id=&quot;dimer-at-airwater-interface&quot;&gt;Dimer at air/water interface:&lt;/h5&gt;
+&lt;p&gt;echo Protein Protein_chain1 | g_sas -f -s -n -dt 100 -o area-Pp1.xvg echo System Protein_chain1 | g_sas -f -s -n -dt 100 -o area-Sp1.xvg - area-Pp1 will give you the sum of the water-exposed area and the water-shielded area due to the interface (excluding the shielded area due to the 2nd chain) - area-Sp1 will give you the water-shielded area due to the interface (excluding the shielded area due to 2nd chain) - difference between area-Pp1 and area-Sp1 will give the water exposed area for chain 1 -&lt;/p&gt;
+&lt;h4 id=&quot;further-notes&quot;&gt;Further notes&lt;/h4&gt;
+&lt;p&gt;When we calculate the SASA values of a single KL peptide at air/water interface, and use the command below (System as surface and protein as calculation group), we get SASA of ~2-3 when the peptide is submerged in bulk water. This SASA should be zero because we are calculating the area of the protein above water, but the radius of the probe is small enough to penetrate through water. Therefore I think we need to define the size of the probe such that it will not take into account any contribution from the area of the peptide inside the bulk water. For my case, a probe radius of 0.21 nm yields zero SASA when the peptide is submerged in bulk water. To be consistent I plan to use a probe size of 0.21 nm for all my SASA calculations. - echo System Protein | g_sas -f -s -n -dt 100 -o area-SP.xvg&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Todo</title>
@@ -25,18 +47,6 @@
 &lt;li&gt;do calc for n-KL (show that 4 is the optimal)&lt;/li&gt;
 &lt;li&gt;give leucine sidechains as calculation group&lt;/li&gt;
 &lt;/ul&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Msayar Todo</title>
-   <link href="/2014/04/25/msayar-todo.html"/>
-   <updated>2014-04-25T00:00:00+03:00</updated>
-   <id>/2014/04/25/msayar-todo</id>
-    
-   <category term="/research/categories.html#msayar" label="msayar"/>
-   
-   <content type="html">
 </content>
  </entry>
  
