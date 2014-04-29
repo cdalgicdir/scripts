@@ -103,15 +103,31 @@
     <article>
     <h3 id="sasa-calculations">SASA Calculations</h3>
 <h5 id="single-peptide-in-bulk-water">Single peptide in bulk water:</h5>
-<p>echo Protein Protein | g_sas -f -s -n -dt 100 -o area-PP.xvg</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> Protein Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-PP.xvg</code></pre>
 <h5 id="single-peptide-at-airwater-interface">Single peptide at air/water interface:</h5>
-<p>echo System Protein | g_sas -f -s -n -dt 100 -o area-SP.xvg echo Protein Protein | g_sas -f -s -n -dt 100 -o area-PP.xvg - difference between area-PP and area-SP (ie [area-PP - area-SP]) will give the water-exposed area.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> System Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-SP.xvg
+<span class="kw">echo</span> Protein Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-PP.xvg</code></pre>
+<ul>
+<li>difference between area-PP and area-SP (ie area-PP - area-SP) will give the water-exposed area.</li>
+</ul>
 <h5 id="dimer-in-bulk-water">Dimer in bulk water:</h5>
-<p>echo Protein Protein_chain1 | g_sas -f -s -n -dt 100 -o area-Pp1.xvg - area-Pp1 will give the water-exposed area for chain 1</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> Protein Protein_chain1 <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-Pp1.xvg</code></pre>
+<ul>
+<li>area-Pp1 will give the water-exposed area for chain 1</li>
+</ul>
 <h5 id="dimer-at-airwater-interface">Dimer at air/water interface:</h5>
-<p>echo Protein Protein_chain1 | g_sas -f -s -n -dt 100 -o area-Pp1.xvg echo System Protein_chain1 | g_sas -f -s -n -dt 100 -o area-Sp1.xvg - area-Pp1 will give you the sum of the water-exposed area and the water-shielded area due to the interface (excluding the shielded area due to the 2nd chain) - area-Sp1 will give you the water-shielded area due to the interface (excluding the shielded area due to 2nd chain) - difference between area-Pp1 and area-Sp1 will give the water exposed area for chain 1 -</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> Protein Protein_chain1 <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-Pp1.xvg
+<span class="kw">echo</span> System Protein_chain1 <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-Sp1.xvg</code></pre>
+<ul>
+<li>area-Pp1 will give you the sum of the water-exposed area and the water-shielded area due to the interface (excluding the shielded area due to the 2nd chain)</li>
+<li>area-Sp1 will give you the water-shielded area due to the interface (excluding the shielded area due to 2nd chain)</li>
+<li>difference between area-Pp1 and area-Sp1 will give the water exposed area for chain 1</li>
+</ul>
 <h4 id="further-notes">Further notes</h4>
-<p>When we calculate the SASA values of a single KL peptide at air/water interface, and use the command below (System as surface and protein as calculation group), we get SASA of ~2-3 when the peptide is submerged in bulk water. This SASA should be zero because we are calculating the area of the protein above water, but the radius of the probe is small enough to penetrate through water. Therefore I think we need to define the size of the probe such that it will not take into account any contribution from the area of the peptide inside the bulk water. For my case, a probe radius of 0.21 nm yields zero SASA when the peptide is submerged in bulk water. To be consistent I plan to use a probe size of 0.21 nm for all my SASA calculations. - echo System Protein | g_sas -f -s -n -dt 100 -o area-SP.xvg</p>
+<ul>
+<li><p>When we calculate the SASA values of a single KL peptide at air/water interface, and use the command below (System as surface and protein as calculation group), we get SASA of ~2-3 when the peptide is submerged in bulk water. This SASA should be zero because we are calculating the area of the protein above water, but the radius of the probe is small enough to penetrate through water. Therefore I think we need to define the size of the probe such that it will not take into account any contribution from the area of the peptide inside the bulk water. For my case, a probe radius of 0.21 nm yields zero SASA when the peptide is submerged in bulk water. To be consistent I plan to use a probe size of 0.21 nm for all my SASA calculations.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> System Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-SP.xvg</code></pre></li>
+</ul>
 
     </article>
   </div>
