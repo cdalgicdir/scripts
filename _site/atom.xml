@@ -4,12 +4,25 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-04-29T15:12:47+03:00</updated>
+ <updated>2014-04-30T10:18:36+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Msayar</title>
+   <link href="/2014/04/30/msayar.html"/>
+   <updated>2014-04-30T00:00:00+03:00</updated>
+   <id>/2014/04/30/msayar</id>
+    
+   <category term="/categories.html#kl" label="kl"/>
+   
+   <content type="html">&lt;h3 id=&quot;why-does-the-peptide-fold-into-helix&quot;&gt;Why does the peptide fold into helix?&lt;/h3&gt;
+&lt;p&gt;-MS: Do you know any structural measure to identify the folding of the alpha helix? I am trying to decompose the energy contributions for the helix formation. If we measure the SASA during folding of a helix for LK, pretty much the whole change in SASA comes from the LEU sidechains. But there must also be a significant contribution from the backbone. I don’t think h-bonds is the answer, because even if the helix does not form, the backbone can still make h-bonds with water. So the answer should be related to the entropy of the water molecules. SASA should also reflect this, but when I look at the SASA from the backbone of the molecule, there is pretty much no change in SASA.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Kl Sasa</title>
