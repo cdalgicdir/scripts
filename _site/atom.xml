@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-05-27T16:35:43+03:00</updated>
+ <updated>2014-05-27T18:29:56+03:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -22,15 +22,15 @@
    <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
 &lt;h5 id=&quot;for-phi-psi-based-clustering&quot;&gt;for phi-psi based clustering:&lt;/h5&gt;
 &lt;ul&gt;
-&lt;li&gt;write the histograms pdf, cdf into a file&lt;/li&gt;
-&lt;li&gt;do clustering with gromacs to compare&lt;/li&gt;
-&lt;li&gt;do euclidean norm calculation&lt;/li&gt;
-&lt;li&gt;try weighting for residues&lt;/li&gt;
-&lt;li&gt;try discarding the first and last 3 residues&lt;/li&gt;
+&lt;li&gt;[x] write the histograms pdf, cdf into a file&lt;/li&gt;
+&lt;li&gt;[] do clustering with gromacs to compare&lt;/li&gt;
+&lt;li&gt;[x] do euclidean norm calculation&lt;/li&gt;
+&lt;li&gt;[] try weighting for residues&lt;/li&gt;
+&lt;li&gt;[] try discarding the first and last 3 residues&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h5 id=&quot;for-kl&quot;&gt;for KL:&lt;/h5&gt;
 &lt;ul&gt;
-&lt;li&gt;do umbrella pulling for two tetramers by pulling them together&lt;/li&gt;
+&lt;li&gt;[] do umbrella pulling for two tetramers by pulling them together&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>
