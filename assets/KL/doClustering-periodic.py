@@ -8,7 +8,6 @@ import numpy as np
 import pylab as pl
 from scipy import linalg as ln
 from hcluster import *
-
 import argparse
 
 class Choices():
@@ -23,7 +22,6 @@ class Choices():
         return iter(self.choices)
 
 parser = argparse.ArgumentParser(description='Process some integers.')
-
 parser.add_argument('--gro', '-g', dest='grofile', nargs='?', default="conf.gro", const="conf.gro", help='gromacs configuration file (.gro)', choices=Choices('.gro'))
 parser.add_argument('--xtc', '-x', dest='xtcfile', nargs='?', default="traj.xtc", const="traj.xtc", help='gromacs trajectory file (.xtc)', choices=Choices('.xtc'))
 parser.add_argument('--cutoff', '-c', dest='cutoff', nargs="?", default="600", const="600", help='cutoff value (default 600)', type=int)
@@ -41,13 +39,6 @@ link_param = args.link_param
 method = args.method
 truncate_mode = args.truncate_mode
 show_plot = args.show_plot
-
-#cutoff = 300
-#link_param = 4
-#xtcfile = 'trajout0-dt10k-center.xtc'
-#grofile = 'protein-alpha.gro'
-#grofile = sys.argv[1]
-#xtcfile = sys.argv[2]
 
 def calcRama(u):
     ''' input: dcd universe '''
@@ -93,7 +84,9 @@ def doHist(Z):
     f = fcluster(Z,cutoff,criterion='distance')
     hist, bin_edges = np.histogram(f,np.arange(0.5,f.max()+1))
     pl.figure()
-    pl.bar(bin_edges[:-1],sorted(hist,reverse=True),width=1)
+    hist_sorted = np.array(sorted(hist,reverse=True))
+    pl.bar(bin_edges[:-1],hist_sorted,width=1)
+    np.savetxt('histogram.dat', np.column_stack((hist_sorted.T, np.cumsum(hist_sorted).T)))
     #pl.bar(bin_edges[:-1],hist,width=1)
     pl.title(method + "-" + str(cutoff))
     pl.savefig("histogram.pdf")
@@ -124,46 +117,39 @@ def accumulate_clusters(f):
     return clusters, clusters_keys_sorted
 
 u = md.Universe(grofile,xtcfile)
+print "Converting trajectory to dcd format"
 Rp = calcRama(convert_xtc2dcd(u))
+# pdist does not do periodic norm calculation
+#X = pdist(Rp)
+# apply periodicity
 x = Rp[:,None,...] - Rp[None,...]
 x[x<-180]+=360
 x[x>180]-=360
 xs = np.sqrt((x**2).sum(axis=2))
-
-#X = pdist(Rp)
+# upper triangular of the matrix to vector
 Xs = (np.triu(xs)[np.triu_indices(Rp.shape[0])])
-nf = Rp.shape[0]
-nff = nf * (nf-1) / 2
+# remove self distances on the diagonal
 X = Xs[ Xs != 0]
 
-#for method in ["single"]:
-#for method in ["complete"]:
+pwd = os.getcwd()
+outdir_root = "clustering-" + method + "-" + str(cutoff)
+outdir = outdir_root
+while os.path.exists(outdir):
+    try: i += 1
+    except NameError: i = 2
+    outdir = outdir_root + "-" + str(i)
+os.mkdir(outdir)
+print "Writing files in %s!" %outdir
+os.chdir(outdir)
+
 f = doCluster(X, method)
 report, clusters_keys_sorted, clusters = write_report(f, method, cutoff)
+os.chdir(pwd)
 
 if show_plot:
     pl.show()
 
-outdir_root = "clustering-" + method + "-" + str(cutoff)
-
 A = u.selectAtoms('all')
-#for i in range(1,f.max()+1):
-i = 1
-
-outdir = outdir_root
-
-while os.path.exists(outdir):
-    i += 1
-    outdir = outdir_root + "-" + str(i)
-
-os.mkdir(outdir)
-
-print "Writing files in %s!" %outdir
-
-shutil.move("histogram.pdf", outdir + "/histogram.pdf")
-shutil.move("dendrogram.pdf", outdir + "/dendrogram.pdf")
-shutil.move(report, outdir + "/" + report)
-
 cluster_id = 1
 for i in clusters_keys_sorted:
     cluster_grofile = outdir + "/" + "cluster-" + str(cluster_id) + ".gro"
