@@ -1,3 +1,4 @@
+set term wxt noctrl raise
 #show style line
 #set term wxt size 800,600
 #set style line 1 lt 1 lc rgb 'red'           lw 3
@@ -61,10 +62,17 @@ pdfout="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 3 rounded
 po="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 3 rounded;set output \"out.pdf\";rep;set output;set term wxt"
 #set terminal pdfcairo font "Gill Sans,16" linewidth 3 rounded;set output "out.pdf";rep;set output
 pngout="set terminal pngcairo size 800,600 enhanced font 'Gill Sans,16' linewidth 3 rounded;set output \"out.png\";rep;set output"
-dih="set xlabel '{/Symbol F}_{PBBP}';set ylabel 'P ({/Symbol F})';set xtics 60;set xrange [-180:180]"
+ang="set xlabel '{/Symbol q}';set ylabel 'P ({/Symbol q})';set xtics 60;set xrange [-180:180]"
+dih="set xlabel '{/Symbol F}';set ylabel 'P ({/Symbol F})';set xtics 60;set xrange [-180:180]"
 pmf="set xlabel 'separation distance (nm)';set ylabel 'V(r) (kJ/mol)'"
 pot="set xlabel 'r (nm)';set ylabel 'V(r) (kJ/mol)'"
 ll="set style data line"
+evo="!evince out.pdf"
+saslab="set key out;set xlabel 'time (ns)';set ylabel 'SASA (nm^2)'"
+sas=" u ($1/1000):2 t 'hydrophobic','' u ($1/1000):3 t 'hydrophilic','' u ($1/1000):4 t 'total'"
+sasev=" ev 200 u ($1/1000):2 t 'hydrophobic','' ev 200 u ($1/1000):3 t 'hydrophilic','' ev 200 u ($1/1000):4 t 'total'"
+sasdiff=" u ($1/1000):($2-$7) t 'hydrophobic','' u ($1/1000):($3-$8) t 'hydrophilic','' u ($1/1000):($4-$9) t 'total'"
+sasdiffev=" ev 200 u ($1/1000):($2-$7) t 'hydrophobic','' ev 200 u ($1/1000):($3-$8) t 'hydrophilic','' ev 200 u ($1/1000):($4-$9) t 'total'"
 #
 #set xtics pi
 #set format x '%.0Pπ'

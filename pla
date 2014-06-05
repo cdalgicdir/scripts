@@ -17,13 +17,15 @@ max=30
 label=1
 keypos=''
 plotfiles=''
-terminal='set terminal wxt'
+terminal=''
+#terminal='set terminal wxt'
 range=[:][:]
 userset="false"
 doshift=0
 entcorr=0
 kT=2.4777 #for T=298K
 #kT=2.4943 #for T=300
+sas=false
 
 plot () {
     gplot $output  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
@@ -76,6 +78,8 @@ while [[ $# -ge 1 ]]; do
 		x="${2}"
 		xl=(${x//:/ })
 		using=' u '"${xl[0]}"':'"${xl[1]}"
+	    else
+		using=" u $2 "
 	    fi
 	    userset="true"
 	    #using=" u 1:${2} "
@@ -103,12 +107,22 @@ while [[ $# -ge 1 ]]; do
 	    lw=$2
 	    shift 2;;
 
+	ev|every)
+	    every=$2
+	    shift 2;;
+
 	-y)
 	    range="[:][:$2]"
 	    shift 2;;
 
 	-nxy)
 	    nxy=1
+	    shift ;;
+
+	-sas)
+	    sas=true
+	    linetype="points ps 1"
+	    extra="set xlabel \"distance(nm)\";set ylabel \"SASA (nm^2)\";set term wxt enhanced"
 	    shift ;;
 
 	not)
@@ -192,9 +206,9 @@ if [[ $doshift == 1 ]]; then
 fi
 
 # linetypes
-if [ $linetype == "lines" ] || [ $linetype == "l" ] ; then
+if [ "${linetype}" == "lines" ] || [ "${linetype}" == "l" ] ; then
     with=" with $linetype lw $lw "
-elif [ $linetype == "points" ] || [ $linetype == "p" ]; then
+elif [ "${linetype}" == "points" ] || [ "${linetype}" == "p" ]; then
     with=" with $linetype ps $pointsize "
 elif [[ $linetype == *yer* ]]; then
     using=" u 1:2:3 "
@@ -237,6 +251,8 @@ do
 		    plotfiles=$plotfiles'not,'
 		fi
 	    done
+	elif [[ $sas == true ]]; then
+	    plotfiles=${plotfiles}${q}${file}${q}" using (\$1/1000):2 "${with}" t 'hydrophobic','' using (\$1/1000):3 "${with}" t 'hydrophilic','' using (\$1/1000):4 "${with}" t 'total',"
 	else
 	    plotfiles=${plotfiles}${q}${file}${q}${using}${with}
 	    if [[ $label == 1 ]]; then

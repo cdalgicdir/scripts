@@ -74,7 +74,7 @@ eof
 
 plot () {
 
-	$gplot -3 -c "$range" $save -c "$size" -c "$terminal" -a "$xrange" -j "$yrange" -x "$xlabel" -y "$ylabel" -t "$title" -c "$xtics" -c "$ytics"  -c "set palette defined ( 0 '$color0',3 '$color3',6 '$color6',10 '$color10' )" -c "set cntrparam bspline" -c "set cntrparam order 5" -c "set cntrparam levels 30" -c "unset clabel" -c "set contour base" -c "set pm3d map interpolate 30,30" -c "set size square" -c "set dgrid3d $grid1,$grid2,$grid3" -c "set style line 1 lt 1 lc rgb 'black' lw 0.1" -k $file $using
+	$gplot -3 -c "$range" $save -c "$size" -c "$terminal" -s "xrange $xrange" -s "yrange $yrange" -x "$xlabel" -y "$ylabel" -t "$title" -c "$xtics" -c "$ytics"  -c "set palette defined ( 0 '$color0',3 '$color3',6 '$color6',10 '$color10' )" -c "set cntrparam bspline" -c "set cntrparam order 5" -c "set cntrparam levels 30" -c "unset clabel" -c "set contour base" -c "set pm3d map interpolate 30,30" -c "set size square" -c "set dgrid3d $grid1,$grid2,$grid3" -c "set style line 1 lt 1 lc rgb 'black' lw 0.1" -k $file $using
 
 }
 

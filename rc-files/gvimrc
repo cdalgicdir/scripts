@@ -42,5 +42,6 @@ if matchstr(expand("%"),".*\.tex") != ""
     :iab KL LK$\alpha$14
     :iab ie i.e.
     :iab adn and
+    :iab 1CNii4 CN$_i$-CN$_{i+4}$
     :map <F2> viwb<ESC><ESC>i\emph{<ESC>ea}<ESC>
 endif

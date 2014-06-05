@@ -154,11 +154,15 @@ user add key D { if {[display get depthcue] != "on" } {display depthcue on} {dis
 user add key f {rotate x by 90}
 user add key F {rotate y by 90}
 user add key v {rotate z by 90}
+user add key S {sas [molinfo top]}
 user add key Z {if {[mol showperiodic [molinfo top] 0] == "" } { periodicZ [molinfo top]} { periodicZoff [molinfo top]; rotate y by 0.1; rotate y by -0.1}}
 #user add key Z {set numrep [molinfo top get numreps];for {set i $numrep} {$i > -1} {incr i -1} {mol showperiodic top $numrep zZ;mol numperiodic top $numrep 1}}
 
 # shortcut for certain drawings
 user add key Up { if {[menu main status] != "on"} {menu main on} {menu main off } }
+user add key Down {animate pause}
+user add key Left {animate reverse}
+user add key Right { if {[molinfo top get numframes] == [ expr [molinfo top get frame] + 1] } {animate goto start; animate forward} {animate forward} }
 user add key q { reset_viz [molinfo top] }
 user add key w { ss_viz [molinfo top] }
 #user add key W { protlig_viz_sketch [molinfo top] }
@@ -184,7 +188,8 @@ user add key {=} { display resetview; rotate x by -90 }
 user add key u { selupdate_all }
 user add key J { if {[molinfo top get rep] == "Lines"} { changerep [molinfo top] "Licorice 0.300000 10.000000 10.000000" } {changerep [molinfo top] "Lines"}}
 user add key L { addHeavyLabels [molinfo top] }
-user add key z { align [molinfo top] }
+user add key B { align [molinfo top] }
+user add key z { align [molinfo top] "resid 3 to 10 and backbone and protein" }
 user add key b { showbackbone [molinfo top] }
 user add key F10 { snap [molinfo top] }
 user add key F11 { display depthcue off; color Display Background white;pbc box -off;axes location off }
@@ -1035,12 +1040,20 @@ proc showbackbone {{molid "0"}} {
     }
 }
 
-proc sas {} {
+#proc sas {} {
+#    kllred_viz [molinfo top]
+#    mol load pdb connelly.pdb
+#    mol modselect 0 1 "resname DOT"
+#    #mol modselect 0 1 "not (protein or resname ACE NME CL or water)"
+#    #mol modcolor 0 1 ColorID 0
+#}
+
+proc sas {{molid "0"}} {
     kllred_viz [molinfo top]
-    mol load pdb connelly.pdb
-    mol modselect 0 1 "resname DOT"
-    #mol modselect 0 1 "not (protein or resname ACE NME CL or water)"
-    #mol modcolor 0 1 ColorID 0
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol color ColorID 9
+    mol selection {resname DOT}
+    mol addrep $molid
 }
 
 proc unwrap {{molid "0"}} {

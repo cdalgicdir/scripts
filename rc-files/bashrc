@@ -105,7 +105,7 @@ fi
 CDPATH=".:~/remote"
 export PATH=$PATH:$HOME/Documents/scripts/currentscripts:$HOME/Mendeley/bin
 GROMACSDIR=/usr/local/gromacs/gromacs-4.5.6
-votcadir=$HOME/Votca/votca-1.2.3-dodebugfixed
+votcadir=$HOME/Votca/votca-1.2.3-fixed
 source $GROMACSDIR/bin/GMXRC.bash
 export GMXLIB=$GROMACSDIR/share/gromacs/top
 source $votcadir/bin/VOTCARC.bash
@@ -143,6 +143,7 @@ export SCHRODINGER=/opt/schrodinger
 extract () {
   if [ -f "$1" ] ; then
       case "$1" in
+          *.tbz)   tar xvjf "$1"    ;;
           *.tar.bz2)   tar xvjf "$1"    ;;
           *.tar.gz)    tar xvzf "$1"    ;;
           *.bz2)       bunzip2 "$1"     ;;
@@ -168,10 +169,10 @@ cd() {
    [[ $PWD == "$HOME/Downloads" ]] && ls -tr || ls
 }
 
-wiki() {
-    local link=`wikipedia2text -u "$1"`
-    chromium-browser "${link}"
-}
+#wiki() {
+#    local link=`wikipedia2text -u "$1"`
+#    chromium-browser "${link}"
+#}
 
 fawk() {
     # "fawk file 2 3" prints 2nd and 3rd columns of
@@ -207,3 +208,5 @@ function pawk {
 }
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
 alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png "[$?] $(alert_helper)"'
+export VIMRUNTIME=/usr/share/vim/vim74
+export LC_TIME=en_GB.utf8
