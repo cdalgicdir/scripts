@@ -26,9 +26,11 @@ entcorr=0
 kT=2.4777 #for T=298K
 #kT=2.4943 #for T=300
 sas=false
+functions=""
+column=2
 
 plot () {
-    gplot $output  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
+    gplot $output -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
 }
 
 printcommands () {
@@ -78,8 +80,10 @@ while [[ $# -ge 1 ]]; do
 		x="${2}"
 		xl=(${x//:/ })
 		using=' u '"${xl[0]}"':'"${xl[1]}"
+		column=${xl[1]}
 	    else
 		using=" u $2 "
+		column=$2
 	    fi
 	    userset="true"
 	    #using=" u 1:${2} "
@@ -177,7 +181,23 @@ while [[ $# -ge 1 ]]; do
 	    keypos='set key right bottom'
 	    shift;;
 
+	-movavg|-ma)
+	    domovavg=1
+	    functions='samples(x) = $0 > 4 ? 5 : ($0+1);avg5(x) = (shift5(x), (back1+back2+back3+back4+back5)/samples($0));shift5(x) = (back5 = back4, back4 = back3, back3 = back2, back2 = back1, back1 = x);init(x) = (back1 = back2 = back3 = back4 = back5 = sum = 0)'
+	    shift;;
+
+	-cummean|-cm)
+	    docummean=1
+	    functions='sum=0'
+	    shift;;
+
+	-mac)
+	    docummean=1 && domovavg=1
+	    functions='samples(x) = $0 > 4 ? 5 : ($0+1);avg5(x) = (shift5(x), (back1+back2+back3+back4+back5)/samples($0));shift5(x) = (back5 = back4, back4 = back3, back3 = back2, back2 = back1, back1 = x);init(x) = (back1 = back2 = back3 = back4 = back5 = sum = 0)'
+	    shift;;
+
 	[0-9]|[0-9][0-9])
+	    column=$1
 	    using=" u 1:${1} "
 	    userset="true"
 	    shift ;;
@@ -239,7 +259,7 @@ do
 	    theshiftR=${shiftRlist[$i]} 
 	    using=" u 1:(\$2+2*$kT*(log(\$1/$theshiftR))-$theshift) "
 	fi
-
+	
 	if [[ $nxy == 1 ]]; then
 	    NF=`tail -1 ${file} | awk '{print NF}'`
 	    for i in `seq 2 $NF`; do
@@ -260,6 +280,8 @@ do
 	    else
 		plotfiles=$plotfiles'not,'
 	    fi
+	    [[ $domovavg == 1 ]] && plotfiles="${plotfiles}sum = init(0), '' using 1:(avg5(\$$column)) title 'running mean-5',"
+	    [[ $docummean == 1 ]] && plotfiles="${plotfiles}sum=0,'' using 1:(sum = sum + \$$column, sum/(\$0+1)) title 'cumulative mean',"
 	fi
 	let i=i+1
     fi
