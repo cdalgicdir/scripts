@@ -58,26 +58,18 @@ die() {
 
 genfunc() {
     n=$1
-    comm="samples(x) = \$0 > $((n-1)) ? $n : (\$0+1);"
-    comm=$comm" avg(x) = (shift(x), ("
-
+    p1=" avg(x) = (shift(x), ("
+    p2=""
+    p3="init(x) = ("
     for i in `seq 1 $((n-1))`; do
-	comm=$comm"back$i+"
+	p1=$p1"back$i+"
+	[[ $i -gt 1 ]] && p2="back$i = back$((i-1)), "$p2
+	p3=$p3"back$i = "
     done
-    comm=$comm"back$n)/samples(\$0));"
-
-    comm=$comm"shift(x) = ("
-
-    for i in `seq $n -1 2`; do
-	comm=$comm"back$i = back$((i-1)), "
-    done
-    comm=$comm"back1 = x);"
-
-    comm=$comm"init(x) = ("
-    for i in `seq 1 $n`; do
-	comm=$comm"back$i = "
-    done
-    comm=$comm"sum = 0)"
+    p1=$p1"back$n)/samples(\$0));"
+    p2="shift(x) = (back$n = back$((n-1)),"$p2"back1 = x);"
+    p3=$p3"back$n = sum = 0)"
+    comm="samples(x) = \$0 > $((n-1)) ? $n : (\$0+1);${p1}${p2}${p3}"
     echo $comm
 }
 
@@ -220,6 +212,7 @@ while [[ $# -ge 1 ]]; do
 		shift
 	    fi
 	    functions=`genfunc $n`
+	    echo $functions
 	    ;;
 
 	-cummean|-cm)
