@@ -212,7 +212,6 @@ while [[ $# -ge 1 ]]; do
 		shift
 	    fi
 	    functions=`genfunc $n`
-	    echo $functions
 	    ;;
 
 	-cummean|-cm)
