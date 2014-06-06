@@ -216,7 +216,7 @@ while [[ $# -ge 1 ]]; do
 
 	-cummean|-cm)
 	    docummean=1
-	    functions='sum=0'
+	    [[ $functions == "" ]] && functions='sum=0'
 	    shift;;
 
 	-mac)
