@@ -28,6 +28,7 @@ kT=2.4777 #for T=298K
 sas=false
 functions=""
 column=2
+every=1
 
 plot () {
     gplot $output -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
@@ -248,6 +249,8 @@ while [[ $# -ge 1 ]]; do
     esac
 done
 
+ev=" every ${every} "
+
 # shift to zero for PMFs (only works for the second column
 if [[ $doshift == 1 ]]; then
     shiftlist=()
@@ -299,7 +302,7 @@ do
 	    NF=`tail -1 ${file} | awk '{print NF}'`
 	    for i in `seq 2 $NF`; do
 		using=" u 1:$i "
-		plotfiles=${plotfiles}${q}${file}${q}${using}${with}
+		plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
 		if [[ $label == 1 ]]; then
 		    plotfiles=$plotfiles't '$q${i}$q',' 
 		else
@@ -307,11 +310,11 @@ do
 		fi
 	    done
 	elif [[ $sas == true ]]; then
-	    plotfiles=${plotfiles}${q}${file}${q}" using (\$1/1000):2 "${with}" t 'hydrophobic','' using (\$1/1000):3 "${with}" t 'hydrophilic','' using (\$1/1000):4 "${with}" t 'total',"
+	    plotfiles=${plotfiles}${q}${file}${q}${ev}" using (\$1/1000):2 "${with}" t 'hydrophobic','' ${ev} using (\$1/1000):3 "${with}" t 'hydrophilic','' ${ev} using (\$1/1000):4 "${with}" t 'total',"
 	else
-	    plotfiles=${plotfiles}${q}${file}${q}${using}${with}
+	    plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
 	    if [[ $label == 1 ]]; then
-		plotfiles=$plotfiles't '$q$file$q',' 
+		plotfiles=$plotfiles't '${q}${file}${q}',' 
 	    else
 		plotfiles=$plotfiles'not,'
 	    fi

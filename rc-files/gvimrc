@@ -8,7 +8,7 @@ if matchstr(expand("%"),".*\.md") != ""
     :au BufRead *.tex set spell
     :highlight SpellBad gui=underline guibg=NONE guifg=red
 else
-    "colorscheme moria, twilight, solarized, inkpot, corporation
+    "colorscheme moria, twilight, solarized, inkpot, corporation, monokai
     colorscheme jellybeans
     set guifont=Inconsolata\ 15
     "set guifont=Monaco\ 13

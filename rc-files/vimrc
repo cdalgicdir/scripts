@@ -172,3 +172,4 @@ endfu
 com! WP call WordProcessorMode()
 filetype plugin indent on
 set grepprg=grep\ -nH\ $*
+
