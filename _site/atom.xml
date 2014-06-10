@@ -4,12 +4,56 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-06-09T12:33:01+03:00</updated>
+ <updated>2014-06-10T17:17:56+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Todo Thesis</title>
+   <link href="/2014/06/10/todo-thesis.html"/>
+   <updated>2014-06-10T00:00:00+03:00</updated>
+   <id>/2014/06/10/todo-thesis</id>
+    
+   <category term="/categories.html#thesis" label="thesis"/>
+   
+   <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Update the DSSP figures.&lt;/li&gt;
+&lt;li&gt;Update the Replica exchange results.&lt;/li&gt;
+&lt;li&gt;update the distance vs angle plots (do in matlab).&lt;/li&gt;
+&lt;li&gt;update the timeline data.&lt;/li&gt;
+&lt;li&gt;update the sas data.&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Klpaper Todo</title>
+   <link href="/2014/06/10/klpaper-todo.html"/>
+   <updated>2014-06-10T00:00:00+03:00</updated>
+   <id>/2014/06/10/klpaper-todo</id>
+    
+   <category term="/categories.html#klpaper" label="klpaper"/>
+   
+   <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Add the snapshot’d DSSP for single bulk water case.&lt;/li&gt;
+&lt;li&gt;Snapshot for interface dssp how it is positioned along the interface. (perpendicular to interface)&lt;/li&gt;
+&lt;li&gt;for dimer in bw, remove antipar, par and aggregated EALA.
+&lt;ul&gt;
+&lt;li&gt;option: add kl2 bw rc dssp where they are separated and then merge &amp;amp; fold into helix.&lt;/li&gt;
+&lt;li&gt;snapshot: no lysines, show leucines: top and side views.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;how do these peptides in the dimer find each other: 3 snapshots: separated, merging (end point unfolded) and merged&lt;/li&gt;
+&lt;li&gt;mindist data above dssp for dimer in bw merging&lt;/li&gt;
+&lt;li&gt;table for sasa (put fig in supp)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Kl Todo</title>
