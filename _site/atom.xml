@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-06-11T10:15:04+03:00</updated>
+ <updated>2014-06-11T10:18:52+03:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -41,12 +41,12 @@
    
    <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;—Add the snapshot’d DSSP for single bulk water case.—&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;Add the snapshot’d DSSP for single bulk water case.&lt;/del&gt;&lt;/li&gt;
 &lt;li&gt;Snapshot for interface dssp how it is positioned along the interface. (perpendicular to interface)&lt;/li&gt;
-&lt;li&gt;—for dimer in bw, remove antipar, par and aggregated EALA.—
+&lt;li&gt;&lt;del&gt;for dimer in bw, remove antipar, par and aggregated EALA.&lt;/del&gt;
 &lt;ul&gt;
 &lt;li&gt;option: add kl2 bw rc dssp where they are separated and then merge &amp;amp; fold into helix.&lt;/li&gt;
-&lt;li&gt;—snapshot: no lysines, show leucines: top and side views.—&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;snapshot: no lysines, show leucines: top and side views.&lt;/del&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;how do these peptides in the dimer find each other: 3 snapshots: separated, merging (end point unfolded) and merged&lt;/li&gt;
 &lt;li&gt;mindist data above dssp for dimer in bw merging&lt;/li&gt;
