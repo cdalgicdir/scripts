@@ -6,7 +6,7 @@ category: klpaper
 
 ### TO-DO
 - ~~Add the snapshot'd DSSP for single bulk water case.~~
-- Snapshot for interface dssp how it is positioned along the interface. (perpendicular to interface)
+- ~~Snapshot for interface dssp how it is positioned along the interface. (perpendicular to interface)~~
 - ~~for dimer in bw, remove antipar, par and aggregated EALA.~~
 	- option: add kl2 bw rc dssp where they are separated and then merge & fold into helix.
 	- ~~snapshot: no lysines, show leucines: top and side views.~~

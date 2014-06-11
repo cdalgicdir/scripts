@@ -4,12 +4,41 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-06-11T10:18:52+03:00</updated>
+ <updated>2014-06-11T19:00:31+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Todo Paper</title>
+   <link href="/2014/06/11/todo-paper.html"/>
+   <updated>2014-06-11T00:00:00+03:00</updated>
+   <id>/2014/06/11/todo-paper</id>
+    
+   <category term="/categories.html#todo" label="todo"/>
+   
+   <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;replace distVang data with the one of merging simulation after 600 ns.&lt;/li&gt;
+&lt;li&gt;color leucine sidechains as white (coloring based on type)&lt;/li&gt;
+&lt;li&gt;show lysine sidechains for interface snapshots&lt;/li&gt;
+&lt;li&gt;tweak fig 9 and 10 - interface-dimer:
+&lt;ul&gt;
+&lt;li&gt;fig. 9: snapshots side view&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;fig. 10: snapshots top view&lt;/li&gt;
+&lt;li&gt;OR merge these figs: make the dssp plots smaller&lt;/li&gt;
+&lt;li&gt;optional: match dssp colors with those of the snapshots&lt;/li&gt;
+&lt;li&gt;put distVang figs into supplementary&lt;/li&gt;
+&lt;li&gt;put timeline-data into main article:
+&lt;ul&gt;
+&lt;li&gt;generate timeline data for kl2-bw-sep distance and angle&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Todo Thesis</title>
@@ -42,7 +71,7 @@
    <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;del&gt;Add the snapshot’d DSSP for single bulk water case.&lt;/del&gt;&lt;/li&gt;
-&lt;li&gt;Snapshot for interface dssp how it is positioned along the interface. (perpendicular to interface)&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;Snapshot for interface dssp how it is positioned along the interface. (perpendicular to interface)&lt;/del&gt;&lt;/li&gt;
 &lt;li&gt;&lt;del&gt;for dimer in bw, remove antipar, par and aggregated EALA.&lt;/del&gt;
 &lt;ul&gt;
 &lt;li&gt;option: add kl2 bw rc dssp where they are separated and then merge &amp;amp; fold into helix.&lt;/li&gt;
