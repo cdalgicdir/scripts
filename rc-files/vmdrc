@@ -165,6 +165,7 @@ user add key Left {animate reverse}
 user add key Right { if {[molinfo top get numframes] == [ expr [molinfo top get frame] + 1] } {animate goto start; animate forward} {animate forward} }
 user add key q { reset_viz [molinfo top] }
 user add key w { ss_viz [molinfo top] }
+user add key E { ss_viz_LEUsc [molinfo top] }
 #user add key W { protlig_viz_sketch [molinfo top] }
 user add key W { showWaterClose }
 user add key R {menu ramaplot on; variable ::RamaPlot::molid [molinfo top] }
@@ -191,6 +192,7 @@ user add key L { addHeavyLabels [molinfo top] }
 user add key B { align [molinfo top] }
 user add key z { align [molinfo top] "resid 3 to 10 and backbone and protein" }
 user add key b { showbackbone [molinfo top] }
+user add key F9 { writegro [molinfo top] }
 user add key F10 { snap [molinfo top] }
 user add key F11 { display depthcue off; color Display Background white;pbc box -off;axes location off }
 #user add key B { align [molinfo top] "residue 1 to 15 and backbone" }
@@ -571,16 +573,40 @@ proc ss_viz {molid} {
     mol material Opaque
     mol addrep $molid
     # add ligand
-    mol color Name
-    mol representation Licorice 0.300000 10.000000 10.000000
-    mol selection resname LIG
-    mol addrep $molid
+    #mol color Name
+    #mol representation Licorice 0.300000 10.000000 10.000000
+    #mol selection resname LIG
+    #mol addrep $molid
     start_sscache $molid
   } 
 }
 proc ss_viz_proxy {args} {
   foreach {fname molid rw} $args {}
   eval "after idle {ss_viz $molid}"
+}
+
+proc ss_viz_LEUsc {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # all
+    mol color Structure
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    mol selection all
+    mol material Opaque
+    mol addrep $molid
+    # add leu sidechain
+    mol color ResType
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection resname LEU and (sidechain or name CA)
+    mol addrep $molid
+    start_sscache $molid
+    display depthcue off; color Display Background white;pbc box -off;axes location off
+  } 
 }
 
 proc protlig_viz {molid} {
@@ -937,6 +963,18 @@ proc snap {{molid "0"}} {
     lores $molid
     puts "Generated snapshot $file"
 }   
+
+proc writegro {{molid "0"}} {
+    set frame [format %04d [molinfo $molid get frame]]
+    set pdbfile "frame$frame.pdb"
+    set grofile "frame$frame.gro"
+    set i 96 
+    # ascii a=97
+    while {[file exists $pdbfile] == 1} { set i [expr $i+1] ; set c [format %c $i]; set pdbfile "frame$frame$c.pdb"; set grofile "frame$frame$c.gro"}
+    [atomselect top all] writepdb $pdbfile
+    eval exec {editconf -f $pdbfile -o $grofile}
+    puts "Written snapshot $pdbfile and $grofile"
+}
 
 proc hires {{molid "0"}} {
   # increase resolutions of all representations
