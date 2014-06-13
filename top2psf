@@ -1,0 +1,143 @@
+#! /usr/bin/python
+
+# top2psf - Generates a PSF file from the topology file of Gromacs ".top"
+#
+# Usage: $ top2psf <filename>
+#     E.g. $ top2psf topol.top (Generates a file topol.psf)
+# 
+# PSF File Format:
+# atom ID, segment name, residue ID, residue name, atom name, atom type, charge, mass, and an unused 0
+# 1 U    1    MET  N    NH3   -0.300000       14.0070           0
+# 
+# File format conversion string: "%8d %4s %4d %4s %4s %4s %14.6f %14.6f %8d"
+#
+# Topology File Format:
+# ; nr type resnr residue atom cgnr charge mass
+# 1     B     1     RES   B1   1  0.000000 74.081999
+#
+#
+
+def Help():
+    print '\n***** top2psf *****\n\n\tGenerates a PSF file from the topology file of Gromacs ".top"\
+    \nUsage:\n\t$ python top2psf.py <filename>\
+            \n\t$ python top2psf.py -h [Prints help]\
+            \n\t$ top2psf <filename>\
+            \n\t$ top2psf topol.top [Generates a file topol.psf]'
+
+import sys
+import time
+import datetime
+
+today = datetime.datetime.today()
+
+if sys.argv[1].startswith('-'):
+    if sys.argv[1] == '-h':
+        Help()
+        sys.exit(0)
+    else:
+        print "Wrong option!"
+        Help()
+        sys.exit(1)
+
+# Create name of the output file as "filename.psf"
+Nfin = sys.argv[1]
+Nf = Nfin.split('.')
+Nfout = Nf[0] + '.psf'
+
+try:
+    fin=open(Nfin, 'r')
+except IOError, message:
+    print >> sys.stderr, message
+    sys.exit(1)
+
+fout=open(Nfout, 'w')
+
+atoms = []; bonds = []#; angles = []; dihedrals = []
+n_remark = 2
+
+# Title and Remarks section
+print >> fout, 'PSF\n'
+print  >> fout,  '\t%d !NTITLE' %n_remark
+print >> fout, 'REMARKS\tFILENAME="%s"' %Nfin
+print >> fout, 'REMARKS\tDATE:%s\n' %str(today)
+
+while  1:
+    try:
+        txt = fin.readline()
+    except EOFError:
+        print "End of file reached!"
+        break
+    if not txt:
+        break
+    
+    if txt in ['[atoms]\n', '[ atoms ]\n']:
+        while 1:
+            txt2 = fin.readline()
+            if txt2 in ['\n', '']:
+                break
+            elif txt2[0] in [';', '#']:
+                continue
+            else:
+                atoms.append(txt2)
+        print >> fout, "%9d !NATOM" % len(atoms)
+        for j in range (0, len(atoms)):
+            T = atoms[j].split()
+            print >> fout, "%8d %4s %4d %4s %4s %4s %14.6f %14.6f %8d" %(int(T[0]),'MAIN',int(T[2]),T[3],T[4],T[1],float(T[6]),float(T[7]),0)
+    
+    if txt in ['[bonds]\n', '[ bonds ]\n']:
+        while 1:
+            txt3 = fin.readline()
+            if txt3 in ['\n'] or not txt3:
+                break
+            elif txt3[0] in [';', '#']:
+                continue
+            else:
+                dummy = txt3.split()
+                bonds.append(dummy[0])
+                bonds.append(dummy[1])
+        print >> fout, '\n%8d !NBOND:  bonds' %(len(bonds)/2)
+        for j in range (0, len(bonds)):
+            if not j % 8 and not j is 0:
+                print >> fout, "\n", 
+            fout.write("%8s" %(bonds[j]))
+    
+#    if txt in ['[angles]\n', '[ angles ]\n']:
+#        while 1:
+#            txt4 = fin.readline()
+#            if txt4 in ['\n'] or not txt4:
+#                break
+#            elif txt4[0] in [';', '#']:
+#                continue
+#            else:
+#                dummy = txt4.split()
+#                angles.append(dummy[0])
+#                angles.append(dummy[1])
+#                angles.append(dummy[2])
+#        print >> fout, '\n\n%8d !NTHETA:  angles' %(len(angles)/3)
+#        for j in range (0, len(angles)):
+#            if not j % 9 and not j is 0:
+#                print >> fout, '\n', 
+#            fout.write('%8s' %(angles[j]))
+#                
+#    if txt in ['[dihedrals]\n', '[ dihedrals ]\n']:
+#        while 1:
+#            txt5 = fin.readline()
+#            if txt5 in ['\n'] or not txt5:
+#                break
+#            elif txt5[0] in [';', '#']:
+#                continue
+#            else:
+#                dummy = txt5.split()
+#                dihedrals.append(dummy[0])
+#                dihedrals.append(dummy[1])
+#                dihedrals.append(dummy[2])
+#                dihedrals.append(dummy[3])
+#        print >> fout, '\n\n%8d !NPHI:  dihedrals' %(len(dihedrals)/4)
+#        for j in range (0, len(dihedrals)):
+#            if not j % 8 and not j is 0:
+#                print >> fout, '\n', 
+#            fout.write('%8s' %(dihedrals[j]))
+
+fin.close()
+fout.close()
+print "%s is created!" %Nfout

@@ -1,0 +1,23 @@
+#! /bin/bash
+
+#sitedir="$HOME/Ubuntu\ One/github/notes/_posts"
+sitedir="$HOME/Dropbox/github/notes/_posts"
+
+[[ ! -n "$1" ]] && echo "Missing argument!" && exit 1
+
+date=`date +%Y-%m-%d`
+fname="$date-$1.md"
+
+if [[ ! -e "$(eval echo $sitedir/$fname)" ]]; then
+    eval cd $sitedir
+
+    echo -e "---\n\
+layout: post\n\
+tag: xxx\n\
+category: xxx\n\
+---" > $fname
+
+    gvim $fname
+else
+    echo "$fname exists! Quitting..."
+fi

@@ -1,0 +1,24 @@
+#! /bin/bash
+
+begin=0
+file='ener.edr'
+
+while [[ $# -gt 1 ]]; do
+    case $1 in
+        
+        -b)
+            begin=$2
+            shift;;
+
+        -f)
+            file=$2
+            shift;;
+
+        -h|--h|-help|--help|*)
+            echo "Usage: getenerg [-b time] [-f ener.edr]"
+            ;;
+    esac
+done
+
+# Calculate energies
+echo -e  "Temperature\nDensity\nPressure\nPres-ZZ\n#Surf*SurfTen" | g_energy -b $begin -f $file

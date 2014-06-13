@@ -1,0 +1,109 @@
+#! /bin/bash
+
+plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'table_L_wall0.xvg' 'tablep.xvg')
+
+plcomms=''
+q="'"
+gplot='gplot'
+#using=" using 1:2 "
+with=" with lines lw 3 "
+#histdir="histograms"
+terminal="set terminal wxt"
+output=""
+
+plot () {
+        gplot $output -c "$yrange" -c "$xrange" -t "$title" -c "$keypos" -c "set ylabel 'P(r)'" -c "set xlabel 'r (nm)'" -c "$terminal" -- "$plcomms"
+}
+
+printcommands () {
+    if [[ $noplottab == true ]]; then
+        #echo "plot $plotfiles" | sed 's/,/,\\\n /g'
+        echo -e "plot\\\\\n $plcomms" | sed 's/,/,\\\n /g'
+	echo
+    else
+        echo "plot $plcomms"
+	echo
+    fi
+}
+
+# parse through command and obtain options and name of directories to plot
+
+if [[ $# -eq 0 ]];then
+    echo "Error! Specify a directory name!"
+    echo "Usage: $ plotall dirname"
+    exit 1
+fi
+
+while [[ $# -gt 0 ]]; do
+    case $1 in
+
+        -png)
+            terminal='set terminal pngcairo size 800,600 enhanced font \"Gill Sans,16\" linewidth 3 rounded'
+            shift;;
+
+        -pdf)
+            terminal='set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 3 rounded'
+            shift;;
+        -t)
+            writetitrs=true
+            for z in $2; do
+                titrs=(${titrs[*]} $z)
+            done
+            shift 2
+            ;;
+
+        -n | -nop | -noplot)
+            noplot=true
+            noplottab=false
+            shift 1;;
+
+        -nt | -nopt)
+            noplot=true
+            noplottab=true
+            shift 1;;
+
+        -h|--h|-help|--help)
+            echo "Usage: plotall [directories]"
+            ;;
+
+        *)
+            folders=(${folders[*]} $1)
+            shift
+            ;;
+    esac
+done
+
+IFS=$'\t\n'
+len_plots=`expr ${#plots[@]} - 1`
+i=0
+
+for f in ${plotlist[@]}; do
+    if [[ $f == table* ]]; then
+	using=" using 1:6 "
+	histdir="."
+	xlabel='r (nm)'
+	ylabel='V(r) (kJ/mol)'
+	xrange='set xrange [:2]'
+	yrange='set yrange [:20]'
+	keypos='set key right'
+    else
+	using=" using 1:2 "
+	histdir="histograms"
+	xlabel='r (nm)'
+	ylabel='P(r)'
+	xrange='set xrange [:]'
+	yrange='set yrange [:]'
+	keypos='set key left'
+    fi
+    plcomms=''
+    title=${f%.xvg}
+    for dir in ${folders[@]}; do
+	address=$dir/$histdir/$f
+	plcomms=${plcomms}${q}${address}${q}${using}${with}'t '${q}${dir}${q},
+    done
+if [[ $noplot == true ]]; then
+    printcommands
+else
+    plot $@
+fi
+done

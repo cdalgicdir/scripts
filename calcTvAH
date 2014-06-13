@@ -1,0 +1,74 @@
+#! /bin/bash
+###################################################################	
+# Calculate secondary structure percentage from scount.xvg
+###################################################################	
+# Structure = A-Helix + B-Sheet + B-Bridge + Turn
+# x: total number of residues with secondary structure
+# nf: number of frames
+# nres: number of residues (14 for KL)
+###################################################################	
+
+split=4
+sslist=('A-Helix')
+#sslist=('Structure' 'Coil' 'B-Sheet' 'B-Bridge' 'Bend' 'Turn' 'A-Helix' '5-Helix' '3-Helix')
+nreplica=16
+# total number of residues (KL=14)
+nres=14
+
+# get last frame number
+lastpart=`ls DSSP-0/scount0-*|nl|awk '{print $1}'|tail -1`
+lastpart=$((lastpart-1))
+lastframe=`tail -1 DSSP-0/scount0-$lastpart.xvg|awk '{print $1}'`
+if [[ $lastframe =~ .e\+* ]]; then
+    a=`echo ${lastframe#*+}`
+    b=`echo ${lastframe%+*} | tr -d "e"`
+    for i in `seq 1 $a`;do b=$b"0";done
+    lastframe=$b
+fi
+# make the number of frames equal for all parts
+remainder=`echo "$lastframe%$split"|bc`
+[[ $remainder -gt 0 ]] && lastframe=$((lastframe-$remainder)) || lastframe=$lastframe
+incr=$((lastframe/split))
+#echo "Total number of frames is $lastframe"
+maxnf=0
+echo -e "\n###################################################################"
+
+for ss in ${sslist[@]}
+do
+    for i in `seq 0 $((nreplica-1))`
+    do
+    limit1=0
+    limit2=0
+    echo -e "Replica $((i+1)):"
+    for part in `seq 1 $split`
+    do
+	x=0
+	nf=0
+	limit1=$((limit2+1))
+	limit2=$((limit2+$incr))
+	#echo "From frames $limit1 to $limit2"
+	#limit2=`echo "$lastframe/$split*$part"|bc`
+    #echo $limit1 $limit2 $incr
+    echo -ne "\tPart $part:\t"
+    #for file in scount?-?.xvg scount?-??.xvg scount??-?.xvg scount??-??.xvg
+    for file in DSSP-$i/scount$i-*.xvg
+    do
+	col=`awk '{if ($1 ~ /@/ && $2 ~ /s[[:digit:]]/) print}' $file | grep $ss | awk '{print $2}'`
+	if [[ $col ]]; then
+	    col=`echo $col | tr -d "s"`
+	    col=$(($col+2))
+	    A=`awk -v x=$x -v nf=$nf '{if ($1 ~ /@/ || $1 ~ /#/ || $1 == 0 || $1 < '$limit1' || $1 > '$limit2' ) {NR--}else{x+=$'$col'}}END{nf+=NR;print x,nf}' $file`
+	    A=(${A// / })
+	    x=${A[0]}
+	    nf=${A[1]}
+	fi
+    done
+    [[ $nf -gt $maxnf ]] && maxnf=$nf
+    #totres=`echo "$maxnf*$nres"|bc`
+    totres=`echo "$nf*$nres"|bc`
+    perc=`echo "$x/$totres"|bc -l`
+    printf "%-10s\t%-16s\t = %f\n" $ss "$x/$totres" $perc
+    done
+done
+done
+echo -e "###################################################################\n"

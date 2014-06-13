@@ -1,0 +1,31 @@
+#! /bin/bash
+
+formattime() {
+    hour=`echo "$DIFF/3600"|bc`
+    remaining=$((DIFF-(hour*3600)))
+    minute=`echo "$remaining/60"|bc`
+    second=$((remaining-(minute*60)))
+    [[ $hour != 0 ]] && echo $hour"h:"$minute"m:"$second"s" || echo $minute"m:"$second"s"
+}
+GREEN='\033[01;32m'	# bold green
+YELLOW='\033[01;33m'	# bold yellow
+RED='\033[01;31m'	# bold red
+RESET='\033[00;00m'	# normal white
+
+START=$(date +%s)
+$@
+END=$(date +%s)
+DIFF=$((END-START))
+
+if [[ $DIFF -lt 60 ]]; then
+    echo -e "${RESET}Command took ${GREEN}$DIFF${RESET} seconds to execute"
+elif [[ $DIFF -lt 600 ]]; then
+    echo -e "${RESET}Command took ${GREEN}$DIFF${RESET} seconds to execute"
+    formattime
+elif [[ $DIFF -ge 600 ]] && [[ $DIFF -lt 1000 ]]; then
+    echo -e "${RESET}Command took ${YELLOW}$DIFF${RESET} seconds to execute"
+    formattime
+elif [[ $DIFF -ge 1000 ]]; then
+    echo -e "${RESET}Command took ${RED}$DIFF${RESET} seconds to execute"
+    formattime
+fi

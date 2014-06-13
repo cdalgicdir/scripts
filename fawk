@@ -1,0 +1,33 @@
+#! /bin/bash
+#
+###################################################################
+# Usage: fawk file.xvg 1 2 3 > out.dat
+# "fawk file 2 3" prints 2nd and 3rd columns of
+# file w/o comment lines [@|#]
+###################################################################
+
+[[ $1 == "-p" ]] && option="-p" && shift
+file="$1" && shift
+
+#for opt in $@; do
+#    [[ $opt == ">" ]] && writetofile=true
+#done
+
+if [[ $# -gt 1 ]]; then
+    columns="\$${1}" && shift
+    nargs="$#" && nargs=$((nargs-1))
+    for i in $@; do
+	columns=$columns",\$${i}"
+    done
+elif [[ $# -eq 1 ]]; then
+    columns="\$${1}"
+else
+    echo "Error with number of arguments!"
+    exit 1
+fi
+
+first="awk '{ if ( \$1 !~ /^[@|#]/) print "
+last="}'"
+cmd="${first}${columns}${last}"
+[[ $option == "-p" ]] && echo "# $cmd $file"
+eval $cmd $file

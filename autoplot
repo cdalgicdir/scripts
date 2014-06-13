@@ -1,0 +1,53 @@
+#! /bin/bash
+
+
+xrange='[:]'
+yrange='[:1]'
+step='step_'
+using='u 1:2 w l'
+slash="/"
+max=500
+gplot='gplot'
+
+plot () {
+
+$gplot $xrange$yrange $step$num$slash$file $using 2>/dev/null
+
+}
+
+A=$1
+B=$2
+opt=$3
+n=1
+
+if [[ $opt == 'pot' ]]; then
+    file="$A-$B.pot.new"
+elif [[ $opt == 'rdf' ]];then
+    file="$A-$B.dist.new.xvg"
+elif [[ $opt == 'dpot' ]];then
+    file="$A-$B.dpot.new"
+elif [[ $opt == 'for' ]];then
+    file="table_$A-$B.xvg"
+    using="using 1:7 w l"
+else
+    echo "ERROR! Unknown option. Options are: pot|rdf|dpot|for"
+    exit 1
+fi
+
+maxstr=`ls -d $step*`
+max=${maxstr: -3}
+
+if [[ $4 ]]; then
+    incr=$4
+else
+    incr=10
+fi
+
+while [[ $n -le $max ]]; do
+    num=`printf "%03d" "$n"`
+    plot $@
+    sleep 0.5
+    n=`expr $n + $incr`
+done
+
+killall gnuplot

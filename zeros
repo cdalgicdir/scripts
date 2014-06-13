@@ -1,0 +1,45 @@
+#! /usr/bin/python
+
+import sys
+
+def write_table(file,start,end,increment):
+ zero = 0.0
+ n = start
+ while n <= end:
+  file.write('%.3f %f %f %f %f %f %f\n' %(n,zero,zero,zero,zero,zero,zero))
+  n += increment
+ return
+
+def write_votca_file(file,start,end,increment):
+ zero = 0.0
+ mark = "i"
+ n = start
+ while n <= end:
+  file.write('%.3f %f %s\n' %(n,zero,mark))
+  n += increment
+ return
+
+def main():
+    outfile = open('zeros.tab','w')
+    numbers = [float(arg) for arg in sys.argv[1].split(":")]
+
+    try:
+	if sys.argv[2] == '-t':
+	    option = 'table'
+    except IndexError:
+	option = 'votca_file'
+
+    start = numbers[0]
+    increment = numbers[1]
+    end = numbers[2]
+
+    if option == 'table':
+     write_table(outfile,start,end,increment)
+    else:
+     write_votca_file(outfile,start,end,increment)
+    outfile.close()
+    print "DONE!"
+
+
+if __name__ == '__main__':
+    main()

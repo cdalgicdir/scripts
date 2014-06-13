@@ -1,0 +1,44 @@
+#! /bin/bash
+
+
+help () {
+    echo -e "Calls g_bar to calculate free energy for Thermodynamic Integration simulations. Creates a folder named Analysis. Copies all Lambda_*/Prod*/md*xvg into the folder. Then calls g_bar."
+    echo -e "Usage:\t$ calcResTI [-s #]"
+    exit 0
+}
+
+while [[ $# -ge 1 ]]; do
+    case $1 in
+
+	-s)
+	    split=$2
+	    shift 2;;
+
+	-h|-help|--h|--help|*)
+	    help
+    esac
+done
+
+
+mkdir -p Analysis
+pushd Analysis
+cp ../Lambda_*/Production_MD/md*xvg .
+rm *_*
+
+if [[ $split -le 1 ]]; then
+    g_bar -f md*xvg -o -oi -oh > RESULTS
+else
+    begin=0
+    final=`tail -n 1 md*xvg | egrep "^[0-9]" | awk '{print $1}' | sort | head -1`
+    final=${final%.*}
+    increment=$(((final-begin)/split))
+    #echo $begin $final $increment
+    end=$increment
+    for i in `seq 1 $split`;do
+	echo -e "Doing from $begin to $end..."
+	g_bar -f md*xvg -o bar_${i}of${split} -oi barint_${i}of${split} -oh histogram_${i}of${split} -b $begin -e $end > RESULTS_${i}of${split}
+	begin=$((begin+increment))
+	end=$((end+increment))
+    done
+fi
+popd
