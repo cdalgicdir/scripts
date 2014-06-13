@@ -46,6 +46,17 @@ menu main move 5 5
 #menu graphics on
 #menu mol on
 
+# add new material Ghost with coloring
+material add Ghostmod
+material change diffuse Ghostmod 0.3
+material change ambient Ghostmod 0.3
+material change specular Ghostmod 1.0
+material change shininess Ghostmod 0.23
+material change opacity Ghostmod 0.1
+material change outline Ghostmod 0.0
+material change outlinewidth Ghostmod 0.0
+# nearclip / zoom more
+display nearclip set 0.010000
 # start the scene a-rockin'
 #rock y by 1
 
@@ -165,7 +176,8 @@ user add key Left {animate reverse}
 user add key Right { if {[molinfo top get numframes] == [ expr [molinfo top get frame] + 1] } {animate goto start; animate forward} {animate forward} }
 user add key q { reset_viz [molinfo top] }
 user add key w { ss_viz [molinfo top] }
-user add key E { ss_viz_LEUsc [molinfo top] }
+user add key Control-e { ss_viz_LEUsc [molinfo top] }
+user add key E { ss_viz_paper [molinfo top] }
 #user add key W { protlig_viz_sketch [molinfo top] }
 user add key W { showWaterClose }
 user add key R {menu ramaplot on; variable ::RamaPlot::molid [molinfo top] }
@@ -604,6 +616,35 @@ proc ss_viz_LEUsc {molid} {
     mol representation Licorice 0.300000 10.000000 10.000000
     mol selection resname LEU and (sidechain or name CA)
     mol addrep $molid
+    start_sscache $molid
+    display depthcue off; color Display Background white;pbc box -off;axes location off
+  } 
+}
+
+proc ss_viz_paper {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # all
+    mol color Structure
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    mol selection all
+    mol material Opaque
+    mol addrep $molid
+    # add sidechains
+    mol color ResType
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection protein and (sidechain or name CA)
+    mol addrep $molid
+    mol color ColorID 0
+    mol representation VDW 0.7 12
+    mol selection name OW
+    mol addrep $molid
+    mol modmaterial 2 0 Ghostmod
     start_sscache $molid
     display depthcue off; color Display Background white;pbc box -off;axes location off
   } 
