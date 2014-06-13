@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-06-11T19:00:31+03:00</updated>
+ <updated>2014-06-13T11:34:50+03:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -22,17 +22,17 @@
    <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;replace distVang data with the one of merging simulation after 600 ns.&lt;/li&gt;
-&lt;li&gt;color leucine sidechains as white (coloring based on type)&lt;/li&gt;
-&lt;li&gt;show lysine sidechains for interface snapshots&lt;/li&gt;
-&lt;li&gt;tweak fig 9 and 10 - interface-dimer:
+&lt;li&gt;&lt;del&gt;color leucine sidechains as white (coloring based on type)&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;show lysine sidechains for interface snapshots&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;tweak fig 9 and 10 - interface-dimer:&lt;/del&gt;
 &lt;ul&gt;
 &lt;li&gt;fig. 9: snapshots side view&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;fig. 10: snapshots top view&lt;/li&gt;
 &lt;li&gt;OR merge these figs: make the dssp plots smaller&lt;/li&gt;
 &lt;li&gt;optional: match dssp colors with those of the snapshots&lt;/li&gt;
-&lt;li&gt;put distVang figs into supplementary&lt;/li&gt;
-&lt;li&gt;put timeline-data into main article:
+&lt;li&gt;&lt;del&gt;put distVang figs into supplementary&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;put timeline-data into main article:&lt;/del&gt;
 &lt;ul&gt;
 &lt;li&gt;generate timeline data for kl2-bw-sep distance and angle&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
