@@ -176,8 +176,8 @@ user add key Left {animate reverse}
 user add key Right { if {[molinfo top get numframes] == [ expr [molinfo top get frame] + 1] } {animate goto start; animate forward} {animate forward} }
 user add key q { reset_viz [molinfo top] }
 user add key w { ss_viz [molinfo top] }
-user add key Control-e { ss_viz_LEUsc [molinfo top] }
-user add key E { ss_viz_paper [molinfo top] }
+user add key E { ss_viz_LEUsc [molinfo top] }
+user add key Control-e { ss_viz_paper [molinfo top] }
 #user add key W { protlig_viz_sketch [molinfo top] }
 user add key W { showWaterClose }
 user add key R {menu ramaplot on; variable ::RamaPlot::molid [molinfo top] }
@@ -201,8 +201,8 @@ user add key {=} { display resetview; rotate x by -90 }
 user add key u { selupdate_all }
 user add key J { if {[molinfo top get rep] == "Lines"} { changerep [molinfo top] "Licorice 0.300000 10.000000 10.000000" } {changerep [molinfo top] "Lines"}}
 user add key L { addHeavyLabels [molinfo top] }
-user add key B { align [molinfo top] }
-user add key z { align [molinfo top] "resid 3 to 10 and backbone and protein" }
+user add key B { align [molinfo top] "resid 3 to 10 and backbone" }
+user add key z { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
 user add key b { showbackbone [molinfo top] }
 user add key F9 { writegro [molinfo top] }
 user add key F10 { snap [molinfo top] }
@@ -614,7 +614,7 @@ proc ss_viz_LEUsc {molid} {
     # add leu sidechain
     mol color ResType
     mol representation Licorice 0.300000 10.000000 10.000000
-    mol selection resname LEU and (sidechain or name CA)
+    mol selection protein and (sidechain or name CA)
     mol addrep $molid
     start_sscache $molid
     display depthcue off; color Display Background white;pbc box -off;axes location off
@@ -1013,7 +1013,7 @@ proc writegro {{molid "0"}} {
     # ascii a=97
     while {[file exists $pdbfile] == 1} { set i [expr $i+1] ; set c [format %c $i]; set pdbfile "frame$frame$c.pdb"; set grofile "frame$frame$c.gro"}
     [atomselect top all] writepdb $pdbfile
-    eval exec {editconf -f $pdbfile -o $grofile}
+    #eval exec {editconf -f $pdbfile -o $grofile}
     puts "Written snapshot $pdbfile and $grofile"
 }
 
