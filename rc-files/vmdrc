@@ -990,13 +990,21 @@ proc snap {{molid "0"}} {
     hires $molid
     #color Display Background white;pbc box -off;axes location off
     #display depthcue off
-    set frame [format %04d [molinfo $molid get frame]]
-    set file "frame$frame.png"
-    set i 96 
     # ascii a=97
-    while {[file exists $file] == 1} { set i [expr $i+1] ; set c [format %c $i]; set file "frame$frame$c.png"}
-    render Tachyon frame$frame.dat tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
-    file delete frame$frame.dat
+    set i 96 
+    if {[molinfo top get numframes] == 1} {
+	set fname [molinfo top get filename]
+	set nfile [string trimright $fname ".pdbgro"]
+	set file "$nfile.png"
+	while {[file exists $file] == 1} { set i [expr $i+1] ; set c [format %c $i]; set file "$nfile$c.png"}
+    } else {
+	set frame [format %04d [molinfo $molid get frame]]
+	set file "frame$frame.png"
+	while {[file exists $file] == 1} { set i [expr $i+1] ; set c [format %c $i]; set file "frame$frame$c.png"}
+	}
+    set datfile [string map {".png" ".dat"} $file]
+    render Tachyon $datfile tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
+    file delete $datfile
     set trimfile [string map {".png" "-trim.png"} $file]
     eval exec {convert -density 300 -trim $file $trimfile}
     file delete $file
