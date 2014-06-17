@@ -31,9 +31,9 @@ if matchstr(expand("%"),".*\.tex") != ""
     :iab com center of mass
     :iab bs beta-sheet
     :iab rc random-coil
-    :iab ah alpha-helix
+    :iab ah $\alpha$-helix
     :iab hh half-helix
-    :iab ahc alpha-helical
+    :iab ahc $\alpha$-helical
     :iab 1bw bulk water
     :iab 1int air/water interface
     :iab 1pmf potential of mean force

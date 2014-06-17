@@ -19,9 +19,10 @@ Options:
 
 
 # total time for simulation
-end=10000 
-closetoend=8000
+end=100000
+closetoend=80000
 directories="d?.???/?-PULL"
+dirset=false
 noFinished=false
 noColor=false
 multipledir=true
@@ -31,6 +32,7 @@ while [[ $# -ge 1 ]]; do
     case $1 in
 	-d)
 	    directories="$2"
+	    dirset=true
 	    shift 2;;
 	-nf)
 	    option=$1
@@ -46,6 +48,7 @@ while [[ $# -ge 1 ]]; do
 	    shift 2;;
 	-ti)
 	    TI=true
+	    dirset=true
 	    directories=`ls -d Lambda*/Production_MD`
 	    shift ;;
 
@@ -65,6 +68,10 @@ while [[ $# -ge 1 ]]; do
 	    exit 0;;
     esac
 done
+
+if [[ $multipledir == true ]]; then
+    [[ -e md.log ]] && [[ $dirset == false  ]] && [[ ! -d d?.??? ]] && multipledir=false && file='md.log'
+fi
 
 # COLORS
 ###################################################################
