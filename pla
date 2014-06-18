@@ -316,6 +316,7 @@ do
 	elif [[ $sas == true ]]; then
 	    plotfiles=${plotfiles}${q}${file}${q}${ev}" using (\$1/1000):2 "${with}" t 'hydrophobic','' ${ev} using (\$1/1000):3 "${with}" t 'hydrophilic','' ${ev} using (\$1/1000):4 "${with}" t 'total',"
 	else
+	    [[ ${#colslist[@]} -eq 0 ]] && colslist=("1:2")
 	    for j in ${colslist[@]}; do
 		if [[ "${j}" == *:* ]]; then
 		    xl=(${x//:/ })
