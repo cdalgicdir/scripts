@@ -29,6 +29,7 @@ sas=false
 functions=""
 column=2
 every=1
+colslist=()
 
 plot () {
     gplot $output -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
@@ -234,8 +235,9 @@ while [[ $# -ge 1 ]]; do
 
 	[0-9]|[0-9][0-9])
 	    column=$1
-	    using=" u 1:${1} "
+	    #using=" u 1:${1} "
 	    userset="true"
+	    colslist+=($column)
 	    shift ;;
 
 	-h | -help | --help | --h)
@@ -312,14 +314,24 @@ do
 	elif [[ $sas == true ]]; then
 	    plotfiles=${plotfiles}${q}${file}${q}${ev}" using (\$1/1000):2 "${with}" t 'hydrophobic','' ${ev} using (\$1/1000):3 "${with}" t 'hydrophilic','' ${ev} using (\$1/1000):4 "${with}" t 'total',"
 	else
-	    plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
+	    for i in ${colslist[@]}; do
+		column=$i
+		using=" u 1:${i} "
+		plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
 	    if [[ $label == 1 ]]; then
-		plotfiles=$plotfiles't '${q}${file}${q}',' 
+		if [[ ${#colslist[@]} -gt 1 ]]; then
+		    titlextra="-${i}"
+		else
+		    titlextra=""
+		fi
+		title='t '${q}${file}${titlextra}${q}','
 	    else
-		plotfiles=$plotfiles'not,'
+		title='not,'
 	    fi
+	    plotfiles=${plotfiles}${title}
 	    [[ $domovavg == 1 ]] && plotfiles="${plotfiles}sum = init(0), '' using 1:(avg(\$$column)) title 'running mean-$n',"
 	    [[ $docummean == 1 ]] && plotfiles="${plotfiles}sum=0,'' using 1:(sum = sum + \$$column, sum/(\$0+1)) title 'cumulative mean',"
+	    done
 	fi
 	let i=i+1
     fi
