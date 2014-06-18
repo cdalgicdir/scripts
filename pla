@@ -104,9 +104,11 @@ while [[ $# -ge 1 ]]; do
 		xl=(${x//:/ })
 		using=' u '"${xl[0]}"':'"${xl[1]}"
 		column=${xl[1]}
+		colslist+=(${x})
 	    else
 		using=" u $2 "
 		column=$2
+		colslist+=($column)
 	    fi
 	    userset="true"
 	    #using=" u 1:${2} "
@@ -314,13 +316,19 @@ do
 	elif [[ $sas == true ]]; then
 	    plotfiles=${plotfiles}${q}${file}${q}${ev}" using (\$1/1000):2 "${with}" t 'hydrophobic','' ${ev} using (\$1/1000):3 "${with}" t 'hydrophilic','' ${ev} using (\$1/1000):4 "${with}" t 'total',"
 	else
-	    for i in ${colslist[@]}; do
-		column=$i
-		using=" u 1:${i} "
+	    for j in ${colslist[@]}; do
+		if [[ "${j}" == *:* ]]; then
+		    xl=(${x//:/ })
+		    using=" u ${j} "
+		    column=${xl[1]}
+		else
+		    using=" u 1:${j} "
+		    column=${j}
+		fi
 		plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
 	    if [[ $label == 1 ]]; then
 		if [[ ${#colslist[@]} -gt 1 ]]; then
-		    titlextra="-${i}"
+		    titlextra="-${j}"
 		else
 		    titlextra=""
 		fi
@@ -346,4 +354,5 @@ if [[ $noplot == true ]]; then
 else
     plot $range $plotfiles
 fi
+
 #echo $plotfiles
