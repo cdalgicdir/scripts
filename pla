@@ -239,7 +239,7 @@ while [[ $# -ge 1 ]]; do
 	    column=$1
 	    #using=" u 1:${1} "
 	    userset="true"
-	    colslist+=($column)
+	    colslist+=("1:$column")
 	    shift ;;
 
 	-h | -help | --help | --h)
@@ -323,7 +323,8 @@ do
 		    using=" u ${j} "
 		    column=${xl[1]}
 		else
-		    using=" u 1:${j} "
+		    #using=" u 1:${j} "
+		    using=" u ${j} "
 		    column=${j}
 		fi
 		plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
@@ -356,4 +357,4 @@ else
     plot $range $plotfiles
 fi
 
-#echo $plotfiles
+echo $plotfiles
