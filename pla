@@ -357,4 +357,4 @@ else
     plot $range $plotfiles
 fi
 
-echo $plotfiles
+#echo $plotfiles
