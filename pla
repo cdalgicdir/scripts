@@ -31,6 +31,8 @@ column=2
 every=1
 colslist=()
 noplot=false
+doentcorr=0
+doshift=0
 
 plot () {
     gplot $output -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
@@ -212,7 +214,7 @@ while [[ $# -ge 1 ]]; do
 	    if [[ $# -gt 1 ]]; then
 		[[ `isnumber $2` != -1 ]] && n="$2" && shift || n=5
 	    else
-		n=5
+		n=10
 	    fi
 	    shift
 	    functions=`genfunc $n`
@@ -261,7 +263,9 @@ if [[ $doshift == 1 ]]; then
     shiftRlist=()
     for f in ${filelist[@]}; do
 	shiftR=`tail -1 ${f} | awk '{print $1}'`
+	[[ $shiftR == "" ]] && shiftR=`tail -2 ${f} | awk '{print $2}'`
 	shift=`tail -1 ${f} | awk '{print $2}'`
+	[[ $shift == "" ]] && shift=`tail -2 ${f} | awk '{print $2}'`
 	shiftRlist+=("$shiftR")
 	shiftlist+=("$shift")
     done
@@ -290,17 +294,6 @@ do
 		[[ $range == "[:][:]" ]] && range="[:][:5]"
 	    fi
 	fi
-	# shift to zero and entropic correction (for second cols only)
-	if [[ $doshift == 1 ]] && [[ $doentcorr == 0 ]]; then
-	    theshift=${shiftlist[$i]} 
-	    using=" u 1:(\$2-$theshift) "
-	elif [[ $doshift == 0 ]] && [[ $doentcorr == 1 ]]; then
-	    using=" u 1:(\$2+2*$kT*log(\$1)) "
-	elif [[ $doshift == 1 ]] && [[ $doentcorr == 1 ]]; then
-	    theshift=${shiftlist[$i]} 
-	    theshiftR=${shiftRlist[$i]} 
-	    using=" u 1:(\$2+2*$kT*(log(\$1/$theshiftR))-$theshift) "
-	fi
 	
 	if [[ $nxy == 1 ]]; then
 	    NF=`tail -1 ${file} | awk '{print NF}'`
@@ -320,13 +313,30 @@ do
 	    for j in ${colslist[@]}; do
 		if [[ "${j}" == *:* ]]; then
 		    xl=(${j//:/ })
-		    using=" u ${j} "
+		    column0=${xl[0]}
 		    column=${xl[1]}
 		else
 		    #using=" u 1:${j} "
-		    using=" u ${j} "
 		    column=${j}
 		fi
+		using=" u ${j} "
+
+	###################################################################
+
+	    # shift to zero and entropic correction (for second cols only)
+	    if [[ $doshift == 1 ]] && [[ $doentcorr == 0 ]]; then
+		theshift=${shiftlist[$i]} 
+		using=" u $column0:(\$$column-$theshift) "
+	    elif [[ $doshift == 0 ]] && [[ $doentcorr == 1 ]]; then
+		using=" u $column0:(\$$column+2*$kT*log(\$1)) "
+	    elif [[ $doshift == 1 ]] && [[ $doentcorr == 1 ]]; then
+		theshift=${shiftlist[$i]} 
+		theshiftR=${shiftRlist[$i]} 
+		using=" u $column0:(\$$column+2*$kT*(log(\$1/$theshiftR))-$theshift) "
+	    fi
+
+	###################################################################
+
 		plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
 	    if [[ $label == 1 ]]; then
 		if [[ ${#colslist[@]} -gt 1 ]]; then
@@ -339,8 +349,8 @@ do
 		title='not,'
 	    fi
 	    plotfiles=${plotfiles}${title}
-	    [[ $domovavg == 1 ]] && plotfiles="${plotfiles}sum = init(0), '' using 1:(avg(\$$column)) title 'running mean-$n',"
-	    [[ $docummean == 1 ]] && plotfiles="${plotfiles}sum=0,'' using 1:(sum = sum + \$$column, sum/(\$0+1)) title 'cumulative mean',"
+	    [[ $domovavg == 1 ]] && plotfiles="${plotfiles}sum = init(0), '' every ::$((n))::-1 using 1:(avg(\$$column)) w l title 'running mean-$n',"
+	    [[ $docummean == 1 ]] && plotfiles="${plotfiles}sum=0,'' using 1:(sum = sum + \$$column, sum/(\$0+1)) w l title 'cumulative mean',"
 	    done
 	fi
 	let i=i+1
