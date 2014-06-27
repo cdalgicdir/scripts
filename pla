@@ -30,13 +30,14 @@ functions=""
 column=2
 every=1
 colslist=()
+noplot=false
 
 plot () {
     gplot $output -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
 }
 
 printcommands () {
-    if [[ $noplottab == true ]]; then
+    if $noplottab; then
 	#echo "plot $plotfiles" | sed 's/,/,\\\n /g'
 	echo -e "plot\\\\\n $plotfiles" | sed 's/,/,\\\n /g'
     else
@@ -209,12 +210,11 @@ while [[ $# -ge 1 ]]; do
 	-movavg|-ma)
 	    domovavg=1
 	    if [[ $# -gt 1 ]]; then
-		[[ `isnumber $2` != -1 ]] && n="$2" || n=5
-		shift 2
+		[[ `isnumber $2` != -1 ]] && n="$2" && shift || n=5
 	    else
 		n=5
-		shift
 	    fi
+	    shift
 	    functions=`genfunc $n`
 	    ;;
 
@@ -351,7 +351,7 @@ done
 plotfiles=${plotfiles:0:$((${#plotfiles}-1))}
 
 # finally plot all
-if [[ $noplot == true ]]; then
+if $noplot; then
     printcommands
 else
     plot $range $plotfiles
