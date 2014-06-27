@@ -319,7 +319,7 @@ do
 	    [[ ${#colslist[@]} -eq 0 ]] && colslist=("1:2")
 	    for j in ${colslist[@]}; do
 		if [[ "${j}" == *:* ]]; then
-		    xl=(${x//:/ })
+		    xl=(${j//:/ })
 		    using=" u ${j} "
 		    column=${xl[1]}
 		else
