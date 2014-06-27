@@ -39,9 +39,9 @@ plot () {
 printcommands () {
     if $noplottab; then
 	#echo "plot $plotfiles" | sed 's/,/,\\\n /g'
-	echo -e "plot\\\\\n $plotfiles" | sed 's/,/,\\\n /g'
+	echo -e "${functions[@]}\nplot\\\\\n $plotfiles" | sed 's/,/,\\\n /g'
     else
-	echo "plot $plotfiles"
+	echo -e "${functions[@]}\nplot $plotfiles"
     fi
 }
 
