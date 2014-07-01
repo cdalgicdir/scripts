@@ -255,6 +255,8 @@ while [[ $# -ge 1 ]]; do
     esac
 done
 
+if [[ ${#filelist[@]} == 1 ]] && [[ ! -f ${filelist[0]} ]]; then echo "File not found!" && exit 1;fi
+
 ev=" every ${every} "
 
 # shift to zero for PMFs (only works for the second column
@@ -289,7 +291,8 @@ do
     if [[ -f $file ]]; then
 	if [[ $file == $tabfile && $file != *table_d*.xvg && $file != *table_a*.xvg && $file != *table_b*.xvg ]]; then
 	    if [[ $userset == "false" ]]; then
-		using=" u 1:6 "
+		#using=" u 1:6 "
+		colslist+=("1:6")
 		#ymax=1.5
 		[[ $range == "[:][:]" ]] && range="[:][:5]"
 	    fi

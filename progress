@@ -69,8 +69,11 @@ while [[ $# -ge 1 ]]; do
     esac
 done
 
+logfiles=`ls *.log 2>/dev/null`
+dirs=`ls -d d?.??? 2>/dev/null`
+
 if [[ $multipledir == true ]]; then
-    [[ -e md.log ]] && [[ $dirset == false  ]] && [[ ! -d d?.??? ]] && multipledir=false && file='md.log'
+    [[ ${#logfiles[@]} == 1 ]] && [[ $dirset == false  ]] && [[ ${dirs[@]} == "" ]] && multipledir=false && file=${logfiles[0]}
 fi
 
 # COLORS
