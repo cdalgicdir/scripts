@@ -4,12 +4,74 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-06-13T11:34:50+03:00</updated>
+ <updated>2014-07-03T14:22:52+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Thesis Todo</title>
+   <link href="/2014/07/02/thesis-todo.html"/>
+   <updated>2014-07-02T00:00:00+03:00</updated>
+   <id>/2014/07/02/thesis-todo</id>
+    
+   <category term="/categories.html#thesis" label="thesis"/>
+   
+   <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Intro - relate conformational transition to amyloid formation&lt;/li&gt;
+&lt;li&gt;FF: snapshot of the crystal structure of the rodlike molecule
+&lt;ul&gt;
+&lt;li&gt;how do these aggregates oriented&lt;/li&gt;
+&lt;li&gt;why FF? - amyloid aggregation motifs - to understand the mechanisms behind aggregation&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Title: Environment Induced Conformational Transition in Peptides&lt;/li&gt;
+&lt;li&gt;cis-trans conformational transition of diphenylalanine molecule&lt;/li&gt;
+&lt;li&gt;In FF intro: introduce FF molecule and related studies&lt;/li&gt;
+&lt;li&gt;change title for transferability of CG&lt;/li&gt;
+&lt;li&gt;for fig 3.4 in FF, place more figs to show transitions + overall histogram&lt;/li&gt;
+&lt;li&gt;in abstract &amp;amp; intro emphasize your contribution&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;showed environment induced conformational changes&lt;/li&gt;
+&lt;li&gt;CG modeled conformational changes (instead of state-dependent models)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;FF: sections for each contributions&lt;/li&gt;
+&lt;li&gt;describe your FF model: how are atoms mapped in a table&lt;/li&gt;
+&lt;li&gt;FF-methods section: describe TI-particle insertion&lt;/li&gt;
+&lt;li&gt;FF: what happens when you use C/W potential : show the results&lt;/li&gt;
+&lt;li&gt;FF: describe how you attained CG-ST - in the middle of two variables W/C and C/W so show CG-FE’s surface tension– use it as a free parameter&lt;/li&gt;
+&lt;li&gt;Fig 3.12 remove P-C&lt;/li&gt;
+&lt;li&gt;Fig 3.10 remove mod-P-C&lt;/li&gt;
+&lt;li&gt;add modified version of 3.10 with both mod-P-C’s and then add the 3.12 again with mod-P-C&lt;/li&gt;
+&lt;li&gt;mod-P-C positions the molecule in correct position at the int&lt;/li&gt;
+&lt;li&gt;although the model is structural the transition is thermodynamic&lt;/li&gt;
+&lt;li&gt;extend fig 3.15 with another figure and shift y value of bulk cyclohexane to zero&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;kl&quot;&gt;KL&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;secondary amphiphilicity&lt;/li&gt;
+&lt;li&gt;talk about all LK molecules: why are they important&lt;/li&gt;
+&lt;li&gt;describe other LK molecules and also similar peptides&lt;/li&gt;
+&lt;li&gt;first show dimer in bw, then n-mer. Then discuss air/water interface&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Kleala Todo</title>
+   <link href="/2014/07/02/kleala-todo.html"/>
+   <updated>2014-07-02T00:00:00+03:00</updated>
+   <id>/2014/07/02/kleala-todo</id>
+    
+   <category term="/categories.html#kleala" label="kleala"/>
+   
+   <content type="html">
+</content>
+ </entry>
  
  <entry>
    <title>Todo Paper</title>
