@@ -153,7 +153,7 @@ else:
 	print 'Mode\t\t: Data has multiple modes!'
 print 'Mean\t\t: %g' %x.mean
 print 'Var\t\t: %g' %x.var
-print 'Std\t\t: %g' %x.std
+print 'Stdev\t\t: %g' %x.std
 print 'Stderr\t\t: %g' %x.stderr
 if x.kurtosis: print 'Kurtosis\t: %g' %x.kurtosis
 else: print 'Kurtosis\t: ', x.kurtosis

@@ -3,7 +3,7 @@
 scriptsdir="$HOME/Documents/scripts/currentscripts"
 
 cd $scriptsdir
-rsync -azr pd plotall pp ramaplot shannon pd parsescount calcTvAH ../votca-stepwise-script $HOME/sayargroup/
+rsync -az pd plotall pp ramaplot shannon pd parsescount calcTvAH ../votca-stepwise-script $HOME/sayargroup/
 
 ###################################################################
 # Scripts to Dropbox
@@ -11,20 +11,20 @@ rsync -azr pd plotall pp ramaplot shannon pd parsescount calcTvAH ../votca-stepw
 echo -e "\n********************************************************"
 echo -e "\t\tScripts to Dropbox"
 echo  -e "********************************************************\n"
-rsync -azr $scriptsdir/ $HOME/Dropbox/scripts/currentscripts
-rsync -azr $HOME/SIMS/simfiles $HOME/Dropbox/scripts/simfiles
+rsync -az $scriptsdir/ $HOME/Dropbox/scripts/currentscripts
+rsync -az $HOME/SIMS/simfiles $HOME/Dropbox/scripts/simfiles
 
 ###################################################################
 # Radiotray and Chess
 ###################################################################
 Dmiscdir="$HOME/Dropbox/misc"
-rsync -abr $HOME/.local/share/radiotray/bookmarks.xml $Dmiscdir/Radio-bookmarks.xml
-rsync -abr $HOME/.bashrc $Dmiscdir/bashrc
-rsync -abr $HOME/.bash_aliases $Dmiscdir/bash_aliases
-rsync -abr $HOME/.vmdrc $Dmiscdir/vmdrc
-rsync -abr $HOME/.vimrc $Dmiscdir/vimrc
-rsync -abr $HOME/.gnuplot $Dmiscdir/gnuplot
-rsync -abr $HOME/Documents/Chess $HOME/Dropbox
+rsync -az $HOME/.local/share/radiotray/bookmarks.xml $Dmiscdir/Radio-bookmarks.xml
+rsync -az $HOME/.bashrc $Dmiscdir/bashrc
+rsync -az $HOME/.bash_aliases $Dmiscdir/bash_aliases
+rsync -az $HOME/.vmdrc $Dmiscdir/vmdrc
+rsync -az $HOME/.vimrc $Dmiscdir/vimrc
+rsync -az $HOME/.gnuplot $Dmiscdir/gnuplot
+rsync -az $HOME/Documents/Chess $HOME/Dropbox
 
 #echo -e "\n\n********************************************************"
 #echo -e "\t\tSyncing to Dropbox"
@@ -40,9 +40,9 @@ if [[ -e $flashdisk ]]; then
     echo  -e "********************************************************\n\n"
     #rsync -avz $HOME/.tiddlywiki/TiddlySaver.jar $HOME/.tiddlywiki/notes* /media/sinan/.tiddlywiki/notes/
     #rsync -avz $HOME/.research/TiddlySaver.jar $HOME/.research/research* /media/sinan/.tiddlywiki/research/
-    rsync -avzr $scriptsdir/ $flashdisk/scripts/
-    rsync -avzr $HOME/SIMS/simfiles $flashdisk/scripts/
-    rsync -avzr $githubdir $flashdisk/github
+    rsync -az $scriptsdir/ $flashdisk/scripts/
+    rsync -az $HOME/SIMS/simfiles $flashdisk/scripts/
+    rsync -az $githubdir $flashdisk/github
 else
     echo "Skipping $flashdisk..."
 fi

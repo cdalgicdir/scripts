@@ -69,7 +69,7 @@ while [[ $# -ge 1 ]]; do
     esac
 done
 
-logfiles=`ls *.log 2>/dev/null`
+logfiles=`ls md*.log 2>/dev/null`
 dirs=`ls -d d?.??? 2>/dev/null`
 
 if [[ $multipledir == true ]]; then
