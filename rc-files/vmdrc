@@ -46,6 +46,7 @@ menu main move 5 5
 #menu graphics on
 #menu mol on
 
+###################################################################
 # add new material Ghost with coloring
 material add Ghostmod
 material change diffuse Ghostmod 0.3
@@ -55,6 +56,17 @@ material change shininess Ghostmod 0.23
 material change opacity Ghostmod 0.04
 material change outline Ghostmod 0.0
 material change outlinewidth Ghostmod 0.0
+# a second one where molecules are less ghostly
+material add Spectre
+material change diffuse Spectre 0.3
+material change ambient Spectre 0.3
+material change specular Spectre 1.0
+material change shininess Spectre 0.23
+material change opacity Spectre 0.35
+material change outline Spectre 0.0
+material change outlinewidth Spectre 0.0
+###################################################################
+#
 # nearclip / zoom more
 display nearclip set 0.010000
 # start the scene a-rockin'
@@ -1206,17 +1218,17 @@ proc processFF {{molid "0"}} {
     mol addrep $molid
 
     mol selection resname PHE
-    mol representation CPK 1.0 0.6 10 10
+    mol representation CPK 1.0 1.0 10 10
     mol addrep $molid
 
     mol color ColorID 0
-    mol representation VDW 0.400000 12.000000
+    mol representation VDW 0.600000 12.000000
     mol selection resname SOL
     mol material Ghostmod
     mol addrep $molid
 
-    mol color ColorID 2
-    mol representation VDW 1.200000 12.000000
+    mol color ColorID 10
+    mol representation VDW 1.400000 12.000000
     mol selection resname CHE
     mol material Ghostmod
     mol addrep $molid
