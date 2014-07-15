@@ -4,12 +4,54 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-07-03T14:22:52+03:00</updated>
+ <updated>2014-07-15T19:02:28+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Todo Thesis</title>
+   <link href="/2014/07/15/todo-thesis.html"/>
+   <updated>2014-07-15T00:00:00+03:00</updated>
+   <id>/2014/07/15/todo-thesis</id>
+    
+   <category term="/categories.html#todo" label="todo"/>
+   
+   <content type="html">&lt;h3 id=&quot;to-do&quot;&gt;TO-DO&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;FF dipeptide: Two state system for investigating conformational transition&lt;/li&gt;
+&lt;li&gt;intrinsically disordered at the end of KL single&lt;/li&gt;
+&lt;li&gt;link bulk water and interface: surfactant (see KL paper)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Abstract Thesis</title>
+   <link href="/2014/07/15/abstract-thesis.html"/>
+   <updated>2014-07-15T00:00:00+03:00</updated>
+   <id>/2014/07/15/abstract-thesis</id>
+    
+   <category term="/categories.html#abstract" label="abstract"/>
+   
+   <content type="html">&lt;p&gt;abstract&lt;/p&gt;
+&lt;p&gt;4 paragraf&lt;/p&gt;
+&lt;ol type=&quot;1&quot;&gt;
+&lt;li&gt;&lt;p&gt;problem definition: not only sequence but also env dependence we will focus on interface - macroscopic and molecular.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;2 model system:&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;FF simple system ideal to study these processes 2 results: shown environment induced conformational transition at atomistic resolution (hardness to show) investigate via CG model&lt;/p&gt;
+&lt;p&gt;second model is a more complex system: KL environment dependent behavior aggregation results in more complex systems&lt;/p&gt;
+&lt;ol start=&quot;4&quot; type=&quot;1&quot;&gt;
+&lt;li&gt;paragraph contribution: aggregation in intrinsically disordered protein link to neurodegenerative diseases&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;we showed via atomistic MD simulations the hardness of observing these processes via atomistic MD simualations.&lt;/p&gt;
+&lt;p&gt;nonbonded and bonded separation might not always work&lt;/p&gt;
+&lt;p&gt;two state model - CG model: structural or thermodynamic conformational change seems structural but the driving forces are thermodynamic&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Thesis Todo</title>
