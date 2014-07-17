@@ -4,12 +4,40 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-07-15T19:02:28+03:00</updated>
+ <updated>2014-07-17T12:31:19+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Todo Presentation</title>
+   <link href="/2014/07/17/todo-presentation.html"/>
+   <updated>2014-07-17T00:00:00+03:00</updated>
+   <id>/2014/07/17/todo-presentation</id>
+    
+   <category term="/categories.html#todo" label="todo"/>
+   
+   <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO-DO&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Modeling multiscale: bond vibration in terms of time up to coarse-grain modelling&lt;/li&gt;
+&lt;li&gt;tell about coarse-graining with a slide&lt;/li&gt;
+&lt;li&gt;why do we need CG? give example from lit: long sim - think about amyloid fibril formation&lt;/li&gt;
+&lt;li&gt;driving forces and mechanism to study –&amp;gt; MD &amp;amp; then what is MD, then what can be done with MD –&amp;gt; show multiscale (bond fluctuation time scales) -&amp;gt; show folded protein from literature (ubiquitin-how long it took) - protein aggregation - 100s of mols and water –&amp;gt; very long – our system?&lt;/li&gt;
+&lt;li&gt;show PBBP dihedral one by one and then xtal&lt;/li&gt;
+&lt;li&gt;in solution show video, and timeline&lt;/li&gt;
+&lt;li&gt;first show CG solvent, show free energy table then show FF mapping&lt;/li&gt;
+&lt;li&gt;show PMF along with interface dih distrs.&lt;/li&gt;
+&lt;li&gt;Do not overtune CG model (mod PC - PMFs)&lt;/li&gt;
+&lt;li&gt;KL designed for ah, LK, charge, structure similar to FF bw, int&lt;/li&gt;
+&lt;li&gt;isolated - single in bw KL (fig in paper) (dilute) frustrated - hydrophobic core, lysine charge, intrinsic disord.&lt;/li&gt;
+&lt;li&gt;we showed the dramatic effect of interface in FF (only partitioning, no secondary structure) here sec str.&lt;/li&gt;
+&lt;li&gt;link to FF molecular interface before dimer (no video for dimer-change snapshots in fig)&lt;/li&gt;
+&lt;li&gt;link to FF and amyloid fibril formation before nKL&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Todo Thesis</title>
