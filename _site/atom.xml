@@ -4,12 +4,34 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-08-06T14:31:54+03:00</updated>
+ <updated>2014-08-06T16:13:44+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Kleala Todo</title>
+   <link href="/2014/08/06/kleala-todo.html"/>
+   <updated>2014-08-06T00:00:00+03:00</updated>
+   <id>/2014/08/06/kleala-todo</id>
+    
+   <category term="/categories.html#kleala" label="kleala"/>
+   
+   <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO-DO&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;figures - a,b,c,d&lt;/li&gt;
+&lt;li&gt;add dssp legends for all&lt;/li&gt;
+&lt;li&gt;update kl1b sasa plots moving avg 1000&lt;/li&gt;
+&lt;li&gt;eala2b add sasa similar to LK&lt;/li&gt;
+&lt;li&gt;fig. 5 remove blank lines below fig&lt;/li&gt;
+&lt;li&gt;table remove error bars&lt;/li&gt;
+&lt;li&gt;fig.12 flip 520 ns&lt;/li&gt;
+&lt;li&gt;crop DSSP legend –&amp;gt; prevent legends getting cut&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Kleala Todo</title>
