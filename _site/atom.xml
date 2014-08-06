@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-08-05T12:13:58+03:00</updated>
+ <updated>2014-08-06T14:31:54+03:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -21,15 +21,15 @@
    
    <content type="html">&lt;h1 id=&quot;to-do&quot;&gt;TO-DO&lt;/h1&gt;
 &lt;ol type=&quot;1&quot;&gt;
-&lt;li&gt;fix fig. 3 sas plots&lt;/li&gt;
-&lt;li&gt;enlarge fig. 3 sas plots&lt;/li&gt;
-&lt;li&gt;calculate helix sasa for hydrophobic sidechains (single value to compare with remaining sec str.s)&lt;/li&gt;
-&lt;li&gt;intra-hbond for kl1b&lt;/li&gt;
-&lt;li&gt;christoph: eala1b 800 ns snapshot to show the loop (and show the Hbond)&lt;/li&gt;
-&lt;li&gt;christoph: when does the molecule go to the interface eala1i&lt;/li&gt;
-&lt;li&gt;add kl1b intra-hbnum to SI&lt;/li&gt;
-&lt;li&gt;put kl2b climbing snapshots into SI&lt;/li&gt;
-&lt;li&gt;kl2b: sas-PLs1 and 2 on same fig instead of sasa fig&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;fix fig. 3 sas plots&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;enlarge fig. 3 sas plots&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;calculate helix sasa for hydrophobic sidechains (single value to compare with remaining sec str.s)&lt;/del&gt; (kl: 7.86, eala: 4.18)&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;intra-hbond for kl1b&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;christoph: eala1b 800 ns snapshot to show the loop (and show the Hbond)&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;christoph: when does the molecule go to the interface eala1i&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;add kl1b intra-hbnum to SI&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;put kl2b climbing snapshots into SI&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;kl2b: sas-PLs1 and 2 on same fig instead of sasa fig&lt;/del&gt;&lt;/li&gt;
 &lt;li&gt;kl2b: calc intra-hbonds for each and place in SI&lt;/li&gt;
 &lt;/ol&gt;
 </content>
