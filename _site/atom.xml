@@ -4,12 +4,35 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-08-07T12:03:47+03:00</updated>
+ <updated>2014-08-07T17:20:37+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Kleala Todo</title>
+   <link href="/2014/08/07/kleala-todo.html"/>
+   <updated>2014-08-07T00:00:00+03:00</updated>
+   <id>/2014/08/07/kleala-todo</id>
+    
+   <category term="/categories.html#kleala" label="kleala"/>
+   
+   <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO-DO&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;add a-b-c-d to fig.5&lt;/li&gt;
+&lt;li&gt;make plot legends black&lt;/li&gt;
+&lt;li&gt;time (ns) –&amp;gt; Time (ns)&lt;/li&gt;
+&lt;li&gt;add the dssp-legend for fig.5 instead of their own for only one of them, add vspace to align the plots&lt;/li&gt;
+&lt;li&gt;for snapshots move the time info to top and align&lt;/li&gt;
+&lt;li&gt;move fig.6 hbonds to SI&lt;/li&gt;
+&lt;li&gt;fig. 4 align snapshots&lt;/li&gt;
+&lt;li&gt;fig.8 do running average&lt;/li&gt;
+&lt;li&gt;remove LKa14 (use LK instead)&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Kleala Todo</title>
