@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-08-06T16:13:44+03:00</updated>
+ <updated>2014-08-07T12:03:47+03:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -21,14 +21,14 @@
    
    <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO-DO&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;figures - a,b,c,d&lt;/li&gt;
-&lt;li&gt;add dssp legends for all&lt;/li&gt;
-&lt;li&gt;update kl1b sasa plots moving avg 1000&lt;/li&gt;
-&lt;li&gt;eala2b add sasa similar to LK&lt;/li&gt;
-&lt;li&gt;fig. 5 remove blank lines below fig&lt;/li&gt;
-&lt;li&gt;table remove error bars&lt;/li&gt;
-&lt;li&gt;fig.12 flip 520 ns&lt;/li&gt;
-&lt;li&gt;crop DSSP legend –&amp;gt; prevent legends getting cut&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;figures - a,b,c,d&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;add dssp legends for all&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;update kl1b sasa plots moving avg 1000&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;eala2b add sasa similar to LK&lt;/del&gt; (dt=10, running-mean 1000)&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;fig. 5 remove blank lines below fig&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;table remove error bars&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;fig.12 flip 520 ns&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;crop DSSP legend –&amp;gt; prevent legends getting cut&lt;/del&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>
@@ -52,7 +52,7 @@
 &lt;li&gt;&lt;del&gt;add kl1b intra-hbnum to SI&lt;/del&gt;&lt;/li&gt;
 &lt;li&gt;&lt;del&gt;put kl2b climbing snapshots into SI&lt;/del&gt;&lt;/li&gt;
 &lt;li&gt;&lt;del&gt;kl2b: sas-PLs1 and 2 on same fig instead of sasa fig&lt;/del&gt;&lt;/li&gt;
-&lt;li&gt;kl2b: calc intra-hbonds for each and place in SI&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;kl2b: calc intra-hbonds for each and place in SI&lt;/del&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </content>
  </entry>

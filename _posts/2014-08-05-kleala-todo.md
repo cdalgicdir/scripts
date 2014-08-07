@@ -14,4 +14,4 @@ category: kleala
 7. ~~add kl1b intra-hbnum to SI~~
 8. ~~put kl2b climbing snapshots into SI~~
 9. ~~kl2b: sas-PLs1 and 2 on same fig instead of sasa fig~~
-10. kl2b: calc intra-hbonds for each and place in SI
+10. ~~kl2b: calc intra-hbonds for each and place in SI~~
