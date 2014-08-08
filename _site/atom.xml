@@ -4,12 +4,32 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-08-08T11:06:05+03:00</updated>
+ <updated>2014-08-08T12:09:45+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Kleala Todo</title>
+   <link href="/2014/08/08/kleala-todo.html"/>
+   <updated>2014-08-08T00:00:00+03:00</updated>
+   <id>/2014/08/08/kleala-todo</id>
+    
+   <category term="/categories.html#kleala" label="kleala"/>
+   
+   <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO-DO&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;merge sas for lk &amp;amp; eala for fig.3&lt;/li&gt;
+&lt;li&gt;add intrahbond for lk-eala for fig.3&lt;/li&gt;
+&lt;li&gt;add sas for lk-eala for fig.4&lt;/li&gt;
+&lt;li&gt;add intrahbond for lk-eala for fig.4&lt;/li&gt;
+&lt;li&gt;merge sas for lk &amp;amp; eala for fig.5&lt;/li&gt;
+&lt;li&gt;add intrahbond for lk-eala and inter for eala for fig.5&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Kleala Todo</title>
