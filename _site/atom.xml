@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-08-08T12:09:45+03:00</updated>
+ <updated>2014-08-08T16:52:37+03:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -21,12 +21,12 @@
    
    <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO-DO&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;merge sas for lk &amp;amp; eala for fig.3&lt;/li&gt;
-&lt;li&gt;add intrahbond for lk-eala for fig.3&lt;/li&gt;
-&lt;li&gt;add sas for lk-eala for fig.4&lt;/li&gt;
-&lt;li&gt;add intrahbond for lk-eala for fig.4&lt;/li&gt;
-&lt;li&gt;merge sas for lk &amp;amp; eala for fig.5&lt;/li&gt;
-&lt;li&gt;add intrahbond for lk-eala and inter for eala for fig.5&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;merge sas for lk &amp;amp; eala for fig.3&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;add intrahbond for lk-eala for fig.3&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;add sas for lk-eala for fig.4&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;add intrahbond for lk-eala for fig.4&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;merge sas for lk &amp;amp; eala for fig.5&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;add intrahbond for lk-eala and inter for eala for fig.5&lt;/del&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>
