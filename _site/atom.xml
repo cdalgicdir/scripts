@@ -4,12 +4,39 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-08-11T12:24:30+03:00</updated>
+ <updated>2014-08-11T17:06:07+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Thesis Klcg</title>
+   <link href="/2014/08/11/thesis-klcg.html"/>
+   <updated>2014-08-11T00:00:00+03:00</updated>
+   <id>/2014/08/11/thesis-klcg</id>
+    
+   <category term="/categories.html#thesis" label="thesis"/>
+   
+   <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO-DO&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Fig. 4.51 red peak-cg-vacBBdih-ii4p CN-CA-CN-CA dihedral, 2nd peak relates to end points – write&lt;/li&gt;
+&lt;li&gt;nwall=2 check wall atomtype&lt;/li&gt;
+&lt;li&gt;change wall strength and monitor adsorption&lt;/li&gt;
+&lt;li&gt;measure atomistic CN-CNi+(2,3) distance distributions &amp;amp; compare with the CG model (cg-vacBBdih-ii4p – no wall)
+&lt;ul&gt;
+&lt;li&gt;the cooperative effect of CNi-CNi4&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;outline&quot;&gt;OUTLINE&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;lysine charge&lt;/li&gt;
+&lt;li&gt;i-i+4 –&amp;gt; generic&lt;/li&gt;
+&lt;li&gt;leu-leu interaction&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Kleala Todo</title>
