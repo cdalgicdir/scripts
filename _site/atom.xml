@@ -4,12 +4,58 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-08-11T17:06:07+03:00</updated>
+ <updated>2014-08-18T17:39:02+03:00</updated>
  <id></id>
  <author>
    <name></name>
  </author>
  <rights>CC0</rights>
+ 
+ <entry>
+   <title>Kleala Todo</title>
+   <link href="/2014/08/18/kleala-todo.html"/>
+   <updated>2014-08-18T00:00:00+03:00</updated>
+   <id>/2014/08/18/kleala-todo</id>
+    
+   <category term="/categories.html#kleala" label="kleala"/>
+   
+   <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO-DO&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;add to SI: /home/cdalgicdir/remote/tric/sg6/KL/140331_KLi-rc/9-Production/sas_PPSP_diff-dt1000-all_rm10.xvg&lt;/li&gt;
+&lt;li&gt;H-bond if EALA contains sidechain-intra H-bonds or not&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Klatm Todo</title>
+   <link href="/2014/08/18/klatm-todo.html"/>
+   <updated>2014-08-18T00:00:00+03:00</updated>
+   <id>/2014/08/18/klatm-todo</id>
+    
+   <category term="/categories.html#klatm" label="klatm"/>
+   
+   <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO-DO&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;add kl2b sas-Ls parallel and anti (dimer, 1st peptide, 2nd peptide)&lt;/li&gt;
+&lt;li&gt;calculate pmf for kl1i from bulk water to interface - umbrella:
+&lt;ul&gt;
+&lt;li&gt;2 sims: init random and init helix&lt;/li&gt;
+&lt;li&gt;difference will give folding at the interface free energy, expected to be favorable&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;kl2b anti start sim&lt;/li&gt;
+&lt;li&gt;nKL-sas:&lt;/li&gt;
+&lt;li&gt;Protein-Ls&lt;/li&gt;
+&lt;li&gt;Protein-Ls-individual&lt;/li&gt;
+&lt;li&gt;Protein-Protein&lt;/li&gt;
+&lt;li&gt;Protein-Protein-individual&lt;/li&gt;
+&lt;li&gt;add PMF vs BI free sim:&lt;/li&gt;
+&lt;li&gt;calc BI free for parallel&lt;/li&gt;
+&lt;li&gt;add the second a/w free sim distVang&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Thesis Klcg</title>
@@ -34,6 +80,10 @@
 &lt;li&gt;lysine charge&lt;/li&gt;
 &lt;li&gt;i-i+4 –&amp;gt; generic&lt;/li&gt;
 &lt;li&gt;leu-leu interaction&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;to-do---kl-aggregate&quot;&gt;TO-DO - KL-aggregate&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;REMD in bw: add convergence (divide into two) for SS v T&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>

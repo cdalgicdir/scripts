@@ -15,3 +15,6 @@ category: thesis
 - lysine charge
 - i-i+4 --> generic
 - leu-leu interaction
+
+# TO-DO - KL-aggregate
+- REMD in bw: add convergence (divide into two) for SS v T
