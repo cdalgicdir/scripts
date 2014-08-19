@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-08-19T12:18:11+03:00</updated>
+ <updated>2014-08-19T12:19:56+03:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -66,14 +66,14 @@
    <updated>2014-08-11T00:00:00+03:00</updated>
    <id>/2014/08/11/thesis-klcg</id>
     
-   <category term="/categories.html#thesis" label="thesis"/>
+   <category term="/categories.html#%5B%22thesis%22%2C+%22klcg%22%2C+%22todo%22%5D" label="["thesis", "klcg", "todo"]"/>
    
    <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO-DO&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;Fig. 4.51 red peak-cg-vacBBdih-ii4p CN-CA-CN-CA dihedral, 2nd peak relates to end points – write&lt;/li&gt;
-&lt;li&gt;nwall=2 check wall atomtype&lt;/li&gt;
-&lt;li&gt;change wall strength and monitor adsorption&lt;/li&gt;
-&lt;li&gt;measure atomistic CN-CNi+(2,3) distance distributions &amp;amp; compare with the CG model (cg-vacBBdih-ii4p – no wall)
+&lt;li&gt;&lt;del&gt;nwall=2 check wall atomtype&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;change wall strength and monitor adsorption&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;measure atomistic CN-CNi+(2,3) distance distributions &amp;amp; compare with the CG model (cg-vacBBdih-ii4p – no wall)&lt;/del&gt;
 &lt;ul&gt;
 &lt;li&gt;the cooperative effect of CNi-CNi4&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
