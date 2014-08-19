@@ -11,10 +11,10 @@ category: klatm
     - difference will give folding at the interface free energy, expected to be favorable
 - kl2b anti start sim
 - nKL-sas:
-  - Protein-Ls
-  - Protein-Ls-individual
-  - Protein-Protein
-  - Protein-Protein-individual
+	- Protein-Ls
+	- Protein-Ls-individual
+	- Protein-Protein
+	- Protein-Protein-individual
 - add PMF vs BI free sim:
-  - calc BI free for parallel
+	- calc BI free for parallel
 - add the second a/w free sim distVang

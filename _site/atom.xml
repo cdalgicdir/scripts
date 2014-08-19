@@ -4,7 +4,7 @@
  <title>Papers Notebook</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-08-18T17:39:02+03:00</updated>
+ <updated>2014-08-19T12:18:11+03:00</updated>
  <id></id>
  <author>
    <name></name>
@@ -21,9 +21,8 @@
    
    <content type="html">&lt;h2 id=&quot;to-do&quot;&gt;TO-DO&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;add to SI: /home/cdalgicdir/remote/tric/sg6/KL/140331_KLi-rc/9-Production/sas_PPSP_diff-dt1000-all_rm10.xvg&lt;/li&gt;
-&lt;li&gt;H-bond if EALA contains sidechain-intra H-bonds or not&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;add to SI: /home/cdalgicdir/remote/tric/sg6/KL/140331_KLi-rc/9-Production/sas_PPSP_diff-dt1000-all_rm10.xvg&lt;/del&gt;&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;H-bond if EALA contains sidechain-intra H-bonds or not&lt;/del&gt; (&lt;strong&gt;contains sidechain and backbone intra H-bonds – Protein Protein&lt;/strong&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 </content>
  </entry>
@@ -45,13 +44,17 @@
 &lt;li&gt;difference will give folding at the interface free energy, expected to be favorable&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;kl2b anti start sim&lt;/li&gt;
-&lt;li&gt;nKL-sas:&lt;/li&gt;
+&lt;li&gt;nKL-sas:
+&lt;ul&gt;
 &lt;li&gt;Protein-Ls&lt;/li&gt;
 &lt;li&gt;Protein-Ls-individual&lt;/li&gt;
 &lt;li&gt;Protein-Protein&lt;/li&gt;
 &lt;li&gt;Protein-Protein-individual&lt;/li&gt;
-&lt;li&gt;add PMF vs BI free sim:&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;add PMF vs BI free sim:
+&lt;ul&gt;
 &lt;li&gt;calc BI free for parallel&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;add the second a/w free sim distVang&lt;/li&gt;
 &lt;/ul&gt;
 </content>
