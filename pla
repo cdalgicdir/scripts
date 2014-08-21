@@ -31,6 +31,7 @@ column=2
 every=1
 colslist=()
 noplot=false
+convert2ns=false
 doentcorr=0
 doshift=0
 
@@ -127,6 +128,10 @@ while [[ $# -ge 1 ]]; do
 	    noplottab=true
 	    shift 1;;
 
+	-ns)
+	    convert2ns=true
+	    shift 1;;
+
 	w)
 	    linetype=$2
 	    shift 2;;
@@ -189,9 +194,15 @@ while [[ $# -ge 1 ]]; do
 	    shift 1;;
 
 	-pdf)
-	    terminal='set terminal pdfcairo font "Gill Sans,12" linewidth 3 rounded'
+	    terminal='set terminal pdfcairo font "Gill Sans,12" linewidth '"$lw"' rounded'
 	    output='-o out.pdf'
 	    echo "Generating out.pdf"
+	    shift 1;;
+
+	-gp)
+	    outgp=true
+	    gpcomm='save "out.gp"'
+	    echo "Generating out.gp"
 	    shift 1;;
 
 	-shift)
@@ -342,6 +353,11 @@ do
 
 ###################################################################
 
+	    if $convert2ns; then
+		using2=${using:3}
+		a=(${using2//:/ })
+		[[ ${#a[@]} -gt 1 ]] && using=" u (\$${a[0]}/1000):${a[1]} "
+	    fi
 		plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
 	    if [[ $label == 1 ]]; then
 		if [[ ${#colslist[@]} -gt 1 ]]; then
@@ -369,6 +385,9 @@ plotfiles=${plotfiles:0:$((${#plotfiles}-1))}
 if $noplot; then
     printcommands
 else
+    if $outgp; then
+	plotfiles="${plotfiles[@]}"";$gpcomm"
+    fi
     plot $range $plotfiles
 fi
 
