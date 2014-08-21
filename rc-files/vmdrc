@@ -1019,7 +1019,7 @@ proc snap {{molid "0"} {filename "auto"} {dotrim "true"}} {
     } else {set file $filename}
     set datfile [string map {".png" ".dat"} $file]
     render Tachyon $datfile tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
-    file delete $datfile
+    #file delete $datfile
     if {$dotrim == "true"} {
 	set trimfile [string map {".png" "-trim.png"} $file]
 	eval exec {convert -density 300 -trim $file $trimfile}

@@ -35,7 +35,7 @@ doentcorr=0
 doshift=0
 
 plot () {
-    gplot $output -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
+    gplot $output -c "${style}" -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
 }
 
 printcommands () {
@@ -257,7 +257,8 @@ done
 
 if [[ ${#filelist[@]} == 1 ]] && [[ ! -f ${filelist[0]} ]]; then echo "File not found!" && exit 1;fi
 
-ev=" every ${every} "
+style="do for [i=1:20] { set style line i linewidth $lw }"
+ev=" every ${every}"
 
 # shift to zero for PMFs (only works for the second column
 if [[ $doshift == 1 ]]; then
@@ -275,7 +276,8 @@ fi
 
 # linetypes
 if [ "${linetype}" == "lines" ] || [ "${linetype}" == "l" ] ; then
-    with=" with $linetype lw $lw "
+    with=" with $linetype "
+    #with=" with $linetype lw $lw "
 elif [ "${linetype}" == "points" ] || [ "${linetype}" == "p" ]; then
     with=" with $linetype ps $pointsize "
 elif [[ $linetype == *yer* ]]; then
@@ -324,7 +326,7 @@ do
 		fi
 		using=" u ${j} "
 
-	###################################################################
+###################################################################
 
 	    # shift to zero and entropic correction (for second cols only)
 	    if [[ $doshift == 1 ]] && [[ $doentcorr == 0 ]]; then
@@ -338,7 +340,7 @@ do
 		using=" u $column0:(\$$column+2*$kT*(log(\$1/$theshiftR))-$theshift) "
 	    fi
 
-	###################################################################
+###################################################################
 
 		plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
 	    if [[ $label == 1 ]]; then

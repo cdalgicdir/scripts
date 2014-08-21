@@ -38,11 +38,11 @@ if matchstr(expand("%"),".*\.tex") != ""
     :iab 1int air/water interface
     :iab 1pmf potential of mean force
     :iab pp peptide
-    :iab leu leucine
-    :iab lys lysine
+    :iab 1leu leucine
+    :iab 1lys lysine
     :iab KL LK$\alpha$14
     :iab ie i.e.
     :iab adn and
-    :iab 1CNii4 CN$_i$-CN$_{i+4}$
-    :map <F2> viwb<ESC><ESC>i\emph{<ESC>ea}<ESC>
+    :iab ii4 \emph{CN$_i$-CN$_{i+4}$}
+    ":map <F2> viWB<ESC><ESC>i\emph{<ESC>Ea}<ESC>
 endif

@@ -25,10 +25,11 @@ set runtimepath^=~/.vim/bundle/vim-online-thesaurus
 ":set autoindent
 set autowrite
 set ruler
-:ab #d #define
+":ab #d #define
 :ab #i #include
 :ab #b /********************************************************
 :ab #c ###################################################################
+:ab #d %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 :ab #e ********************************************************/
 :ab #l /*------------------------------------------------------*/
 :set sw=4
@@ -43,7 +44,7 @@ set ignorecase          " ignore case when searching
 set smartcase           " no ignorecase if Uppercase char present
 
 map <F8> :w <enter> :!/home/cdalgicdir/Documents/scripts/currentscripts/vimrun % <enter>
-"map <F2> :w <enter> :!/home/cdalgicdir/Documents/scripts/currentscripts/latexcrop % <enter>
+map <F2> :w <enter> :!/home/cdalgicdir/Documents/scripts/currentscripts/latexcrop % <enter>
 "nnoremap    <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
 
 " LATEX PLUGIN options 

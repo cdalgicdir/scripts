@@ -35,20 +35,22 @@ set style line 80 lt rgb "#808080"
 # Line style for grid
 #set style line 81 lt 0  # dashed
 set style line 81 lt -1  # solid
-set style line 81 lt rgb "#808080"  # grey
+set style line 81 lt rgb "black"  # black
+#set style line 81 lt rgb "#808080"  # grey
 set border 3 back linestyle 81 # Remove border on top and right.  These
              # borders are useless and make it harder
              # to see plotted lines near the border.
     # Also, put it in grey; no need for so much emphasis on a border.
+#set border 11 back linestyle 81 # for 2 y-axes
 set tics nomirror
 # Line styles: try to pick pleasing colors, rather
 # than strictly primary colors or hard-to-see colors
 # like gnuplot's default yellow.  Make the lines thick
 # so they're easy to see in small plots in papers.
-set style line 1 lt rgb "#A00000" lw 3 pt 1
-set style line 2 lt rgb "#00A000" lw 3 pt 6
-set style line 3 lt rgb "#5060D0" lw 3 pt 2
-set style line 4 lt rgb "#F25900" lw 3 pt 9
+set style line 1 lt rgb "#A00000" lw 3 pt 1 #red
+set style line 2 lt rgb "#00A000" lw 3 pt 6 #blue
+set style line 3 lt rgb "#5060D0" lw 3 pt 2 #green
+set style line 4 lt rgb "#F25900" lw 3 pt 9 #orange
 set style line 5 lt 5 lc rgb 'black'         lw 3
 set style line 6 lt 6 lc rgb 'dark-violet'           lw 3
 set style line 7 lt 7 lc rgb 'cyan'          lw 3
@@ -68,7 +70,7 @@ pmf="set xlabel 'separation distance (nm)';set ylabel 'V(r) (kJ/mol)'"
 pot="set xlabel 'r (nm)';set ylabel 'V(r) (kJ/mol)'"
 ll="set style data line"
 evo="!evince out.pdf"
-saslab="set key out;set xlabel 'time (ns)';set ylabel 'SASA (nm^2)'"
+saslab="set key out;set xlabel 'Time (ns)';set ylabel 'SASA (nm^2)'"
 sas=" u ($1/1000):2 t 'hydrophobic','' u ($1/1000):3 t 'hydrophilic','' u ($1/1000):4 t 'total'"
 sasev=" ev 200 u ($1/1000):2 t 'hydrophobic','' ev 200 u ($1/1000):3 t 'hydrophilic','' ev 200 u ($1/1000):4 t 'total'"
 sasdiff=" u ($1/1000):($2-$7) t 'hydrophobic','' u ($1/1000):($3-$8) t 'hydrophilic','' u ($1/1000):($4-$9) t 'total'"

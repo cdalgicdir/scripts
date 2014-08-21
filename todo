@@ -1,26 +1,30 @@
 #! /bin/bash
 
-sitedir="$HOME/Dropbox/github/notes/_posts"
+sitedir="$HOME/Dropbox/github/research/_posts"
 
 #[[ ! -n "$1" ]] && echo "Missing argument!" && exit 1
-[[ ! -n "$1" ]] && title="notes" || title="$1"
+[[ ! -n "$1" ]] && title="todo"
 
 date=`date +%Y-%m-%d`
 fname="$date-${title}.md"
+#project=(${1//-/ })
+#project=${project[0]}
 
 if [[ ! -e "$(eval echo $sitedir/$fname)" ]]; then
     eval cd $sitedir
 
     echo -e "---\n\
 layout: post\n\
-tag: ${title}\n\
-category: ${title}\n\
----" > $fname
+tags: todo\n\
+category: todo\n\
+---\n\
+\n\
+## TO-DO\n\
+- " > $fname
 
-gvim $fname
+    gvim $fname
 else
     eval cd $sitedir
     echo "$fname exists, opening..."
     gvim $fname
 fi
-

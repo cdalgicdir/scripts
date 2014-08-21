@@ -70,10 +70,15 @@ while [[ $# -ge 1 ]]; do
 done
 
 logfiles=`ls md*.log 2>/dev/null`
+logfileslist=(${logfiles// / })
 dirs=`ls -d d?.??? 2>/dev/null`
 
 if [[ $multipledir == true ]]; then
-    [[ ${#logfiles[@]} == 1 ]] && [[ $dirset == false  ]] && [[ ${dirs[@]} == "" ]] && multipledir=false && file=${logfiles[0]}
+    [[ ${#logfileslist[@]} == 1 ]] && [[ $dirset == false  ]] && [[ ${dirs[@]} == "" ]] && multipledir=false && file=${logfiles[0]}
+    if [[ ${#logfileslist[@]} -gt 1 ]] && [[ $dirset == false ]] && [[ ${dirs[@]} == "" ]]; then
+	multipledir=false
+	file=`ls -l md*.log | tail -1 | awk '{print $9}'`
+    fi
 fi
 
 # COLORS
