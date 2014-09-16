@@ -247,6 +247,41 @@
 
   <cg_bonded>
       <bond>
+          <name>dist_CNi-CNi2</name>
+          <beads>
+            CN1  CN3
+            CN2  CN4
+            CN3  CN5
+            CN4  CN6
+            CN5  CN7
+            CN6  CN8
+            CN7  CN9
+            CN8  CN10
+            CN9  CN11
+            CN10 CN12
+            CN11 CN13
+            CN12 CN14
+            CN13 CN15
+          </beads>
+      </bond>
+      <bond>
+          <name>dist_CNi-CNi3</name>
+          <beads>
+            CN1  CN4
+            CN2  CN5
+            CN3  CN6
+            CN4  CN7
+            CN5  CN8
+            CN6  CN9
+            CN7  CN10
+            CN8  CN11
+            CN9  CN12
+            CN10 CN13
+            CN11 CN14
+            CN12 CN15
+          </beads>
+      </bond>
+      <bond>
 	  <name>dist_CNi-CNi4</name>
 	  <beads>
 	    CN1  CN5
@@ -261,6 +296,21 @@
 	    CN10 CN14
 	    CN11 CN15
 	  </beads>
+      </bond>
+      <bond>
+          <name>dist_CNi-CNi5</name>
+          <beads>
+            CN1  CN6
+            CN2  CN7
+            CN3  CN8
+            CN4  CN9
+            CN5  CN10
+            CN6  CN11
+            CN7  CN12
+            CN8  CN13
+            CN9  CN14
+            CN10 CN15
+          </beads>
       </bond>
       <bond>
           <name>bond_CN-CA</name>
