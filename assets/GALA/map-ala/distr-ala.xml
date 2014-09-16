@@ -1,247 +1,247 @@
 <cg_molecule>
   <name>EALA</name>
-	<ident>Protein</ident>
+	<ident>EALA</ident>
   <topology>
     <cg_beads>
 	<cg_bead>
         <name>CN1</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>1:ACE:C 1:ACE:O 2:GLU:N 2:GLU:H</beads>
+        <beads>1:EALA:CN1</beads>
       </cg_bead>
       <cg_bead>
         <name>CA1</name>
         <type>CA</type>
         <mapping>CA</mapping>
-        <beads>2:GLU:CA</beads>
+        <beads>1:EALA:CA1</beads>
       </cg_bead>
       <cg_bead>
         <name>GC1</name>
         <type>GC</type>
         <mapping>GC</mapping>
-        <beads>2:GLU:CB 2:GLU:CG 2:GLU:CD</beads>
+        <beads>1:EALA:GC1</beads>
       </cg_bead>
       <cg_bead>
         <name>GO1</name>
         <type>GO</type>
         <mapping>GO</mapping>
-        <beads>2:GLU:OE1 2:GLU:OE2</beads>
+        <beads>1:EALA:GO1</beads>
       </cg_bead>
       <cg_bead>
         <name>CN2</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>2:GLU:C 2:GLU:O 3:ALA:N 3:ALA:H</beads>
+        <beads>1:EALA:CN2</beads>
       </cg_bead>
       <cg_bead>
         <name>A1</name>
         <type>A</type>
         <mapping>A</mapping>
-        <beads>3:ALA:CA</beads>
+        <beads>1:EALA:A1</beads>
       </cg_bead>
       <cg_bead>
         <name>CN3</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>3:ALA:C 3:ALA:O 4:ALA:N 4:ALA:H</beads>
+        <beads>1:EALA:CN3</beads>
       </cg_bead>
       <cg_bead>
         <name>A2</name>
         <type>A</type>
         <mapping>A</mapping>
-        <beads>4:ALA:CA</beads>
+        <beads>1:EALA:A2</beads>
       </cg_bead>
       <cg_bead>
         <name>CN4</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>4:ALA:C 4:ALA:O 5:LEU:N 5:LEU:H</beads>
+        <beads>1:EALA:CN4</beads>
       </cg_bead>
       <cg_bead>
         <name>CA2</name>
         <type>CA</type>
         <mapping>CA</mapping>
-        <beads>5:LEU:CA</beads>
+        <beads>1:EALA:CA2</beads>
       </cg_bead>
       <cg_bead>
         <name>L1</name>
         <type>L</type>
         <mapping>L</mapping>
-        <beads>5:LEU:CB 5:LEU:CG 5:LEU:CD1 5:LEU:CD2</beads>
+        <beads>1:EALA:L1</beads>
       </cg_bead>
       <cg_bead>
         <name>CN5</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>5:LEU:C 5:LEU:O 6:ALA:N 6:ALA:H</beads>
+        <beads>1:EALA:CN5</beads>
       </cg_bead>
       <cg_bead>
         <name>A3</name>
         <type>A</type>
         <mapping>A</mapping>
-        <beads>6:ALA:CA</beads>
+        <beads>1:EALA:A3</beads>
       </cg_bead>
       <cg_bead>
         <name>CN6</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>6:ALA:C 6:ALA:O 7:GLU:N 7:GLU:H</beads>
+        <beads>1:EALA:CN6</beads>
       </cg_bead>
       <cg_bead>
         <name>CA3</name>
         <type>CA</type>
         <mapping>CA</mapping>
-        <beads>7:GLU:CA</beads>
+        <beads>1:EALA:CA3</beads>
       </cg_bead>
       <cg_bead>
         <name>GC2</name>
         <type>GC</type>
         <mapping>GC</mapping>
-        <beads>7:GLU:CB 7:GLU:CG 7:GLU:CD</beads>
+        <beads>1:EALA:GC2</beads>
       </cg_bead>
       <cg_bead>
         <name>GO2</name>
         <type>GO</type>
         <mapping>GO</mapping>
-        <beads>7:GLU:OE1 7:GLU:OE2</beads>
+        <beads>1:EALA:GO2</beads>
       </cg_bead>
       <cg_bead>
         <name>CN7</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>7:GLU:C 7:GLU:O 8:ALA:N 8:ALA:H</beads>
+        <beads>1:EALA:CN7</beads>
       </cg_bead>
       <cg_bead>
         <name>A4</name>
         <type>A</type>
         <mapping>A</mapping>
-        <beads>8:ALA:CA</beads>
+        <beads>1:EALA:A4</beads>
       </cg_bead>
       <cg_bead>
         <name>CN8</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>8:ALA:C 8:ALA:O 9:LEU:N 9:LEU:H</beads>
+        <beads>1:EALA:CN8</beads>
       </cg_bead>
       <cg_bead>
         <name>CA4</name>
         <type>CA</type>
         <mapping>CA</mapping>
-        <beads>9:LEU:CA</beads>
+        <beads>1:EALA:CA4</beads>
       </cg_bead>
       <cg_bead>
         <name>L2</name>
         <type>L</type>
         <mapping>L</mapping>
-        <beads>9:LEU:CB 9:LEU:CG 9:LEU:CD1 9:LEU:CD2</beads>
+        <beads>1:EALA:L2</beads>
       </cg_bead>
       <cg_bead>
         <name>CN9</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>9:LEU:C 9:LEU:O 10:ALA:N 10:ALA:H</beads>
+        <beads>1:EALA:CN9</beads>
       </cg_bead>
       <cg_bead>
         <name>A5</name>
         <type>A</type>
         <mapping>A</mapping>
-        <beads>10:ALA:CA</beads>
+        <beads>1:EALA:A5</beads>
       </cg_bead>
       <cg_bead>
         <name>CN10</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>10:ALA:C 10:ALA:O 11:GLU:N 11:GLU:H</beads>
+        <beads>1:EALA:CN10</beads>
       </cg_bead>
       <cg_bead>
         <name>CA5</name>
         <type>CA</type>
         <mapping>CA</mapping>
-        <beads>11:GLU:CA</beads>
+        <beads>1:EALA:CA5</beads>
       </cg_bead>
       <cg_bead>
         <name>GC3</name>
         <type>GC</type>
         <mapping>GC</mapping>
-        <beads>11:GLU:CB 11:GLU:CG 11:GLU:CD</beads>
+        <beads>1:EALA:GC3</beads>
       </cg_bead>
       <cg_bead>
         <name>GO3</name>
         <type>GO</type>
         <mapping>GO</mapping>
-        <beads>11:GLU:OE1 11:GLU:OE2</beads>
+        <beads>1:EALA:GO3</beads>
       </cg_bead>
       <cg_bead>
         <name>CN11</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>11:GLU:C 11:GLU:O 12:ALA:N 12:ALA:H</beads>
+        <beads>1:EALA:CN11</beads>
       </cg_bead>
       <cg_bead>
         <name>A6</name>
         <type>A</type>
         <mapping>A</mapping>
-        <beads>12:ALA:CA</beads>
+        <beads>1:EALA:A6</beads>
       </cg_bead>
       <cg_bead>
         <name>CN12</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>12:ALA:C 12:ALA:O 13:LEU:N 13:LEU:H</beads>
+        <beads>1:EALA:CN12</beads>
       </cg_bead>
       <cg_bead>
         <name>CA6</name>
         <type>CA</type>
         <mapping>CA</mapping>
-        <beads>13:LEU:CA</beads>
+        <beads>1:EALA:CA6</beads>
       </cg_bead>
       <cg_bead>
         <name>L3</name>
         <type>L</type>
         <mapping>L</mapping>
-        <beads>13:LEU:CB 13:LEU:CG 13:LEU:CD1 13:LEU:CD2</beads>
+        <beads>1:EALA:L3</beads>
       </cg_bead>
       <cg_bead>
         <name>CN13</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>13:LEU:C 13:LEU:O 14:ALA:N 14:ALA:H</beads>
+        <beads>1:EALA:CN13</beads>
       </cg_bead>
       <cg_bead>
         <name>A7</name>
         <type>A</type>
         <mapping>A</mapping>
-        <beads>14:ALA:CA</beads>
+        <beads>1:EALA:A7</beads>
       </cg_bead>
       <cg_bead>
         <name>CN14</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>14:ALA:C 14:ALA:O 15:GLU:N 15:GLU:H</beads>
+        <beads>1:EALA:CN14</beads>
       </cg_bead>
       <cg_bead>
         <name>CA7</name>
         <type>CA</type>
         <mapping>CA</mapping>
-        <beads>15:GLU:CA</beads>
+        <beads>1:EALA:CA7</beads>
       </cg_bead>
       <cg_bead>
         <name>GC4</name>
         <type>GC</type>
         <mapping>GC</mapping>
-        <beads>15:GLU:CB 15:GLU:CG 15:GLU:CD</beads>
+        <beads>1:EALA:GC4</beads>
       </cg_bead>
       <cg_bead>
         <name>GO4</name>
         <type>GO</type>
         <mapping>GO</mapping>
-        <beads>15:GLU:OE1 15:GLU:OE2</beads>
+        <beads>1:EALA:GO4</beads>
       </cg_bead>
       <cg_bead>
         <name>CN15</name>
         <type>CN</type>
         <mapping>CN</mapping>
-        <beads>15:GLU:C 15:GLU:O 16:NME:N 16:NME:H</beads>
+        <beads>1:EALA:CN15</beads>
       </cg_bead>
     </cg_beads>
 

@@ -176,7 +176,7 @@
         <type>CN</type>
         <mapping>CN</mapping>
         <beads>11:GLU:C 11:GLU:O 12:ALA:N 12:ALA:H</beads>
-      </cg_bead>and (sidechain or name CA)
+      </cg_bead>
       <cg_bead>
         <name>A6</name>
         <type>A</type>
