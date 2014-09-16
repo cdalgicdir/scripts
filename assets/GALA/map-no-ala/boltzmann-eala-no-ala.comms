@@ -482,35 +482,35 @@ vals time_imp_CA-CN-GC-CN-4.xvg 1:imp_CA-CN-GC-CN:4
 
 # distances
 # CNi-CNi2
-vals time_dist_CNi-CNi4-1.xvg 1:dist_CNi-CNi4:1
-vals time_dist_CNi-CNi4-2.xvg 1:dist_CNi-CNi4:2
-vals time_dist_CNi-CNi4-3.xvg 1:dist_CNi-CNi4:3
-vals time_dist_CNi-CNi4-4.xvg 1:dist_CNi-CNi4:4
-vals time_dist_CNi-CNi4-5.xvg 1:dist_CNi-CNi4:5
-vals time_dist_CNi-CNi4-6.xvg 1:dist_CNi-CNi4:6
-vals time_dist_CNi-CNi4-7.xvg 1:dist_CNi-CNi4:7
-vals time_dist_CNi-CNi4-8.xvg 1:dist_CNi-CNi4:8
-vals time_dist_CNi-CNi4-9.xvg 1:dist_CNi-CNi4:9
-vals time_dist_CNi-CNi4-10.xvg 1:dist_CNi-CNi4:10
-vals time_dist_CNi-CNi4-11.xvg 1:dist_CNi-CNi4:11
-vals time_dist_CNi-CNi4-12.xvg 1:dist_CNi-CNi4:12
-vals time_dist_CNi-CNi4-13.xvg 1:dist_CNi-CNi4:13
-vals time_dist_CNi-CNi4-14.xvg 1:dist_CNi-CNi4:14
+vals time_dist_CNi-CNi2-1.xvg 1:dist_CNi-CNi2:1
+vals time_dist_CNi-CNi2-2.xvg 1:dist_CNi-CNi2:2
+vals time_dist_CNi-CNi2-3.xvg 1:dist_CNi-CNi2:3
+vals time_dist_CNi-CNi2-4.xvg 1:dist_CNi-CNi2:4
+vals time_dist_CNi-CNi2-5.xvg 1:dist_CNi-CNi2:5
+vals time_dist_CNi-CNi2-6.xvg 1:dist_CNi-CNi2:6
+vals time_dist_CNi-CNi2-7.xvg 1:dist_CNi-CNi2:7
+vals time_dist_CNi-CNi2-8.xvg 1:dist_CNi-CNi2:8
+vals time_dist_CNi-CNi2-9.xvg 1:dist_CNi-CNi2:9
+vals time_dist_CNi-CNi2-10.xvg 1:dist_CNi-CNi2:10
+vals time_dist_CNi-CNi2-11.xvg 1:dist_CNi-CNi2:11
+vals time_dist_CNi-CNi2-12.xvg 1:dist_CNi-CNi2:12
+vals time_dist_CNi-CNi2-13.xvg 1:dist_CNi-CNi2:13
+vals time_dist_CNi-CNi2-14.xvg 1:dist_CNi-CNi2:14
 
 # CNi-CNi3
-vals time_dist_CNi-CNi4-1.xvg 1:dist_CNi-CNi4:1
-vals time_dist_CNi-CNi4-2.xvg 1:dist_CNi-CNi4:2
-vals time_dist_CNi-CNi4-3.xvg 1:dist_CNi-CNi4:3
-vals time_dist_CNi-CNi4-4.xvg 1:dist_CNi-CNi4:4
-vals time_dist_CNi-CNi4-5.xvg 1:dist_CNi-CNi4:5
-vals time_dist_CNi-CNi4-6.xvg 1:dist_CNi-CNi4:6
-vals time_dist_CNi-CNi4-7.xvg 1:dist_CNi-CNi4:7
-vals time_dist_CNi-CNi4-8.xvg 1:dist_CNi-CNi4:8
-vals time_dist_CNi-CNi4-9.xvg 1:dist_CNi-CNi4:9
-vals time_dist_CNi-CNi4-10.xvg 1:dist_CNi-CNi4:10
-vals time_dist_CNi-CNi4-11.xvg 1:dist_CNi-CNi4:11
-vals time_dist_CNi-CNi4-12.xvg 1:dist_CNi-CNi4:12
-vals time_dist_CNi-CNi4-13.xvg 1:dist_CNi-CNi4:13
+vals time_dist_CNi-CNi3-1.xvg 1:dist_CNi-CNi3:1
+vals time_dist_CNi-CNi3-2.xvg 1:dist_CNi-CNi3:2
+vals time_dist_CNi-CNi3-3.xvg 1:dist_CNi-CNi3:3
+vals time_dist_CNi-CNi3-4.xvg 1:dist_CNi-CNi3:4
+vals time_dist_CNi-CNi3-5.xvg 1:dist_CNi-CNi3:5
+vals time_dist_CNi-CNi3-6.xvg 1:dist_CNi-CNi3:6
+vals time_dist_CNi-CNi3-7.xvg 1:dist_CNi-CNi3:7
+vals time_dist_CNi-CNi3-8.xvg 1:dist_CNi-CNi3:8
+vals time_dist_CNi-CNi3-9.xvg 1:dist_CNi-CNi3:9
+vals time_dist_CNi-CNi3-10.xvg 1:dist_CNi-CNi3:10
+vals time_dist_CNi-CNi3-11.xvg 1:dist_CNi-CNi3:11
+vals time_dist_CNi-CNi3-12.xvg 1:dist_CNi-CNi3:12
+vals time_dist_CNi-CNi3-13.xvg 1:dist_CNi-CNi3:13
 
 # CNi-CNi4
 vals time_dist_CNi-CNi4-1.xvg 1:dist_CNi-CNi4:1
@@ -527,16 +527,16 @@ vals time_dist_CNi-CNi4-11.xvg 1:dist_CNi-CNi4:11
 vals time_dist_CNi-CNi4-12.xvg 1:dist_CNi-CNi4:12
 
 # CNi-CNi5
-vals time_dist_CNi-CNi4-1.xvg 1:dist_CNi-CNi4:1
-vals time_dist_CNi-CNi4-2.xvg 1:dist_CNi-CNi4:2
-vals time_dist_CNi-CNi4-3.xvg 1:dist_CNi-CNi4:3
-vals time_dist_CNi-CNi4-4.xvg 1:dist_CNi-CNi4:4
-vals time_dist_CNi-CNi4-5.xvg 1:dist_CNi-CNi4:5
-vals time_dist_CNi-CNi4-6.xvg 1:dist_CNi-CNi4:6
-vals time_dist_CNi-CNi4-7.xvg 1:dist_CNi-CNi4:7
-vals time_dist_CNi-CNi4-8.xvg 1:dist_CNi-CNi4:8
-vals time_dist_CNi-CNi4-9.xvg 1:dist_CNi-CNi4:9
-vals time_dist_CNi-CNi4-10.xvg 1:dist_CNi-CNi4:10
-vals time_dist_CNi-CNi4-11.xvg 1:dist_CNi-CNi4:11
+vals time_dist_CNi-CNi5-1.xvg 1:dist_CNi-CNi5:1
+vals time_dist_CNi-CNi5-2.xvg 1:dist_CNi-CNi5:2
+vals time_dist_CNi-CNi5-3.xvg 1:dist_CNi-CNi5:3
+vals time_dist_CNi-CNi5-4.xvg 1:dist_CNi-CNi5:4
+vals time_dist_CNi-CNi5-5.xvg 1:dist_CNi-CNi5:5
+vals time_dist_CNi-CNi5-6.xvg 1:dist_CNi-CNi5:6
+vals time_dist_CNi-CNi5-7.xvg 1:dist_CNi-CNi5:7
+vals time_dist_CNi-CNi5-8.xvg 1:dist_CNi-CNi5:8
+vals time_dist_CNi-CNi5-9.xvg 1:dist_CNi-CNi5:9
+vals time_dist_CNi-CNi5-10.xvg 1:dist_CNi-CNi5:10
+vals time_dist_CNi-CNi5-11.xvg 1:dist_CNi-CNi5:11
 
 q
