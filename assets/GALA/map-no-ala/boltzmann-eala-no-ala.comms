@@ -293,7 +293,7 @@ hist dist_CNi-CNi5-10.xvg 1:dist_CNi-CNi5:10
 hist dist_CNi-CNi5-11.xvg 1:dist_CNi-CNi5:11
 hist dist_CNi-CNi5_avg.xvg 1:dist_CNi-CNi5:*
 
-# values
+# time data
 #
 # bonds
 # CN-CA
