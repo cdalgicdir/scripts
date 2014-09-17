@@ -72,8 +72,8 @@ display nearclip set 0.010000
 # start the scene a-rockin'
 #rock y by 1
 
-source ~/.vmd_plg.tcl
-source ~/Documents/scripts/vmd-scripts/trajectory_path.tcl
+#source ~/.vmd_plg.tcl
+#source ~/Documents/scripts/vmd-scripts/trajectory_path.tcl
 source ~/.sscache.tcl
 
 display projection Orthographic
@@ -166,7 +166,7 @@ proc gc {selection} {
         return [vecscale [expr 1.0 /[$selection num]] $gc]
 }
 
-vmd_install_extension bendix bendix "Analysis/Bendix"
+#vmd_install_extension bendix bendix "Analysis/Bendix"
 # shortcut keys
 user add key {.} { if {[molinfo top get numframes] == [ expr [molinfo top get frame] + 1] } {animate goto start; animate forward} {animate forward} }
 user add key Control-q {exit}
@@ -188,15 +188,16 @@ user add key Left {animate reverse}
 user add key Right { if {[molinfo top get numframes] == [ expr [molinfo top get frame] + 1] } {animate goto start; animate forward} {animate forward} }
 user add key q { reset_viz [molinfo top] }
 user add key w { ss_viz [molinfo top] }
+user add key W { addwall [molinfo top] }
 user add key E { ss_viz_LEUsc [molinfo top] }
 user add key Control-e { ss_viz_paper [molinfo top] }
 #user add key W { protlig_viz_sketch [molinfo top] }
-user add key W { showWaterClose }
+user add key Control-w { showWaterClose }
 user add key R {menu ramaplot on; variable ::RamaPlot::molid [molinfo top] }
 user add key T {menu timeline on }
 #user add key R { hires [molinfo top] }
 #user add key w { protlig_viz [molinfo top] }
-user add key a { ff_viz [molinfo top] }
+#user add key a { ff_viz [molinfo top] }
 user add key m { kll_viz [molinfo top] }
 user add key K { kllred_viz [molinfo top] }
 user add key M { klnow_viz [molinfo top] }
@@ -215,6 +216,8 @@ user add key J { if {[molinfo top get rep] == "Lines"} { changerep [molinfo top]
 user add key L { addHeavyLabels [molinfo top] }
 #user add key B { align [molinfo top] "resid 3 to 10 and backbone" }
 #user add key z { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
+user add key A { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
+user add key a { align [molinfo top] "protein and backbone" }
 user add key b { showbackbone [molinfo top] }
 user add key F9 { writegro [molinfo top] }
 user add key F8 { snap [molinfo top] "auto" "false" }
@@ -223,7 +226,8 @@ user add key F11 { display depthcue off; color Display Background white;pbc box 
 #user add key B { align [molinfo top] "residue 1 to 15 and backbone" }
 #user add key V { align [molinfo top] "not water and mass 12 to 99" }
 
-user add key A {
+#user add key A {
+proc mimickTop {} {
 	# Applies representations from the top molecule to all other molecules
 	# based on save_state script by John Stone
   set srcmol [molinfo top]
@@ -1232,6 +1236,17 @@ proc processFF {{molid "0"}} {
     mol selection resname CHE
     mol material Ghostmod
     mol addrep $molid
+}
+
+proc addwall {{molid "0"}} {
+    #draw delete all
+    draw color blue
+    draw triangle {46 46 0} {46 0 0 } {0 46 0}
+    draw triangle {0 0 0} {46 0 0 } {0 46 0}
+    draw line {0 0 0} {46 0 0}
+    draw line {0 0 0} {0 46 0}
+    draw line {0 46 0} {46 46 0}
+    draw line {46 0 0} {46 46 0}
 }
 
 color Name L red

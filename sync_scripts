@@ -1,6 +1,7 @@
 #! /bin/bash
 
-scriptsdir="$HOME/Documents/scripts/currentscripts"
+#scriptsdir="$HOME/Documents/scripts/currentscripts"
+scriptsdir="$HOME/progs/bin"
 
 cd $scriptsdir
 rsync -az pd plotall pp ramaplot shannon pd parsescount calcTvAH ../votca-stepwise-script $HOME/sayargroup/

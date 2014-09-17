@@ -4,14 +4,14 @@ set guioptions-=T
 
 if matchstr(expand("%"),".*\.md") != ""
     colorscheme darkdevel
-    set guifont=Ubuntu\ Mono\ 15
+    set guifont=Ubuntu\ Mono\ 13
     :au BufRead *.tex set spell
     :highlight SpellBad gui=underline guibg=NONE guifg=red
 else
     "colorscheme moria, twilight, solarized, inkpot, corporation, monokai,
     "jellybeans
     colorscheme corporation
-    set guifont=Inconsolata\ 15
+    set guifont=Inconsolata\ 13
     "set guifont=Monaco\ 13
 endif
 
