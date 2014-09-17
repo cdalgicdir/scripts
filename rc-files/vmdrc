@@ -76,7 +76,7 @@ display nearclip set 0.010000
 #source ~/Documents/scripts/vmd-scripts/trajectory_path.tcl
 source ~/.sscache.tcl
 
-display projection Orthographic
+display projection OrthographicL9
 #color Display Background white
 color Name H iceblue
 #mol modstyle 0 0 Points 3.000
@@ -1241,12 +1241,14 @@ proc processFF {{molid "0"}} {
 proc addwall {{molid "0"}} {
     #draw delete all
     draw color blue
-    draw triangle {46 46 0} {46 0 0 } {0 46 0}
-    draw triangle {0 0 0} {46 0 0 } {0 46 0}
+    draw triangle {46 46 0} {46 0 0} {0 46 0}
+    draw triangle {0 0 0} {46 0 0} {0 46 0}
+
     draw line {0 0 0} {46 0 0}
     draw line {0 0 0} {0 46 0}
     draw line {0 46 0} {46 46 0}
     draw line {46 0 0} {46 46 0}
+
 }
 
 color Name L red
