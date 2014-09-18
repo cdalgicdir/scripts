@@ -243,7 +243,6 @@ hist dist_CNi-CNi4-8.xvg 1:dist_CNi-CNi4:8
 hist dist_CNi-CNi4-9.xvg 1:dist_CNi-CNi4:9
 hist dist_CNi-CNi4-10.xvg 1:dist_CNi-CNi4:10
 hist dist_CNi-CNi4-11.xvg 1:dist_CNi-CNi4:11
-hist dist_CNi-CNi4-12.xvg 1:dist_CNi-CNi4:12
 hist dist_CNi-CNi4_avg.xvg 1:dist_CNi-CNi4:*
 
 # CNi-CNi2
@@ -260,7 +259,6 @@ hist dist_CNi-CNi2-10.xvg 1:dist_CNi-CNi2:10
 hist dist_CNi-CNi2-11.xvg 1:dist_CNi-CNi2:11
 hist dist_CNi-CNi2-12.xvg 1:dist_CNi-CNi2:12
 hist dist_CNi-CNi2-13.xvg 1:dist_CNi-CNi2:13
-hist dist_CNi-CNi2-14.xvg 1:dist_CNi-CNi2:14
 hist dist_CNi-CNi2_avg.xvg 1:dist_CNi-CNi2:*
 
 # CNi-CNi3
@@ -276,7 +274,6 @@ hist dist_CNi-CNi3-9.xvg 1:dist_CNi-CNi3:9
 hist dist_CNi-CNi3-10.xvg 1:dist_CNi-CNi3:10
 hist dist_CNi-CNi3-11.xvg 1:dist_CNi-CNi3:11
 hist dist_CNi-CNi3-12.xvg 1:dist_CNi-CNi3:12
-hist dist_CNi-CNi3-13.xvg 1:dist_CNi-CNi3:13
 hist dist_CNi-CNi3_avg.xvg 1:dist_CNi-CNi3:*
 
 # CNi-CNi5
@@ -290,7 +287,6 @@ hist dist_CNi-CNi5-7.xvg 1:dist_CNi-CNi5:7
 hist dist_CNi-CNi5-8.xvg 1:dist_CNi-CNi5:8
 hist dist_CNi-CNi5-9.xvg 1:dist_CNi-CNi5:9
 hist dist_CNi-CNi5-10.xvg 1:dist_CNi-CNi5:10
-hist dist_CNi-CNi5-11.xvg 1:dist_CNi-CNi5:11
 hist dist_CNi-CNi5_avg.xvg 1:dist_CNi-CNi5:*
 
 # time data
@@ -495,7 +491,6 @@ vals time_dist_CNi-CNi2-10.xvg 1:dist_CNi-CNi2:10
 vals time_dist_CNi-CNi2-11.xvg 1:dist_CNi-CNi2:11
 vals time_dist_CNi-CNi2-12.xvg 1:dist_CNi-CNi2:12
 vals time_dist_CNi-CNi2-13.xvg 1:dist_CNi-CNi2:13
-vals time_dist_CNi-CNi2-14.xvg 1:dist_CNi-CNi2:14
 
 # CNi-CNi3
 vals time_dist_CNi-CNi3-1.xvg 1:dist_CNi-CNi3:1
@@ -510,7 +505,6 @@ vals time_dist_CNi-CNi3-9.xvg 1:dist_CNi-CNi3:9
 vals time_dist_CNi-CNi3-10.xvg 1:dist_CNi-CNi3:10
 vals time_dist_CNi-CNi3-11.xvg 1:dist_CNi-CNi3:11
 vals time_dist_CNi-CNi3-12.xvg 1:dist_CNi-CNi3:12
-vals time_dist_CNi-CNi3-13.xvg 1:dist_CNi-CNi3:13
 
 # CNi-CNi4
 vals time_dist_CNi-CNi4-1.xvg 1:dist_CNi-CNi4:1
@@ -524,7 +518,6 @@ vals time_dist_CNi-CNi4-8.xvg 1:dist_CNi-CNi4:8
 vals time_dist_CNi-CNi4-9.xvg 1:dist_CNi-CNi4:9
 vals time_dist_CNi-CNi4-10.xvg 1:dist_CNi-CNi4:10
 vals time_dist_CNi-CNi4-11.xvg 1:dist_CNi-CNi4:11
-vals time_dist_CNi-CNi4-12.xvg 1:dist_CNi-CNi4:12
 
 # CNi-CNi5
 vals time_dist_CNi-CNi5-1.xvg 1:dist_CNi-CNi5:1
@@ -537,6 +530,5 @@ vals time_dist_CNi-CNi5-7.xvg 1:dist_CNi-CNi5:7
 vals time_dist_CNi-CNi5-8.xvg 1:dist_CNi-CNi5:8
 vals time_dist_CNi-CNi5-9.xvg 1:dist_CNi-CNi5:9
 vals time_dist_CNi-CNi5-10.xvg 1:dist_CNi-CNi5:10
-vals time_dist_CNi-CNi5-11.xvg 1:dist_CNi-CNi5:11
 
 q
