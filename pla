@@ -175,12 +175,17 @@ while [[ $# -ge 1 ]]; do
 	    shift 1;;
 
 	-keyleft|-kl)
-	    keypos='set key left'
+	    keypos='set key left reverse Left'
+	    shift 1;;
+
+	-dihe)
+	    range="[-180:180][:]"
+	    extra="set xtics 45;set xlabel '{/Symbol f}';set ylabel 'P({/Symbol f})'"
 	    shift 1;;
 
 	-dih)
 	    range="[-180:180][:]"
-	    extra="set xtics 60;set xlabel 'Dihedral angle (degrees)';set ylabel 'Probability'"
+	    extra="set xtics 45;set xlabel 'angle';set ylabel 'Probability'"
 	    shift 1;;
 
 	-rama)

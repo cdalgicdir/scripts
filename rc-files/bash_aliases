@@ -30,13 +30,23 @@ alias sl='ls'
 alias doc="cd $HOME/Documents"
 alias des="cd $HOME/Desktop"
 alias dow="cd $HOME/Downloads"
-alias scr="cd $HOME/Documents/scripts/currentscripts"
+#alias scr="cd $HOME/Documents/scripts/currentscripts"
+alias scr="cd $HOME/progs/bin"
 alias sim="cd $HOME/SIMS"
+###################################################################
+# SSH
 alias hamsi='ssh hamsi -X'
 alias lufer='ssh lufer -X'
 alias ichi='ssh ichi -X'
 alias yunus='ssh yunus -X'
+alias yunust-tunnel='ssh -X -f -N -L 9001:yunus.hpc.ku.edu.tr:22 ichi'
+alias yunust='ssh yunust -X'
 alias tric='ssh tric -X'
+alias trict-tunnel='ssh -X -f -N -L 9002:172.23.160.14:22 ichi'
+alias trict='ssh trict -X'
+alias karls='ssh karls -X'
+alias scc='ssh scc -X'
+###################################################################
 alias gp='gnuplot --persist'
 alias emerillon='export CLUTTER_VBLANK=none && emerillon'
 #alias psudo='sudo env PATH="$PATH"'

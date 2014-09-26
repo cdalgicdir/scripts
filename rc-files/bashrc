@@ -17,7 +17,7 @@ shopt -s histappend
 # Combine multiline commands into one in history
 shopt -s cmdhist
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=20000
+HISTSIZE=200000
 HISTFILESIZE=10000
 export HISTIGNORE="&:ls:[bf]g:exit"
 # check the window size after each command and, if necessary,
@@ -123,19 +123,21 @@ fi
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
+    . ~/.bash_completion.d/books
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
 fi
 
+GROMACSDIR=/usr/local/gromacs/gromacs-4.6.7
+VOTCADIR=$HOME/votca/votca-1.2.4-g467
+
 CDPATH=".:~/remote"
 export PATH=$PATH:$HOME/progs/bin:$HOME/Mendeley/bin
-GROMACSDIR=/usr/local/gromacs/gromacs-4.5.6
-VOTCADIR=$HOME/votca/votca-1.2.4
 source $GROMACSDIR/bin/GMXRC.bash
 export GMXLIB=$GROMACSDIR/share/gromacs/top
 source $VOTCADIR/bin/VOTCARC.bash
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:$votcadir/lib64:$votcadir/lib
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:$VOTCADIR/lib
 export MANPATH=/usr/share/man/:/usr/local/gromacs-4.5.6/share/man:/opt/novell/man
 #calc(){ echo "scale=2;$@" | bc;}
 #calc(){ printf "%.4f\n" `echo $@ |bc -l`;}
@@ -184,3 +186,6 @@ export LC_TIME=en_GB.utf8
 export EDITOR=vim
 export MMTSBDIR=$HOME/mmtsb
 export PATH=$PATH:$MMTSBDIR/perl:$MMTSBDIR/bin
+#export PATH=/usr/local/plumed/plumed-2.1/bin:$PATH
+#export LD_LIBRARY_PATH=/usr/local/plumed/plumed-2.1/lib:$LD_LIBRARY_PATH
+

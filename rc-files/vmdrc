@@ -76,7 +76,7 @@ display nearclip set 0.010000
 #source ~/Documents/scripts/vmd-scripts/trajectory_path.tcl
 source ~/.sscache.tcl
 
-display projection OrthographicL9
+display projection Orthographic
 #color Display Background white
 color Name H iceblue
 #mol modstyle 0 0 Points 3.000
@@ -223,6 +223,7 @@ user add key F9 { writegro [molinfo top] }
 user add key F8 { snap [molinfo top] "auto" "false" }
 user add key F10 { snap [molinfo top] }
 user add key F11 { display depthcue off; color Display Background white;pbc box -off;axes location off }
+user add key Control-c { cg_map [molinfo top] }
 #user add key B { align [molinfo top] "residue 1 to 15 and backbone" }
 #user add key V { align [molinfo top] "not water and mass 12 to 99" }
 
@@ -1251,9 +1252,16 @@ proc addwall {{molid "0"}} {
 
 }
 
-color Name L red
-color Name K blue
-color Name C cyan
+proc cg_map {{molid "0"}} {
+    mol new {mapped.gro} type {gro} first 0 last -1 step 1 waitfor 1
+    mol modselect 0 0 protein or resname ACE NME
+    mol modstyle 0 0 Licorice 0.100000 10.000000 10.000000
+    mol modselect 0 1 not resname SOL CL NA
+    mol modstyle 0 1 VDW 0.400000 12.000000
+    #mol modstyle 0 1 CPK 1.7 0.3 10.0 10.0
+    display resetview
+    rotate x by -90.000000
+}
 
 set water [atomselect top "water"]
 set protein [atomselect top "protein"]
@@ -1264,6 +1272,11 @@ puts "**** [molinfo top get numframes] frames exist"
 puts "**** [$water num] water atoms and [expr [$water num]/3] water molecules"
 puts "**** [$protein num] protein atoms"
 animate style Once
+
+color Name L red
+color Name K blue
+color Name C cyan
+color Name G purple
 
 ## hook up the function.
 #trace variable vmd_initialize_structure w kl_viz_proxy

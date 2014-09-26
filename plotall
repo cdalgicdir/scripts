@@ -1,18 +1,21 @@
 #! /bin/bash
 
-plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'table_L_wall0.xvg' 'tablep.xvg')
+#plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'table_L_wall0.xvg' 'tablep.xvg')
+#plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CN-CA-CN_avg.xvg')
+plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_A-CN-A-CN_avg.xvg' 'dih_A-CN-CA-CN_avg.xvg' 'dih_CA-CN-A-CN_avg.xvg' 'dih_CN-A-CN-A_avg.xvg' 'dih_CN-A-CN-CA_avg.xvg' 'dih_CN-CA-CN-A_avg.xvg')
 
 plcomms=''
 q="'"
 gplot='gplot'
 #using=" using 1:2 "
 with=" with lines lw 3 "
-#histdir="histograms"
-terminal="set terminal wxt"
+histdir="histograms"
+terminal="set terminal wxt enhanced"
 output=""
+termset=""
 
 plot () {
-        gplot $output -c "$yrange" -c "$xrange" -t "$title" -c "$keypos" -c "set ylabel 'P(r)'" -c "set xlabel 'r (nm)'" -c "$terminal" -- "$plcomms"
+        gplot $output -c "$yrange" -c "$xrange" -t "$title" -c "$keypos" -c "set ylabel '$ylabel'" -c "set xlabel '$xlabel'" -c "$terminal" -- "$plcomms"
 }
 
 printcommands () {
@@ -38,11 +41,13 @@ while [[ $# -gt 0 ]]; do
     case $1 in
 
         -png)
-            terminal='set terminal pngcairo size 800,600 enhanced font \"Gill Sans,16\" linewidth 3 rounded'
+            terminal='set terminal pngcairo size 800,600 enhanced font "Gill Sans,16" linewidth 3 rounded'
+	    termset="png"
             shift;;
 
         -pdf)
-            terminal='set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 3 rounded'
+	    termset="pdf"
+            terminal='set terminal pdfcairo enhanced font "Gill Sans,16" linewidth 3 rounded'
             shift;;
         -t)
             writetitrs=true
@@ -78,6 +83,7 @@ len_plots=`expr ${#plots[@]} - 1`
 i=0
 
 for f in ${plotlist[@]}; do
+
     if [[ $f == table* ]]; then
 	using=" using 1:6 "
 	histdir="."
@@ -86,7 +92,23 @@ for f in ${plotlist[@]}; do
 	xrange='set xrange [:2]'
 	yrange='set yrange [:20]'
 	keypos='set key right'
-    else
+    elif [[ $f == dih_* ]]; then
+	using=" using 1:2 "
+	histdir="histograms"
+	xlabel='{/Symbol f} (degrees)'
+	ylabel='P({/Symbol f})'
+	xrange='set xrange [:]'
+	yrange='set yrange [:]'
+	keypos='set key left'
+    elif [[ $f == ang_* ]]; then
+	using=" using 1:2 "
+	histdir="histograms"
+	xlabel='{/Symbol t} (degrees)'
+	ylabel='P({/Symbol t})'
+	xrange='set xrange [:]'
+	yrange='set yrange [:]'
+	keypos='set key left'
+    else 
 	using=" using 1:2 "
 	histdir="histograms"
 	xlabel='r (nm)'
@@ -96,14 +118,17 @@ for f in ${plotlist[@]}; do
 	keypos='set key left'
     fi
     plcomms=''
-    title=${f%.xvg}
+    tmp=`echo "${f}" | sed 's/_/-/g'` && title=${tmp%.xvg}
+    [[ $termset != "" ]] && output="-o${title}.${termset}"
     for dir in ${folders[@]}; do
 	address=$dir/$histdir/$f
+	[[ ! -e "${address}" ]] && continue
 	plcomms=${plcomms}${q}${address}${q}${using}${with}'t '${q}${dir}${q},
     done
-if [[ $noplot == true ]]; then
-    printcommands
-else
-    plot $@
-fi
+    if [[ $noplot == true ]]; then
+	printcommands
+    else
+	[[ "${plcomms}" == "" ]] && continue
+	plot $@
+    fi
 done
