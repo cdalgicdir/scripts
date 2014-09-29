@@ -150,11 +150,6 @@ hist ang_L-CA-CN-3.xvg 1:ang_L-CA-CN:3
 hist ang_L-CA-CN_avg.xvg 1:ang_L-CA-CN:*
 
 # dihedrals
-# CN-CA-CN-CA
-hist set scale no
-hist dih_CN-CA-CN-CA-1.xvg 1:dih_CN-CA-CN-CA:1
-hist dih_CN-CA-CN-CA_avg.xvg 1:dih_CN-CA-CN-CA:*
-
 # CN-CA-CN-A
 hist set scale no
 hist dih_CN-CA-CN-A-1.xvg 1:dih_CN-CA-CN-A:1
@@ -179,11 +174,6 @@ hist dih_CN-A-CN-CA-5.xvg 1:dih_CN-A-CN-CA:5
 hist dih_CN-A-CN-CA-6.xvg 1:dih_CN-A-CN-CA:6
 hist dih_CN-A-CN-CA_avg.xvg 1:dih_CN-A-CN-CA:*
 
-# CA-CN-CA-CN
-hist set scale no
-hist dih_CA-CN-CA-CN-1.xvg 1:dih_CA-CN-CA-CN:1
-hist dih_CA-CN-CA-CN_avg.xvg 1:dih_CA-CN-CA-CN:*
-
 # CA-CN-A-CN
 hist set scale no
 hist dih_CA-CN-A-CN-1.xvg 1:dih_CA-CN-A-CN:1
@@ -207,15 +197,7 @@ hist dih_A-CN-CA-CN-3.xvg 1:dih_A-CN-CA-CN:3
 hist dih_A-CN-CA-CN-4.xvg 1:dih_A-CN-CA-CN:4
 hist dih_A-CN-CA-CN-5.xvg 1:dih_A-CN-CA-CN:5
 hist dih_A-CN-CA-CN-6.xvg 1:dih_A-CN-CA-CN:6
-hist dih_A-CN-CA-CN-7.xvg 1:dih_A-CN-CA-CN:7
 hist dih_A-CN-CA-CN_avg.xvg 1:dih_A-CN-CA-CN:*
-
-# CA-CN-CA-GC
-hist set scale no
-hist dih_CA-CN-CA-GC-1.xvg 1:dih_CA-CN-CA-GC:1
-hist dih_CA-CN-CA-GC-2.xvg 1:dih_CA-CN-CA-GC:2
-hist dih_CA-CN-CA-GC-3.xvg 1:dih_CA-CN-CA-GC:3
-hist dih_CA-CN-CA-GC_avg.xvg 1:dih_CA-CN-CA-GC:*
 
 # GC_CA-CN-A
 hist set scale no
@@ -332,209 +314,197 @@ hist dist_CNi-CNi5_avg.xvg 1:dist_CNi-CNi5:*
 # time data
 # bonds
 # CN-CA
-vals bond_CN-CA-1.xvg 1:bond_CN-CA:1
-vals bond_CN-CA-2.xvg 1:bond_CN-CA:2
-vals bond_CN-CA-3.xvg 1:bond_CN-CA:3
-vals bond_CN-CA-4.xvg 1:bond_CN-CA:4
-vals bond_CN-CA-5.xvg 1:bond_CN-CA:5
-vals bond_CN-CA-6.xvg 1:bond_CN-CA:6
-vals bond_CN-CA-7.xvg 1:bond_CN-CA:7
+vals time_bond_CN-CA-1.xvg 1:bond_CN-CA:1
+vals time_bond_CN-CA-2.xvg 1:bond_CN-CA:2
+vals time_bond_CN-CA-3.xvg 1:bond_CN-CA:3
+vals time_bond_CN-CA-4.xvg 1:bond_CN-CA:4
+vals time_bond_CN-CA-5.xvg 1:bond_CN-CA:5
+vals time_bond_CN-CA-6.xvg 1:bond_CN-CA:6
+vals time_bond_CN-CA-7.xvg 1:bond_CN-CA:7
 
 # CN-A
-vals bond_CN-A-1.xvg 1:bond_CN-A:1
-vals bond_CN-A-2.xvg 1:bond_CN-A:2
-vals bond_CN-A-3.xvg 1:bond_CN-A:3
-vals bond_CN-A-4.xvg 1:bond_CN-A:4
-vals bond_CN-A-5.xvg 1:bond_CN-A:5
-vals bond_CN-A-6.xvg 1:bond_CN-A:6
-vals bond_CN-A-7.xvg 1:bond_CN-A:7
+vals time_bond_CN-A-1.xvg 1:bond_CN-A:1
+vals time_bond_CN-A-2.xvg 1:bond_CN-A:2
+vals time_bond_CN-A-3.xvg 1:bond_CN-A:3
+vals time_bond_CN-A-4.xvg 1:bond_CN-A:4
+vals time_bond_CN-A-5.xvg 1:bond_CN-A:5
+vals time_bond_CN-A-6.xvg 1:bond_CN-A:6
+vals time_bond_CN-A-7.xvg 1:bond_CN-A:7
 
 # CA-CN
-vals bond_CA-CN-1.xvg 1:bond_CA-CN:1
-vals bond_CA-CN-2.xvg 1:bond_CA-CN:2
-vals bond_CA-CN-3.xvg 1:bond_CA-CN:3
-vals bond_CA-CN-4.xvg 1:bond_CA-CN:4
-vals bond_CA-CN-5.xvg 1:bond_CA-CN:5
-vals bond_CA-CN-6.xvg 1:bond_CA-CN:6
-vals bond_CA-CN-7.xvg 1:bond_CA-CN:7
+vals time_bond_CA-CN-1.xvg 1:bond_CA-CN:1
+vals time_bond_CA-CN-2.xvg 1:bond_CA-CN:2
+vals time_bond_CA-CN-3.xvg 1:bond_CA-CN:3
+vals time_bond_CA-CN-4.xvg 1:bond_CA-CN:4
+vals time_bond_CA-CN-5.xvg 1:bond_CA-CN:5
+vals time_bond_CA-CN-6.xvg 1:bond_CA-CN:6
+vals time_bond_CA-CN-7.xvg 1:bond_CA-CN:7
 
 # A-CN
-vals bond_A-CN-1.xvg 1:bond_A-CN:1
-vals bond_A-CN-2.xvg 1:bond_A-CN:2
-vals bond_A-CN-3.xvg 1:bond_A-CN:3
-vals bond_A-CN-4.xvg 1:bond_A-CN:4
-vals bond_A-CN-5.xvg 1:bond_A-CN:5
-vals bond_A-CN-6.xvg 1:bond_A-CN:6
-vals bond_A-CN-7.xvg 1:bond_A-CN:7
+vals time_bond_A-CN-1.xvg 1:bond_A-CN:1
+vals time_bond_A-CN-2.xvg 1:bond_A-CN:2
+vals time_bond_A-CN-3.xvg 1:bond_A-CN:3
+vals time_bond_A-CN-4.xvg 1:bond_A-CN:4
+vals time_bond_A-CN-5.xvg 1:bond_A-CN:5
+vals time_bond_A-CN-6.xvg 1:bond_A-CN:6
+vals time_bond_A-CN-7.xvg 1:bond_A-CN:7
 
 # CA-L
-vals bond_CA-L-1.xvg 1:bond_CA-L:1
-vals bond_CA-L-2.xvg 1:bond_CA-L:2
-vals bond_CA-L-3.xvg 1:bond_CA-L:3
+vals time_bond_CA-L-1.xvg 1:bond_CA-L:1
+vals time_bond_CA-L-2.xvg 1:bond_CA-L:2
+vals time_bond_CA-L-3.xvg 1:bond_CA-L:3
 
 # CA-GC
-vals bond_CA-GC-1.xvg 1:bond_CA-GC:1
-vals bond_CA-GC-2.xvg 1:bond_CA-GC:2
-vals bond_CA-GC-3.xvg 1:bond_CA-GC:3
-vals bond_CA-GC-4.xvg 1:bond_CA-GC:4
+vals time_bond_CA-GC-1.xvg 1:bond_CA-GC:1
+vals time_bond_CA-GC-2.xvg 1:bond_CA-GC:2
+vals time_bond_CA-GC-3.xvg 1:bond_CA-GC:3
+vals time_bond_CA-GC-4.xvg 1:bond_CA-GC:4
 
 # GC-GO
-vals bond_GC-GO-1.xvg 1:bond_GC-GO:1
-vals bond_GC-GO-2.xvg 1:bond_GC-GO:2
-vals bond_GC-GO-3.xvg 1:bond_GC-GO:3
-vals bond_GC-GO-4.xvg 1:bond_GC-GO:4
+vals time_bond_GC-GO-1.xvg 1:bond_GC-GO:1
+vals time_bond_GC-GO-2.xvg 1:bond_GC-GO:2
+vals time_bond_GC-GO-3.xvg 1:bond_GC-GO:3
+vals time_bond_GC-GO-4.xvg 1:bond_GC-GO:4
 
 # angles
 # CN-CA-CN
-vals ang_CN-CA-CN-1.xvg 1:ang_CN-CA-CN:1
-vals ang_CN-CA-CN-2.xvg 1:ang_CN-CA-CN:2
-vals ang_CN-CA-CN-3.xvg 1:ang_CN-CA-CN:3
-vals ang_CN-CA-CN-4.xvg 1:ang_CN-CA-CN:4
-vals ang_CN-CA-CN-5.xvg 1:ang_CN-CA-CN:5
-vals ang_CN-CA-CN-6.xvg 1:ang_CN-CA-CN:6
-vals ang_CN-CA-CN-7.xvg 1:ang_CN-CA-CN:7
+vals time_ang_CN-CA-CN-1.xvg 1:ang_CN-CA-CN:1
+vals time_ang_CN-CA-CN-2.xvg 1:ang_CN-CA-CN:2
+vals time_ang_CN-CA-CN-3.xvg 1:ang_CN-CA-CN:3
+vals time_ang_CN-CA-CN-4.xvg 1:ang_CN-CA-CN:4
+vals time_ang_CN-CA-CN-5.xvg 1:ang_CN-CA-CN:5
+vals time_ang_CN-CA-CN-6.xvg 1:ang_CN-CA-CN:6
+vals time_ang_CN-CA-CN-7.xvg 1:ang_CN-CA-CN:7
 
 # CN-A-CN
-vals ang_CN-A-CN-1.xvg 1:ang_CN-A-CN:1
-vals ang_CN-A-CN-2.xvg 1:ang_CN-A-CN:2
-vals ang_CN-A-CN-3.xvg 1:ang_CN-A-CN:3
-vals ang_CN-A-CN-4.xvg 1:ang_CN-A-CN:4
-vals ang_CN-A-CN-5.xvg 1:ang_CN-A-CN:5
-vals ang_CN-A-CN-6.xvg 1:ang_CN-A-CN:6
-vals ang_CN-A-CN-7.xvg 1:ang_CN-A-CN:7
+vals time_ang_CN-A-CN-1.xvg 1:ang_CN-A-CN:1
+vals time_ang_CN-A-CN-2.xvg 1:ang_CN-A-CN:2
+vals time_ang_CN-A-CN-3.xvg 1:ang_CN-A-CN:3
+vals time_ang_CN-A-CN-4.xvg 1:ang_CN-A-CN:4
+vals time_ang_CN-A-CN-5.xvg 1:ang_CN-A-CN:5
+vals time_ang_CN-A-CN-6.xvg 1:ang_CN-A-CN:6
+vals time_ang_CN-A-CN-7.xvg 1:ang_CN-A-CN:7
 
 # CA-CN-A
-vals ang_CA-CN-A-1.xvg 1:ang_CA-CN-A:1
-vals ang_CA-CN-A-2.xvg 1:ang_CA-CN-A:2
-vals ang_CA-CN-A-3.xvg 1:ang_CA-CN-A:3
-vals ang_CA-CN-A-4.xvg 1:ang_CA-CN-A:4
-vals ang_CA-CN-A-5.xvg 1:ang_CA-CN-A:5
-vals ang_CA-CN-A-6.xvg 1:ang_CA-CN-A:6
+vals time_ang_CA-CN-A-1.xvg 1:ang_CA-CN-A:1
+vals time_ang_CA-CN-A-2.xvg 1:ang_CA-CN-A:2
+vals time_ang_CA-CN-A-3.xvg 1:ang_CA-CN-A:3
+vals time_ang_CA-CN-A-4.xvg 1:ang_CA-CN-A:4
+vals time_ang_CA-CN-A-5.xvg 1:ang_CA-CN-A:5
+vals time_ang_CA-CN-A-6.xvg 1:ang_CA-CN-A:6
 
 # A-CN-CA
-vals ang_A-CN-CA-1.xvg 1:ang_A-CN-CA:1
-vals ang_A-CN-CA-2.xvg 1:ang_A-CN-CA:2
-vals ang_A-CN-CA-3.xvg 1:ang_A-CN-CA:3
-vals ang_A-CN-CA-4.xvg 1:ang_A-CN-CA:4
-vals ang_A-CN-CA-5.xvg 1:ang_A-CN-CA:5
-vals ang_A-CN-CA-6.xvg 1:ang_A-CN-CA:6
+vals time_ang_A-CN-CA-1.xvg 1:ang_A-CN-CA:1
+vals time_ang_A-CN-CA-2.xvg 1:ang_A-CN-CA:2
+vals time_ang_A-CN-CA-3.xvg 1:ang_A-CN-CA:3
+vals time_ang_A-CN-CA-4.xvg 1:ang_A-CN-CA:4
+vals time_ang_A-CN-CA-5.xvg 1:ang_A-CN-CA:5
+vals time_ang_A-CN-CA-6.xvg 1:ang_A-CN-CA:6
 
 # CN-CA-GC
-vals ang_CN-CA-GC-1.xvg 1:ang_CN-CA-GC:1
-vals ang_CN-CA-GC-2.xvg 1:ang_CN-CA-GC:2
-vals ang_CN-CA-GC-3.xvg 1:ang_CN-CA-GC:3
-vals ang_CN-CA-GC-4.xvg 1:ang_CN-CA-GC:4
+vals time_ang_CN-CA-GC-1.xvg 1:ang_CN-CA-GC:1
+vals time_ang_CN-CA-GC-2.xvg 1:ang_CN-CA-GC:2
+vals time_ang_CN-CA-GC-3.xvg 1:ang_CN-CA-GC:3
+vals time_ang_CN-CA-GC-4.xvg 1:ang_CN-CA-GC:4
 
 # GC-CA-CN
-vals ang_GC-CA-CN-1.xvg 1:ang_GC-CA-CN:1
-vals ang_GC-CA-CN-2.xvg 1:ang_GC-CA-CN:2
-vals ang_GC-CA-CN-3.xvg 1:ang_GC-CA-CN:3
-vals ang_GC-CA-CN-4.xvg 1:ang_GC-CA-CN:4
+vals time_ang_GC-CA-CN-1.xvg 1:ang_GC-CA-CN:1
+vals time_ang_GC-CA-CN-2.xvg 1:ang_GC-CA-CN:2
+vals time_ang_GC-CA-CN-3.xvg 1:ang_GC-CA-CN:3
+vals time_ang_GC-CA-CN-4.xvg 1:ang_GC-CA-CN:4
 
 # CA-GC-GO
-vals ang_CA-GC-GO-1.xvg 1:ang_CA-GC-GO:1
-vals ang_CA-GC-GO-2.xvg 1:ang_CA-GC-GO:2
-vals ang_CA-GC-GO-3.xvg 1:ang_CA-GC-GO:3
-vals ang_CA-GC-GO-4.xvg 1:ang_CA-GC-GO:4
+vals time_ang_CA-GC-GO-1.xvg 1:ang_CA-GC-GO:1
+vals time_ang_CA-GC-GO-2.xvg 1:ang_CA-GC-GO:2
+vals time_ang_CA-GC-GO-3.xvg 1:ang_CA-GC-GO:3
+vals time_ang_CA-GC-GO-4.xvg 1:ang_CA-GC-GO:4
 
 # CN-CA-L
-vals ang_CN-CA-L-1.xvg 1:ang_CN-CA-L:1
-vals ang_CN-CA-L-2.xvg 1:ang_CN-CA-L:2
-vals ang_CN-CA-L-3.xvg 1:ang_CN-CA-L:3
+vals time_ang_CN-CA-L-1.xvg 1:ang_CN-CA-L:1
+vals time_ang_CN-CA-L-2.xvg 1:ang_CN-CA-L:2
+vals time_ang_CN-CA-L-3.xvg 1:ang_CN-CA-L:3
 
 # L-CA-CN
-vals ang_L-CA-CN-1.xvg 1:ang_L-CA-CN:1
-vals ang_L-CA-CN-2.xvg 1:ang_L-CA-CN:2
-vals ang_L-CA-CN-3.xvg 1:ang_L-CA-CN:3
+vals time_ang_L-CA-CN-1.xvg 1:ang_L-CA-CN:1
+vals time_ang_L-CA-CN-2.xvg 1:ang_L-CA-CN:2
+vals time_ang_L-CA-CN-3.xvg 1:ang_L-CA-CN:3
 
 # dihedrals
-# CN-CA-CN-CA
-vals dih_CN-CA-CN-CA-1.xvg 1:dih_CN-CA-CN-CA:1
-
 # CN-CA-CN-A
-vals dih_CN-CA-CN-A-1.xvg 1:dih_CN-CA-CN-A:1
-vals dih_CN-CA-CN-A-2.xvg 1:dih_CN-CA-CN-A:2
-vals dih_CN-CA-CN-A-3.xvg 1:dih_CN-CA-CN-A:3
-vals dih_CN-CA-CN-A-4.xvg 1:dih_CN-CA-CN-A:4
-vals dih_CN-CA-CN-A-5.xvg 1:dih_CN-CA-CN-A:5
+vals time_dih_CN-CA-CN-A-1.xvg 1:dih_CN-CA-CN-A:1
+vals time_dih_CN-CA-CN-A-2.xvg 1:dih_CN-CA-CN-A:2
+vals time_dih_CN-CA-CN-A-3.xvg 1:dih_CN-CA-CN-A:3
+vals time_dih_CN-CA-CN-A-4.xvg 1:dih_CN-CA-CN-A:4
+vals time_dih_CN-CA-CN-A-5.xvg 1:dih_CN-CA-CN-A:5
 
 # CN-A-CN-A
-vals dih_CN-A-CN-A-1.xvg 1:dih_CN-A-CN-A:1
+vals time_dih_CN-A-CN-A-1.xvg 1:dih_CN-A-CN-A:1
 
 # CN-A-CN-CA
-vals dih_CN-A-CN-CA-1.xvg 1:dih_CN-A-CN-CA:1
-vals dih_CN-A-CN-CA-2.xvg 1:dih_CN-A-CN-CA:2
-vals dih_CN-A-CN-CA-3.xvg 1:dih_CN-A-CN-CA:3
-vals dih_CN-A-CN-CA-4.xvg 1:dih_CN-A-CN-CA:4
-vals dih_CN-A-CN-CA-5.xvg 1:dih_CN-A-CN-CA:5
-vals dih_CN-A-CN-CA-6.xvg 1:dih_CN-A-CN-CA:6
-
-# CA-CN-CA-CN
-vals dih_CA-CN-CA-CN-1.xvg 1:dih_CA-CN-CA-CN:1
+vals time_dih_CN-A-CN-CA-1.xvg 1:dih_CN-A-CN-CA:1
+vals time_dih_CN-A-CN-CA-2.xvg 1:dih_CN-A-CN-CA:2
+vals time_dih_CN-A-CN-CA-3.xvg 1:dih_CN-A-CN-CA:3
+vals time_dih_CN-A-CN-CA-4.xvg 1:dih_CN-A-CN-CA:4
+vals time_dih_CN-A-CN-CA-5.xvg 1:dih_CN-A-CN-CA:5
+vals time_dih_CN-A-CN-CA-6.xvg 1:dih_CN-A-CN-CA:6
 
 # CA-CN-A-CN
-vals dih_CA-CN-A-CN-1.xvg 1:dih_CA-CN-A-CN:1
-vals dih_CA-CN-A-CN-2.xvg 1:dih_CA-CN-A-CN:2
-vals dih_CA-CN-A-CN-3.xvg 1:dih_CA-CN-A-CN:3
-vals dih_CA-CN-A-CN-4.xvg 1:dih_CA-CN-A-CN:4
-vals dih_CA-CN-A-CN-5.xvg 1:dih_CA-CN-A-CN:5
-vals dih_CA-CN-A-CN-6.xvg 1:dih_CA-CN-A-CN:6
+vals time_dih_CA-CN-A-CN-1.xvg 1:dih_CA-CN-A-CN:1
+vals time_dih_CA-CN-A-CN-2.xvg 1:dih_CA-CN-A-CN:2
+vals time_dih_CA-CN-A-CN-3.xvg 1:dih_CA-CN-A-CN:3
+vals time_dih_CA-CN-A-CN-4.xvg 1:dih_CA-CN-A-CN:4
+vals time_dih_CA-CN-A-CN-5.xvg 1:dih_CA-CN-A-CN:5
+vals time_dih_CA-CN-A-CN-6.xvg 1:dih_CA-CN-A-CN:6
 
 # A-CN-A-CN
-vals dih_A-CN-A-CN-1.xvg 1:dih_A-CN-A-CN:1
+vals time_dih_A-CN-A-CN-1.xvg 1:dih_A-CN-A-CN:1
 
 # A-CN-CA-CN
-vals dih_A-CN-CA-CN-1.xvg 1:dih_A-CN-CA-CN:1
-vals dih_A-CN-CA-CN-2.xvg 1:dih_A-CN-CA-CN:2
-vals dih_A-CN-CA-CN-3.xvg 1:dih_A-CN-CA-CN:3
-vals dih_A-CN-CA-CN-4.xvg 1:dih_A-CN-CA-CN:4
-vals dih_A-CN-CA-CN-5.xvg 1:dih_A-CN-CA-CN:5
-vals dih_A-CN-CA-CN-6.xvg 1:dih_A-CN-CA-CN:6
-vals dih_A-CN-CA-CN-7.xvg 1:dih_A-CN-CA-CN:7
-
-# CA-CN-CA-GC
-vals dih_CA-CN-CA-GC-1.xvg 1:dih_CA-CN-CA-GC:1
-vals dih_CA-CN-CA-GC-2.xvg 1:dih_CA-CN-CA-GC:2
-vals dih_CA-CN-CA-GC-3.xvg 1:dih_CA-CN-CA-GC:3
+vals time_dih_A-CN-CA-CN-1.xvg 1:dih_A-CN-CA-CN:1
+vals time_dih_A-CN-CA-CN-2.xvg 1:dih_A-CN-CA-CN:2
+vals time_dih_A-CN-CA-CN-3.xvg 1:dih_A-CN-CA-CN:3
+vals time_dih_A-CN-CA-CN-4.xvg 1:dih_A-CN-CA-CN:4
+vals time_dih_A-CN-CA-CN-5.xvg 1:dih_A-CN-CA-CN:5
+vals time_dih_A-CN-CA-CN-6.xvg 1:dih_A-CN-CA-CN:6
 
 # GC_CA-CN-A
-vals dih_GC-CA-CN-A-1.xvg 1:dih_GC-CA-CN-A:1
-vals dih_GC-CA-CN-A-2.xvg 1:dih_GC-CA-CN-A:2
-vals dih_GC-CA-CN-A-3.xvg 1:dih_GC-CA-CN-A:3
+vals time_dih_GC-CA-CN-A-1.xvg 1:dih_GC-CA-CN-A:1
+vals time_dih_GC-CA-CN-A-2.xvg 1:dih_GC-CA-CN-A:2
+vals time_dih_GC-CA-CN-A-3.xvg 1:dih_GC-CA-CN-A:3
 
 # CN-CA-GC-GO
-vals dih_CN-CA-GC-GO-1.xvg 1:dih_CN-CA-GC-GO:1
-vals dih_CN-CA-GC-GO-2.xvg 1:dih_CN-CA-GC-GO:2
-vals dih_CN-CA-GC-GO-3.xvg 1:dih_CN-CA-GC-GO:3
-vals dih_CN-CA-GC-GO-4.xvg 1:dih_CN-CA-GC-GO:4
+vals time_dih_CN-CA-GC-GO-1.xvg 1:dih_CN-CA-GC-GO:1
+vals time_dih_CN-CA-GC-GO-2.xvg 1:dih_CN-CA-GC-GO:2
+vals time_dih_CN-CA-GC-GO-3.xvg 1:dih_CN-CA-GC-GO:3
+vals time_dih_CN-CA-GC-GO-4.xvg 1:dih_CN-CA-GC-GO:4
 
 # GO-GC-CA-CN
-vals dih_GO-GC-CA-CN-1.xvg 1:dih_GO-GC-CA-CN:1
-vals dih_GO-GC-CA-CN-2.xvg 1:dih_GO-GC-CA-CN:2
-vals dih_GO-GC-CA-CN-3.xvg 1:dih_GO-GC-CA-CN:3
-vals dih_GO-GC-CA-CN-4.xvg 1:dih_GO-GC-CA-CN:4
+vals time_dih_GO-GC-CA-CN-1.xvg 1:dih_GO-GC-CA-CN:1
+vals time_dih_GO-GC-CA-CN-2.xvg 1:dih_GO-GC-CA-CN:2
+vals time_dih_GO-GC-CA-CN-3.xvg 1:dih_GO-GC-CA-CN:3
+vals time_dih_GO-GC-CA-CN-4.xvg 1:dih_GO-GC-CA-CN:4
 
 # A-CN-CA-L
-vals dih_A-CN-CA-L-1.xvg 1:dih_A-CN-CA-L:1
-vals dih_A-CN-CA-L-2.xvg 1:dih_A-CN-CA-L:2
-vals dih_A-CN-CA-L-3.xvg 1:dih_A-CN-CA-L:3
+vals time_dih_A-CN-CA-L-1.xvg 1:dih_A-CN-CA-L:1
+vals time_dih_A-CN-CA-L-2.xvg 1:dih_A-CN-CA-L:2
+vals time_dih_A-CN-CA-L-3.xvg 1:dih_A-CN-CA-L:3
 
 # L-CA-CN-A
-vals dih_L-CA-CN-A-1.xvg 1:dih_L-CA-CN-A:1
-vals dih_L-CA-CN-A-2.xvg 1:dih_L-CA-CN-A:2
-vals dih_L-CA-CN-A-3.xvg 1:dih_L-CA-CN-A:3
+vals time_dih_L-CA-CN-A-1.xvg 1:dih_L-CA-CN-A:1
+vals time_dih_L-CA-CN-A-2.xvg 1:dih_L-CA-CN-A:2
+vals time_dih_L-CA-CN-A-3.xvg 1:dih_L-CA-CN-A:3
 
 # impropers
 # CA-CN-CN-L
-vals imp_CA-CN-CN-L-1.xvg 1:imp_CA-CN-CN-L:1
-vals imp_CA-CN-CN-L-2.xvg 1:imp_CA-CN-CN-L:2
-vals imp_CA-CN-CN-L-3.xvg 1:imp_CA-CN-CN-L:3
+vals time_imp_CA-CN-CN-L-1.xvg 1:imp_CA-CN-CN-L:1
+vals time_imp_CA-CN-CN-L-2.xvg 1:imp_CA-CN-CN-L:2
+vals time_imp_CA-CN-CN-L-3.xvg 1:imp_CA-CN-CN-L:3
 
 # CA-CN-CN-GC
-vals imp_CA-CN-CN-GC-1.xvg 1:imp_CA-CN-CN-GC:1
-vals imp_CA-CN-CN-GC-2.xvg 1:imp_CA-CN-CN-GC:2
-vals imp_CA-CN-CN-GC-3.xvg 1:imp_CA-CN-CN-GC:3
-vals imp_CA-CN-CN-GC-4.xvg 1:imp_CA-CN-CN-GC:4
+vals time_imp_CA-CN-CN-GC-1.xvg 1:imp_CA-CN-CN-GC:1
+vals time_imp_CA-CN-CN-GC-2.xvg 1:imp_CA-CN-CN-GC:2
+vals time_imp_CA-CN-CN-GC-3.xvg 1:imp_CA-CN-CN-GC:3
+vals time_imp_CA-CN-CN-GC-4.xvg 1:imp_CA-CN-CN-GC:4
 
 # time_distances
 # CNi-CNi4
