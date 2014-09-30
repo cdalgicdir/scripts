@@ -306,6 +306,7 @@ fi
 i=0
 for file in ${filelist[@]}
 do
+    [[ $userset == "false" ]] && colslist=()
     if [[ -f $file ]]; then
 	if [[ $file == $tabfile && $file != *table_d*.xvg && $file != *table_a*.xvg && $file != *table_b*.xvg ]]; then
 	    if [[ $userset == "false" ]]; then
@@ -343,7 +344,6 @@ do
 		using=" u ${j} "
 
 ###################################################################
-
 	    # shift to zero and entropic correction (for second cols only)
 	    if [[ $doshift == 1 ]] && [[ $doentcorr == 0 ]]; then
 		theshift=${shiftlist[$i]} 
@@ -355,7 +355,6 @@ do
 		theshiftR=${shiftRlist[$i]} 
 		using=" u $column0:(\$$column+2*$kT*(log(\$1/$theshiftR))-$theshift) "
 	    fi
-
 ###################################################################
 
 	    if $convert2ns; then

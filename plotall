@@ -15,7 +15,7 @@ output=""
 termset=""
 
 plot () {
-        gplot $output -c "$yrange" -c "$xrange" -t "$title" -c "$keypos" -c "set ylabel '$ylabel'" -c "set xlabel '$xlabel'" -c "$terminal" -- "$plcomms"
+        gplot $output -c "$xtics" -c "$yrange" -c "$xrange" -t "$title" -c "$keypos" -c "set ylabel '$ylabel'" -c "set xlabel '$xlabel'" -c "$terminal" -- "$plcomms"
 }
 
 printcommands () {
@@ -97,16 +97,18 @@ for f in ${plotlist[@]}; do
 	histdir="histograms"
 	xlabel='{/Symbol f} (degrees)'
 	ylabel='P({/Symbol f})'
-	xrange='set xrange [:]'
+	xrange='set xrange [-180:180]'
 	yrange='set yrange [:]'
-	keypos='set key left'
+	xtics='set xtics 45'
+	keypos='set key left Left reverse'
     elif [[ $f == ang_* ]]; then
 	using=" using 1:2 "
 	histdir="histograms"
 	xlabel='{/Symbol t} (degrees)'
 	ylabel='P({/Symbol t})'
-	xrange='set xrange [:]'
+	xrange='set xrange [-180:180]'
 	yrange='set yrange [:]'
+	xtics='set xtics 45'
 	keypos='set key left'
     else 
 	using=" using 1:2 "
@@ -123,6 +125,15 @@ for f in ${plotlist[@]}; do
     for dir in ${folders[@]}; do
 	address=$dir/$histdir/$f
 	[[ ! -e "${address}" ]] && continue
+	if [[ $dir == cg-ala-CACB* ]]; then
+	    dir="ala-CACB"
+	elif [[ $dir == cg-ala-CA* ]]; then
+	    dir="ala-CA"
+	elif [[ $dir == cg-only-CA* ]]; then
+	    dir="only-CA"
+	elif [[ $dir == cg-CAB* ]]; then
+	    dir="CAB"
+	fi
 	plcomms=${plcomms}${q}${address}${q}${using}${with}'t '${q}${dir}${q},
     done
     if [[ $noplot == true ]]; then

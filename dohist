@@ -86,7 +86,8 @@ axes = np.ravel(axes)
 
 color = sns.color_palette("husl")[0]
 cis = np.linspace(95, 10, 4) #confidence intervals
-sns.tsplot(.5*(binslist[0][1:]+binslist[0][:-1]), countslist, err_style="ci_band", ci=cis, color=color, ax=axes[0], lw=3)
+sns.tsplot(countslist, time=.5*(binslist[0][1:]+binslist[0][:-1]), err_style="ci_band", ci=cis, color=color, ax=axes[0], lw=3)
+#sns.tsplot(.5*(binslist[0][1:]+binslist[0][:-1]), countslist, err_style="ci_band", ci=cis, color=color, ax=axes[0], lw=3)
 
 for i in range(divide):
     axes[1].plot(.5*(binslist[i][1:]+binslist[i][:-1]), countslist[i,:], lw=3, label=("part %d" %(i+1)))
@@ -94,7 +95,8 @@ for i in range(divide):
 # divide into 2 regions
 divide = 2
 countslist2, binslist2 = splithist(a, divide, nbins)
-sns.tsplot(.5*(binslist2[0][1:]+binslist2[0][:-1]), countslist2, err_style="ci_band", ci=cis, color=color, ax=axes[2])
+#sns.tsplot(.5*(binslist2[0][1:]+binslist2[0][:-1]), countslist2, err_style="ci_band", ci=cis, color=color, ax=axes[2])
+sns.tsplot(countslist2,time=.5*(binslist2[0][1:]+binslist2[0][:-1]), err_style="ci_band", ci=cis, color=color, ax=axes[2])
 
 for i in range(divide):
     axes[3].plot(.5*(binslist2[i][1:]+binslist2[i][:-1]), countslist2[i,:], lw=3, label=("part %d" %(i+1)))

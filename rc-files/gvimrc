@@ -28,7 +28,7 @@ if matchstr(expand("%"),".*\.tex") != ""
     :iab ss secondary structure
     :iab sc sidechain
     :iab bb backbone
-    :iab com center of mass
+    :iab com1 center of mass
     :iab bs beta-sheet
     :iab rc random-coil
     :iab ah $\alpha$-helix
