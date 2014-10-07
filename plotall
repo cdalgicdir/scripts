@@ -122,16 +122,24 @@ for f in ${plotlist[@]}; do
     plcomms=''
     tmp=`echo "${f}" | sed 's/_/-/g'` && title=${tmp%.xvg}
     [[ $termset != "" ]] && output="-o${title}.${termset}"
+    title=${title#dih-} && title=${title%-avg}
+
+    if [[ $title == "CN-A-CN-CA" ]] || [[ $title == "CN-A-CN-A" ]] || [[ $title == "CN-CA-CN-CA" ]]; then
+	keypos='set key right top'
+    fi
+
     for dir in ${folders[@]}; do
 	address=$dir/$histdir/$f
 	[[ ! -e "${address}" ]] && continue
-	if [[ $dir == cg-ala-CACB* ]]; then
+	if [[ $dir == cg-ala-CACB* ]] || [[ $dir == map-ala-CACB* ]]; then
 	    dir="ala-CACB"
-	elif [[ $dir == cg-ala-CA* ]]; then
+	elif [[ $dir == cg-ala-CA* ]] || [[ $dir == map-ala-CA* ]]; then
 	    dir="ala-CA"
-	elif [[ $dir == cg-only-CA* ]]; then
+	elif [[ $dir == cg-only-CA* ]] || [[ $dir == map-only-CA* ]]; then
 	    dir="only-CA"
-	elif [[ $dir == cg-CAB* ]]; then
+	elif [[ $dir == cg-ala-CB* ]] || [[ $dir == map-ala-CB* ]]; then
+	    dir="ala-CB"
+	elif [[ $dir == cg-CAB* ]] || [[ $dir == map-CAB* ]]; then
 	    dir="CAB"
 	fi
 	plcomms=${plcomms}${q}${address}${q}${using}${with}'t '${q}${dir}${q},

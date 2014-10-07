@@ -52,14 +52,16 @@ alias emerillon='export CLUTTER_VBLANK=none && emerillon'
 #alias psudo='sudo env PATH="$PATH"'
 alias diff-side-by-side='diff --side-by-side -W"`tput cols`"'
 alias diff-side-by-side-changes='diff --side-by-side --suppress-common-lines -W"`tput cols`"'
-alias xp="virtualbox --startvm WinXP"
-alias xpsave="VBoxManage controlvm WinXP savestate"
-alias xpoff="VBoxManage controlvm WinXP acpipowerbutton"
+alias btw="$HOME/genymotion/player --vm-name Between &"
+alias btwoff="ps aux | grep '\-\-vm-name Between' | awk '{print \$2}' | xargs kill"
+#alias xp="virtualbox --startvm WinXP"
+#alias xpsave="VBoxManage controlvm WinXP savestate"
+#alias xpoff="VBoxManage controlvm WinXP acpipowerbutton"
 alias off="xset dpms force off"
 alias pymol="export PYTHONPATH=/opt/pymol/modules:$PYTHONPATH && pymol"
-export SCHRODINGER=/opt/schrodinger
-alias maestro="$SCHRODINGER/maestro %f &"
-alias matlab="$HOME/matlabR2013a/bin/matlab -desktop &"
+#export SCHRODINGER=/opt/schrodinger
+#alias maestro="$SCHRODINGER/maestro %f &"
+#alias matlab="$HOME/matlabR2013a/bin/matlab -desktop &"
 alias dsvisualizer="/home/cdalgicdir/Accelrys/DiscoveryStudio35/bin/DiscoveryStudio35 &"
 #alias open="gnome-open"
 #alias op="gnome-open"
@@ -71,7 +73,7 @@ alias gv='gvim'
 alias mkcd='_(){ mkdir $1; cd $1; }; _'
 alias mangro="gnome-open $HOME/Documents/Manuals/gromacs-manual-4.5.6.pdf &"
 alias github="cd $HOME/Dropbox/github"
-alias eclipse="$HOME/Courses/comp130/eclipse/eclipse &"
+#alias eclipse="$HOME/Courses/comp130/eclipse/eclipse &"
 alias btstart="~/.btsync/btsync --config ~/.btsync/sync.conf --log ~/.btsync/log"
 alias btkill="pkill btsync"
 alias tmux="tmux -2"
