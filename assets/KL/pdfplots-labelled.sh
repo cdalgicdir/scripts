@@ -1,0 +1,125 @@
+#! /bin/bash
+
+hom=`pwd`
+remotedir="$HOME/remote"
+nKLdir="$remotedir/scratch8/n-KL"
+
+tetdir="$nKLdir/120608_KL4BbwLF/4-SIM/map"
+#vacdir="$remotedir/yunus/KL/131216_vacuum-excl/trial-2/map/distributions"
+kl7vacdir="$remotedir/yunus/KL/131216_vacuum-excl/7KL/map/distributions"
+#bozsindir="$remotedir/bozgur-bonded/aa_SINMOL"
+#bozsinexdir="$remotedir/bozgur-bonded/aa_SINMOL_excl"
+bozsinexdir="$HOME/SIMS/bozgur/aa_SINMOL_excl"
+
+# Bulk water
+kl1dir="$nKLdir/131021_KLsbwL/map/"
+kl2dir="$nKLdir/130121_2KL/map/"
+kl3dir="$nKLdir/130408_3KL-cubic/7-NPT/map/"
+kl4dir="$nKLdir/120608_KL4BbwLF/4-SIM/map/"
+kl5dir="$nKLdir/130326_5KL/7-NPT/map/"
+kl6dir="$remotedir/scratch7/KL/131204_6KL/7-Production/map/"
+kl8dir="$nKLdir/130620_8KL/7-NPT/map/"
+
+# Interface
+kl1intdir="$remotedir/scratch10/120529_KLSiLF-54/4-SIM/map/"
+kl2intdir="$remotedir/scratch4/130624_2KL-int/7-INT-nodistconstr/map/"
+
+# @HOME
+nKLhome="$HOME/SIMS/KL/n-KL-distributions"
+tetdir="$nKLhome/4KL"
+vacdir="$nKLhome/vac-excl-nocharge"
+
+# HISTOGRAMS directory
+histdir='histograms'
+
+dirlist=("$tetdir" "$remotedir/yunus/KL/131216_vacuum-excl/140205_all-cutoff/map")
+tlist=("tetramer" "vacuum-excl")
+
+###################################################################
+# Plot Comparisons of Averages
+###################################################################
+
+flist=('bond_CN-CA_avg.xvg' 'bond_CA-CN_avg.xvg' 'bond_CA-L_avg.xvg' 'bond_CA-KC_avg.xvg' 'bond_KC-KN_avg.xvg' 'ang_CN-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CN-CA-L_avg.xvg' 'ang_L-CA-CN_avg.xvg' 'ang_CN-CA-KC_avg.xvg' 'ang_KC-CA-CN_avg.xvg' 'ang_CA-KC-KN_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CN-CA-KC_avg.xvg' 'dih_CN-CA-KC-KN_avg.xvg' 'dih_CA-CN-CA-L_avg.xvg' 'imp_CA-CN-CN-L_avg.xvg' 'imp_CA-CN-KC-CN_avg.xvg' 'dist_CNi-CNi4_avg.xvg')
+
+q="'"
+u=" using 1:2 with line title "
+terminal="pdfcairo font \"Gill Sans,16\" lw 3 rounded enhanced"
+pdflist=()
+
+for f in ${flist[@]}; do
+    plcomms=""
+    for i in `seq 0 $((${#dirlist[@]}-1))`; do
+	dir=${dirlist[$i]}/$histdir
+	t=${tlist[$i]}
+	plcomms="${plcomms}""${q}${dir}/${f}${q}${u}${q}${t}${q},"
+    done
+    outname="`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/'`"
+    pdflist+=("$outname")
+    title=${outname%.pdf}
+    xlabel=''
+    ylabel=''
+    if [[ ${f} == *bond* ]]; then
+	xlabel='r (nm)'
+	ylabel='P(r)'
+    elif [[ ${f} == *ang* ]]; then
+	xlabel='{/Symbol q} (radians)'
+	ylabel='P({/Symbol q})'
+    elif [[ ${f} == *dih* ]]; then
+	xlabel='{/Symbol f} (radians)'
+	ylabel='P({/Symbol f})'
+    elif [[ ${f} == *imp* ]]; then
+	xlabel='{/Symbol f} (radians)'
+	ylabel='P({/Symbol f})'
+    elif [[ ${f} == *dist* ]]; then
+	xlabel='r (nm)'
+	ylabel='P(r)'
+    fi
+    if [[ ${f} == "dih_CN-CA-KC-KN_avg.xvg" ]] && [[ ! "${dirlist[@]}" =~ $vacdir ]] ; then
+	gplot -x "$xlabel" -y "$ylabel" -c "set yrange[0:1]" -o "${outname}" --term "${terminal}" -t "${title}" -- "${plcomms}"
+    else
+	gplot -x "$xlabel" -y "$ylabel" -o "${outname}" --term "${terminal}" -t "${title}" -- "${plcomms}"
+    fi
+done
+
+
+###################################################################
+# Plot All
+###################################################################
+
+plots=`egrep "^hist [badi]" boltzmann.comms | awk '{print $2}'`
+
+q="'"
+plcomms=''
+terminal="pdfcairo font \"Gill Sans,16\" lw 2 rounded enhanced"
+
+for f in ${plots[@]}; do
+    if [[ ${f} != *_avg.xvg ]]; then
+	plcomms=${plcomms}${q}${histdir}/${f}${q}${u}${q}${j}${q}","
+	let j=$j+1
+    else
+	plcomms=${plcomms}${q}${histdir}/${f}${q}${u}"'avg'"
+	outname=`echo $f | sed 's/_/-/g' | sed 's/xvg/pdf/' | sed 's/avg/all/'`
+	if [[ ${f} == "dih_CN-CA-KC-KN_avg.xvg" ]]; then
+	    gplot -c "set yrange [0:1]" -c "set style data line" -o "${outname}" --term "${terminal}" -t "${title}" -- ${plcomms}
+	else
+	    gplot -c "set style data line" -o "${outname}" --term "${terminal}" -t "${title}" -- ${plcomms}
+	fi
+	pdflist+=("$outname")
+	plcomms=""
+	j=1
+    fi
+
+done
+
+mkdir -p report
+for pdf in ${pdflist[@]}; do
+    mv ${pdf} report/
+done
+cp pdfplots.sh report/
+cd report/
+cp $HOME/SIMS/KL/plots/distributions-all.tex .
+pdflatex -shell-escape -interaction=nonstopmode distributions-all.tex
+rm *.aux *.log
+mupdf distributions-all.pdf &
+cd ../
+

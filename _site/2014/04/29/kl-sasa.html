@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head prefix="dc: http://purl.org/dc/terms/ og: http://ogp.me/ns#"> <!-- namespaces used in metadata.html -->
+<link rel="icon" 
+      type="image/ico" 
+      href="/ico/favicon.ico">
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+  <title>Kl Sasa</title>
+  <meta name="author" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CSS Stylesheets (alternate sheets toggled with javascript or browsers supporting rel='alternative stylesheet') -->
+  <link href="/css/bootstrap.css" rel="stylesheet" 
+        type="text/css" title="white" />
+  <link href="/css/light.css" rel="alternate stylesheet"
+        type="text/css" id="stl" title="light" />
+  <link href="/css/dark.css" rel="alternate stylesheet" 
+        type="text/css" title="dark" />
+  <link href="/css/bootstrap-responsive.css" rel="stylesheet" 
+  type="text/css"/>
+  <!-- Help the browser identify the RSS feed automatically -->
+  <link rel="alternate" type="application/rss+xml" title="Non-linear notebook" href="/blog.xml" />
+  <!-- Javascript needed for theme toggle, load immediately -->
+  <script type="text/javascript" src="/js/switch-css.js"></script>
+  <script type="text/javascript">set_style_from_cookie(); </script>
+
+
+</head>
+
+
+  <body prefix="dc: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/"> 
+    <!-- Navbar  ================================================== -->
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <!--a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"-->
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <!--div class="nav-collapse"-->
+        <ul class="nav">
+      <a class="brand" href="/README.html"><i style="float:right;" class="icon-info-sign" alt="info"></i></span></a>
+          <li>
+          <a href="/index.html">Home</a></li>
+
+          <li>
+          <a href="/papers.html">Papers</a></li>
+
+          <li>
+          <a href="/kl.html">KL</a></li>
+
+          <li>
+          <a href="/meetings.html">Meetings</a></li>
+
+          <li>
+          <a href="/lab-notebook.html">Lab Notebook</a></li>
+
+          <li>
+          <a href="/CV.html">CV</a></li>
+
+        </ul>
+  <!-- ************* Buttons to toggle theme CSS ********************** -->
+        <form style="font-size:10px" class="pull-right">
+
+           <a onclick="switch_style('white'); 
+                      recordOutboundLink(this, 'Outbound Links', 'white theme'); 
+                      return false;" 
+             name="theme" value="white" id="white" 
+	     class="btn btn-mini showtooltip(placement: 'bottom')" title="switch to white theme"><i class="icon-circle-blank"></i>
+                                 </span></a>
+          
+          <a onclick="switch_style('light'); 
+                      recordOutboundLink(this, 'Outbound Links', 'light theme'); 
+                      return false;" 
+             name="theme" value="light" id="light" 
+	     class="btn btn-mini showtooltip(placement: 'bottom')" title="switch to light theme"><i class="icon-adjust"></i>
+                                  </span></a>
+
+
+
+          <a onclick="switch_style('dark'); 
+                      recordOutboundLink(this, 'Outbound Links', 'dark theme'); 
+                      return false;" 
+             name="theme" value="dark" id="dark" 
+	     class="btn btn-mini showtooltip(placement: 'bottom')" title="switch to dark theme"><i class="icon-certificate"></i>
+                                   </span></a>
+        </form>
+      </div><!--/.nav-collapse -->
+     </div> <!-- /container -->
+   </div> <!-- /navbar-inner -->
+ </div> <!-- /navbar -->
+
+    <div class="container"> <!-- Responsive grid layout --> 
+
+      <header class="jumbotron">
+<h4 class="entry-title">Kl Sasa</h4>
+  <h5></h5>
+</header>
+
+
+<div class="row">
+  <div class="span8">
+    <article>
+    <h3 id="sasa-calculations">SASA Calculations</h3>
+<h5 id="single-peptide-in-bulk-water">Single peptide in bulk water:</h5>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> Protein Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-PP.xvg</code></pre>
+<h5 id="single-peptide-at-airwater-interface">Single peptide at air/water interface:</h5>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> System Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-SP.xvg
+<span class="kw">echo</span> Protein Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-PP.xvg</code></pre>
+<ul>
+<li>difference between area-PP and area-SP (ie area-PP - area-SP) will give the water-exposed area.</li>
+</ul>
+<h5 id="dimer-in-bulk-water">Dimer in bulk water:</h5>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> Protein Protein_chain1 <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-Pp1.xvg</code></pre>
+<ul>
+<li>area-Pp1 will give the water-exposed area for chain 1</li>
+</ul>
+<h5 id="dimer-at-airwater-interface">Dimer at air/water interface:</h5>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> Protein Protein_chain1 <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-Pp1.xvg
+<span class="kw">echo</span> System Protein_chain1 <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-Sp1.xvg</code></pre>
+<ul>
+<li>area-Pp1 will give you the sum of the water-exposed area and the water-shielded area due to the interface (excluding the shielded area due to the 2nd chain)</li>
+<li>area-Sp1 will give you the water-shielded area due to the interface (excluding the shielded area due to 2nd chain)</li>
+<li>difference between area-Pp1 and area-Sp1 will give the water exposed area for chain 1</li>
+</ul>
+<h4 id="further-notes">Further notes</h4>
+<ul>
+<li><p>When we calculate the SASA values of a single KL peptide at air/water interface, and use the command below (System as surface and protein as calculation group), we get SASA of ~2-3 when the peptide is submerged in bulk water. This SASA should be zero because we are calculating the area of the protein above water, but the radius of the probe is small enough to penetrate through water. Therefore I think we need to define the size of the probe such that it will not take into account any contribution from the area of the peptide inside the bulk water. For my case, a probe radius of 0.21 nm yields zero SASA when the peptide is submerged in bulk water. <del>To be consistent I plan to use a probe size of 0.21 nm for all my SASA calculations.</del></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> System Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -dt 100 -o area-SP.xvg</code></pre></li>
+</ul>
+<h4 id="further-notes-2">Further notes-2</h4>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> System Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -o area-SP-p014 -q connelly-SP-p014 -dt 100 -e 500 -probe 0.14 -ndots 100</code></pre>
+<pre><code>@ s0 legend &quot;Hydrophobic&quot;
+@ s1 legend &quot;Hydrophilic&quot;
+@ s2 legend &quot;Total&quot;
+@ s3 legend &quot;D Gsolv&quot;
+         0     2.20895    0.240718     2.44967     15.1569
+       100     2.30845    0.146591     2.45504     15.5694
+       200     2.09388    0.169116     2.26299     13.4466
+       300     2.16763    0.209235     2.37686      14.896
+       400     1.51571    0.157556     1.67327     9.32963
+       500     1.35112    0.183376      1.5345     8.75062</code></pre>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> System Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -o area-SP-p018 -q connelly-SP-p018 -dt 100 -e 500 -probe 0.18 -ndots 100</code></pre>
+<pre><code>@ s0 legend &quot;Hydrophobic&quot;
+@ s1 legend &quot;Hydrophilic&quot;
+@ s2 legend &quot;Total&quot;
+@ s3 legend &quot;D Gsolv&quot;
+         0    0.314077           0    0.314077     2.10256
+       100    0.482332   0.0112171    0.493549     3.30402
+       200    0.358945   0.0112171    0.370162     2.47801
+       300    0.201907    0.011217    0.213124     1.42673
+       400    0.100953  0.00836642     0.10932    0.654819
+       500   0.0448681           0   0.0448681    0.300365</code></pre>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> System Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -o area-SP-p021 -q connelly-SP-p021 -dt 100 -e 500 -probe 0.21 -ndots 100</code></pre>
+<pre><code>@ s0 legend &quot;Hydrophobic&quot;
+@ s1 legend &quot;Hydrophilic&quot;
+@ s2 legend &quot;Total&quot;
+@ s3 legend &quot;D Gsolv&quot;
+         0           0           0           0           0
+       100   0.0266984           0   0.0266984     0.17873
+       200   0.0266984           0   0.0266984     0.17873
+       300           0           0           0           0
+       400           0           0           0           0
+       500           0           0           0           0</code></pre>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> System Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -o area-SP-p022 -q connelly-SP-p022 -dt 100 -e 500 -probe 0.22 -ndots 100</code></pre>
+<pre><code>@ s0 legend &quot;Hydrophobic&quot;
+@ s1 legend &quot;Hydrophilic&quot;
+@ s2 legend &quot;Total&quot;
+@ s3 legend &quot;D Gsolv&quot;
+         0           0           0           0           0
+       100           0           0           0           0
+       200   0.0141011           0   0.0141011   0.0943985
+       300           0           0           0           0
+       400           0           0           0           0
+       500           0           0           0           0</code></pre>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> System Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -o area-SP-p023 -q connelly-SP-p023 -dt 100 -e 500 -probe 0.23 -ndots 100</code></pre>
+<pre><code>@ s0 legend &quot;Hydrophobic&quot;
+@ s1 legend &quot;Hydrophilic&quot;
+@ s2 legend &quot;Total&quot;
+@ s3 legend &quot;D Gsolv&quot;
+         0           0           0           0           0
+       100           0           0           0           0
+       200   0.0148736           0   0.0148736   0.0995701
+       300           0           0           0           0
+       400           0           0           0           0
+       500           0           0           0           0</code></pre>
+<hr />
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> System Protein <span class="kw">|</span> <span class="kw">g_sas</span> -f -s -n -o area-SP-p024 -q connelly-SP-p024 -dt 100 -e 500 -probe 0.24 -ndots 100</code></pre>
+<pre class="text"><code>@ s0 legend &quot;Hydrophobic&quot;
+@ s1 legend &quot;Hydrophilic&quot;
+@ s2 legend &quot;Total&quot;
+@ s3 legend &quot;D Gsolv&quot;
+         0           0           0           0           0
+       100           0           0           0           0
+       200           0           0           0           0
+       300           0           0           0           0
+       400           0           0           0           0
+       500           0           0           0           0</code></pre>
+
+    </article>
+  </div>
+  <div class="span4">
+    <div class="sidebar">
+	  <p><i class="icon-list"></i> Posted in
+    
+      <a rel="dc:subject" class="category" 
+         href="/categories.html#kl">kl</a>
+    
+    </p>
+
+  <p> <i class="icon-tag"></i> tags:
+    
+    <!-- http://schema.org/BlogPosting/keywords -->
+    <a rel="og:tag" class="tag" 
+       href="/tags.html#kl">#kl</a>, 
+    
+    <!-- http://schema.org/BlogPosting/keywords -->
+    <a rel="og:tag" class="tag" 
+       href="/tags.html#sasa">#sasa</a>
+    </p>
+
+<aside prefix="dc: http://purl.org/dc/terms/">
+  <p> <i class="icon-calendar"></i>
+<time datetime="2014-04-29T00:00:00+03:00" 
+      property="dc:created">29 Apr 2014</time></p>
+
+</br>
+
+  
+  <p><a class="btn btn-mini showtooltip" title="Todo" rel="prev" href='/2014/04/25/todo.html'><i class="icon-chevron-left"></i>previous</a>
+  
+  
+  <a class="btn btn-mini showtooltip" title="Msayar" rel="next" href='/2014/04/30/msayar.html'>next <i class="icon-chevron-right"></i></a></p>
+  
+
+
+    </div>
+  </div>
+</div>
+
+
+<footer class="footer">
+
+<div class="row">
+  <div class="span11 offset1">
+    <div class="socialicons">
+      <p> <a alt="rss" type="application/atom+xml" href="/blog.xml"  
+	  class="showtooltip" title="RSS feeds ==> /atom.xml" 
+         onclick="recordOutboundLink(this, 'Outbound Links', 'RSS'); 
+         return false;"><i class="icon-rss"></i></a>
+
+     <style type="text/css">
+	 p {text-indent: 5px; }
+     </style>
+      <a href="/archive.html"><i class="icon-calendar"></i> Sort by date</a>
+      <a href="/categories.html"><i class="icon-list"></i> Sort by category</a>
+      <a href="/tags.html"><i class="icon-tags"></i> Sort by tag</a>
+       </p>
+    </div>
+  </div> <!--end span9 -->
+</div> <!--end row -->
+
+
+
+  <div class="row">
+
+  </div>
+  
+<!-- COinS metadata (for citation managers like Zotero etc), goes in body text -->
+  <span
+      class="Z3988" 
+      title="ctx_ver=Z39.88-2004
+      &amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc
+      &amp;rfr_id=info%3Asid%2Focoins.info%3Agenerator
+      &amp;rft.title=Kl Sasa
+      &amp;rft.creator=
+      &amp;rft.date=2014-04-29
+      &amp;rft.language=EN
+      &amp;rft.rights=CC0
+      &amp;rft_id=/2014/04/29/kl-sasa.html">
+  </span>
+
+
+
+</footer>
+
+    <!-- Le javascript
+    ================================================== -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- JQuery, used on a few pages -->
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <!-- Equations using MathJax -->
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });       </script>
+    <!-- Twitter Bootstrap Javascript -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Tooltip javascript -->
+    <script type="text/javascript">
+      $(document).ready(function (){
+        $(".showtooltip").tooltip();
+      });
+    </script>
+
+    <!-- Code collapse Javascript -->
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $("#toggle_code").click(function(){
+        $(".highlight").toggle();
+        $(".sourceCode").toggle();
+      });
+    });
+    </script>
+
+
+
+
+
+    </div>
+  </body>
+</html>
+

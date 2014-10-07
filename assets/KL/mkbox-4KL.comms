@@ -1,0 +1,65 @@
+#! /bin/bash
+
+function mergegro {
+    local n1=`sed -n '2p' ${1} | tr -d ' '`
+    local n2=`sed -n '2p' ${2} | tr -d ' '`
+    local n3=$((n1+n2))
+    awk '{if (NF!=3)print}' ${1} > ${1}.xXx
+    awk '{if (NR>2)print}' ${2} > ${2}.xXx
+    cat ${1}.xXx ${2}.xXx > ${3}.xXx
+    sed '2s/'$n1'/'$n3'/' ${3}.xXx > ${3}
+    rm ${1}.xXx ${2}.xXx ${3}.xXx
+}
+
+
+dist=1.3
+initgro='protein.gro'
+
+echo System | editconf -f ${initgro} -d 0 -o p1.gro -princ -rotate 0 90 150
+echo System | editconf -f ${initgro} -d 0 -o p2.gro -princ -rotate 90 270 -45
+echo System | editconf -f ${initgro} -d 0 -o p3.gro -princ -rotate 180 270 30
+echo System | editconf -f ${initgro} -d 0 -o p4.gro -princ -rotate 180 90 150
+
+editconf -f p2.gro -translate 0 $dist 0 -o p2.gro
+editconf -f p3.gro -translate $dist 0 0 -o p3.gro
+editconf -f p4.gro -translate $dist $dist 0 -o p4.gro
+mergegro p1.gro p2.gro d1.gro
+mergegro p3.gro p4.gro d2.gro
+editconf -f d1.gro -translate `echo "2*$dist" | bc -l` 0 0 -o d3.gro
+editconf -f d2.gro -translate `echo "2*$dist" | bc -l` 0 0 -o d4.gro
+mergegro d1.gro d2.gro tetramer.gro
+#vmd tetramer.gro
+
+###################################################################
+# solvation
+###################################################################
+
+editconf -f tetramer.gro -bt dode -d 2.0 -o box.gro -c -rotate 0 0 0
+genbox -cp box.gro -cs -o solvated.gro -p -maxsol 11304
+cp ~/mdpfiles/ions.mdp .
+sed 's/^Protein.*1$/Protein 4/' topol.top > topol.top.xXx
+rm topol.top && mv topol.top.xXx topol.top
+grompp -f ions.mdp -c solvated.gro -p topol.top
+echo SOL | genion -s topol.tpr -nn 24 -p topol.top -o neutral.gro
+echo -e "splitch 1\nsplitch 8\nq\n" | make_ndx -f neutral.gro
+
+echo Backbone | genrestr -f neutral.gro -o posre_bb.itp
+echo C-alpha | genrestr -f neutral.gro -o posre_ca.itp
+#vmd neutral.gro
+
+sed -i '/POSRES$/i \
+#ifdef POSRES_BB \
+#include "posre_bb.itp" \
+#endif' topol.top
+
+sed -i '/POSRES_BB/i \
+#ifdef POSRES_CA \
+#include "posre_ca.itp" \
+#endif' topol.top
+
+echo Protein | genrestr -f p1.gro -o posre.itp
+echo Backbone | genrestr -f p1.gro -o posre_bb.itp
+echo C-alpha | genrestr -f p1.gro -o posre_ca.itp
+
+mkdir 1-EM
+cp neutral.gro topol_Protein.itp topol.top index.ndx ~/mdpfiles/em.mdp 1-EM/

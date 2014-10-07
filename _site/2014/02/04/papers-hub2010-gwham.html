@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head prefix="dc: http://purl.org/dc/terms/ og: http://ogp.me/ns#"> <!-- namespaces used in metadata.html -->
+<link rel="icon" 
+      type="image/ico" 
+      href="/ico/favicon.ico">
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+  <title>Papers Hub2010 Gwham</title>
+  <meta name="author" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CSS Stylesheets (alternate sheets toggled with javascript or browsers supporting rel='alternative stylesheet') -->
+  <link href="/css/bootstrap.css" rel="stylesheet" 
+        type="text/css" title="white" />
+  <link href="/css/light.css" rel="alternate stylesheet"
+        type="text/css" id="stl" title="light" />
+  <link href="/css/dark.css" rel="alternate stylesheet" 
+        type="text/css" title="dark" />
+  <link href="/css/bootstrap-responsive.css" rel="stylesheet" 
+  type="text/css"/>
+  <!-- Help the browser identify the RSS feed automatically -->
+  <link rel="alternate" type="application/rss+xml" title="Non-linear notebook" href="/blog.xml" />
+  <!-- Javascript needed for theme toggle, load immediately -->
+  <script type="text/javascript" src="/js/switch-css.js"></script>
+  <script type="text/javascript">set_style_from_cookie(); </script>
+
+
+</head>
+
+
+  <body prefix="dc: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/"> 
+    <!-- Navbar  ================================================== -->
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <!--a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"-->
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <!--div class="nav-collapse"-->
+        <ul class="nav">
+      <a class="brand" href="/README.html"><i style="float:right;" class="icon-info-sign" alt="info"></i></span></a>
+          <li>
+          <a href="/index.html">Home</a></li>
+
+          <li>
+          <a href="/papers.html">Papers</a></li>
+
+          <li>
+          <a href="/kl.html">KL</a></li>
+
+          <li>
+          <a href="/meetings.html">Meetings</a></li>
+
+          <li>
+          <a href="/lab-notebook.html">Lab Notebook</a></li>
+
+          <li>
+          <a href="/CV.html">CV</a></li>
+
+        </ul>
+  <!-- ************* Buttons to toggle theme CSS ********************** -->
+        <form style="font-size:10px" class="pull-right">
+
+           <a onclick="switch_style('white'); 
+                      recordOutboundLink(this, 'Outbound Links', 'white theme'); 
+                      return false;" 
+             name="theme" value="white" id="white" 
+	     class="btn btn-mini showtooltip(placement: 'bottom')" title="switch to white theme"><i class="icon-circle-blank"></i>
+                                 </span></a>
+          
+          <a onclick="switch_style('light'); 
+                      recordOutboundLink(this, 'Outbound Links', 'light theme'); 
+                      return false;" 
+             name="theme" value="light" id="light" 
+	     class="btn btn-mini showtooltip(placement: 'bottom')" title="switch to light theme"><i class="icon-adjust"></i>
+                                  </span></a>
+
+
+
+          <a onclick="switch_style('dark'); 
+                      recordOutboundLink(this, 'Outbound Links', 'dark theme'); 
+                      return false;" 
+             name="theme" value="dark" id="dark" 
+	     class="btn btn-mini showtooltip(placement: 'bottom')" title="switch to dark theme"><i class="icon-certificate"></i>
+                                   </span></a>
+        </form>
+      </div><!--/.nav-collapse -->
+     </div> <!-- /container -->
+   </div> <!-- /navbar-inner -->
+ </div> <!-- /navbar -->
+
+    <div class="container"> <!-- Responsive grid layout --> 
+
+      <header class="jumbotron">
+<h4 class="entry-title">Papers Hub2010 Gwham</h4>
+  <h5></h5>
+</header>
+
+
+<div class="row">
+  <div class="span8">
+    <article>
+    <p><strong>g_wham: A Free Weighted Histogram Analysis Implementation Including Robust Error and Autocorrelation Estimates</strong></p>
+<p><em>Jochen S. Hub, Bert L. de Groot, and David van der Spoel</em></p>
+<blockquote>
+<p>the idea of WHAM is to estimate the statistical uncertainty of the unbiased probability distribution given the umbrella histograms, and subsequently to compute the PMF that corresponds to the smallest uncertainty.</p>
+</blockquote>
+<h4 id="three-methods-to-calculate-uncertainties-in-the-pmf">Three methods to calculate uncertainties in the PMF:</h4>
+<ol type="1">
+<li>“bootstrapping of hypothetical trajectories based on the umbrella histograms together with the respective autocorrelation time”
+<ul>
+<li>each window is run once and the corresponding trajectory is bootstrapped (new trajectories are generated)</li>
+<li>provides an accurate error estimate if (and only if) the histograms are sufficiently converged.</li>
+</ul></li>
+<li>“by bootstrapping complete histograms”
+<ul>
+<li>where an umbrella window is simulated multiple times each with different initial configurations. Then the histograms are pooled and a group of “complete histograms” is generated. Each histogram (including the multiple runs for each window) is treated as an “individual observation” and a new set of Nw histograms are selected out of this “complete histograms” group, where multiple selections are allowed. Compared to method 1, no new trajectories or histograms are generated in this method, instead the already available histograms are bootstrapped.</li>
+<li>better for limited sampling</li>
+<li>the probability of choosing one histogram out of n histograms is 1/n. (n=Nw*sum(m<span class="math">\(_i\)</span>) where m<span class="math">\(_i\)</span> is the number of multiple runs for ith window) one should be careful that the bootstrapped histograms should overlap. To this end, the histograms can be grouped along the reaction coordinate and each group can be separately bootstrapped to avoid hollow regions in the reaction coordinate.</li>
+</ul></li>
+<li>“by using the Bayesian bootstrap of complete histograms, that is, by assigning random weights to the histograms.”
+<ul>
+<li>just like method 2, but instead assigns random weights to all histograms within each bootstrap to avoid non-overlapping of histograms. So the probability of choosing a histogram becomes w<span class="math">\(_i\)</span> instead of 1/n.</li>
+<li>“the continuous weights w<span class="math">\(_i\)</span> are almost never exactly zero” so that a gap along the reaction coordinate using the set of bootstrapped histograms is avoided.</li>
+</ul></li>
+</ol>
+<ul>
+<li>If the histograms are affected by long autocorrelations, as frequently occurrs in simulations of large biomolecules, methods 2. and 3. provide a more accurate error estimate.&quot;</li>
+<li>“In nonhomogeneous systems such as a protein channel or a lipid membrane surrounded by bulk water, the autocorrelation times may substantially vary along the reaction coordinate and thus not cancel from the WHAM equations.”</li>
+</ul>
+<h3 id="notes">NOTES:</h3>
+<ul>
+<li>If the molecules have slow motions so that the simulation cannot sample all the configurations, then the suggestion is to sample the same window multiple times using different initial configurations.</li>
+</ul>
+<figure>
+<img src="/images/papers-images/hub2010-wham.png" alt="Obtaining unbiased probability distribution through WHAM" /><figcaption>Obtaining unbiased probability distribution through WHAM</figcaption>
+</figure>
+
+    </article>
+  </div>
+  <div class="span4">
+    <div class="sidebar">
+	  <p><i class="icon-list"></i> Posted in
+    
+      <a rel="dc:subject" class="category" 
+         href="/categories.html#papers">papers</a>
+    
+    </p>
+
+  <p> <i class="icon-tag"></i> tags:
+    
+    <!-- http://schema.org/BlogPosting/keywords -->
+    <a rel="og:tag" class="tag" 
+       href="/tags.html#papers">#papers</a>, 
+    
+    <!-- http://schema.org/BlogPosting/keywords -->
+    <a rel="og:tag" class="tag" 
+       href="/tags.html#g_wham">#g_wham</a>, 
+    
+    <!-- http://schema.org/BlogPosting/keywords -->
+    <a rel="og:tag" class="tag" 
+       href="/tags.html#umbrella+sampling">#umbrella sampling</a>, 
+    
+    <!-- http://schema.org/BlogPosting/keywords -->
+    <a rel="og:tag" class="tag" 
+       href="/tags.html#WHAM">#WHAM</a>
+    </p>
+
+<aside prefix="dc: http://purl.org/dc/terms/">
+  <p> <i class="icon-calendar"></i>
+<time datetime="2014-02-04T00:00:00+02:00" 
+      property="dc:created">04 Feb 2014</time></p>
+
+</br>
+
+  
+  <p><a class="btn btn-mini showtooltip" title="Cg Votca Bonded Histogram" rel="prev" href='/2014/01/29/CG-votca-bonded-histogram.html'><i class="icon-chevron-left"></i>previous</a>
+  
+  
+  <a class="btn btn-mini showtooltip" title="Study Bootstrap" rel="next" href='/2014/02/04/study-bootstrap.html'>next <i class="icon-chevron-right"></i></a></p>
+  
+
+
+    </div>
+  </div>
+</div>
+
+
+<footer class="footer">
+
+<div class="row">
+  <div class="span11 offset1">
+    <div class="socialicons">
+      <p> <a alt="rss" type="application/atom+xml" href="/blog.xml"  
+	  class="showtooltip" title="RSS feeds ==> /atom.xml" 
+         onclick="recordOutboundLink(this, 'Outbound Links', 'RSS'); 
+         return false;"><i class="icon-rss"></i></a>
+
+     <style type="text/css">
+	 p {text-indent: 5px; }
+     </style>
+      <a href="/archive.html"><i class="icon-calendar"></i> Sort by date</a>
+      <a href="/categories.html"><i class="icon-list"></i> Sort by category</a>
+      <a href="/tags.html"><i class="icon-tags"></i> Sort by tag</a>
+       </p>
+    </div>
+  </div> <!--end span9 -->
+</div> <!--end row -->
+
+
+
+  <div class="row">
+
+  </div>
+  
+<!-- COinS metadata (for citation managers like Zotero etc), goes in body text -->
+  <span
+      class="Z3988" 
+      title="ctx_ver=Z39.88-2004
+      &amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Adc
+      &amp;rfr_id=info%3Asid%2Focoins.info%3Agenerator
+      &amp;rft.title=Papers Hub2010 Gwham
+      &amp;rft.creator=
+      &amp;rft.date=2014-02-04
+      &amp;rft.language=EN
+      &amp;rft.rights=CC0
+      &amp;rft_id=/2014/02/04/papers-hub2010-gwham.html">
+  </span>
+
+
+
+</footer>
+
+    <!-- Le javascript
+    ================================================== -->
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- JQuery, used on a few pages -->
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <!-- Equations using MathJax -->
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: {autoNumber: "all"} } });       </script>
+    <!-- Twitter Bootstrap Javascript -->
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Tooltip javascript -->
+    <script type="text/javascript">
+      $(document).ready(function (){
+        $(".showtooltip").tooltip();
+      });
+    </script>
+
+    <!-- Code collapse Javascript -->
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $("#toggle_code").click(function(){
+        $(".highlight").toggle();
+        $(".sourceCode").toggle();
+      });
+    });
+    </script>
+
+
+
+
+
+    </div>
+  </body>
+</html>
+
