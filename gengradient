@@ -1,0 +1,32 @@
+#! /usr/bin/python
+
+import math, sys
+
+if len(sys.argv) != 5:
+    print "USAGE: $ gengradient initpoint initvalue endpoint endvalue"
+    sys.exit(1)
+
+step = 0.5
+
+p1 = [float(sys.argv[1]), float(sys.argv[2])]
+p2 = [float(sys.argv[3]), float(sys.argv[4])]
+m = (p1[1]-p2[1])/(p1[0]-p2[0])
+
+if p1[0] > p2[0]:
+    initpoint = p2[0]
+    initval = p2[1]
+    endpoint = p1[0]
+    #m = -m
+else:
+    initpoint = p1[0]
+    initval = p1[1]
+    endpoint = p2[0]
+    #m = m
+
+noofpoints = (endpoint - initpoint)/step
+p = [initpoint, initval]
+
+while p[0] <= endpoint:
+    print '%.2f %f' %(p[0],p[1])
+    p[0] += step
+    p[1] += m*step
