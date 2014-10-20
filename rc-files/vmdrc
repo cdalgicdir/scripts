@@ -30,6 +30,8 @@ light 3 off
 #axes location lowerleft
 stage location off
 
+#display resize 1338 1668
+
 # position and turn on menus
 menu main move 5 5
 #menu display move 386 90
@@ -217,7 +219,8 @@ user add key L { addHeavyLabels [molinfo top] }
 #user add key B { align [molinfo top] "resid 3 to 10 and backbone" }
 #user add key z { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
 user add key A { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
-user add key a { align [molinfo top] "protein and backbone" }
+#user add key A { align [molinfo top] "protein and backbone" }
+user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA2 CA3 CA4 CA5 CA6 A1 A2 A3 A4 A5 A6" }
 user add key b { showbackbone [molinfo top] }
 user add key F9 { writegro [molinfo top] }
 user add key F8 { snap [molinfo top] "auto" "false" }
@@ -868,14 +871,14 @@ proc align {molid {seltxt "protein and backbone"}} {
   set ref_frame 0
   set sel_ref [atomselect top $seltxt frame $ref_frame]
   set sel [atomselect top $seltxt]
+  menu rmsdtt on
     for {set j 0} {$j < [molinfo $molid get numframes]} {incr j} {
       if {$j == $ref_frame} {
         continue
       }
-      menu rmsdtt on
       rmsdtt::align $sel $j $sel_ref
-      menu rmsdtt off
     }
+  menu rmsdtt off
 }
 
 proc get_cell {{molid top}} { 
