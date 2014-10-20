@@ -1,0 +1,39 @@
+#! /usr/bin/python
+
+import sys, math
+
+if len(sys.argv) != 5:
+    print "Usage: $ genline x1 x2 y1 y2"
+    print "Generates a line to zero or 180 with the gradient between x1,y1 and x2,y2."
+    sys.exit(0)
+
+step = 0.5
+
+x1 = float(sys.argv[1])
+x2 = float(sys.argv[2])
+y1 = float(sys.argv[3])
+y2 = float(sys.argv[4])
+
+m = (y2-y1)/(x2-x1)
+
+if x1 < x2:
+    end = 180.
+else:
+    end = 0.
+
+if x2 < end:
+    x = x2
+    y = y2
+else:
+    yzero = y2 - (x2-end) * m
+    x = 0.0
+    y = yzero
+
+while True:
+    if x > x2 and x1 > x2:
+        break
+    elif x > end and x2 > x1:
+        break
+    print x, y
+    x += step
+    y += m * step
