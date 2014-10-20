@@ -4,7 +4,7 @@ import sys, math
 
 if len(sys.argv) != 5:
     print "Usage: $ genline x1 x2 y1 y2"
-    print "Generates a line to zero or 180 with the gradient between x1,y1 and x2,y2."
+    print "Generates lines between x1,y1 and x2,y2."
     sys.exit(0)
 
 step = 0.5
