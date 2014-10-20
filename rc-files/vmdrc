@@ -635,6 +635,11 @@ proc ss_viz_LEUsc {molid} {
     mol representation Licorice 0.300000 10.000000 10.000000
     mol selection protein and (sidechain or name CA)
     mol addrep $molid
+    # add ACE terminal
+    mol color ColorID 3
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol selection resname ACE
+    mol addrep $molid
     start_sscache $molid
     display depthcue off; color Display Background white;pbc box -off;axes location off
   } 

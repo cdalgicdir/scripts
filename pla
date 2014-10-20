@@ -5,7 +5,7 @@
 ###################################################################
 
 lw=3
-pointsize="0.01"
+pointsize="1"
 #linetype="points"
 linetype="lines"
 #linetype="linespoints"
@@ -294,7 +294,7 @@ fi
 if [ "${linetype}" == "lines" ] || [ "${linetype}" == "l" ] ; then
     with=" with $linetype "
     #with=" with $linetype lw $lw "
-elif [ "${linetype}" == "points" ] || [ "${linetype}" == "p" ]; then
+elif [ "${linetype}" == "points" ] || [ "${linetype}" == "p" ] || [ "${linetype}" == "linepoints" ] || [ "${linetype}" == "lp" ]; then
     with=" with $linetype ps $pointsize "
 elif [[ $linetype == *yer* ]]; then
     using=" u 1:2:3 "
