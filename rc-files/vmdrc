@@ -1251,14 +1251,21 @@ proc processFF {{molid "0"}} {
 proc addwall {{molid "0"}} {
     #draw delete all
     draw color blue
-    draw triangle {46 46 0} {46 0 0} {0 46 0}
-    draw triangle {0 0 0} {46 0 0} {0 46 0}
+    draw triangle {50 50 0} {50 0 0} {0 50 0}
+    draw triangle {0 0 0} {50 0 0} {0 50 0}
 
-    draw line {0 0 0} {46 0 0}
-    draw line {0 0 0} {0 46 0}
-    draw line {0 46 0} {46 46 0}
-    draw line {46 0 0} {46 46 0}
+    draw line {0 0 0} {50 0 0}
+    draw line {0 0 0} {0 50 0}
+    draw line {0 50 0} {50 50 0}
+    draw line {50 0 0} {50 50 0}
 
+    draw triangle {50 50 50} {50 0 50} {0 50 50}
+    draw triangle {0 0 50} {50 0 50} {0 50 50}
+
+    draw line {0 0 50} {50 0 50}
+    draw line {0 0 50} {0 50 50}
+    draw line {0 50 50} {50 50 50}
+    draw line {50 0 50} {50 50 50}
 }
 
 proc cg_map {{molid "0"}} {
