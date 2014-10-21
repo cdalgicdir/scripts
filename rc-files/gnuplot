@@ -1,4 +1,4 @@
-set term wxt noctrl raise
+set term wxt noctrl raise size 1000,600 font "Gill Sans,16"
 #show style line
 #set term wxt size 800,600
 #set style line 1 lt 1 lc rgb 'red'           lw 3
@@ -8,14 +8,14 @@ set term wxt noctrl raise
 #set style line 5 lt 5 lc rgb 'dark-violet'   lw 3
 #set style line 6 lt 6 lc rgb 'cyan'          lw 3
 #set style line 7 lt 7 lc rgb 'dark-green'    lw 3
-set style line 8 lt 8 lc rgb 'red'           lw 3
-set style line 9 lt 9 lc rgb 'magenta'       lw 3
-set style line 10 lt 1 lc rgb 'olive'        lw 3
-set style line 11 lt 1 lc rgb 'dark-red'     lw 3
-set style line 12 lt 1 lc rgb 'light-green'  lw 3
-set style line 13 lt 1 lc rgb 'violet'       lw 3
-set style line 14 lt 1 lc rgb 'navy'         lw 3
-set style line 15 lt 1 lc rgb 'grey'         lw 3
+set style line 8 lt 8 lc rgb 'red'           lw 6
+set style line 9 lt 9 lc rgb 'magenta'       lw 6
+set style line 10 lt 1 lc rgb 'olive'        lw 6
+set style line 11 lt 1 lc rgb 'dark-red'     lw 6
+set style line 12 lt 1 lc rgb 'light-green'  lw 6
+set style line 13 lt 1 lc rgb 'violet'       lw 6
+set style line 14 lt 1 lc rgb 'navy'         lw 6
+set style line 15 lt 1 lc rgb 'grey'         lw 6
 set style increment user
 #set grid
 #set arrow from 0,100 to 0,-80 nohead lt 0
@@ -47,13 +47,13 @@ set tics nomirror
 # than strictly primary colors or hard-to-see colors
 # like gnuplot's default yellow.  Make the lines thick
 # so they're easy to see in small plots in papers.
-set style line 1 lt rgb "#A00000" lw 3 pt 1 #red
-set style line 2 lt rgb "#00A000" lw 3 pt 6 #blue
-set style line 3 lt rgb "#5060D0" lw 3 pt 2 #green
-set style line 4 lt rgb "#F25900" lw 3 pt 9 #orange
-set style line 5 lt 5 lc rgb 'black'         lw 3
-set style line 6 lt 6 lc rgb 'dark-violet'           lw 3
-set style line 7 lt 7 lc rgb 'cyan'          lw 3
+set style line 1 lt rgb "#A00000" lw 6 pt 1 #red
+set style line 2 lt rgb "#00A000" lw 6 pt 6 #blue
+set style line 3 lt rgb "#5060D0" lw 6 pt 2 #green
+set style line 4 lt rgb "#F25900" lw 6 pt 9 #orange
+set style line 5 lt 5 lc rgb 'black'         lw 6
+set style line 6 lt 6 lc rgb 'dark-violet'   lw 6
+set style line 7 lt 7 lc rgb 'cyan'          lw 6
 
 #set log x
 ##set mxtics 10    # Makes logscale look good.
@@ -64,22 +64,22 @@ pdfout="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 3 rounded
 po="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 3 rounded;set output \"out.pdf\";rep;set output;set term wxt"
 #set terminal pdfcairo font "Gill Sans,16" linewidth 3 rounded;set output "out.pdf";rep;set output
 pngout="set terminal pngcairo size 800,600 enhanced font 'Gill Sans,16' linewidth 3 rounded;set output \"out.png\";rep;set output"
-ang="set xlabel '{/Symbol q}';set ylabel 'P ({/Symbol q})';set xtics 60;set xrange [-180:180]"
-dih="set xlabel '{/Symbol F}';set ylabel 'P ({/Symbol F})';set xtics 60;set xrange [-180:180]"
+ang="set xlabel '{/Symbol q}';set ylabel 'P ({/Symbol q})';set xtics 60;set xrange [-180:180];set term wxt enhanced;rep"
+dih="set xlabel '{/Symbol F}';set ylabel 'P ({/Symbol F})';set xtics 60;set xrange [-180:180];set term wxt enhanced;rep"
 pmf="set xlabel 'separation distance (nm)';set ylabel 'V(r) (kJ/mol)'"
 pot="set xlabel 'r (nm)';set ylabel 'V(r) (kJ/mol)'"
-ll="set style data line"
+ll="set style data line;rep"
+lp="set style data linespoints;rep"
+pp="set style data points;rep"
 evo="!evince out.pdf"
 saslab="set key out;set xlabel 'Time (ns)';set ylabel 'SASA (nm^2)'"
 sas=" u ($1/1000):2 t 'hydrophobic','' u ($1/1000):3 t 'hydrophilic','' u ($1/1000):4 t 'total'"
 sasev=" ev 200 u ($1/1000):2 t 'hydrophobic','' ev 200 u ($1/1000):3 t 'hydrophilic','' ev 200 u ($1/1000):4 t 'total'"
 sasdiff=" u ($1/1000):($2-$7) t 'hydrophobic','' u ($1/1000):($3-$8) t 'hydrophilic','' u ($1/1000):($4-$9) t 'total'"
 sasdiffev=" ev 200 u ($1/1000):($2-$7) t 'hydrophobic','' ev 200 u ($1/1000):($3-$8) t 'hydrophilic','' ev 200 u ($1/1000):($4-$9) t 'total'"
+xy2="set border 11 back linestyle 81;set y2tics;rep" # for 2 y-axes
+sp="set cntrparam bspline;set cntrparam order 5;set cntrparam levels 30;set contour base;set pm3d map interpolate 30,30;set dgrid3d 12,12,12;set palette defined ( 0 'blue',3 'green',6 'yellow',10 'red');unset clabel;set style line 1 lt 1 lc rgb 'black' lw 0.1;rep"
+sp2="set cntrparam bspline;set cntrparam order 5;set cntrparam levels 30;set contour base;set pm3d map interpolate 30,30;set dgrid3d 12,12,12;set palette defined ( 0 'red',3 'yellow',6 'green',10 'blue');unset clabel;set style line 1 lt 1 lc rgb 'black' lw 0.1;rep"
 #
 #set xtics pi
 #set format x '%.0Pπ'
-KL="'/home/cdalgicdir/remote/tric/sg6/KL"
-IBI="'/home/cdalgicdir/remote/tric/sg5/IBI"
-#FF="'/home/cdalgicdir/remote/tric/sg5/FF"
-SG6="'/home/cdalgicdir/remote/tric/sg6/KL/"
-SG5="'/home/cdalgicdir/remote/tric/sg5/KL/"
