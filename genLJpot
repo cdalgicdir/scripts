@@ -1,18 +1,28 @@
 #! /usr/bin/python
 
+import math
+import sys
 
-eps = 0.1
-sigma = 1.5
-cutoff = 4.
+#kJ/mol
+#eps = 2.81
+#sigma = 0.288
+eps = float(sys.argv[1])
+sigma = float(sys.argv[2])
+foutname = sys.argv[3]
+
+rmin = sigma*(3./2.)**(1./3.)
+#cutoff = rmin+0.2
+cutoff = 1.4 #nm
+
+increment = 0.002
+dummy = increment/100.
+rmax = 2.50
 
 maxlimit = 10**6
 smin = 0.10
-smax = 2.**(1./6.)
-increment = 0.002
-dummy = increment/100.
-rmax = cutoff + 0.5
+smax = 2.**(1./6.)*sigma
 
-def LJ(r,shift):
+def LJ126(r,shift=0.0):
  if r < smin: return maxlimit
  elif r <= cutoff + dummy:
 	U = 4.*eps*(((sigma/r)**12.)-((sigma/r)**6.)) + shift
@@ -28,17 +38,59 @@ def LJrep(r):
 	else: return U
  else: return 0.
 
+def LJ124(r,shift=0.0):
+    if r < smin: return maxlimit
+    elif r <= cutoff + dummy:
+	A = math.sqrt(3**3)/2.
+	U = A*eps*((sigma/r)**12-(sigma/r)**4) + shift
+	if U > maxlimit: return maxlimit
+	else: return U
+    else: return 0.
 
-fLJ = open('LJpot.pot','w')
+def LJ96(r,shift=0.0):
+ if r == 0: return maxlimit
+ elif r <= cutoff + dummy:
+	U = 27./4.*eps*(((sigma/r)**9.)-((sigma/r)**6.)) + shift
+	if U > maxlimit: return maxlimit
+	else: return U
+ else: return 0.
+
+def LJcos126(r):
+    rmin = sigma*(2.)**(1./6.)
+    if r < smin: return maxlimit
+    elif r <= rmin:
+	return LJ126(r)
+    elif rmin < r <= cutoff + dummy:
+	U = -eps*(math.cos(math.pi/2/(cutoff-rmin)*(r-rmin)))**2
+	return U
+    else: return 0.
+
+def LJcos96(r):
+    rmin = sigma*(3./2.)**(1./3.)
+    if r < smin: return maxlimit
+    elif r <= rmin:
+	return LJ96(r)
+    elif rmin < r <= cutoff + dummy:
+	U = -eps*(math.cos(math.pi/2/(cutoff-rmin)*(r-rmin)))**2
+	return U
+    else: return 0.
+
+
+#foutname='table.xvg'
+fLJ = open(foutname,'w')
 #fLJrep = open('LJrep.pot','w')
 
 r = 0.
-shift = -1. * LJ(cutoff,0)
-#shift = 0.0
+shift = -1. * LJ96(cutoff,0)
+#shift = -1. * LJ126(cutoff,0)
 
 while r <= rmax:
- fLJ.write('%2.3f %2.1f %2.1f %2.1f %2.1f %2.10f %2.1f\n' %(r,0,0,0,0,LJ(r,shift),0))
+ U = LJ96(r,shift)
+ #U = LJ126(r,shift)
+ #U = LJcos96(r)
+ fLJ.write('%2.3f %2.1f %2.1f %2.1f %2.1f %2.10f %2.1f\n' %(r,0,0,0,0,U,0))
  #fLJrep.write('%2.3f %2.1f %2.1f %2.1f %2.1f %2.10f %2.1f\n' %(r,0,0,0,0,LJrep(r),0))
  r += increment
 
-print "DONE!"
+fLJ.close()
+print "DONE! %s created!" %foutname
