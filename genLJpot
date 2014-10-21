@@ -6,6 +6,14 @@ import sys
 #kJ/mol
 #eps = 2.81
 #sigma = 0.288
+if len(sys.argv) > 4:
+    option = sys.argv[4]
+elif len(sys.argv) == 4:
+    option = "126"
+else:
+    print "Usage: $ genLJpot epsilon sigma outfile [option=126/124/96/cos126/cos96/rep]"
+    sys.exit(1)
+
 eps = float(sys.argv[1])
 sigma = float(sys.argv[2])
 foutname = sys.argv[3]
@@ -16,7 +24,7 @@ cutoff = 1.4 #nm
 
 increment = 0.002
 dummy = increment/100.
-rmax = 2.50
+rmax = 5.0
 
 maxlimit = 10**6
 smin = 0.10
@@ -76,21 +84,29 @@ def LJcos96(r):
     else: return 0.
 
 
-#foutname='table.xvg'
 fLJ = open(foutname,'w')
-#fLJrep = open('LJrep.pot','w')
-
 r = 0.
-shift = -1. * LJ96(cutoff,0)
-#shift = -1. * LJ126(cutoff,0)
 
 while r <= rmax:
- U = LJ96(r,shift)
- #U = LJ126(r,shift)
- #U = LJcos96(r)
- fLJ.write('%2.3f %2.1f %2.1f %2.1f %2.1f %2.10f %2.1f\n' %(r,0,0,0,0,U,0))
- #fLJrep.write('%2.3f %2.1f %2.1f %2.1f %2.1f %2.10f %2.1f\n' %(r,0,0,0,0,LJrep(r),0))
- r += increment
+    if option == "126":
+        shift = -1. * LJ126(cutoff,0)
+        U = LJ126(r,shift)
+    elif option == "124":
+        shift = -1. * LJ124(cutoff,0)
+        U = LJ124(r,shift)
+    elif option == "96":
+        shift = -1. * LJ96(cutoff,0)
+        U = LJ96(r,shift)
+    elif option == "cos96":
+        shift = -1. * LJcos96(cutoff,0)
+        U = LJcos96(r,shift)
+    elif option == "cos126":
+        shift = -1. * LJcos126(cutoff,0)
+        U = LJcos126(r,shift)
+    elif option == "rep":
+        U = LJrep(r)
+    fLJ.write('%2.3f %2.1f %2.1f %2.1f %2.1f %2.10f %2.1f\n' %(r,0,0,0,0,U,0))
+    r += increment
 
 fLJ.close()
-print "DONE! %s created!" %foutname
+print "DONE! %s created with option LJ%s!" %(foutname, option)
