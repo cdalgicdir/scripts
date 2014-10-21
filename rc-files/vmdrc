@@ -226,8 +226,9 @@ user add key F9 { writegro [molinfo top] }
 user add key F8 { snap [molinfo top] "auto" "false" }
 user add key F10 { snap [molinfo top] }
 user add key F11 { display depthcue off; color Display Background white;axes location off;foreach mol [molinfo list] { mol top $mol; pbc box -off }}
+user add key F5 { refresh_trajectory [molinfo top] }
 user add key Control-c { cg_map [molinfo top] }
-user add key Control-x { cg_colors [molinfo top] }
+#user add key Control-x { cg_colors [molinfo top] }
 #user add key B { align [molinfo top] "residue 1 to 15 and backbone" }
 #user add key V { align [molinfo top] "not water and mass 12 to 99" }
 
@@ -1289,16 +1290,21 @@ puts "**** [$water num] water atoms and [expr [$water num]/3] water molecules"
 puts "**** [$protein num] protein atoms"
 animate style Once
 
-proc cg_colors {{molid "0"}} {
-foreach mol [molinfo list] {
-mol top $mol
-    color Name L red
-    color Name K blue
-    color Name C cyan
-    color Name G purple
-    color Name G purple
-    color Name A white
-}
+#proc cg_colors {{molid "0"}} {
+#foreach mol [molinfo list] {
+#mol top $mol
+#    color Name L red
+#    color Name K blue
+#    color Name C cyan
+#    color Name G purple
+#    color Name G purple
+#    color Name A white
+#}
+#}
+
+proc refresh_trajectory {{molid "0"}} {
+    animate delete  beg 0 end -1 skip 0 0
+    mol addfile {traj.xtc} type {xtc} first 0 last -1 step 1 waitfor -1 0
 }
 
 color Name L red
