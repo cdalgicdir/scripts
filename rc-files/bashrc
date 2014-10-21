@@ -188,4 +188,5 @@ export MMTSBDIR=$HOME/mmtsb
 export PATH=$PATH:$MMTSBDIR/perl:$MMTSBDIR/bin
 #export PATH=/usr/local/plumed/plumed-2.1/bin:$PATH
 #export LD_LIBRARY_PATH=/usr/local/plumed/plumed-2.1/lib:$LD_LIBRARY_PATH
-
+#source /home/soft/bashrc_extension_soft
+#export PATH=$PATH:~/remote/soft/MATLAB/R2014a/bin/

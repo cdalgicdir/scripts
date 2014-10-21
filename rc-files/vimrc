@@ -5,15 +5,16 @@
 " imap <C-n> <C-x><C-o>
 :autocmd FileType python set omnifunc=pythoncomplete#Complete
 :autocmd BufWritePre *.gro call Update_number_of_atoms()
-:au BufNewFile,BufRead *.rtp    setf top.gromacs
-:au BufNewFile,BufRead *.gp    set syntax=gnuplot
+":au BufNewFile,BufRead *.rtp    setf top.gromacs
+:au BufNewFile,BufRead *.gp    set filetype=gnuplot
+:au BufNewFile,BufRead bash-fc-*    set syntax=sh
 ":au BufRead *.tex set spell
 ":highlight SpellBad gui=underline guibg=NONE guifg=NONE
 
 :map <F6> {v}!par -w75<CR>
 :vmap <F6> !par -w75<CR>
 
-" autocmd FileType mdp.gromacs imap <silent> <buffer> = = <C-n>
+":autocmd FileType mdp.gromacs imap <silent> <buffer> = = <C-n>
 "set runtimepath^=~/.vim/bundle/ctrlp.vim
 "set runtimepath^=~/.vim/bundle/rainbow_parentheses.vim
 "set runtimepath^=~/.vim/bundle/gundo
@@ -116,6 +117,9 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'depuracao/vim-darkdevel'
 Plugin 'altercation/solarized'
 Plugin 'github-theme'
+" Markdown syntax highlighting
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
 " Git plugin not hosted on GitHub
 "lugin 'https://github.com/Lokaltog/vim-easymotion.git'
 "Plugin 'https://github.com/vim-scripts/Rainbow-Parenthsis-Bundle.git'
@@ -217,3 +221,8 @@ let g:Tex_MultipleCompileFormats = 'pdf'
 let g:Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode $*'
 let g:Tex_GotoError = 0
 let g:Tex_ViewRule_pdf = 'evince'
+" Initial fold level for markdown syntax plugin
+let g:vim_markdown_initial_foldlevel=4
+" Highlight YAML frontmatter
+let g:vim_markdown_frontmatter=1
+let g:vim_markdown_math=1
