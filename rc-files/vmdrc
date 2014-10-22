@@ -227,7 +227,7 @@ user add key F8 { snap [molinfo top] "auto" "false" }
 user add key F10 { snap [molinfo top] }
 user add key F11 { display depthcue off; color Display Background white;axes location off;foreach mol [molinfo list] { mol top $mol; pbc box -off }}
 user add key F5 { refresh_trajectory [molinfo top] "traj.xtc" 1 }
-user add key Control-c { cg_map [molinfo top] }
+user add key Control-c { cg_map "mapped.gro" }
 #user add key Control-x { cg_colors [molinfo top] }
 #user add key B { align [molinfo top] "residue 1 to 15 and backbone" }
 #user add key V { align [molinfo top] "not water and mass 12 to 99" }
@@ -1269,8 +1269,8 @@ proc addwall {{molid "0"}} {
     draw line {50 0 50} {50 50 50}
 }
 
-proc cg_map {{molid "0"}} {
-    mol new {mapped.gro} type {gro} first 0 last -1 step 1 waitfor 1
+proc cg_map {{mapped "mapped.gro"}} {
+    mol new $mapped type {gro} first 0 last -1 step 1 waitfor 1
     mol modselect 0 0 protein or resname ACE NME
     mol modstyle 0 0 Licorice 0.100000 10.000000 10.000000
     mol modselect 0 1 not resname SOL CL NA
