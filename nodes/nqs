@@ -68,7 +68,7 @@ command = ('qstat', '-f')
 # spawn a new process, connect to its output and error pipes
 pipe = Popen(command, stdout=PIPE, stderr=PIPE)
 
-showqlist = ['scc','long','longer']
+#showqlist = ['scc','long','longer']
 # print the output lines as they happen
 while True:
     line = pipe.stdout.readline()
@@ -78,7 +78,8 @@ while True:
 	txt=line.split()
 	cpus=txt[2].split('/')
 	queues=txt[0].split('@')
-        if queues[0] in showqlist and not 'd' in txt[-1]:
+        #if queues[0] in showqlist and not 'd' in txt[-1]:
+        if not 'd' in txt[-1]:
 	    qname = queues[0]
 	    #nodename=queues[1]
 	    nodename = queues[1].split('.')[0]
