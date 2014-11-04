@@ -207,7 +207,8 @@ user add key n { cgLK [molinfo top] }
 user add key N { klow_viz [molinfo top] }
 user add key Q { nowater_viz [molinfo top] }
 user add key H { showHbonds [molinfo top] }
-user add key P { if {[animate skip] == 1 } { animate skip 2 } elseif { [animate skip] == 2 } { animate skip 3 } elseif { [animate skip] == 3} {animate skip 4} elseif { [animate skip] == 4 } {animate skip 5} elseif { [animate skip] == 5} {animate skip 10} elseif { [animate skip] == 10} {animate skip 20} elseif { [animate skip] == 20} {animate skip 1}}
+user add key P { skip }
+#user add key P { if {[animate skip] == 1 } { animate skip 2 } elseif { [animate skip] == 2 } { animate skip 3 } elseif { [animate skip] == 3} {animate skip 4} elseif { [animate skip] == 4 } {animate skip 5} elseif { [animate skip] == 5} {animate skip 10} elseif { [animate skip] == 10} {animate skip 20} elseif { [animate skip] == 20} {animate skip 1}}
 user add key e { if {[color Display Background] != "black"} { color Display Background black;pbc box -on;axes location lowerright} {color Display Background white;pbc box -off;axes location off}}
 user add key C { if {[animate style] == "Once"} {animate style Loop} elseif {[animate style] == "Loop"} {animate style Rock} elseif {[animate style] == "Rock"} {animate style Once}}
 user add key i { smoothrep_inc [molinfo top] }
@@ -1305,6 +1306,11 @@ animate style Once
 proc refresh_trajectory {{molid "0"} {traj "traj.xtc"} {step "2"}} {
     animate delete beg 0 end -1 skip 0 $molid
     mol addfile $traj type {xtc} first 0 last -1 step $step waitfor -1 $molid
+}
+
+proc skip { } {
+     if {[animate skip] == 1 } { animate skip 2; puts "Skipping 2" } elseif { [animate skip] == 2 } { animate skip 3; puts "Skipping 3"  } elseif { [animate skip] == 3 } {animate skip 4; puts "Skipping 4"} elseif { [animate skip] == 4 } {animate skip 5; puts "Skipping 5"} elseif { [animate skip] == 5} {animate skip 10; puts "Skipping 10"} elseif { [animate skip] == 10 } {animate skip 20; puts "Skipping 20"} elseif { [animate skip] == 20 } {animate skip 1; puts "Skipping 1"}
+
 }
 
 color Name L red

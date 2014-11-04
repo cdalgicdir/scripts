@@ -80,6 +80,7 @@ sasdiffev=" ev 200 u ($1/1000):($2-$7) t 'hydrophobic','' ev 200 u ($1/1000):($3
 xy2="set border 11 back linestyle 81;set y2tics;rep" # for 2 y-axes
 sp="set cntrparam bspline;set cntrparam order 5;set cntrparam levels 30;set contour base;set pm3d map interpolate 30,30;set dgrid3d 12,12,12;set palette defined ( 0 'blue',3 'green',6 'yellow',10 'red');unset clabel;set style line 1 lt 1 lc rgb 'black' lw 0.1;rep"
 sp2="set cntrparam bspline;set cntrparam order 5;set cntrparam levels 30;set contour base;set pm3d map interpolate 30,30;set dgrid3d 12,12,12;set palette defined ( 0 'red',3 'yellow',6 'green',10 'blue');unset clabel;set style line 1 lt 1 lc rgb 'black' lw 0.1;rep"
+ww=",0 lt 0 lw 2 not,5 lt 0 lw 2 not"
 #
 #set xtics pi
 #set format x '%.0Pπ'
