@@ -211,8 +211,8 @@ user add key P { skip }
 #user add key P { if {[animate skip] == 1 } { animate skip 2 } elseif { [animate skip] == 2 } { animate skip 3 } elseif { [animate skip] == 3} {animate skip 4} elseif { [animate skip] == 4 } {animate skip 5} elseif { [animate skip] == 5} {animate skip 10} elseif { [animate skip] == 10} {animate skip 20} elseif { [animate skip] == 20} {animate skip 1}}
 user add key e { if {[color Display Background] != "black"} { color Display Background black;pbc box -on;axes location lowerright} {color Display Background white;pbc box -off;axes location off}}
 user add key C { if {[animate style] == "Once"} {animate style Loop} elseif {[animate style] == "Loop"} {animate style Rock} elseif {[animate style] == "Rock"} {animate style Once}}
-user add key i { smoothrep_inc [molinfo top] }
-user add key I { smoothrep_dec [molinfo top] }
+user add key i { smoothrep_inc }
+user add key I { smoothrep_dec }
 user add key {=} { display resetview; rotate x by -90 }
 user add key u { selupdate_all }
 user add key J { if {[molinfo top get rep] == "Lines"} { changerep [molinfo top] "Licorice 0.300000 10.000000 10.000000" } {changerep [molinfo top] "Lines"}}
@@ -817,8 +817,9 @@ proc changerep {molid rep} {
   } 
 }
 
-proc smoothrep_inc {molid} {
+proc smoothrep_inc {} {
   # operate only on existing molecules
+  foreach molid [molinfo list] {
   set cur_numsmooth [mol smoothrep $molid 0]
   set numsmooth [expr $cur_numsmooth+5]
   if {[lsearch [molinfo list] $molid] >= 0} {
@@ -826,12 +827,13 @@ proc smoothrep_inc {molid} {
     set numrep [molinfo $molid get numreps]
     for {set i 0} {$i < $numrep} {incr i 1} {
       mol smoothrep $molid $i $numsmooth
-    }
+    } }
     }
 } 
 
-proc smoothrep_dec {molid} {
+proc smoothrep_dec {} {
   # operate only on existing molecules
+  foreach molid [molinfo list] {
   set cur_numsmooth [mol smoothrep $molid 0]
   if {$cur_numsmooth > 0} {
   set numsmooth [expr $cur_numsmooth-5]
@@ -841,7 +843,7 @@ proc smoothrep_dec {molid} {
     for {set i 0} {$i < $numrep} {incr i 1} {
       mol smoothrep $molid $i $numsmooth
 	}
-    }
+    } }
     }
 } 
 
