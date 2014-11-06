@@ -4,15 +4,25 @@ set guioptions-=T
 
 if matchstr(expand("%"),".*\.md") != ""
     colorscheme darkdevel
-    set guifont=Ubuntu\ Mono\ 16
+    set guifont=Monofur\ 16
+    " Monofur, Monaco, Source Code Pro
+    "set guifont=Ubuntu\ Mono\ 16
+    :au BufRead *.tex set spell
+    :highlight SpellBad gui=underline guibg=NONE guifg=red
+elseif matchstr(expand("%"),".*\.tex") != ""
+    colorscheme corporation
+    set guifont=Inconsolata\ 16
+    " Monofur, Monaco, Source Code Pro
+    "set guifont=Ubuntu\ Mono\ 16
     :au BufRead *.tex set spell
     :highlight SpellBad gui=underline guibg=NONE guifg=red
 else
     "colorscheme moria, twilight, solarized, inkpot, corporation, monokai,
     "jellybeans
-    colorscheme corporation
-    set guifont=Inconsolata\ 15
-    "set guifont=Monaco\ 13
+    "colorscheme corporation
+    colorscheme jellybeans
+    set guifont=Monaco\ 13
+    "set guifont=Droid\ Sans\ Mono\ 14
 endif
 
 "let g:fullscreen = 1
