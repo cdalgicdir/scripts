@@ -1,0 +1,43 @@
+NORMAL 00 # global default, although everything should be something.
+FILE 00 # normal file
+DIR 01;34 # directory
+LINK 01;36 # symbolic link. (If you set this to 'target' instead of a
+ # numerical value, the color is as for the file pointed to.)
+FIFO 40;33 # pipe
+SOCK 01;35 # socket
+DOOR 01;35 # door
+BLK 40;33;01 # block device driver
+CHR 40;33;01 # character device driver
+ORPHAN 40;31;01 # symlink to nonexistent file, or non-stat'able file
+SETUID 37;41 # file that is setuid (u+s)
+SETGID 30;43 # file that is setgid (g+s)
+STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
+STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
+.tar 01;31
+.tgz 01;31
+.tar.gz 01;31
+.tar.bz 01;31
+.tbz 01;31
+.zip 01;31
+.rar 01;31
+.7z 01;31
+# image formats
+.png 01;35
+.jpg 01;35
+.jpeg 01;35
+.gif 01;35
+.bmp 01;35
+# audio formats
+.aac 00;36
+.flac 00;36
+.ogg 00;36
+.mp3 00;36
+# text files
+.tex 01;37
+.md 01;37
+.pdf 01;33
+.avi 03;36
+.mp4 03;36
+.deb 00;31
+.gp 00;31
