@@ -15,16 +15,9 @@
 :map <F6> {v}!par -w75<CR>
 :vmap <F6> !par -w75<CR>
 
-":autocmd FileType mdp.gromacs imap <silent> <buffer> = = <C-n>
-"set runtimepath^=~/.vim/bundle/ctrlp.vim
-"set runtimepath^=~/.vim/bundle/rainbow_parentheses.vim
-"set runtimepath^=~/.vim/bundle/gundo
-"set runtimepath^=~/.vim/bundle/vim-online-thesaurus
-
 ":set autoindent
 set autowrite
 set ruler
-":ab #d #define
 :ab #i #include
 :ab #b /********************************************************
 :ab #c ###################################################################
@@ -108,6 +101,8 @@ Plugin 'gmarik/Vundle.vim'
 " plugin from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-commentary'
 Plugin 'matchit.zip'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -121,6 +116,9 @@ Plugin 'github-theme'
 " Markdown syntax highlighting
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'bling/vim-airline'
+Plugin 'benmills/vimux'
+Plugin 'kien/ctrlp.vim'
 " Git plugin not hosted on GitHub
 "lugin 'https://github.com/Lokaltog/vim-easymotion.git'
 "Plugin 'https://github.com/vim-scripts/Rainbow-Parenthsis-Bundle.git'
@@ -190,16 +188,10 @@ let g:rbpt_loadcmd_toggle = 0
 " matchit
 ":source ~/.vim/bundle/vim-matchit/plugin/matchit.vim
 
-" CtrlP
-" When invoked, unless a starting directory is specified, CtrlP will set its local working directory according to this variable:
-" let g:ctrlp_working_path_mode = 'cra'
-" Exclude files and directories using Vim's wildignore and CtrlP's own g:ctrl
-" p_custom_ignore:
-"let g:ctrlp_custom_ignore = {
-"  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-"  \ 'file': '\v\.(exe|so|dll|bib|aux|pdf|bbl|blg|toc|lof|lot|cls|tdo|ilg|ind|idx|brf|png)$',
-"  \ 'link': 'some_bad_symbolic_links',
-"  \ }
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'c'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 set wildignore=*.log,*.aux,*.dvi,*.aut,*.aux,*.bbl,*.blg,*.dvi,*.fff,*.log,*.out,*.pdf,*.ps,*.toc,*.ttt
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 set dictionary+=/usr/share/dict/words
@@ -228,4 +220,51 @@ let g:vim_markdown_initial_foldlevel=4
 let g:vim_markdown_frontmatter=1
 let g:vim_markdown_math=1
 " Highlight line with \l, 'l to return to line and :match to clear
-:nnoremap <silent> <Leader>l ml:execute 'match Search /\%'.line('.').'l/'<CR>
+nnoremap <silent> <Leader>l ml:execute 'match Search /\%'.line('.').'l/'<CR>
+
+" vim-airline settings
+"let g:airline_left_sep=''
+"let g:airline_right_sep=''
+let g:airline#extensions#whitespace#trailing_format = 'trailing[%s]'
+let g:airline#extensions#whitespace#mixed_indent_format = 'mixed-indent[%s]'
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#branch#empty_message = ''
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Hide function display (don't use it)
+let g:airline#extensions#tagbar#enabled = 0
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_powerline_fonts=1
+
+if !exists('g:airline_symbols')
+   let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+let g:airline_theme='dark'
+
+" Vimux settings
+let g:VimuxHeight = "30"
+let g:VimuxOrientation = "v"
+let g:VimuxUseNearestPane = 0
+
+" Vimux Mappings
+nmap <leader>vp :VimuxPromptCommand<cr>
+nmap <leader>vl :VimuxRunLastCommand<cr>
+nmap <leader>vq :VimuxCloseRunner<cr>
+nmap <leader>vx :VimuxInterruptRunner<cr>
