@@ -139,6 +139,9 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 :let g:notes_directory = '~/Documents/Notes'
 
+autocmd FileType top.gromacs set commentstring=;\ %s
+autocmd FileType mdp.gromacs set commentstring=;\ %s
+
 " Toggle fold state between closed and opened. 
   " 
   " If there is no fold at current line, just moves forward. 
