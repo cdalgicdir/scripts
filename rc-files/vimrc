@@ -119,6 +119,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'bling/vim-airline'
 Plugin 'benmills/vimux'
 Plugin 'kien/ctrlp.vim'
+Plugin 'jeetsukumaran/vim-buffergator'
 " Git plugin not hosted on GitHub
 "lugin 'https://github.com/Lokaltog/vim-easymotion.git'
 "Plugin 'https://github.com/vim-scripts/Rainbow-Parenthsis-Bundle.git'
@@ -191,13 +192,53 @@ let g:rbpt_loadcmd_toggle = 0
 " matchit
 ":source ~/.vim/bundle/vim-matchit/plugin/matchit.vim
 
+" CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'c'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|xtc|edr|cpt|tpr|pdf)$',
+  \}
+" https://joshldavis.com/2014/04/05/vim-tab-madness-buffers-vs-tabs/
+" Use a leader instead of the actual named binding
+nmap <leader>p :CtrlP<cr>
+
+" Easy bindings for its various modes
+nmap <leader>bb :CtrlPBuffer<cr>
+nmap <leader>bm :CtrlPMixed<cr>
+nmap <leader>bs :CtrlPMRU<cr>
+" /CtrlP
+
 set wildignore=*.log,*.aux,*.dvi,*.aut,*.aux,*.bbl,*.blg,*.dvi,*.fff,*.log,*.out,*.pdf,*.ps,*.toc,*.ttt
 set thesaurus+=~/.vim/thesaurus/mthesaur.txt
 set dictionary+=/usr/share/dict/words
+
+" Buffergator
+" Use the right side of the screen
+let g:buffergator_viewport_split_policy = 'R'
+
+" I want my own keymappings...
+let g:buffergator_suppress_keymaps = 0
+
+" Looper buffers
+"let g:buffergator_mru_cycle_loop = 1
+
+" Go to the previous buffer open
+nmap <leader>jj :BuffergatorMruCyclePrev<cr>
+
+" Go to the next buffer open
+nmap <leader>kk :BuffergatorMruCycleNext<cr>
+
+" View the entire list of buffers open
+nmap <leader>bl :BuffergatorOpen<cr>
+
+" Shared bindings from Solution #1 from earlier
+nmap <leader>T :enew<cr>
+nmap <leader>bq :bp <BAR> bd #<cr>
+
+" /Buffergator
+
 ":command! -nargs=1 -range SuperRetab <line1>,<line2>s/\v%(^ *)@<= {<args>}/\t/g
 "
 "func! WordProcessorMode() 
