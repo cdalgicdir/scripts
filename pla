@@ -35,7 +35,7 @@ noplot=false
 convert2ns=false
 doentcorr=0
 doshift=0
-userlabels=false
+usersetlabels=false
 userrangeset=true
 termoptions=""
 
@@ -58,6 +58,38 @@ help () {
     echo "       $ pla file* 4           (uses 4th column)"
     echo "       $ pla file* u 4         (uses 4th column)"
     echo "       $ pla file* -y 2        (sets max yrange)"
+    echo "       $ pla [0:100][-10:10] file* (sets ranges)"
+    echo "       $ pla file1 file2 -t \"label1,label2\"  (sets labels)"
+    echo "       $ pla file1 file2 -t \".,label2\"  (auto labelling for first file)"
+    echo "       $ pla file* -ang (range is set to 0:180 and labeling done)"
+    echo "       $ pla file* -ange (enhanced version of -ang option)"
+    echo "       $ pla file* -dih/-dihe (for dihedrals)"
+    echo "       $ pla file* -cm/-cummean (plots cumulative mean)"
+    echo "       $ pla file* -ma/-movavg (plots moving average)"
+    echo "       $ pla file* -mac (-ma and -cm combined)"
+    echo "       $ pla file* -shift (final points of plots are shifted to zero)"
+    echo "       $ pla file* -entcorr (entropic correction applied)"
+    echo "       $ pla file* -pmf (shifting done, entropic correction applied)"
+    echo "       $ pla file* -pdf (saves as out.pdf)"
+    echo "       $ pla file* -png (saves as out.png)"
+    echo "       $ pla file* -gp (saves as gnuplot file out.gp)"
+    echo "       $ pla file* -rama (for drawing Ramachandran map)"
+    echo "       $ pla file* -dash/-dashed (adds dashed option to terminal)"
+    echo "       $ pla file* -keyout/-ko (key is out of the plot)"
+    echo "       $ pla file* -keybot/-kb (key is at the bottom)"
+    echo "       $ pla file* -keyleft/-kl (key is at the left)"
+    echo "       $ pla file* -sas (for drawing SASA)"
+    echo "       $ pla file* -nxy (plots every column of the file starting from 2nd)"
+    echo "       $ pla file* not (no key labeling)"
+    echo "       $ pla file* lw 3 (set linewidth to 3)"
+    echo "       $ pla file* ps 3 (set pointsize to 3)"
+    echo "       $ pla file* -ns (convert ps to ns for x-dimension)"
+    echo "       $ pla file* -n/-nop/-noplot (print out command to plot)"
+    echo "       $ pla file* -nt/-nopt (print out command to plot with tabs)"
+    echo "       $ pla file* u 3 (plot files using column 3)"
+    echo "       $ pla file* 3 (plot files using column 3)"
+    echo "       $ pla file* w lw/p/l (plot files using with linetype lw/p/l etc)"
+    echo "       $ pla -h/--help/-help/--h (print this help)"
     echo "Needs: gplot script from C. Junghans"
 }
 
@@ -263,7 +295,7 @@ while [[ $# -ge 1 ]]; do
 	    ;;
 
 	-t | -titles)
-	    userlabels=true
+	    usersetlabels=true
 	    titlelist=(${2//;/ })
 	    k=0
 	    shift 2
@@ -398,8 +430,9 @@ do
 		plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
 	    if [[ $label == 1 ]]; then
 		[[ ${#colslist[@]} -gt 1 ]] && titlextra="-${j}" | titlextra=""
-		if $userlabels; then
-		    title="t ${q}${titlelist[$k]}${q}, "
+		if $usersetlabels; then
+		    [[ ${titlelist[$k]} == "." ]] && title_label="${file}" || title_label=${titlelist[$k]}
+		    title="t ${q}${title_label}${q}, "
 		    let k=k+1
 		else
 		    title='t '${q}${file}${titlextra}${q}','
