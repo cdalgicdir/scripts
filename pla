@@ -38,9 +38,11 @@ doshift=0
 usersetlabels=false
 userrangeset=true
 termoptions=""
+labelsfromfile=false
+thetitle=""
 
 plot () {
-    gplot $output -c "${style}" -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
+    gplot $output -t "${thetitle}" -c "${style}" -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
 }
 
 printcommands () {
@@ -301,6 +303,11 @@ while [[ $# -ge 1 ]]; do
 	    shift 2
 	    ;;
 
+	-tt|-thetitle)
+	    thetitle="$2"
+	    shift 2
+	    ;;
+
 	-cummean|-cm)
 	    docummean=1
 	    [[ $functions == "" ]] && functions='sum=0'
@@ -317,6 +324,14 @@ while [[ $# -ge 1 ]]; do
 	    fi
 	    functions=`genfunc $n`
 	    ;;
+
+	-autolabel|-al)
+	    labelsfromfile=true
+	    #titlelist=(`grep -i -w s[0-9] $1 | awk '{print $4}'`)
+	    k=0
+	    shift
+	    ;;
+
 
 	[0-9]|[0-9][0-9])
 	    column=$1
@@ -384,11 +399,19 @@ do
 	if [[ $nxy == 1 ]]; then
 	    NF=`tail -1 ${file} | awk '{print NF}'`
 	    for i in `seq 2 $NF`; do
-		using=" u 1:$i "
+		column=$i
+		using=" u 1:$column "
 		plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
 		if [[ $label == 1 ]]; then
-		    #plotfiles=$plotfiles't '$q${i}$q',' 
-		    plotfiles=$plotfiles't '$q$((i-1))$q',' 
+		    if $labelsfromfile; then
+			titlelist=(`grep -i -w s[0-9] $file | awk '{print $4}' | tr -d '"'`)
+			title_label=${titlelist[$((column-2))]}
+			title="t ${q}${title_label}${q}, "
+			plotfiles=$plotfiles${title}
+		    else
+			#plotfiles=$plotfiles't '$q${i}$q',' 
+			plotfiles=$plotfiles't '$q$((i-1))$q',' 
+		    fi
 		else
 		    plotfiles=$plotfiles'not,'
 		fi
@@ -434,6 +457,10 @@ do
 		    [[ ${titlelist[$k]} == "." ]] && title_label="${file}" || title_label=${titlelist[$k]}
 		    title="t ${q}${title_label}${q}, "
 		    let k=k+1
+		elif $labelsfromfile; then
+		    titlelist=(`grep -i -w s[0-9] $file | awk '{print $4}' | tr -d '"'`)
+		    title_label=${titlelist[$((column-2))]}
+		    title="t ${q}${title_label}${q}, "
 		else
 		    title='t '${q}${file}${titlextra}${q}','
 		fi
