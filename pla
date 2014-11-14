@@ -6,7 +6,7 @@
 
 lw=6
 lwset=false
-pointsize="1"
+pointsize="0.2"
 #linetype="points"
 linetype="lines"
 #linetype="linespoints"
@@ -35,6 +35,7 @@ noplot=false
 convert2ns=false
 doentcorr=0
 doshift=0
+userlabels=false
 
 plot () {
     gplot $output -c "${style}" -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
@@ -202,9 +203,16 @@ while [[ $# -ge 1 ]]; do
 
 	-pdf)
 	    $lwset && lw=$lw || lw=3
-	    terminal='set terminal pdfcairo font "Gill Sans,12" linewidth '"$lw"' rounded'
+	    terminal='set terminal pdfcairo font "Gill Sans,16" linewidth '"$lw"' rounded'
 	    output='-o out.pdf'
 	    echo "Generating out.pdf"
+	    shift 1;;
+
+	-png)
+	    $lwset && lw=$lw || lw=3
+	    terminal='set terminal pngcairo font "Gill Sans,16" linewidth '"$lw"' rounded size 800,600'
+	    output='-o out.png'
+	    echo "Generating out.png"
 	    shift 1;;
 
 	-gp)
@@ -237,6 +245,13 @@ while [[ $# -ge 1 ]]; do
 	    fi
 	    shift
 	    functions=`genfunc $n`
+	    ;;
+
+	-t | -titles)
+	    userlabels=true
+	    titlelist=(${2//;/ })
+	    k=0
+	    shift 2
 	    ;;
 
 	-cummean|-cm)
@@ -367,12 +382,13 @@ do
 	    fi
 		plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
 	    if [[ $label == 1 ]]; then
-		if [[ ${#colslist[@]} -gt 1 ]]; then
-		    titlextra="-${j}"
+		[[ ${#colslist[@]} -gt 1 ]] && titlextra="-${j}" | titlextra=""
+		if $userlabels; then
+		    title="t ${q}${titlelist[$k]}${q}, "
+		    let k=k+1
 		else
-		    titlextra=""
+		    title='t '${q}${file}${titlextra}${q}','
 		fi
-		title='t '${q}${file}${titlextra}${q}','
 	    else
 		title='not,'
 	    fi
