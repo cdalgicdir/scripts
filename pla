@@ -36,6 +36,8 @@ convert2ns=false
 doentcorr=0
 doshift=0
 userlabels=false
+userrangeset=true
+termoptions=""
 
 plot () {
     gplot $output -c "${style}" -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
@@ -93,7 +95,7 @@ if [ "${1#'['}" != "$1" ]; then
    #check for [??:??] or [??:??]{??:??}
    [ -n "$(echo "$1" | grep -e '^\(\[[-.eE[:digit:]]*:[-.eE[:digit:]]*\]\)\{1,2\}$')" ] ||
      die "Range ('$1') has to be in form [??:??]\<[??:??]\>"
-   range=$1
+   range=$1 && userrangeset=true
    shift
 fi
 
@@ -182,23 +184,36 @@ while [[ $# -ge 1 ]]; do
 	    shift 1;;
 
 	-dihe)
-	    range="[-180:180][:]"
+	    $userrangeset || range="[-180:180][:]"
+	    termoptions="$termoptions enhanced"
 	    extra="set xtics 45;set xlabel '{/Symbol f}';set ylabel 'P({/Symbol f})'"
 	    shift 1;;
 
 	-dih)
-	    range="[-180:180][:]"
+	    $userrangeset || range="[-180:180][:]"
 	    extra="set xtics 45;set xlabel 'angle';set ylabel 'Probability'"
 	    shift 1;;
 
+	-ange)
+	    $userrangeset || range="[0:180][:]"
+	    termoptions="$termoptions enhanced"
+	    extra="set xtics 30;set xlabel '{/Symbol q}';set ylabel 'P({/Symbol q})'"
+	    shift 1;;
+
+	-ang)
+	    $userrangeset || range="[0:180][:]"
+	    extra="set xtics 30;set xlabel 'angle';set ylabel 'Probability'"
+	    shift 1;;
+
 	-rama)
-	    terminal=$terminal' enhanced'
+	    termoptions="$termoptions enhanced"
 	    range="[-180:180][-180:180]"
 	    extra="set xtics 60;set ytics 60;set xlabel '{/Symbol f} (degrees)';set ylabel '{/Symbol y} (degrees)'"
 	    shift 1;;
 
 	-dashed|-dash)
-	    terminal=$terminal' dashed'
+	    termoptions="$termoptions dashed"
+	    #terminal=$terminal' dashed'
 	    shift 1;;
 
 	-pdf)
@@ -411,6 +426,7 @@ else
     if $outgp; then
 	plotfiles="${plotfiles[@]}"";$gpcomm"
     fi
+    [[ $terminal == "" ]] && terminal="set term wxt $termoptions" || terminal="$terminal $termoptions"
     plot $range $plotfiles
 fi
 
