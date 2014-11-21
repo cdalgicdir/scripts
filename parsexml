@@ -57,11 +57,14 @@ for val in ['hist','vals','tab']:
             print >> fout, "tab set smooth_pot 1"
             if section in ['bond', 'dist']:
                 scale = 'bond'
+                periodic = 0
             elif section in ['ang', 'angle']:
                 scale = 'angle'
-            else:
+                periodic = 0
+            elif section in ['dih', 'dihedral']:
                 scale = 'no'
-                print >> fout, "tab set periodic 1"
+                periodic = 1
+            print >> fout, "tab set periodic %s" %periodic
             print >> fout, "tab set scale %s" %scale
             print >> fout, val, fname_root + ".xvg", "1:" + name + ":*"
 
