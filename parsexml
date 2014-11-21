@@ -54,14 +54,16 @@ for val in ['hist','vals','tab']:
                 print >> fout, val, fname_root + "_avg.xvg", "1:" + name + ":*"
                 print >> fout
         elif val == 'tab':
+            print >> fout, "tab set smooth_pot 1"
             if section in ['bond', 'dist']:
                 scale = 'bond'
             elif section in ['ang', 'angle']:
                 scale = 'angle'
             else:
                 scale = 'no'
+                print >> fout, "tab set periodic 1"
             print >> fout, "tab set scale %s" %scale
             print >> fout, val, fname_root + ".xvg", "1:" + name + ":*"
 
-print >> fout, "\nq"
+print >> fout, "\nq\n"
 print "Written commands to %s!" %sys.argv[2]
