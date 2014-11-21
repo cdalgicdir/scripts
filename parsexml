@@ -51,7 +51,7 @@ for val in ['hist','vals','tab']:
                 print >> fout, val, fname_root + "-%d.xvg" %i, "1:" + name + ":%d" %i
             if val == 'hist':
                 # write the average
-                print >> fout, val, name + "_avg.xvg", "1:" + name + ":*"
+                print >> fout, val, fname_root + "_avg.xvg", "1:" + name + ":*"
                 print >> fout
         elif val == 'tab':
             if section in ['bond', 'dist']:
@@ -61,7 +61,7 @@ for val in ['hist','vals','tab']:
             else:
                 scale = 'no'
             print >> fout, "tab set scale %s" %scale
-            print >> fout, val, name + ".xvg", "1:" + name + ":*"
+            print >> fout, val, fname_root + ".xvg", "1:" + name + ":*"
 
 print >> fout, "\nq"
 print "Written commands to %s!" %sys.argv[2]
