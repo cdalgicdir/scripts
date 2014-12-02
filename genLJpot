@@ -98,11 +98,11 @@ while r <= rmax:
         shift = -1. * LJ96(cutoff,0)
         U = LJ96(r,shift)
     elif option == "cos96":
-        shift = -1. * LJcos96(cutoff,0)
-        U = LJcos96(r,shift)
+        shift = -1. * LJcos96(cutoff)
+        U = LJcos96(r)
     elif option == "cos126":
-        shift = -1. * LJcos126(cutoff,0)
-        U = LJcos126(r,shift)
+        shift = -1. * LJcos126(cutoff)
+        U = LJcos126(r)
     elif option == "rep":
         U = LJrep(r)
     fLJ.write('%2.3f %2.1f %2.1f %2.1f %2.1f %2.10f %2.1f\n' %(r,0,0,0,0,U,0))
