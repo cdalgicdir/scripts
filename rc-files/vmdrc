@@ -190,11 +190,12 @@ user add key Left {animate reverse}
 user add key Right { if {[molinfo top get numframes] == [ expr [molinfo top get frame] + 1] } {animate goto start; animate forward} {animate forward} }
 user add key q { reset_viz [molinfo top] }
 user add key w { ss_viz [molinfo top] }
-user add key W { addwall [molinfo top] }
+user add key Control-w { addwall }
+user add key Control-d { draw delete all }
 user add key E { ss_viz_LEUsc [molinfo top] }
-user add key Control-e { ss_viz_paper [molinfo top] }
+user add key W { ss_viz_paper [molinfo top] }
 #user add key W { protlig_viz_sketch [molinfo top] }
-user add key Control-w { showWaterClose }
+user add key Alt-w { showWaterClose }
 user add key R {menu ramaplot on; variable ::RamaPlot::molid [molinfo top] }
 user add key T {menu timeline on }
 #user add key R { hires [molinfo top] }
@@ -221,7 +222,8 @@ user add key L { addHeavyLabels [molinfo top] }
 #user add key z { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
 user add key A { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
 #user add key A { align [molinfo top] "protein and backbone" }
-user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA2 CA3 CA4 CA5 CA6 A1 A2 A3 A4 A5 A6" }
+#user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA2 CA3 CA4 CA5 CA6 A1 A2 A3 A4 A5 A6" }
+user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11"}
 user add key b { showbackbone [molinfo top] }
 user add key F9 { writegro [molinfo top] }
 user add key F8 { snap [molinfo top] "auto" "false" }
@@ -1253,7 +1255,7 @@ proc processFF {{molid "0"}} {
     mol addrep $molid
 }
 
-proc addwall {{molid "0"}} {
+proc addwall {} {
     #draw delete all
     draw color blue
     draw triangle {50 50 0} {50 0 0} {0 50 0}
