@@ -15,6 +15,15 @@ terminal="set terminal wxt enhanced"
 output=""
 termset=""
 
+###################################################################
+# Atomistic EALA directories
+###################################################################
+dirvac="/mnt/data/cdalgicdir/SIMS/EALA-cg/atm-implicit/071014_implicit-excluded/cg-only-CA-glu-PME/map"
+dirint="/mnt/data/cdalgicdir/SIMS/EALA-cg/atm-interface/map-only-CA-glu"
+folders=($dirvac $dirint)
+###################################################################
+
+
 plot () {
         gplot $output -c "$xtics" -c "$yrange" -c "$xrange" -t "$title" -c "$keypos" -c "set ylabel '$ylabel'" -c "set xlabel '$xlabel'" -c "$terminal" -- "$plcomms"
 }
@@ -90,7 +99,7 @@ for f in ${plotlist[@]}; do
 	histdir="."
 	xlabel='r (nm)'
 	ylabel='V(r) (kJ/mol)'
-	xrange='set xrange [:2]'
+	xrange='set xrange [:1.4]'
 	yrange='set yrange [:20]'
 	xtics='set xtics auto'
 	keypos='set key right'
@@ -144,12 +153,17 @@ for f in ${plotlist[@]}; do
 	elif [[ $dir == cg-CAB* ]] || [[ $dir == map-CAB* ]]; then
 	    dir="CAB"
 	fi
-	dirlabel=`echo "$dir" | sed 's/_/-/g'`
+	if [[ $dir == $dirvac ]]; then
+	    dirlabel="atm-vac"
+	elif [[ $dir == $dirint ]]; then
+	    dirlabel="atm-int"
+	else
+	    dirlabel=`echo "$dir" | sed 's/_/-/g'`
+	fi
 	plcomms=${plcomms}${q}${address}${q}${using}${with}'t '${q}${dirlabel}${q},
     done
     if [[ $noplot == true ]]; then
 	printcommands
-	echo $xrange
     else
 	[[ "${plcomms}" == "" ]] && continue
 	plot $@
