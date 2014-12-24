@@ -34,7 +34,6 @@ def runningMeanFast(x, N):
 
 x = np.loadtxt(f)
 ft = f.split('.')
-fout = ft[:-1][0] + '_rm' + str(N) + '.xvg' 
+fout = '.'.join(ft[:-1]) + '_rm' + str(N) + '.xvg' 
 np.savetxt(fout,np.column_stack((x[:,0],runningMean2(x[:,1],N))))
 print "Written to %s!" %fout
-
