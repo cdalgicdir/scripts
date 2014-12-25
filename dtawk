@@ -1,0 +1,31 @@
+#! /bin/bash
+#
+###################################################################
+# Usage: dtawk file.xvg 50 1 2 > out.dat
+# "dtawk file.xvg 50 2 3" prints 2nd and 3rd columns with dt=50
+# file w/o comment lines [@|#]
+###################################################################
+
+[[ $1 == "-p" ]] && option="-p" && shift
+file="$1" && shift
+
+dt="$1"  && shift
+
+if [[ $# -gt 1 ]]; then
+    columns="\$${1}" && shift
+    nargs="$#" && nargs=$((nargs-1))
+    for i in $@; do
+	columns=$columns",\$${i}"
+    done
+elif [[ $# -eq 1 ]]; then
+    columns="\$${1}"
+else
+    echo "Error with number of arguments!"
+    exit 1
+fi
+
+first="awk '{ if ( \$1 !~ /^[@|#]/) { if ( \$1 % '$dt' == 0 ) print "
+last="}}'"
+cmd="${first}${columns}${last}"
+[[ $option == "-p" ]] && echo "# $cmd $file"
+eval $cmd $file
