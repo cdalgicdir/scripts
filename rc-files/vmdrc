@@ -646,7 +646,12 @@ proc ss_viz_LEUsc {molid} {
     # add ACE terminal
     mol color ColorID 3
     mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    #mol representation Licorice 0.300000 10.000000 10.000000
     mol selection resname ACE
+    mol addrep $molid
+    mol color Name
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol selection residue 1 17 33 49 and name CA N H or resname ACE
     mol addrep $molid
     start_sscache $molid
     display depthcue off; color Display Background white;pbc box -off;axes location off
