@@ -283,6 +283,7 @@ while [[ $# -ge 1 ]]; do
 	    doshift=1
 	    doentcorr=1
 	    keypos='set key right bottom'
+	    extra="set xlabel 'r (nm)';set ylabel 'V(r) (kJ/mol)'"
 	    shift;;
 
 	-movavg|-ma)
@@ -298,7 +299,10 @@ while [[ $# -ge 1 ]]; do
 
 	-t | -titles)
 	    usersetlabels=true
-	    titlelist=(${2//;/ })
+	    IFS=$';'
+	    for i in ${2}; do titlelist+=( "$i" );done
+	    #titlelist=(${2//;/ })
+	    IFS=$' \t\n'
 	    k=0
 	    shift 2
 	    ;;
