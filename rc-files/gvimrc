@@ -21,7 +21,7 @@ else
     "jellybeans
     "colorscheme corporation
     colorscheme jellybeans
-    set guifont=Monaco\ 13
+    set guifont=Monaco\ 14
     "set guifont=Droid\ Sans\ Mono\ 14
 endif
 
@@ -58,3 +58,6 @@ if matchstr(expand("%"),".*\.tex") != ""
     :iab cb1 C$_{\beta}$
     ":map <F2> viWB<ESC><ESC>i\emph{<ESC>Ea}<ESC>
 endif
+
+map <silent> <F11>
+\    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
