@@ -12,8 +12,9 @@
 ":au BufRead *.tex set spell
 ":highlight SpellBad gui=underline guibg=NONE guifg=NONE
 
-:map <F6> {v}!par -w75<CR>
-:vmap <F6> !par -w75<CR>
+:map <F6> {v}!par -w85<CR>
+:vmap <F6> !par -w85<CR>
+:map <F4> :highlight Normal ctermfg=black ctermbg=white<CR>
 
 ":set autoindent
 set autowrite
