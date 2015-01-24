@@ -37,7 +37,12 @@ STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 .tex 01;37
 .md 01;37
 .pdf 01;33
+.sh 00;33
+.py 00;33
+.comms 00;33
 .avi 03;36
+.mkv 03;36
 .mp4 03;36
+.mov 03;36
 .deb 00;31
 .gp 00;31
