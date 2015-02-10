@@ -1,0 +1,24 @@
+#!/bin/bash 
+defaultvmddir=/usr/local/lib/vmd 
+export VMDDIR=$defaultvmddir
+export MASTERVMDDIR=$defaultvmddir
+vmdbasename=vmd 
+export LD_LIBRARY_PATH=/usr/local/lib/vmd::/usr/local/lib/python2.7/site-package 
+export VMDDISPLAYDEVICE=win 
+export VMDSCRPOS="596 190" 
+export VMDSCRSIZE="669 634" 
+export VMDSCRHEIGHT=6.0 
+export VMDSCRDIST=-2.0 
+export VMDTITLE=on 
+export VMD_WINGEOM="-geometry 80x11-0-0" 
+export TCL_LIBRARY=$VMDDIR/scripts/tcl 
+export PYTHONPATH=$VMDDIR/scripts/python 
+
+export VMD_WINTERM=xterm
+export VMD_WINOPTS="-sb -sl 1000 -e"
+export VMDDEBUGGER="gdb"
+export ARCH="LINUXAMD64"
+export STRIDE_BIN=$VMDDIR/stride_${ARCH}
+export SURF_BIN=$VMDDIR/surf_${ARCH}
+export TACHYON_BIN=$VMDDIR/tachyon_${ARCH}
+rlwrap -C vmd -c -b\(\){}[],\&^%#\;\|\\ -f /usr/local/lib/vmd/vmd_completion.dat /usr/local/lib/vmd/vmd_LINUXAMD64 -size 1338 1668 $* 

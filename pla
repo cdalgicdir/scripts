@@ -168,6 +168,7 @@ while [[ $# -ge 1 ]]; do
 
 	-ns)
 	    convert2ns=true
+	    extra="set xlabel 'Time (ns)'"
 	    shift 1;;
 
 	w)

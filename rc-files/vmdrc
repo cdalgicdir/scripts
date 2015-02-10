@@ -58,6 +58,15 @@ material change shininess Ghostmod 0.23
 material change opacity Ghostmod 0.04
 material change outline Ghostmod 0.0
 material change outlinewidth Ghostmod 0.0
+# add new less Ghostly material
+material add Ghostmod2
+material change diffuse Ghostmod2 0.3
+material change ambient Ghostmod2 0.3
+material change specular Ghostmod2 1.0
+material change shininess Ghostmod2 0.23
+material change opacity Ghostmod2 0.10
+material change outline Ghostmod2 0.0
+material change outlinewidth Ghostmod2 0.0
 # a second one where molecules are less ghostly
 material add Spectre
 material change diffuse Spectre 0.3
@@ -201,11 +210,14 @@ user add key T {menu timeline on }
 #user add key R { hires [molinfo top] }
 #user add key w { protlig_viz [molinfo top] }
 #user add key a { ff_viz [molinfo top] }
-user add key m { kll_viz [molinfo top] }
-user add key K { kllred_viz [molinfo top] }
-user add key M { klnow_viz [molinfo top] }
-user add key n { cgLK [molinfo top] }
-user add key N { klow_viz [molinfo top] }
+user add key n { cgview [molinfo top] }
+###################################################################
+# KL - obsolete
+#user add key m { kll_viz [molinfo top] }
+#user add key K { kllred_viz [molinfo top] }
+#user add key M { klnow_viz [molinfo top] }
+#user add key N { klow_viz [molinfo top] }
+###################################################################
 user add key Q { nowater_viz [molinfo top] }
 user add key H { showHbonds [molinfo top] }
 user add key P { skip }
@@ -225,10 +237,11 @@ user add key A { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone 
 #user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA2 CA3 CA4 CA5 CA6 A1 A2 A3 A4 A5 A6" }
 user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11"}
 user add key b { showbackbone [molinfo top] }
-user add key F9 { writegro [molinfo top] }
 user add key F8 { snap [molinfo top] "auto" "false" }
+user add key F9 { writegro [molinfo top] }
 user add key F10 { snap [molinfo top] }
 user add key F11 { display depthcue off; color Display Background white;axes location off;foreach mol [molinfo list] { mol top $mol; pbc box -off }}
+user add key F12 { snap [molinfo top] "auto" "true" "true" }
 user add key F5 { refresh_trajectory [molinfo top] "traj.xtc" 1 }
 user add key Control-c { cg_map "mapped.gro" }
 user add key Control-v { cg_map_all "mapped.gro" }
@@ -1024,34 +1037,58 @@ proc snapincr {{increment "1000"}} {
     lores [molinfo top]
 }
 
-proc snap {{molid "0"} {filename "auto"} {dotrim "true"}} {
+proc snap {{molid "0"} {filename "auto"} {dotrim "true"} {ambient "true"}} {
   # take a snapshot, process and output as frame#.png
     hires $molid
     #color Display Background white;pbc box -off;axes location off
     #display depthcue off
     # ascii a=97
-    set i 96 
+    # turn ambient occlusion on
+    if {$ambient == "true"} {
+	display ambientocclusion on
+	display shadows on
+	display aoambient 0.800000
+	display aodirect 0.300000
+	set suffix "-ao"
+    } else {
+	display ambientocclusion off
+	display shadows off
+	set suffix ""
+    }
+    #set i 96 
     if {$filename == "auto"} {
     if {[molinfo top get numframes] == 1} {
 	set fname [molinfo top get filename]
 	set nfile [string trimright $fname ".pdbgro"]
 	set file "$nfile.png"
-	while {[file exists $file] == 1} { set i [expr $i+1] ; set c [format %c $i]; set file "$nfile$c.png"}
+	#while {[file exists $file] == 1} { set i [expr $i+1] ; set c [format %c $i]; set file "$nfile$c.png"}
     } else {
 	set frame [format %04d [molinfo $molid get frame]]
 	set file "frame$frame.png"
-	while {[file exists $file] == 1} { set i [expr $i+1] ; set c [format %c $i]; set file "frame$frame$c.png"}
+	#while {[file exists $file] == 1} { set i [expr $i+1] ; set c [format %c $i]; set file "frame$frame$c.png"}
 	}
     } else {set file $filename}
+    set i 1
+    set basename [string trimright $file ".png"]
+    while {[file exists $file] == 1} { set i [expr $i+1] ; set file "$basename-$i.png"}
     set datfile [string map {".png" ".dat"} $file]
-    render Tachyon $datfile tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
-    #file delete $datfile
+    set ppmfile [string map {".png" ".ppm"} $file]
+    #render Tachyon $datfile tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
+    render TachyonLOptiXInternal $ppmfile
+    if {$ambient == "true"} {
+	# dummy command to generate dat file
+	render Tachyon $datfile tachyon --a > sil.out
+	file delete sil.out
+    }
+
     if {$dotrim == "true"} {
 	set trimfile [string map {".png" "-trim.png"} $file]
-	eval exec {convert -density 300 -trim $file $trimfile}
+	#eval exec {convert -density 300 -trim $file $trimfile}
+	eval exec {convert -density 300 -trim $ppmfile $trimfile}
 	file delete $file
 	file rename $trimfile $file
     }
+    file delete $ppmfile
     lores $molid
     puts "Generated snapshot $file"
 }   
@@ -1068,15 +1105,15 @@ proc writegro {{molid "0"}} {
     puts "Written snapshot $pdbfile and $grofile"
 }
 
-proc hires {{molid "0"}} {
+proc hires {{molid "0"} {res "100"}} {
   # increase resolutions of all representations
   for {set i 0} {$i < [molinfo $molid get numreps]} {incr i} {
     set rep [molinfo $molid get "{rep $i} {selection $i} {color $i} {material $i}"]
       foreach {r s c m} $rep { break }
-    if { [lindex $r 0] == "NewCartoon" } { mol modstyle $i $molid NewCartoon [lindex $r 1] 100 [lindex $r 3] [lindex $r 4]
-    } elseif { [lindex $r 0] == "Licorice" } { mol modstyle $i $molid Licorice [lindex $r 1] 100 100
-    } elseif { [lindex $r 0] == "CPK" } { mol modstyle $i $molid CPK [lindex $r 1] [lindex $r 2] 100 100
-    } elseif { [lindex $r 0] == "VDW" } { mol modstyle $i $molid VDW [lindex $r 1] 100 }
+    if { [lindex $r 0] == "NewCartoon" } { mol modstyle $i $molid NewCartoon [lindex $r 1] 50 [lindex $r 3] [lindex $r 4]
+    } elseif { [lindex $r 0] == "Licorice" } { mol modstyle $i $molid Licorice [lindex $r 1] $res $res
+    } elseif { [lindex $r 0] == "CPK" } { mol modstyle $i $molid CPK [lindex $r 1] [lindex $r 2] $res $res
+    } elseif { [lindex $r 0] == "VDW" } { mol modstyle $i $molid VDW [lindex $r 1] $res }
     }
 }
 
@@ -1191,18 +1228,28 @@ proc unwrap {{molid "0"}} {
     align $molid
 }
 
-proc cgLK {{molid "0"}} {
+proc cgview {{molid "0"}} {
     mol representation CPK 1.000000 0.300000 10.000000 10.000000
-    mol color ColorID 0
-    mol selection {name KC1 KC2 KC3 KC4 KC5 KC6 KN1 KN2 KN3 KN4 KN5 KN6}
+    #mol color ColorID 26
+    mol color Name
+    #mol selection {name KC1 KC2 KC3 KC4 KC5 KC6 KN1 KN2 KN3 KN4 KN5 KN6}
+    mol selection {name GO1 GO2 GO3 GO4 GC1 GC2 GC3 GC4}
     mol addrep $molid
     mol representation CPK 1.000000 0.300000 10.000000 10.000000
-    mol color ColorID 1
-    mol selection {name L1 L2 L3 L4 L5 L6 L7 L8}
+    #mol color ColorID 1
+    mol selection {name L1 L2 L3 L4 }
+    #mol selection {name L1 L2 L3 L4 L5 L6 L7 L8}
     mol addrep $molid
     mol representation CPK 1.000000 0.300000 10.000000 10.000000
-    mol color ColorID 6
+    #mol color ColorID 6
     mol selection {name CA1 CA2 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11 CA12 CA13 CA14 CN1 CN2 CN3 CN4 CN5 CN6 CN7 CN8 CN8 CN9 CN10 CN11 CN12 CN13 CN14 CN15}
+    mol addrep $molid
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    #mol color ColorID 8
+    mol selection {name AB1 AB2 AB3 AB4 AB5 AB6 AB7 }
+    mol addrep $molid
+    mol representation Bonds 0.1 12.00
+    mol selection all
     mol addrep $molid
 
 }
@@ -1282,7 +1329,7 @@ proc addwall {} {
 
 proc cg_map {{mapped "mapped.gro"}} {
     mol new $mapped type {gro} first 0 last -1 step 1 waitfor 1
-    mol addfile {mapped.xtc} type {xtc} first 0 last -1 step 1 waitfor -1 1
+    #mol addfile {mapped.xtc} type {xtc} first 0 last -1 step 1 waitfor -1 1
     mol modselect 0 0 protein or resname ACE NME
     mol modstyle 0 0 Licorice 0.100000 10.000000 10.000000
     mol modselect 0 1 not resname SOL CL NA
@@ -1348,6 +1395,8 @@ color Name K blue
 color Name C cyan
 color Name G purple
 color Name A white
+
+#color Labels Atoms black
 
 ## hook up the function.
 #trace variable vmd_initialize_structure w kl_viz_proxy
