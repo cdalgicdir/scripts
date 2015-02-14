@@ -203,7 +203,7 @@ user add key Control-w { addwall }
 user add key Control-d { draw delete all }
 user add key E { ss_viz_LEUsc [molinfo top] }
 user add key W { ss_viz_paper [molinfo top] }
-#user add key W { protlig_viz_sketch [molinfo top] }
+user add key Control-e { protlig_viz_sketch [molinfo top] }
 user add key Alt-w { showWaterClose }
 user add key R {menu ramaplot on; variable ::RamaPlot::molid [molinfo top] }
 user add key T {menu timeline on }
@@ -625,10 +625,10 @@ proc ss_viz {molid} {
     mol material Opaque
     mol addrep $molid
     # add ligand
-    #mol color Name
-    #mol representation Licorice 0.300000 10.000000 10.000000
-    #mol selection resname LIG
-    #mol addrep $molid
+    mol color Name
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection resname LIG BEN S58 UNK
+    mol addrep $molid
     start_sscache $molid
   } 
 }
@@ -718,8 +718,9 @@ proc protlig_viz {molid} {
     #mol color Name
     mol color colorID 0
     mol representation CPK 1.000000 0.300000 10.000000 10.000000
-    #mol selection (resname LIG CEL UNK) and noh
-    mol selection resname ACE
+    #mol selection (resname LIG BEN CEL UNK) and noh
+    mol selection (resname LIG BEN CEL UNK)
+    #mol selection resname ACE
     mol addrep $molid
     mol color Name
     # water close to the ligand
@@ -756,7 +757,7 @@ proc protlig_viz_sketch {molid} {
     mol addrep $molid
     #mol representation VDW 1.0
     mol representation Licorice 0.300000 10.000000 10.000000
-    mol selection (resname LIG S58 CEL UNK) and noh
+    mol selection (resname LIG BEN S58 CEL UNK)
     mol color ColorID 1
     mol addrep $molid
     mol representation CPK 1.000000 0.300000 10.000000 10.000000
