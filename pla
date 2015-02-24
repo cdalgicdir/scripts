@@ -22,8 +22,11 @@ terminal=''
 #terminal='set terminal wxt'
 range=[:][:]
 userset=false
-doshift=0
-entcorr=0
+doshiftend=false
+doshiftmin=false
+doshiftmax=false
+doshifting=false
+doentcorr=false
 kT=2.4777 #for T=298K
 #kT=2.4943 #for T=300
 sas=false
@@ -33,8 +36,6 @@ every=1
 colslist=()
 noplot=false
 convert2ns=false
-doentcorr=0
-doshift=0
 usersetlabels=false
 userrangeset=false
 termoptions=""
@@ -271,18 +272,32 @@ while [[ $# -ge 1 ]]; do
 	    echo "Generating out.gp"
 	    shift 1;;
 
+	-shiftmax)
+	    doshiftmax=true
+	    doshifting=true
+	    #keypos='set key right bottom'
+	    shift;;
+
+	-shiftmin)
+	    doshiftmin=true
+	    doshifting=true
+	    #keypos='set key right bottom'
+	    shift;;
+
 	-shift)
-	    doshift=1
+	    doshiftend=true
+	    doshifting=true
 	    keypos='set key right bottom'
 	    shift;;
 
 	-entcorr|-ec)
-	    doentcorr=1
+	    doentcorr=true
 	    shift;;
 	    
 	-pmf)
-	    doshift=1
-	    doentcorr=1
+	    doshiftend=true
+	    doshifting=true
+	    doentcorr=true
 	    keypos='set key right bottom'
 	    extra="set xlabel 'r (nm)';set ylabel 'V(r) (kJ/mol)'"
 	    shift;;
@@ -362,14 +377,26 @@ style="do for [i=1:20] { set style line i linewidth $lw }"
 ev=" every ${every}"
 
 # shift to zero for PMFs (only works for the second column
-if [[ $doshift == 1 ]]; then
+if $doshifting; then
     shiftlist=()
     shiftRlist=()
     for f in ${filelist[@]}; do
-	shiftR=`tail -1 ${f} | awk '{print $1}'`
-	[[ $shiftR == "" ]] && shiftR=`tail -2 ${f} | awk '{print $2}'`
-	shift=`tail -1 ${f} | awk '{print $2}'`
-	[[ $shift == "" ]] && shift=`tail -2 ${f} | awk '{print $2}'`
+	if $doshiftend; then
+	    shiftR=`tail -1 ${f} | awk '{print $1}'`
+	    [[ $shiftR == "" ]] && shiftR=`tail -2 ${f} | awk '{print $2}'`
+	    shift=`tail -1 ${f} | awk '{print $2}'`
+	    [[ $shift == "" ]] && shift=`tail -2 ${f} | awk '{print $2}'`
+	elif $doshiftmin; then
+	    tmp=`awk '!/^[@|#]/{if ($2<y){y=$2;x=$1}}END{print x,y}' ${f}`
+	    tmp=(${tmp// / })
+	    shiftR=${tmp[0]}
+	    shift=${tmp[1]}
+	elif $doshiftmax; then
+	    tmp=`awk -v y=-1e6 '!/^[@|#]/{if ($2>y){y=$2;x=$1}}END{print x,y}' ${f}`
+	    tmp=(${tmp// / })
+	    shiftR=${tmp[0]}
+	    shift=${tmp[1]}
+	fi
 	shiftRlist+=("$shiftR")
 	shiftlist+=("$shift")
     done
@@ -437,15 +464,15 @@ do
 		using=" u ${j} "
 
 ###################################################################
+	    theshift=${shiftlist[$i]} 
+	    theshiftR=${shiftRlist[$i]} 
 	    # shift to zero and entropic correction (for second cols only)
-	    if [[ $doshift == 1 ]] && [[ $doentcorr == 0 ]]; then
-		theshift=${shiftlist[$i]} 
+	    if $doshifting && ! $doentcorr; then
 		using=" u $column0:(\$$column-$theshift) "
-	    elif [[ $doshift == 0 ]] && [[ $doentcorr == 1 ]]; then
+		echo "Shifting ${f} by $theshift (at $theshiftR)"
+	    elif ! $doshifting && $doentcorr; then
 		using=" u $column0:(\$$column+2*$kT*log(\$1)) "
-	    elif [[ $doshift == 1 ]] && [[ $doentcorr == 1 ]]; then
-		theshift=${shiftlist[$i]} 
-		theshiftR=${shiftRlist[$i]} 
+	    elif $doshifting && $doentcorr; then
 		using=" u $column0:(\$$column+2*$kT*(log(\$1/$theshiftR))-$theshift) "
 	    fi
 ###################################################################
