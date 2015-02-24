@@ -1,4 +1,5 @@
-set term wxt noctrl raise size 1000,600 font "Gill Sans,16"
+#set term wxt noctrl raise size 1000,600 font "Gill Sans,16"
+set term wxt noctrl raise size 800,480 font "Gill Sans,12"
 #show style line
 #set term wxt size 800,600
 ###################################################################
@@ -43,23 +44,23 @@ set style increment user
 #set style line 8 lt 8 lc rgb "#cc79a7" lw 6
 ###################################################################
 # MINE
-set style line 1 lt 1 lw 6 pt 6 lc rgb "#e34234"
-set style line 2 lt 2 lw 6 pt 1 lc rgb "black"
-set style line 3 lt 3 lw 6 pt 2 lc rgb "#0072b2"
-set style line 4 lt 4 lw 6 pt 9 lc rgb "#1b9e77"
-set style line 5 lt 5 lw 6 lc rgb "#e69f00"
-set style line 6 lt 6 lw 6 lc rgb "#800080"
-set style line 7 lt 7 lw 6 lc rgb "cyan"
-set style line 7 lt 7 lw 6 lc rgb "#87ceeb"
-set style line 8 lt 8 lw 6 lc rgb "olive"
-set style line 9 lt 9 lw 6 lc rgb "grey"
-set style line 10 lt 10 lw 6 lc rgb "red"
-set style line 11 lt 11 lw 6 lc rgb "navy"
-set style line 12 lt 12 lw 6 lc rgb "light-green"
-set style line 13 lt 13 lw 6 lc rgb "dark-red"
-set style line 14 lt 14 lw 6 lc rgb "#00A000"
-set style line 15 lt 15 lw 6 lc rgb "#5060D0"
-set style line 16 lt 16 lw 6 lc rgb "#F25900"
+set style line 1 lt 1 lw 3 pt 6 lc rgb "#e34234"
+set style line 2 lt 2 lw 3 pt 1 lc rgb "black"
+set style line 3 lt 3 lw 3 pt 2 lc rgb "#0072b2"
+set style line 4 lt 4 lw 3 pt 9 lc rgb "#1b9e77"
+set style line 5 lt 5 lw 3 lc rgb "#e69f00"
+set style line 6 lt 6 lw 3 lc rgb "#800080"
+set style line 7 lt 7 lw 3 lc rgb "cyan"
+set style line 7 lt 7 lw 3 lc rgb "#87ceeb"
+set style line 8 lt 8 lw 3 lc rgb "olive"
+set style line 9 lt 9 lw 3 lc rgb "grey"
+set style line 10 lt 10 lw 3 lc rgb "red"
+set style line 11 lt 11 lw 3 lc rgb "navy"
+set style line 12 lt 12 lw 3 lc rgb "light-green"
+set style line 13 lt 13 lw 3 lc rgb "dark-red"
+set style line 14 lt 14 lw 3 lc rgb "#00A000"
+set style line 15 lt 15 lw 3 lc rgb "#5060D0"
+set style line 16 lt 16 lw 3 lc rgb "#F25900"
 ###################################################################
 #set style line 1 lt 1 pt 1 lc rgb "#1b9e77" lw 6
 #set style line 2 lt 2 pt 6 lc rgb "#d95f02" lw 6
@@ -131,8 +132,8 @@ sasev=" ev 200 u ($1/1000):2 t 'hydrophobic','' ev 200 u ($1/1000):3 t 'hydrophi
 sasdiff=" u ($1/1000):($2-$7) t 'hydrophobic','' u ($1/1000):($3-$8) t 'hydrophilic','' u ($1/1000):($4-$9) t 'total'"
 sasdiffev=" ev 200 u ($1/1000):($2-$7) t 'hydrophobic','' ev 200 u ($1/1000):($3-$8) t 'hydrophilic','' ev 200 u ($1/1000):($4-$9) t 'total'"
 xy2="set border 11 back linestyle 81;set y2tics;rep" # for 2 y-axes
-sp="set cntrparam bspline;set cntrparam order 5;set cntrparam levels 30;set contour base;set pm3d map interpolate 30,30;set dgrid3d 12,12,12;set palette defined ( 0 'blue',3 'green',6 'yellow',10 'red');unset clabel;set style line 1 lt 1 lc rgb 'black' lw 0.1;rep"
-sp2="set cntrparam bspline;set cntrparam order 5;set cntrparam levels 30;set contour base;set pm3d map interpolate 30,30;set dgrid3d 12,12,12;set palette defined ( 0 'red',3 'yellow',6 'green',10 'blue');unset clabel;set style line 1 lt 1 lc rgb 'black' lw 0.1;rep"
+sp="set cntrparam bspline;set cntrparam order 5;set cntrparam levels 30;set contour base;set pm3d map interpolate 30,30;set dgrid3d 12,12,12;set palette defined ( 0 'blue',3 'green',6 'yellow',10 'red');unset clabel;set style line 1 lt 1 lc rgb 'black' lw 0.1;set border 11 back linestyle 81;rep"
+sp2="set cntrparam bspline;set cntrparam order 5;set cntrparam levels 30;set contour base;set pm3d map interpolate 30,30;set dgrid3d 12,12,12;set palette defined ( 0 'red',3 'yellow',6 'green',10 'blue');unset clabel;set style line 1 lt 1 lc rgb 'black' lw 0.1;set border 11 back linestyle 81;rep"
 ww=",0 lt 0 lw 2 not,5 lt 0 lw 2 not"
 pi="set xtics pi;set format x '%.0Pπ';rep"
 ###################################################################
