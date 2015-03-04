@@ -2,12 +2,15 @@
 
 import sys, math, re
 
+minmax_user = None
+
 def printhelp():
     print "Script to generate correlation from data file of two rows"
     print "Usage :\n \
     ${0##*/} file.xvg 12 (divides into 12 equal rows, default is 12)\n \
     ${0##*/} file.xvg 12 -mat (writes out the matrix)\n \
     ${0##*/} file.xvg 12 (-rowsum|-colsum)\n \
+    ${0##*/} file.xvg 12 -r 0:100 140:180\n \
     ${0##*/} file.xvg 12 -bins"
 
 def prob2ener(probs):
@@ -33,7 +36,12 @@ outfilename = '.'.join(infilename.split('.')[0:-1])+'.corr'
 
 writeprob = True
 writematrix = printbins = rowsum = colsum = False
+i = 0
+shift = 0
 for arg in sys.argv:
+    for i in range(shift):
+        shift -= 1
+        continue
     if arg == '-mat':
 	writematrix = True
 	writeprob = False
@@ -50,11 +58,15 @@ for arg in sys.argv:
 	writeprob = False
 	writeener = True
 	outfilename = outfilename[:-4] + 'ener'
-    elif re.search(r'^\d+',arg):
+    elif arg == '-r':
+        minmax_user = [[float(sys.argv[i+1].split(":")[0]),float(sys.argv[i+1].split(":")[1])],[float(sys.argv[i+2].split(":")[0]),float(sys.argv[i+2].split(":")[1])]]
+        shift = 2
+    elif re.search(r'^\d+',arg) and not re.search(r':',arg):
 	divide = int(arg)
     elif arg in ['-h','-help','help','--h','--help']:
 	printhelp()
 	sys.exit(0)
+    i += 1
 
 try:
     divide
@@ -179,6 +191,8 @@ minmax, nlines = FindMinMax(infilename)
 eps = 1e-10
 minmax = [[minmax[0][0]-eps, minmax[0][1]+eps],[minmax[1][0]-eps, minmax[1][1]+eps]]
 increment = [(minmax[0][1] - minmax[0][0])/divide,(minmax[1][1] - minmax[1][0])/divide]
+if not minmax_user is None:
+    minmax = minmax_user
 
 bins = []
 for i in range(divide):

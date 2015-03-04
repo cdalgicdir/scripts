@@ -1,0 +1,13 @@
+#! /bin/bash
+
+FILE=$1
+CMD=$2
+#f=(${FILE//./ })
+while true; do
+    ATIME=`stat -c %Z $FILE`
+    if [[ $ATIME != $LTIME ]] ; then
+	$CMD
+    fi
+    LTIME=$ATIME
+    sleep 2
+done
