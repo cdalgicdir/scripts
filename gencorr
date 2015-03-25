@@ -187,12 +187,15 @@ def bin2prob(bins,n):
 
 
 minmax, nlines = FindMinMax(infilename)
-# to avoid extra bins for the maximum and minimum points
-eps = 1e-10
-minmax = [[minmax[0][0]-eps, minmax[0][1]+eps],[minmax[1][0]-eps, minmax[1][1]+eps]]
-increment = [(minmax[0][1] - minmax[0][0])/divide,(minmax[1][1] - minmax[1][0])/divide]
 if not minmax_user is None:
     minmax = minmax_user
+else:
+    eps = 1e-10
+    # to avoid extra bins for the maximum and minimum points
+    minmax = [[minmax[0][0]-eps, minmax[0][1]+eps],[minmax[1][0]-eps, minmax[1][1]+eps]]
+increment = [(minmax[0][1] - minmax[0][0])/divide,(minmax[1][1] - minmax[1][0])/divide]
+
+print "# Using ranges of %f, %f and %f, %f" %(minmax[0][0],minmax[0][1],minmax[1][0],minmax[1][1])
 
 bins = []
 for i in range(divide):
@@ -215,7 +218,12 @@ while 1:
 	data0 = float(tmp[0])
 	data1 = float(tmp[1])
 
-	bins[int((data0 - minmax[0][0])/increment[0])][int((data1 - minmax[1][0])/increment[1])] += 1
+	#print int((data0 - minmax[0][0])/increment[0])  ,int((data1 - minmax[1][0])/increment[1])
+        try:
+            bins[int((data0 - minmax[0][0])/increment[0])][int((data1 - minmax[1][0])/increment[1])] += 1
+        except IndexError:
+            print "Points are out of range: %f, %f !" %(data0,data1)
+            continue
 
 probs = bin2prob(bins,nlines)
 

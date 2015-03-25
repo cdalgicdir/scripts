@@ -1,0 +1,13 @@
+#! /bin/bash
+
+submit=`which msub`
+JOB_FILE=$1
+JOB_NAME=`grep "\-N" $JOB_FILE  | awk '{print $3}'`
+
+JOB_ID=`$submit $JOB_FILE`
+
+echo $JOB_ID
+
+echo $JOB_ID $JOB_NAME >> ~/.jobs
+
+

@@ -1,0 +1,14 @@
+#! /bin/bash
+
+me=`whoami`
+shortme="${me:0:8}"
+jobstates="$HOME/.jobstates"
+jobs="$HOME/.jobs"
+showq > $jobstates
+JOB_IDs=`egrep "^[0-9]+.*${shortme}" $jobstates | awk '{print $1}'`
+for id in ${JOB_IDs[@]}; do
+    JOB_NAME=`grep $id $jobs | awk '{print $2}'`
+    sed -i "s/$id.*$shortme/$id\t\t$JOB_NAME/" $jobstates
+done
+
+cat $jobstates

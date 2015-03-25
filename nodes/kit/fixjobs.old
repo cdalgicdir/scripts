@@ -1,0 +1,21 @@
+#! /bin/bash
+
+workdirs=`ws_list | grep "workspace"`
+jobstates="$HOME/.jobstates"
+jobs="$HOME/.jobs"
+me=`whoami`
+shortme="${me:0:8}"
+showq > $jobstates
+JOB_IDs=`egrep "^[0-9]+.*${shortme}" $jobstates | awk '{print $1}'`
+for id in ${JOB_IDs[@]}; do
+    for wdir in ${workdirs[@]}; do
+	address=`find $wdir -name "*$id*.out"`
+	dir=${address%\/job_uc1_${id}.out}
+	JOB_NAME=`grep "\-N" $dir/xsubmit-mpi | awk '{print $3}'`
+	sed -i "s/$id.*$shortme/$id\t\t$JOB_NAME/" $jobstates
+	sed -i "/$id/d" $jobs
+	echo "$id $JOB_NAME" >> $jobs
+    done
+done
+
+cat $jobstates
