@@ -81,6 +81,7 @@ help () {
     echo "       $ pla file* -keyout/-ko (key is out of the plot)"
     echo "       $ pla file* -keybot/-kb (key is at the bottom)"
     echo "       $ pla file* -keyleft/-kl (key is at the left)"
+    echo "       $ pla file* -keyhor/-kh (key is horizontal)"
     echo "       $ pla file* -sas (for drawing SASA)"
     echo "       $ pla file* -nxy (plots every column of the file starting from 2nd)"
     echo "       $ pla file* not (no key labeling)"
@@ -217,6 +218,10 @@ while [[ $# -ge 1 ]]; do
 
 	-keyleft|-kl)
 	    keypos='set key left reverse Left'
+	    shift 1;;
+
+	-keyhor|-kh)
+	    keypos='set key center top samplen 2 width -1.5 height -2 horizontal'
 	    shift 1;;
 
 	-dihe)
@@ -424,7 +429,7 @@ do
 	    if ! $userset ; then
 		colslist+=("1:6")
 		#ymax=1.5
-		[[ $range == "[:][:]" ]] && range="[:][:5]"
+		[[ $range == "[:][:]" ]] && range="[:][:500]"
 	    fi
 	fi
 	

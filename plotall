@@ -3,7 +3,7 @@
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'table_L_wall0.xvg' 'tablep.xvg')
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CN-CA-CN_avg.xvg')
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_A-CN-A-CN_avg.xvg' 'dih_A-CN-CA-CN_avg.xvg' 'dih_CA-CN-A-CN_avg.xvg' 'dih_CN-A-CN-A_avg.xvg' 'dih_CN-A-CN-CA_avg.xvg' 'dih_CN-CA-CN-A_avg.xvg')
-plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CA-CA-CA_avg.xvg' 'tablep.xvg')
+plotlist=('dist_CNi-CNi3_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CA-CA-CA_avg.xvg' 'tablep.xvg' 'table_L_wall0.xvg' 'table_d6.xvg' 'table_GO_GO.xvg')
 
 plcomms=''
 q="'"
@@ -51,21 +51,23 @@ while [[ $# -gt 0 ]]; do
     case $1 in
 
         -png)
-            terminal='set terminal pngcairo size 800,600 enhanced font "Gill Sans,16" linewidth 3 rounded'
+            terminal='set terminal pngcairo size 800,600 enhanced font "Gill Sans,12" linewidth 3 rounded'
 	    termset="png"
             shift;;
 
         -pdf)
 	    termset="pdf"
-            terminal='set terminal pdfcairo enhanced font "Gill Sans,16" linewidth 3 rounded'
+            terminal='set terminal pdfcairo enhanced font "Gill Sans,12" linewidth 2 rounded'
             shift;;
-        -t)
-            writetitrs=true
-            for z in $2; do
-                titrs=(${titrs[*]} $z)
-            done
-            shift 2
-            ;;
+
+	-t | -titles)
+	    usersetlabels=true
+	    IFS=$';'
+	    for i in ${2}; do labellist+=( "$i" );done
+	    IFS=$' \t\n'
+	    k=0
+	    shift 2
+	    ;;
 
         -n | -nop | -noplot)
             noplot=true
@@ -94,19 +96,36 @@ i=0
 
 for f in ${plotlist[@]}; do
 
-    if [[ $f == table* ]]; then
-	using=" using 1:6 "
+    if [[ $f == table*xvg ]]; then
 	histdir="."
 	xlabel='r (nm)'
 	ylabel='V(r) (kJ/mol)'
 	xrange='set xrange [:1.4]'
 	yrange='set yrange [:20]'
+	using=" using 1:6 "
 	xtics='set xtics auto'
 	keypos='set key right'
+	if [[ $f == table_[adi][0-9]*.xvg ]]; then
+	    if [[ $f == table_[a][0-9]*.xvg ]]; then
+		xlabel='{/Symbol f} ({/Symbol \260})'
+		ylabel='V({/Symbol f}) (kJ/mol)'
+	    else
+		xlabel='{/Symbol f} ({/Symbol \260})'
+		ylabel='V({/Symbol f}) (kJ/mol)'
+	    fi
+	    using=" using 1:2 "
+	    xrange='set xrange [-180:180]'
+	    xtics='set xtics 45'
+	    yrange='set yrange [:]'
+	elif [[ $f == "table_GO_GO.xvg" ]]; then
+	    using=" using 1:6 "
+	    xrange='set xrange [:5]'
+	    yrange='set yrange [:200]'
+	fi
     elif [[ $f == dih_* ]]; then
 	using=" using 1:2 "
 	histdir="histograms"
-	xlabel='{/Symbol f} (degrees)'
+	xlabel='{/Symbol f} ({/Symbol \260})'
 	ylabel='P({/Symbol f})'
 	xrange='set xrange [-180:180]'
 	yrange='set yrange [:]'
@@ -115,7 +134,7 @@ for f in ${plotlist[@]}; do
     elif [[ $f == ang_* ]]; then
 	using=" using 1:2 "
 	histdir="histograms"
-	xlabel='{/Symbol t} (degrees)'
+	xlabel='{/Symbol t} ({/Symbol \260})'
 	ylabel='P({/Symbol t})'
 	xrange='set xrange [-180:180]'
 	yrange='set yrange [:]'
@@ -139,9 +158,10 @@ for f in ${plotlist[@]}; do
 	keypos='set key right top'
     fi
 
+    counter=0
     for dir in ${folders[@]}; do
 	address=$dir/$histdir/$f
-	[[ ! -e "${address}" ]] && continue
+	#[[ ! -e "${address}" ]] && continue
 	if [[ $dir == cg-ala-CACB* ]] || [[ $dir == map-ala-CACB* ]]; then
 	    dir="ala-CACB"
 	elif [[ $dir == cg-ala-CA* ]] || [[ $dir == map-ala-CA* ]]; then
@@ -158,9 +178,14 @@ for f in ${plotlist[@]}; do
 	elif [[ $dir == $dirint ]]; then
 	    dirlabel="atm-int"
 	else
-	    dirlabel=`echo "$dir" | sed 's/_/-/g'`
+	    if $usersetlabels; then
+		dirlabel="${labellist[$((counter-2))]}"
+	    else
+		dirlabel=`echo "$dir" | sed 's/_/-/g'`
+	    fi
 	fi
 	plcomms=${plcomms}${q}${address}${q}${using}${with}'t '${q}${dirlabel}${q},
+    let counter=$counter+1
     done
     if [[ $noplot == true ]]; then
 	printcommands
