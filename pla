@@ -429,7 +429,7 @@ do
 	    if ! $userset ; then
 		colslist+=("1:6")
 		#ymax=1.5
-		[[ $range == "[:][:]" ]] && range="[:][:500]"
+		[[ $range == "[:][:]" ]] && range="[:][:10]"
 	    fi
 	fi
 	

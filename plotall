@@ -123,6 +123,10 @@ for f in ${plotlist[@]}; do
 	    using=" using 1:6 "
 	    xrange='set xrange [:5]'
 	    yrange='set yrange [:200]'
+	else
+	    using=" using 1:6 "
+	    xrange='set xrange [:5]'
+	    yrange='set yrange [:10]'
 	fi
     elif [[ $f == dih_* ]]; then
 	using=" using 1:2 "
