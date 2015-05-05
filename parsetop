@@ -62,7 +62,7 @@ fout = open(outfilename,'w')
 fin = open(filename,'r')
 commentlist = ['#','@',';']
 while 1:
-    sectionlist = ['bonds','pairs','angles','dihedrals','dihedral_restraints']
+    sectionlist = ['bonds','pairs','angles','dihedrals','dihedral_restraints','virtual_sites3','exclusions']
     line = fin.readline()
     if not line: break
     elif line[0] in commentlist: fout.write(line)
@@ -77,29 +77,42 @@ while 1:
 		txt = line.split()
 		a1 = int(txt[0])
 		a2 = int(txt[1])
-		func = int(txt[2])
-		fout.write('%s\t%s\t%d\n' %(Atom.atomdic[a1], Atom.atomdic[a2], func))
+                string = ' '.join(txt[2:])
+		fout.write('%s\t%s\t%s\n' %(Atom.atomdic[a1], Atom.atomdic[a2], string))
 	    elif option == 'pairs':
 		txt = line.split()
 		a1 = int(txt[0])
 		a2 = int(txt[1])
-		func = int(txt[2])
-		fout.write('%s\t%s\t%d\n' %(Atom.atomdic[a1], Atom.atomdic[a2], func))
+                string = ' '.join(txt[2:])
+		fout.write('%s\t%s\t%s\n' %(Atom.atomdic[a1], Atom.atomdic[a2], string))
+	    elif option == 'exclusions':
+		txt = line.split()
+		a1 = int(txt[0])
+		a2 = int(txt[1])
+		fout.write('%s\t%s\n' %(Atom.atomdic[a1], Atom.atomdic[a2]))
 	    elif option == 'angles':
 		txt = line.split()
 		a1 = int(txt[0])
 		a2 = int(txt[1])
 		a3 = int(txt[2])
-		func = int(txt[3])
-		fout.write('%s\t%s\t%s\t%d\n' %(Atom.atomdic[a1], Atom.atomdic[a2], Atom.atomdic[a3], func))
+                string = ' '.join(txt[3:])
+		fout.write('%s\t%s\t%s\t%s\n' %(Atom.atomdic[a1], Atom.atomdic[a2], Atom.atomdic[a3], string))
 	    elif option == 'dihedrals' :
 		txt = line.split()
 		a1 = int(txt[0])
 		a2 = int(txt[1])
 		a3 = int(txt[2])
 		a4 = int(txt[3])
-		func = int(txt[4])
-		fout.write('%s\t%s\t%s\t%s\t%d\n' %(Atom.atomdic[a1], Atom.atomdic[a2], Atom.atomdic[a3], Atom.atomdic[a4], func))
+                string = ' '.join(txt[4:])
+		fout.write('%s\t%s\t%s\t%s\t%s\n' %(Atom.atomdic[a1], Atom.atomdic[a2], Atom.atomdic[a3], Atom.atomdic[a4], string))
+	    elif option == 'virtual_sites3' :
+		txt = line.split()
+		a1 = int(txt[0])
+		a2 = int(txt[1])
+		a3 = int(txt[2])
+		a4 = int(txt[3])
+                string = ' '.join(txt[4:])
+		fout.write('%s\t%s\t%s\t%s\t%s\n' %(Atom.atomdic[a1], Atom.atomdic[a2], Atom.atomdic[a3], Atom.atomdic[a4], string))
 	    elif option == 'dihedral_restraints':
 		txt = line.split()
 		a1 = int(txt[0])
