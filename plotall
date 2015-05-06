@@ -108,16 +108,17 @@ for f in ${plotlist[@]}; do
 	keypos='set key right'
 	if [[ $f == table_[adi][0-9]*.xvg ]]; then
 	    if [[ $f == table_[a][0-9]*.xvg ]]; then
-		xlabel='{/Symbol f} ({/Symbol \260})'
-		ylabel='V({/Symbol f}) (kJ/mol)'
+		xlabel='{/Symbol q} ({/Symbol \260})'
+		ylabel='V({/Symbol q}) (kJ/mol)'
 		xrange='set xrange [0:180]'
+		xtics='set xtics 30'
 	    else
 		xrange='set xrange [-180:180]'
 		xlabel='{/Symbol f} ({/Symbol \260})'
 		ylabel='V({/Symbol f}) (kJ/mol)'
+		xtics='set xtics 45'
 	    fi
 	    using=" using 1:2 "
-	    xtics='set xtics 45'
 	    yrange='set yrange [:]'
 	elif [[ $f == "table_GO_GO.xvg" ]]; then
 	    using=" using 1:6 "
