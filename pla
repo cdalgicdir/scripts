@@ -443,8 +443,7 @@ do
 		    if $labelsfromfile; then
 			#titlelist=(`grep -i -w s[0-9] $file | awk '{$1=$2=$3="";print $0}' | tr -d '"'`)
 			title_label=(`grep -i -w s$((column-2)) $file | awk '{$1=$2=$3="";print $0}' | tr -d '"'`)
-			echo $column ${title_label[@]}
-			#echo ${titlelist[@]}
+			#echo $column ${title_label[@]}
 			#title_label=${titlelist[$((column-2))]}
 			#echo ${title_label[@]}
 			title="t ${q}${title_label[@]}${q}, "
