@@ -429,7 +429,7 @@ do
 	    if ! $userset ; then
 		colslist+=("1:6")
 		#ymax=1.5
-		[[ $range == "[:][:]" ]] && range="[:][:10]"
+		[[ $range == "[:][:]" ]] && range="[:][:20]"
 	    fi
 	fi
 	
@@ -441,9 +441,13 @@ do
 		plotfiles=${plotfiles}${q}${file}${q}${ev}${using}${with}
 		if [[ $label == 1 ]]; then
 		    if $labelsfromfile; then
-			titlelist=(`grep -i -w s[0-9] $file | awk '{print $4}' | tr -d '"'`)
-			title_label=${titlelist[$((column-2))]}
-			title="t ${q}${title_label}${q}, "
+			#titlelist=(`grep -i -w s[0-9] $file | awk '{$1=$2=$3="";print $0}' | tr -d '"'`)
+			title_label=(`grep -i -w s[$((column-2))] $file | awk '{$1=$2=$3="";print $0}' | tr -d '"'`)
+			#echo ${titlelist[@]}
+			#title_label=${titlelist[$((column-2))]}
+			#echo ${title_label[@]}
+			title="t ${q}${title_label[@]}${q}, "
+			#echo ${title[@]}
 			plotfiles=$plotfiles${title}
 		    else
 			#plotfiles=$plotfiles't '$q${i}$q',' 
