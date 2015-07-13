@@ -7,31 +7,24 @@ if matchstr(expand("%"),".*\.md") != ""
     set guifont=Monofur\ 17
     " Monofur, Monaco, Source Code Pro
     "set guifont=Ubuntu\ Mono\ 16
-    :au BufRead *.md set spell
+    :au BufRead *.tex set spell
     :highlight SpellBad gui=underline guibg=NONE guifg=red
     :au BufRead *.md syn region mkdCode start="\[@" end="\]"
-    :au BufRead *.md syn region mkdCode start="{% cite " end="%}"
     ":au BufRead *.md syn region mkdRule matchgroup=mkdDelimiter start="\[@" end="\]"
 elseif matchstr(expand("%"),".*\.tex") != ""
     colorscheme corporation
-    set guifont=Inconsolata\ 16
-    "set guifont=Source\ Code\ Pro\ 15
+    set guifont=Inconsolata\ 18
+    "set guifont=Source\ Code\ Pro\ 16
     " Monofur, Monaco, Source Code Pro
     "set guifont=Ubuntu\ Mono\ 16
     :au BufRead *.tex set spell
     :highlight SpellBad gui=underline guibg=NONE guifg=red
-    :hi myTexRed ctermfg=red guifg=#9C2020
-    :hi myTexBlue ctermfg=blue guifg=#3D48BD
-    :hi myTexComment ctermfg=green guifg=#3DBD72
-    :au BufRead *.tex syn region myTexRed start='\\red{' end='}' containedin=texStatement
-    :au BufRead *.tex syn region myTexBlue start='\\blue{' end='}' containedin=texStatement
-    :au BufRead *.tex syn region myTexComment start='\\cahit{' end='}' containedin=texStatement
 else
     "colorscheme moria, twilight, solarized, inkpot, corporation, monokai,
     "jellybeans
     "colorscheme corporation
     colorscheme jellybeans
-    set guifont=Monaco\ 14
+    set guifont=Monaco\ 16
     "set guifont=Droid\ Sans\ Mono\ 14
 endif
 
@@ -63,7 +56,7 @@ if matchstr(expand("%"),".*\.tex") != ""
     :iab KL LK$\alpha$14
     :iab ie i.e.
     :iab adn and
-    :iab ii4 \emph{CN$_i$-CN$_{i+4}$}
+    :iab ii3 \emph{CN$_i$-CN$_{i+3}$}
     :iab ca1 C$_{\alpha}$
     :iab cb1 C$_{\beta}$
     ":map <F2> viWB<ESC><ESC>i\emph{<ESC>Ea}<ESC>

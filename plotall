@@ -69,6 +69,7 @@ while [[ $# -gt 0 ]]; do
         -pdf)
 	    termset="pdf"
 	    fontsize=18
+	    linewidth=2.5
             shift;;
 
 	-t | -titles)
