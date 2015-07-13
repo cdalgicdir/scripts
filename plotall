@@ -113,7 +113,7 @@ while [[ $# -gt 0 ]]; do
 	    ;;
 
         -w | -wall)
-	    plotlist+=('table_L_wall0.xvg' 'table_GO_wall0.xvg')
+	    plotlist+=('table_L_wall0.xvg' 'table_GO_wall0.xvg' 'coord_L.xvg')
 	    shift
 	    ;;
 
@@ -222,6 +222,15 @@ for f in ${plotlist[@]}; do
 	yrange='set yrange [:]'
 	xtics='set xtics 45'
 	keypos='left'
+    elif [[ $f == coord*xvg ]]; then
+	using=' using ($1/1000):2 every 100 '
+	histdir="."
+	xlabel='Time (ns)'
+	ylabel='z (nm)'
+	xrange=''
+	yrange=''
+	xtics=''
+	keypos='right'
     else 
 	using=" using 1:2 "
 	histdir="histograms"
