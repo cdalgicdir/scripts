@@ -19,6 +19,12 @@ size="800,600"
 output=""
 termset=""
 usersetlabels=false
+keyvh="vertical"
+keysamplen="4"
+keyspacing="1"
+keywidth="0"
+keyheight="0"
+keypos="right Right"
 
 ###################################################################
 # Atomistic EALA directories
@@ -30,7 +36,7 @@ folders=($dirvac $dirint)
 
 
 plot () {
-        gplot $output -c "$xtics" -c "$yrange" -c "$xrange" -t "$title" -c "$keypos" -c "set ylabel '$ylabel'" -c "set xlabel '$xlabel'" -c "$terminal" -- "$plcomms"
+        gplot $output -c "$xtics" -c "$yrange" -c "$xrange" -t "$title" -c "$key" -c "set ylabel '$ylabel'" -c "set xlabel '$xlabel'" -c "$terminal" -- "$plcomms"
 }
 
 printcommands () {
@@ -57,10 +63,12 @@ while [[ $# -gt 0 ]]; do
 
         -png)
 	    termset="png"
+	    fontsize=22
             shift;;
 
         -pdf)
 	    termset="pdf"
+	    fontsize=18
             shift;;
 
 	-t | -titles)
@@ -108,6 +116,36 @@ while [[ $# -gt 0 ]]; do
 	    shift
 	    ;;
 
+        -kho | -keyhorizontal)
+	    keyvh="horizontal"
+	    shift
+	    ;;
+
+        -ks | -keysamplen)
+	    keysamplen=$2
+	    shift
+	    ;;
+
+        -kp | -keypos)
+	    keypos=$2
+	    shift
+	    ;;
+
+        -ksp | -keyspacing)
+	    keyspacing=$2
+	    shift
+	    ;;
+
+        -kw | -keywidth)
+	    keywidth=$2
+	    shift
+	    ;;
+
+        -kh | -keyheight)
+	    keyheight=$2
+	    shift
+	    ;;
+
         -h|--h|-help|--help)
             echo "Usage: plotall [directories]"
 	    exit 0
@@ -126,6 +164,7 @@ elif [[ $termset == "pdf" ]]; then
     terminal='set terminal pdfcairo enhanced font "'${fonttype[@]}','$fontsize'" linewidth '$linewidth' rounded'
 fi
 
+
 IFS=$'\t\n'
 len_plots=`expr ${#plots[@]} - 1`
 i=0
@@ -140,7 +179,7 @@ for f in ${plotlist[@]}; do
 	yrange='set yrange [:20]'
 	using=" using 1:6 "
 	xtics='set xtics auto'
-	keypos='set key right'
+	keypos='right'
 	if [[ $f == table_[adi][0-9]*.xvg ]]; then
 	    if [[ $f == table_[a][0-9]*.xvg ]]; then
 		xlabel='{/Symbol q} ({/Symbol \260})'
@@ -172,7 +211,7 @@ for f in ${plotlist[@]}; do
 	xrange='set xrange [-180:180]'
 	yrange='set yrange [:]'
 	xtics='set xtics 45'
-	keypos='set key left Left reverse'
+	keypos='left Left reverse'
     elif [[ $f == ang_* ]]; then
 	using=" using 1:2 "
 	histdir="histograms"
@@ -181,7 +220,7 @@ for f in ${plotlist[@]}; do
 	xrange='set xrange [-180:180]'
 	yrange='set yrange [:]'
 	xtics='set xtics 45'
-	keypos='set key left'
+	keypos='left'
     else 
 	using=" using 1:2 "
 	histdir="histograms"
@@ -189,7 +228,7 @@ for f in ${plotlist[@]}; do
 	ylabel='P(r)'
 	xrange='set xrange [:]'
 	yrange='set yrange [:]'
-	keypos='set key right'
+	keypos='right'
     fi
     plcomms=''
     tmp=`echo "${f}" | sed 's/_/-/g'` && title=${tmp%.xvg}
@@ -197,8 +236,10 @@ for f in ${plotlist[@]}; do
     title=${title#dih-} && title=${title%-avg}
 
     if [[ $title == "CN-A-CN-CA" ]] || [[ $title == "CN-A-CN-A" ]] || [[ $title == "CN-CA-CN-CA" ]]; then
-	keypos='set key right top'
+	keypos='right top'
     fi
+
+    key="set key $keypos $keyvh samplen $keysamplen width $keywidth spacing $keyspacing height $keyheight"
 
     counter=0
     for dir in ${folders[@]}; do
