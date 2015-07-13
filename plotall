@@ -3,7 +3,7 @@
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'table_L_wall0.xvg' 'tablep.xvg')
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CN-CA-CN_avg.xvg')
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_A-CN-A-CN_avg.xvg' 'dih_A-CN-CA-CN_avg.xvg' 'dih_CA-CN-A-CN_avg.xvg' 'dih_CN-A-CN-A_avg.xvg' 'dih_CN-A-CN-CA_avg.xvg' 'dih_CN-CA-CN-A_avg.xvg')
-plotlist=('dist_CNi-CNi3_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CA-CA-CA_avg.xvg' 'tablep.xvg' 'table_d6.xvg' 'table_a10.xvg')
+plotlist=('dist_CNi-CNi3_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CA-CA-CA_avg.xvg' 'tablep.xvg' 'table_d6.xvg' 'table_a10.xvg' 'table_GO_GO.xvg')
 
 plcomms=''
 q="'"
@@ -12,6 +12,10 @@ gplot='gplot'
 with=" with lines "
 histdir="histograms"
 terminal="set terminal wxt enhanced"
+fonttype="Gill Sans"
+fontsize="12"
+linewidth=1.5
+size="800,600"
 output=""
 termset=""
 usersetlabels=false
@@ -52,13 +56,11 @@ while [[ $# -gt 0 ]]; do
     case $1 in
 
         -png)
-            terminal='set terminal pngcairo size 800,600 enhanced font "Gill Sans,12" linewidth 3 rounded'
 	    termset="png"
             shift;;
 
         -pdf)
 	    termset="pdf"
-            terminal='set terminal pdfcairo enhanced font "Gill Sans,12" linewidth 2 rounded'
             shift;;
 
 	-t | -titles)
@@ -75,6 +77,22 @@ while [[ $# -gt 0 ]]; do
             noplottab=false
             shift 1;;
 
+        -lw | -linewidth)
+	    linewidth=$2
+	    ;;
+
+        -ft | -fonttype)
+	    fonttype="$2"
+	    ;;
+
+        -fs | -fontsize)
+	    fontsize=$2
+	    ;;
+
+        -s | -size)
+	    size=$2
+	    ;;
+
         -nt | -nopt)
             noplot=true
             noplottab=true
@@ -82,6 +100,7 @@ while [[ $# -gt 0 ]]; do
 
         -h|--h|-help|--help)
             echo "Usage: plotall [directories]"
+	    exit 0
             ;;
 
         *)
@@ -90,6 +109,12 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
+
+if [[ $termset == "png" ]]; then
+    terminal='set terminal pngcairo size '$size' enhanced font "'${fonttype[@]}','$fontsize'" linewidth '$linewidth' rounded'
+elif [[ $termset == "pdf" ]]; then
+    terminal='set terminal pdfcairo enhanced font "'${fonttype[@]}','$fontsize'" linewidth '$linewidth' rounded'
+fi
 
 IFS=$'\t\n'
 len_plots=`expr ${#plots[@]} - 1`
@@ -127,7 +152,7 @@ for f in ${plotlist[@]}; do
 	else
 	    using=" using 1:6 "
 	    xrange='set xrange [:5]'
-	    yrange='set yrange [:10]'
+	    yrange='set yrange [:20]'
 	fi
     elif [[ $f == dih_* ]]; then
 	using=" using 1:2 "

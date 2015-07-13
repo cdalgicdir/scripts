@@ -240,11 +240,12 @@ user add key A { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone 
 #user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA2 CA3 CA4 CA5 CA6 A1 A2 A3 A4 A5 A6" }
 user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11"}
 user add key b { showbackbone [molinfo top] }
-user add key F8 { snap [molinfo top] "auto" "false" }
+#user add key F8 { snap [molinfo top] "auto" "false" }
+user add key F8 { snap "auto" "false" }
 user add key F9 { writegro [molinfo top] }
-user add key F10 { snap [molinfo top] }
+user add key F10 { snap }
 user add key F11 { display depthcue off; color Display Background white;axes location off;foreach mol [molinfo list] { mol top $mol; pbc box -off }}
-user add key F12 { snap [molinfo top] "auto" "true" "true" }
+user add key F12 { snap "auto" "true" "true" }
 user add key F5 { refresh_trajectory [molinfo top] "traj.xtc" 1 }
 user add key Control-c { cg_map "mapped.gro" }
 user add key Control-v { cg_map_all "mapped.gro" }
@@ -905,6 +906,8 @@ proc align {molid {seltxt "protein and backbone"}} {
         continue
       }
       rmsdtt::align $sel $j $sel_ref
+     # rmsdtt::get_rmsd $sel $sel_ref
+     # rmsdtt::doPlot
     }
   menu rmsdtt off
 }
@@ -1054,9 +1057,11 @@ proc snapincr {{increment "1000"}  {ambient "true"}} {
     lores [molinfo top]
 }
 
-proc snap {{molid "0"} {filename "auto"} {dotrim "true"} {ambient "true"}} {
+#proc snap {{molid "0"} {filename "auto"} {dotrim "true"} {ambient "true"}} {
+proc snap {{filename "auto"} {dotrim "true"} {ambient "true"} {aoambient "0.8"} {aodirect "0.3"} } {
   # take a snapshot, process and output as frame#.png
-    hires $molid
+    foreach i [molinfo list] {hires $i}
+    set molid 0
     #color Display Background white;pbc box -off;axes location off
     #display depthcue off
     # ascii a=97
@@ -1064,8 +1069,8 @@ proc snap {{molid "0"} {filename "auto"} {dotrim "true"} {ambient "true"}} {
     if {$ambient == "true"} {
 	display ambientocclusion on
 	display shadows on
-	display aoambient 0.800000
-	display aodirect 0.300000
+	display aoambient $aoambient 
+	display aodirect $aodirect
 	set suffix "-ao"
     } else {
 	display ambientocclusion off
@@ -1259,7 +1264,10 @@ proc cgview {{molid "0"}} {
     mol addrep $molid
     mol representation CPK 1.000000 0.300000 10.000000 10.000000
     #mol color ColorID 6
-    mol selection {name CA1 CA2 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11 CA12 CA13 CA14 CN1 CN2 CN3 CN4 CN5 CN6 CN7 CN8 CN8 CN9 CN10 CN11 CN12 CN13 CN14 CN15}
+    mol selection {name CA1 CA2 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11 CA12 CA13 CA14 }
+    mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol addrep $molid
+    mol selection {name CN1 CN2 CN3 CN4 CN5 CN6 CN7 CN8 CN8 CN9 CN10 CN11 CN12 CN13 CN14 CN15}
     mol addrep $molid
     mol representation CPK 1.000000 0.300000 10.000000 10.000000
     #mol color ColorID 8
@@ -1268,9 +1276,40 @@ proc cgview {{molid "0"}} {
     mol representation Bonds 0.1 12.00
     mol selection all
     mol addrep $molid
-
 }
 
+proc cgviewVDW {{molid "0"}} {
+    #mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol representation VDW 1.000000 12.000000
+    #mol color ColorID 26
+    mol color Name
+    #mol selection {name KC1 KC2 KC3 KC4 KC5 KC6 KN1 KN2 KN3 KN4 KN5 KN6}
+    mol selection {name GO1 GO2 GO3 GO4 GC1 GC2 GC3 GC4}
+    mol addrep $molid
+    #mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol representation VDW 1.000000 12.000000
+    #mol color ColorID 1
+    mol selection {name L1 L2 L3 L4 }
+    #mol selection {name L1 L2 L3 L4 L5 L6 L7 L8}
+    mol addrep $molid
+    #mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol representation VDW 0.600000 12.000000
+    #mol color ColorID 6
+    mol selection {name CA1 CA2 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11 CA12 CA13 CA14 }
+    #mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol addrep $molid
+    mol representation VDW 1.000000 12.000000
+    mol selection {name CN1 CN2 CN3 CN4 CN5 CN6 CN7 CN8 CN8 CN9 CN10 CN11 CN12 CN13 CN14 CN15}
+    mol addrep $molid
+    #mol representation CPK 1.000000 0.300000 10.000000 10.000000
+    mol representation VDW 0.600000 12.000000
+    #mol color ColorID 8
+    mol selection {name AB1 AB2 AB3 AB4 AB5 AB6 AB7 }
+    mol addrep $molid
+    mol representation Bonds 0.1 12.00
+    mol selection all
+    mol addrep $molid
+}
 proc periodicZ {{molid "0"}} {
     set numrep [molinfo $molid get numreps]
     for {set i 0} {$i < $numrep} {incr i} { 
@@ -1466,6 +1505,44 @@ color Labels Dihedrals iceblue
 color Labels Springs iceblue
 label textsize 1.1
 label textthickness 1.8
+
+#proc dorms {{rms_sel "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11"} } {
+#set rmsdtt::traj_sw 1
+#set rmsdtt::skip_sw 0
+#set ref_frames 0
+## Calculate rmsd and averages
+#  array unset rmsd
+#  array unset rms_ave
+#  array unset rms_val
+#  set rms_tot 0.0
+#  set ref_mol 0
+#  foreach i 0 {
+#    set target_frames [rmsdtt::get_frames_for_mol $i]
+##puts "DEBUG: target_frames $target_frames"
+#    set target_sel [atomselect $i $rms_sel]
+#    set rms_ave($i) 0.0
+#    foreach j $ref_frames {
+#      foreach k $target_frames {
+#        if {$ref_mol == $i && $j == $k} {
+#          continue
+#        }
+#        #puts -nonewline "DEBUG: computing rmsd($ref_mol:$j,$i:$k)"
+#puts $target_sel
+#        $target_sel frame $k
+#        #puts "   = $rmsd($ref_mol:$j,$i:$k)"
+#        set rms_ave($i) [expr {$rms_ave($i) + $rmsd($ref_mol:$j,$i:$k)}]
+#      }
+#    }
+#    set rms_tot [expr {$rms_tot + $rms_ave($i)}]
+#    set count($i) [llength [array names rmsd *,$i:*]]
+#    if {$count($i) != 0} {
+#      set rms_ave($i) [expr {$rms_ave($i)/$count($i)}]
+#    }
+#  }
+#  set rms_tot [expr {$rms_tot/[array size rmsd]}]
+#  rmsdtt::color_data 1
+#  rmsdtt:doPlot
+#}
 
 ## hook up the function.
 #trace variable vmd_initialize_structure w kl_viz_proxy
