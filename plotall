@@ -23,8 +23,8 @@ usersetlabels=false
 ###################################################################
 # Atomistic EALA directories
 ###################################################################
-dirvac="/mnt/data/cdalgicdir/SIMS/EALA-cg/atm-implicit/071014_implicit-excluded/cg-only-CA-glu-PME/map"
-dirint="/mnt/data/cdalgicdir/SIMS/EALA-cg/atm-interface/map-only-CA-glu"
+dirvac="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-implicit/071014_implicit-excluded/cg-only-CA-glu-PME/map"
+dirint="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-interface/map-only-CA-glu"
 folders=($dirvac $dirint)
 ###################################################################
 
@@ -100,7 +100,13 @@ while [[ $# -gt 0 ]]; do
         -nt | -nopt)
             noplot=true
             noplottab=true
-            shift 1;;
+            shift
+	    ;;
+
+        -w | -wall)
+	    plotlist+=('table_L_wall0.xvg' 'table_GO_wall0.xvg')
+	    shift
+	    ;;
 
         -h|--h|-help|--help)
             echo "Usage: plotall [directories]"
