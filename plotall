@@ -79,18 +79,22 @@ while [[ $# -gt 0 ]]; do
 
         -lw | -linewidth)
 	    linewidth=$2
+	    shift
 	    ;;
 
         -ft | -fonttype)
 	    fonttype="$2"
+	    shift
 	    ;;
 
         -fs | -fontsize)
 	    fontsize=$2
+	    shift
 	    ;;
 
         -s | -size)
 	    size=$2
+	    shift
 	    ;;
 
         -nt | -nopt)
