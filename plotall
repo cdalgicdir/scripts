@@ -201,7 +201,7 @@ for f in ${plotlist[@]}; do
 	    yrange='set yrange [:200]'
 	elif [[ $f == "tablep.xvg" ]]; then
 	    using=" using 1:6 "
-	    xrange='set xrange [:2]'
+	    xrange='set xrange [:1.5]'
 	    yrange='set yrange [:50]'
 	else
 	    using=" using 1:6 "
@@ -227,7 +227,16 @@ for f in ${plotlist[@]}; do
 	xtics='set xtics 45'
 	keypos='left'
     elif [[ $f == coord*xvg ]]; then
-	using=' using ($1/1000):2 every 100 '
+	using=' using ($1/1000):4 every 100 '
+	histdir="."
+	xlabel='Time (ns)'
+	ylabel='P({/Symbol f})'
+	xrange=''
+	yrange=''
+	xtics=''
+	keypos='right'
+    elif [[ $f == time*xvg ]]; then
+	using=' using ($1/1000):2 every 500 '
 	histdir="."
 	xlabel='Time (ns)'
 	ylabel='z (nm)'
