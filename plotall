@@ -199,6 +199,10 @@ for f in ${plotlist[@]}; do
 	    using=" using 1:6 "
 	    xrange='set xrange [:5]'
 	    yrange='set yrange [:200]'
+	elif [[ $f == "tablep.xvg" ]]; then
+	    using=" using 1:6 "
+	    xrange='set xrange [:2]'
+	    yrange='set yrange [:50]'
 	else
 	    using=" using 1:6 "
 	    xrange='set xrange [:5]'
