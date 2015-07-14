@@ -194,6 +194,16 @@ while [[ $# -ge 1 ]]; do
 	    range="[:][:$2]"
 	    shift 2;;
 
+	-yl)
+	    extra="set ylabel \"$2\""
+	    shift 2
+	    ;;
+
+	-xl)
+	    extra="set xlabel \"$2\""
+	    shift 2
+	    ;;
+
 	-nxy)
 	    nxy=1
 	    shift ;;
@@ -256,6 +266,11 @@ while [[ $# -ge 1 ]]; do
 	    termoptions="$termoptions dashed"
 	    #terminal=$terminal' dashed'
 	    shift 1;;
+
+	-e|-enhanced)
+	    termoptions="$termoptions enhanced"
+	    shift
+	    ;;
 
 	-pdf)
 	    $lwset && lw=$lw || lw=3
