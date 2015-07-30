@@ -25,6 +25,7 @@ keyspacing="1"
 keywidth="0"
 keyheight="0"
 keypos="right Right"
+check_identical=true
 
 ###################################################################
 # Atomistic EALA directories
@@ -88,22 +89,22 @@ while [[ $# -gt 0 ]]; do
 
         -lw | -linewidth)
 	    linewidth=$2
-	    shift
+	    shift 2
 	    ;;
 
         -ft | -fonttype)
 	    fonttype="$2"
-	    shift
+	    shift 2
 	    ;;
 
         -fs | -fontsize)
 	    fontsize=$2
-	    shift
+	    shift 2
 	    ;;
 
         -s | -size)
 	    size=$2
-	    shift
+	    shift 2
 	    ;;
 
         -nt | -nopt)
@@ -124,26 +125,36 @@ while [[ $# -gt 0 ]]; do
 
         -ks | -keysamplen)
 	    keysamplen=$2
-	    shift
+	    shift 2
 	    ;;
 
         -kp | -keypos)
 	    keypos=$2
-	    shift
+	    shift 2
 	    ;;
 
         -ksp | -keyspacing)
 	    keyspacing=$2
-	    shift
+	    shift 2
 	    ;;
 
         -kw | -keywidth)
 	    keywidth=$2
-	    shift
+	    shift 2
 	    ;;
 
         -kh | -keyheight)
 	    keyheight=$2
+	    shift 2
+	    ;;
+
+        -i | -id | -identical)
+	    check_identical=true
+	    shift
+	    ;;
+
+        -ni | -noid | -noidentical)
+	    check_identical=false
 	    shift
 	    ;;
 
@@ -269,6 +280,32 @@ for f in ${plotlist[@]}; do
     key="set key $keypos $keyvh samplen $keysamplen width $keywidth spacing $keyspacing height $keyheight"
 
     counter=0
+
+    if $check_identical; then
+    identical=true
+    nfolders=${#folders[@]}
+    for i1 in `seq $((nfolders-1))`; do
+	dir1=${folders[$i1]}
+	f1=$dir1/$histdir/$f
+	for i2 in `seq $((i1+1)) $((nfolders-1))`; do
+	    dir2=${folders[$i2]}
+	    if [[ $dir1 == $dirvac ]] || [[ $dir1 == $dirint ]] || [[ $dir2 == $dirvac ]] || [[ $dir2 == $dirint ]]; then
+		identical=true
+	    else
+		f2=$dir2/$histdir/$f
+		#echo $f1 $f2 $identical
+		if [[ -e $f1 ]] && [[ -e $f2 ]]; then
+		    [[ `diff $f1 $f2` ]] && identical=false && break
+		fi
+	    fi
+	done
+    done
+    #echo $identical
+    else
+	identical=false
+    fi
+
+    if ! $identical; then
     for dir in ${folders[@]}; do
 	address=$dir/$histdir/$f
 	#[[ ! -e "${address}" ]] && continue
@@ -297,6 +334,7 @@ for f in ${plotlist[@]}; do
 	plcomms=${plcomms}${q}${address}${q}${using}${with}'t '${q}${dirlabel}${q},
     let counter=$counter+1
     done
+    fi
     if [[ $noplot == true ]]; then
 	printcommands
     else
