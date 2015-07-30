@@ -272,14 +272,17 @@ for f in ${plotlist[@]}; do
     tmp=`echo "${f}" | sed 's/_/-/g'` && title=${tmp%.xvg}
     [[ $termset != "" ]] && output="-o${title}.${termset}"
     title=${title#dih-} && title=${title%-avg}
+    [[ $title == *-avg-mid ]] && title=${title%-avg-mid} && title=$title"-mid"
 
-    if [[ $title == "CN-A-CN-CA" ]] || [[ $title == "CN-A-CN-A" ]] || [[ $title == "CN-CA-CN-CA" ]]; then
+    if [[ $title == CN-A-CN-CA* ]] || [[ $title == CN-A-CN-A* ]] || [[ $title == CN-CA-CN-CA* ]] ; then
 	keypos='right top'
     fi
 
     key="set key $keypos $keyvh samplen $keysamplen width $keywidth spacing $keyspacing height $keyheight"
 
     counter=0
+
+    [[ ${#folders[@]} == 3 ]] && check_identical=false
 
     if $check_identical; then
     identical=true
