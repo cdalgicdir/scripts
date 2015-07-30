@@ -32,6 +32,7 @@ check_identical=true
 ###################################################################
 dirvac="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-implicit/071014_implicit-excluded/cg-only-CA-glu-PME/map"
 dirint="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-interface/map-only-CA-glu"
+dirbulk="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-bulk/map-CA-AB"
 folders=($dirvac $dirint)
 ###################################################################
 
@@ -158,13 +159,31 @@ while [[ $# -gt 0 ]]; do
 	    shift
 	    ;;
 
+	-m | -mid)
+	    plotlist=('dih_CN-CA-CN-CA_avg_mid.xvg' 'dih_CA-CN-CA-CN_avg_mid.xvg' 'dist_CNi-CNi3_avg-mid.xvg')
+	    shift
+	    ;;
+
+	-bb )
+	    plotlist=('dih_CN-CA-CN-CA_avg.xvg' 'dih_CN-CA-CN-CA_avg_mid.xvg')
+	    shift
+	    ;;
+
+	-b | -bulk )
+	    folders=(${folders[@]/$dirint})
+	    folders=(${folders[@]/$dirvac})
+	    folders=($dirint $dirvac $dirbulk ${folders[*]})
+	    shift
+	    ;;
+
+
         -h|--h|-help|--help)
             echo "Usage: plotall [directories]"
 	    exit 0
             ;;
 
         *)
-            folders=(${folders[*]} $1)
+            folders+=($1)
             shift
             ;;
     esac
@@ -327,6 +346,8 @@ for f in ${plotlist[@]}; do
 	    dirlabel="atm-vac"
 	elif [[ $dir == $dirint ]]; then
 	    dirlabel="atm-int"
+	elif [[ $dir == $dirbulk ]]; then
+	    dirlabel="atm-bulk"
 	else
 	    if $usersetlabels; then
 		dirlabel="${labellist[$((counter-2))]}"
