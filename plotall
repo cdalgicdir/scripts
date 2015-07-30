@@ -3,7 +3,7 @@
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'table_L_wall0.xvg' 'tablep.xvg')
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CN-CA-CN_avg.xvg')
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_A-CN-A-CN_avg.xvg' 'dih_A-CN-CA-CN_avg.xvg' 'dih_CA-CN-A-CN_avg.xvg' 'dih_CN-A-CN-A_avg.xvg' 'dih_CN-A-CN-CA_avg.xvg' 'dih_CN-CA-CN-A_avg.xvg')
-plotlist=('dist_CNi-CNi3_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CA-CA-CA_avg.xvg' 'tablep.xvg' 'table_d6.xvg' 'table_a10.xvg' 'table_GO_GO.xvg')
+plotlist=('dist_CNi-CNi3_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CA-CA-CA_avg.xvg' 'tablep.xvg' 'table_d6.xvg' 'table_a10.xvg' 'table_GO_GO.xvg' 'table_L_L.xvg' 'dih_CN-CA-CN-CA_avg_mid.xvg' 'dih_CA-CN-CA-CN_avg_mid.xvg' 'dist_CNi-CNi3_avg-mid.xvg')
 
 plcomms=''
 q="'"
@@ -234,7 +234,10 @@ for f in ${plotlist[@]}; do
 	xrange=''
 	yrange=''
 	xtics=''
-	keypos='right'
+	keypos='out'
+	keyvh='horizontal'
+	keysamplen='1'
+	keywidth='-1'
     elif [[ $f == time*xvg ]]; then
 	using=' using ($1/1000):2 every 500 '
 	histdir="."
@@ -251,6 +254,7 @@ for f in ${plotlist[@]}; do
 	ylabel='P(r)'
 	xrange='set xrange [:]'
 	yrange='set yrange [:]'
+	xtics='set xtics auto'
 	keypos='right'
     fi
     plcomms=''
