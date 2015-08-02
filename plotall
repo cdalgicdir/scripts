@@ -3,7 +3,8 @@
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'table_L_wall0.xvg' 'tablep.xvg')
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'ang_CA-CN-CA_avg.xvg' 'ang_CN-CA-CN_avg.xvg')
 #plotlist=('dist_CNi-CNi4_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_A-CN-A-CN_avg.xvg' 'dih_A-CN-CA-CN_avg.xvg' 'dih_CA-CN-A-CN_avg.xvg' 'dih_CN-A-CN-A_avg.xvg' 'dih_CN-A-CN-CA_avg.xvg' 'dih_CN-CA-CN-A_avg.xvg')
-plotlist=('dist_CNi-CNi3_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CA-CA-CA_avg.xvg' 'tablep.xvg' 'table_d6.xvg' 'table_a10.xvg' 'table_GO_GO.xvg' 'table_L_L.xvg' 'dih_CN-CA-CN-CA_avg_mid.xvg' 'dih_CA-CN-CA-CN_avg_mid.xvg' 'dist_CNi-CNi3_avg-mid.xvg')
+#plotlist=('dist_CNi-CNi3_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CA-CA-CA_avg.xvg' 'tablep.xvg' 'table_d6.xvg' 'table_a10.xvg' 'table_GO_GO.xvg' 'table_L_L.xvg' 'dih_CN-CA-CN-CA_avg_mid.xvg' 'dih_CA-CN-CA-CN_avg_mid.xvg' 'dist_CNi-CNi3_avg-mid.xvg')
+plotlist=('dih_CA-CA-CA-CA_avg.xvg' 'tablep.xvg' 'table_d6.xvg' 'table_a10.xvg' 'table_GO_GO.xvg' 'table_L_L.xvg' 'dih_CN-CA-CN-CA_avg_mid.xvg' 'dih_CA-CN-CA-CN_avg_mid.xvg' 'dist_CNi-CNi3_avg_mid.xvg')
 
 plcomms=''
 q="'"
@@ -33,6 +34,7 @@ check_identical=true
 dirvac="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-implicit/071014_implicit-excluded/cg-only-CA-glu-PME/map"
 dirint="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-interface/map-only-CA-glu"
 dirbulk="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-bulk/map-CA-AB"
+plot_atm=true
 folders=($dirvac $dirint)
 ###################################################################
 
@@ -176,6 +178,10 @@ while [[ $# -gt 0 ]]; do
 	    shift
 	    ;;
 
+	-na | -noatm )
+	    plot_atm=false
+	    shift
+	    ;;
 
         -h|--h|-help|--help)
             echo "Usage: plotall [directories]"
@@ -188,6 +194,11 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
+
+if ! $plot_atm ; then
+    folders=(${folders[@]/$dirint})
+    folders=(${folders[@]/$dirvac})
+fi
 
 if [[ $termset == "png" ]]; then
     terminal='set terminal pngcairo size '$size' enhanced font "'${fonttype[@]}','$fontsize'" linewidth '$linewidth' rounded'
@@ -306,7 +317,7 @@ for f in ${plotlist[@]}; do
     if $check_identical; then
     identical=true
     nfolders=${#folders[@]}
-    for i1 in `seq $((nfolders-1))`; do
+    for i1 in `seq 0 $((nfolders-1))`; do
 	dir1=${folders[$i1]}
 	f1=$dir1/$histdir/$f
 	for i2 in `seq $((i1+1)) $((nfolders-1))`; do
