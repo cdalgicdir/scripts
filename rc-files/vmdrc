@@ -241,7 +241,7 @@ user add key A { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone 
 user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11"}
 user add key b { showbackbone [molinfo top] }
 #user add key F8 { snap [molinfo top] "auto" "false" }
-user add key F8 { snap "auto" "false" }
+user add key F8 { snap "auto" "false" "true" }
 user add key F9 { writegro [molinfo top] }
 user add key F10 { snap }
 user add key F11 { display depthcue off; color Display Background white;axes location off;foreach mol [molinfo list] { mol top $mol; pbc box -off }}
@@ -252,6 +252,7 @@ user add key Control-v { cg_map_all "mapped.gro" }
 #user add key Control-x { cg_colors [molinfo top] }
 #user add key B { align [molinfo top] "residue 1 to 15 and backbone" }
 #user add key V { align [molinfo top] "not water and mass 12 to 99" }
+user add key K { ss_viz_SSA [molinfo top] }
 
 #user add key A {
 proc mimickTop {} {
@@ -895,6 +896,21 @@ proc addHeavyLabels {molid} {
     }
 } 
 
+proc addCALabels {molid} {
+  # operate only on existing molecules
+  #set carbons [atomselect top "element C"]
+  set CA [atomselect top "name CA and protein"]
+  set numCA [$CA num]
+  if {$numCA > 0} {
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    if {[color Display Background] != "black"} {color Labels Atoms black} {color Labels Atoms green}
+    foreach i [$CA get index] {
+	label add Atoms $molid/$i
+	}
+    }
+    }
+} 
+
 proc align {molid {seltxt "protein and backbone"}} {
   rmsdtt_tk_cb
   set ref_frame 0
@@ -1095,8 +1111,8 @@ proc snap {{filename "auto"} {dotrim "true"} {ambient "true"} {aoambient "0.8"} 
     while {[file exists $file] == 1} { set i [expr $i+1] ; set file "$basename-$i.png"}
     set datfile [string map {".png" ".dat"} $file]
     set ppmfile [string map {".png" ".ppm"} $file]
-    #render Tachyon $datfile tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
     render TachyonLOptiXInternal $ppmfile
+    #render Tachyon $datfile tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
     if {$ambient == "true"} {
 	# dummy command to generate dat file
 	render Tachyon $datfile tachyon --a > sil.out
@@ -1109,8 +1125,47 @@ proc snap {{filename "auto"} {dotrim "true"} {ambient "true"} {aoambient "0.8"} 
 	eval exec {convert -density 300 -trim $ppmfile $trimfile}
 	file delete $file
 	file rename $trimfile $file
+    } else {
+	eval exec {convert -density 300 -trim $ppmfile $file}
+	puts
     }
     file delete $ppmfile
+    lores $molid
+    puts "Generated snapshot $file"
+}   
+
+proc snap_tachyon {{molid "0"} {filename "auto"} {dotrim "true"} } {
+  # take a snapshot, process and output as frame#.png
+    foreach i [molinfo list] {hires $i}
+    set molid 0
+    #color Display Background white;pbc box -off;axes location off
+    #display depthcue off
+    # ascii a=97
+    #set i 96 
+    if {$filename == "auto"} {
+    if {[molinfo top get numframes] == 1} {
+	set fname [molinfo top get filename]
+	set nfile [string trimright $fname ".pdbgro"]
+	set file "$nfile.png"
+	#while {[file exists $file] == 1} { set i [expr $i+1] ; set c [format %c $i]; set file "$nfile$c.png"}
+    } else {
+	set frame [format %04d [molinfo $molid get frame]]
+	set file "frame$frame.png"
+	#while {[file exists $file] == 1} { set i [expr $i+1] ; set c [format %c $i]; set file "frame$frame$c.png"}
+	}
+    } else {set file $filename}
+    set i 1
+    set basename [string trimright $file ".png"]
+    while {[file exists $file] == 1} { set i [expr $i+1] ; set file "$basename-$i.png"}
+    set datfile [string map {".png" ".dat"} $file]
+    render Tachyon $datfile tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
+
+    if {$dotrim == "true"} {
+	set trimfile [string map {".png" "-trim.png"} $file]
+	eval exec {convert -density 300 -trim $file $trimfile}
+	file delete $file
+	file rename $trimfile $file
+    }
     lores $molid
     puts "Generated snapshot $file"
 }   
@@ -1188,7 +1243,7 @@ proc showWaterClose {{molid "0"}} {
 	mol representation Lines
 	mol selection {water and within 4 of protein}
 	mol addrep $molid
-	mol selupdate $molid $lastrep 1
+	mol selupdate $lastrep $molid 1
 } elseif { [lindex $rep 0] == "water and within 4 of protein" } {
         mol delrep $lastrep $molid
 } elseif { [lindex $rep 0] == "all" } {
@@ -1197,13 +1252,13 @@ proc showWaterClose {{molid "0"}} {
 	mol Color Name
 	mol selection {not water}
 	mol addrep $molid
-	mol selupdate $molid $lastrep 1
+	mol selupdate $lastrep $molid 1
 } else {
         mol representation Lines
 	mol Color Name
         mol selection {water}
         mol addrep $molid
-	mol selupdate $molid $lastrep 1
+	mol selupdate $lastrep $molid 1
     }
 }
 
@@ -1557,3 +1612,32 @@ label textthickness 1.8
 #start_sscache 0
 #kllred_viz  [molinfo top]
 #
+
+proc ss_viz_SSA {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    # all
+    mol color ColorID 0
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    mol selection resid 8 to 9999
+    mol material Opaque
+    mol addrep $molid
+    # add ligand
+    mol color ColorID 4
+    mol representation NewCartoon 0.300000 10.000000 4.500000 0
+    mol selection resid 1 to 7
+    mol material Opaque
+    mol addrep $molid
+    #mol color Name
+    #mol representation Licorice 0.300000 10.000000 10.000000
+    #mol selection resname LIG
+    #mol addrep $molid
+    display depthcue off; color Display Background white;pbc box -off;axes location off
+    start_sscache $molid
+  } 
+}

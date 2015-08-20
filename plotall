@@ -183,6 +183,11 @@ while [[ $# -gt 0 ]]; do
 	    shift
 	    ;;
 
+	-pf | -PF )
+	    plotlist+=('table_P_P.xvg' 'table_F_F.xvg' 'table_P_F.xvg')
+	    shift
+	    ;;
+
         -h|--h|-help|--help)
             echo "Usage: plotall [directories]"
 	    exit 0
@@ -217,7 +222,7 @@ for f in ${plotlist[@]}; do
 	histdir="."
 	xlabel='r (nm)'
 	ylabel='V(r) (kJ/mol)'
-	xrange='set xrange [:1.4]'
+	xrange='set xrange [:2]'
 	yrange='set yrange [:20]'
 	using=" using 1:6 "
 	xtics='set xtics auto'
@@ -246,7 +251,7 @@ for f in ${plotlist[@]}; do
 	    yrange='set yrange [:50]'
 	else
 	    using=" using 1:6 "
-	    xrange='set xrange [:5]'
+	    xrange='set xrange [:1.5]'
 	    yrange='set yrange [:20]'
 	fi
     elif [[ $f == dih_* ]]; then
