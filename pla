@@ -275,21 +275,24 @@ while [[ $# -ge 1 ]]; do
 	-pdf)
 	    $lwset && lw=$lw || lw=3
 	    terminal='set terminal pdfcairo font "Gill Sans,16" linewidth '"$lw"' rounded'
-	    output='-o out.pdf'
-	    echo "Generating out.pdf"
+	    [[ $2 == *.pdf ]] && outfile="$2" && shift || outfile="out.pdf"
+	    output="-o ${outfile}"
+	    echo "Generating $outfile!"
 	    shift 1;;
 
 	-png)
 	    $lwset && lw=$lw || lw=3
 	    terminal='set terminal pngcairo font "Gill Sans,16" linewidth '"$lw"' rounded size 800,600'
-	    output='-o out.png'
-	    echo "Generating out.png"
+	    [[ $2 == *.png ]] && outfile="$2" && shift || outfile="out.png"
+	    output="-o ${outfile}"
+	    echo "Generating $outfile!"
 	    shift 1;;
 
 	-gp)
 	    outgp=true
-	    gpcomm='save "out.gp"'
-	    echo "Generating out.gp"
+	    [[ $2 == *.gp ]] && outfile="$2" && shift || outfile="out.gp"
+	    gpcomm="save \"${outfile}\""
+	    echo "Generating $outfile!"
 	    shift 1;;
 
 	-shiftmax)
