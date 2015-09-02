@@ -343,6 +343,13 @@ while [[ $# -ge 1 ]]; do
 	    shift 2
 	    ;;
 
+	-tf | -titlefile)
+	    usersetlabels=true
+	    while read line; do titlelist+=($line);done < $2
+	    k=0
+	    shift 2
+	    ;;
+
 	-tt|-thetitle)
 	    thetitle="$2"
 	    shift 2
