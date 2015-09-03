@@ -41,6 +41,7 @@ userrangeset=false
 termoptions=""
 labelsfromfile=false
 thetitle=""
+titlesmall=false
 
 plot () {
     gplot $output -t "${thetitle}" -c "${style}" -c "${functions}"  -c "${extra}" -c "$keypos" -c "$terminal" -r $range -- "$plotfiles"
@@ -353,12 +354,17 @@ while [[ $# -ge 1 ]]; do
 	    shift 2
 	    ;;
 
+	-ts | -titlesmall)
+	    titlesmall=true
+	    extra='set key samplen 2 spacing 0.7 width 0 height 0 font "Gill Sans, 12"'
+	    shift;;
+
 	-tt|-thetitle)
 	    thetitle="$2"
 	    shift 2
 	    ;;
 
-	-cummean|-cm)
+	-cm|-cummean)
 	    docummean=1
 	    [[ $functions == "" ]] && functions='sum=0'
 	    shift;;
