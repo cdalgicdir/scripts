@@ -25,8 +25,11 @@ keysamplen="4"
 keyspacing="1"
 keywidth="0"
 keyheight="0"
+keyspacing="1"
 keypos="right Right"
 check_identical=true
+filelabel=""
+keyfont="\"${fonttype}, $fontsize\""
 
 ###################################################################
 # Atomistic EALA directories
@@ -69,6 +72,10 @@ while [[ $# -gt 0 ]]; do
 	    termset="png"
 	    fontsize=22
             shift;;
+
+        -fl|-filelabel)
+	    filelabel="$2"
+            shift 2;;
 
         -pdf)
 	    termset="pdf"
@@ -283,7 +290,10 @@ for f in ${plotlist[@]}; do
 	keypos='out'
 	keyvh='horizontal'
 	keysamplen='1'
-	keywidth='-1'
+	keywidth='1'
+	keyheight='0'
+	keyspacing='0.6'
+	keyfont="\"${fonttype}, 12\""
     elif [[ $f == time*xvg ]]; then
 	using=' using ($1/1000):2 every 500 '
 	histdir="."
@@ -305,15 +315,15 @@ for f in ${plotlist[@]}; do
     fi
     plcomms=''
     tmp=`echo "${f}" | sed 's/_/-/g'` && title=${tmp%.xvg}
-    [[ $termset != "" ]] && output="-o${title}.${termset}"
+    [[ $termset != "" ]] && output="-o${title}_${filelabel}.${termset}"
     title=${title#dih-} && title=${title%-avg}
     [[ $title == *-avg-mid ]] && title=${title%-avg-mid} && title=$title"-mid"
 
     if [[ $title == CN-A-CN-CA* ]] || [[ $title == CN-A-CN-A* ]] || [[ $title == CN-CA-CN-CA* ]] ; then
 	keypos='right top'
     fi
-
-    key="set key $keypos $keyvh samplen $keysamplen width $keywidth spacing $keyspacing height $keyheight"
+ 
+    key="set key font "${keyfont}" $keypos $keyvh samplen $keysamplen width $keywidth spacing $keyspacing height $keyheight"
 
     counter=0
 
