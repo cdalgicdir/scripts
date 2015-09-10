@@ -74,7 +74,7 @@ while [[ $# -gt 0 ]]; do
             shift;;
 
         -fl|-filelabel)
-	    filelabel="$2"
+	    filelabel="_${2}"
             shift 2;;
 
         -pdf)
@@ -315,7 +315,7 @@ for f in ${plotlist[@]}; do
     fi
     plcomms=''
     tmp=`echo "${f}" | sed 's/_/-/g'` && title=${tmp%.xvg}
-    [[ $termset != "" ]] && output="-o${title}_${filelabel}.${termset}"
+    [[ $termset != "" ]] && output="-o${title}${filelabel}.${termset}"
     title=${title#dih-} && title=${title%-avg}
     [[ $title == *-avg-mid ]] && title=${title%-avg-mid} && title=$title"-mid"
 
