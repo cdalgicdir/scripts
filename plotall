@@ -71,6 +71,7 @@ while [[ $# -gt 0 ]]; do
         -png)
 	    termset="png"
 	    fontsize=22
+	    keyfont="\"${fonttype}, $fontsize\""
             shift;;
 
         -fl|-filelabel)
@@ -81,6 +82,7 @@ while [[ $# -gt 0 ]]; do
 	    termset="pdf"
 	    fontsize=18
 	    linewidth=2.5
+	    keyfont="\"${fonttype}, $fontsize\""
             shift;;
 
 	-t | -titles)
