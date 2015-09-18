@@ -25,6 +25,7 @@ userset=false
 doshiftend=false
 doshiftmin=false
 doshiftmax=false
+doshiftval=false
 doshifting=false
 doentcorr=false
 kT=2.4777 #for T=298K
@@ -308,6 +309,13 @@ while [[ $# -ge 1 ]]; do
 	    #keypos='set key right bottom'
 	    shift;;
 
+	-shiftval)
+	    doshiftval=true
+	    doshifting=true
+	    shiftXval=$2
+	    #keypos='set key right bottom'
+	    shift 2;;
+
 	-shift)
 	    doshiftend=true
 	    doshifting=true
@@ -432,6 +440,11 @@ if $doshifting; then
 	    tmp=(${tmp// / })
 	    shiftR=${tmp[0]}
 	    shift=${tmp[1]}
+	elif $doshiftval; then
+	    tmp=`awk -v val=$shiftXval -v eps=0.009 '!/^[@|#]/{if ($1<val+eps && $1>val-eps){print $2}}' ${f}`
+	    tmp=(${tmp// / })
+	    shiftR=${shiftXval}
+	    shift=${tmp[0]}
 	fi
 	shiftRlist+=("$shiftR")
 	shiftlist+=("$shift")
