@@ -175,8 +175,13 @@ while [[ $# -gt 0 ]]; do
 	    shift
 	    ;;
 
+	-main)
+	    plotlist=('dist_CNi-CNi3_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CA-CA-CA_avg.xvg')
+	    shift
+	    ;;
+
 	-bb )
-	    plotlist=('dih_CN-CA-CN-CA_avg.xvg' 'dih_CN-CA-CN-CA_avg_mid.xvg')
+	    plotlist=('dih_CN-CA-CN-CA_avg.xvg' 'dih_CN-CA-CN-CA_avg_mid.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CN-CA-CN_avg_mid.xvg')
 	    shift
 	    ;;
 
