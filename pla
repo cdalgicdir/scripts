@@ -197,12 +197,12 @@ while [[ $# -ge 1 ]]; do
 	    shift 2;;
 
 	-yl)
-	    extra="set ylabel \"$2\""
+	    extra="$extra;set ylabel \"$2\""
 	    shift 2
 	    ;;
 
 	-xl)
-	    extra="set xlabel \"$2\""
+	    extra="$extra;set xlabel \"$2\""
 	    shift 2
 	    ;;
 
