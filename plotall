@@ -202,6 +202,12 @@ while [[ $# -gt 0 ]]; do
 	    shift
 	    ;;
 
+	-pl | -plotlist)
+	    echo ${plotlist[@]}
+	    exit 0
+	    shift
+	    ;;
+
         -h|--h|-help|--help)
             echo "Usage: plotall [directories]"
 	    exit 0
