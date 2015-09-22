@@ -213,7 +213,7 @@ while [[ $# -ge 1 ]]; do
 	-sas)
 	    sas=true
 	    linetype="points ps 1"
-	    extra="set xlabel \"distance(nm)\";set ylabel \"SASA (nm^2)\";set term wxt enhanced"
+	    extra="set xlabel \"Time (ns)\";set ylabel \"SASA (nm^2)\";set term wxt enhanced"
 	    shift ;;
 
 	not)
