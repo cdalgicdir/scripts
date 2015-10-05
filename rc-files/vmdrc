@@ -1551,9 +1551,23 @@ animate style Once
 #}
 
 proc refresh_trajectory {{molid "0"} {traj "traj.xtc"} {step "2"}} {
+    ###################################################################
+    #set traj [lindex [molinfo $molid get filename] 0 1]
+    #mol addfile $traj type {xtc} first 0 last -1 step $step waitfor -1 $molid
+    ###################################################################
+    set filename [molinfo $molid get filename]
+    set n [llength $filename]
+    ###################################################################
+    # workaround for single lammps trajectories
+    if {[llength [lindex $filename 0]] >= 2 } { if {[lindex $filename 0 0] == [lindex $filename 0 1]} {set filename [lindex $filename 0 0]} }
+    ###################################################################
+    if {$n == 1} {set traj $filename} elseif {$n == 2} {set traj [lindex $filename 0 1]}
+    set type [lindex [split $traj {.}] 1]
+    if {[llength $type] > 1 } {set type [lindex $type 0]}
+    puts $filename
+    puts $traj
     animate delete beg 0 end -1 skip 0 $molid
-    set traj [lindex [molinfo $molid get filename] 0 1]
-    mol addfile $traj type {xtc} first 0 last -1 step $step waitfor -1 $molid
+    mol addfile $traj type $type first 0 last -1 step $step waitfor -1 $molid
 }
 
 proc skip { } {
