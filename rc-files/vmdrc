@@ -211,12 +211,11 @@ user add key Down {animate pause}
 user add key Left {animate reverse}
 user add key Right { if {[molinfo top get numframes] == [ expr [molinfo top get frame] + 1] } {animate goto start; animate forward} {animate forward} }
 user add key q { reset_viz [molinfo top] }
-user add key w { ss_viz [molinfo top] }
 user add key Control-w { addwall }
 user add key Control-d { draw delete all }
 user add key E { ss_viz_LEUsc [molinfo top] }
-user add key W { ss_viz_paper [molinfo top] }
-#user add key W { protlig_viz_sketch [molinfo top] }
+user add key w { ss_poly [molinfo top] }
+user add key W { ss_poly_bb [molinfo top] }
 user add key Alt-w { showWaterClose [molinfo top] }
 user add key R {menu ramaplot on; variable ::RamaPlot::molid [molinfo top] }
 user add key T {menu timeline on }
@@ -242,11 +241,6 @@ user add key {=} { display resetview; rotate x by -90 }
 user add key u { selupdate_all }
 user add key J { if {[molinfo top get rep] == "Lines"} { changerep [molinfo top] "Licorice 0.300000 10.000000 10.000000" } {changerep [molinfo top] "Lines"}}
 user add key L { addHeavyLabels [molinfo top] }
-user add key B { align [molinfo top] "backbone" }
-#user add key z { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
-user add key A { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
-#user add key A { align [molinfo top] "protein and backbone" }
-#user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA2 CA3 CA4 CA5 CA6 A1 A2 A3 A4 A5 A6" }
 user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11"}
 user add key b { showbackbone [molinfo top] }
 user add key F8 { snap [molinfo top] "auto" "false" }
@@ -1556,7 +1550,7 @@ proc refresh_trajectory {{molid "0"} {traj "traj.xtc"} {step "2"}} {
     #mol addfile $traj type {xtc} first 0 last -1 step $step waitfor -1 $molid
     ###################################################################
     set filename [molinfo $molid get filename]
-    set n [llength $filename]
+    set n [llength [lindex $filename 0]]
     ###################################################################
     # workaround for single lammps trajectories
     if {[llength [lindex $filename 0]] >= 2 } { if {[lindex $filename 0 0] == [lindex $filename 0 1]} {set filename [lindex $filename 0 0]} }
@@ -1714,3 +1708,54 @@ proc ss_viz_SSA_cg {molid} {
     #start_sscache $molid
   } 
 }
+
+proc ss_poly {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    mol color Name
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection not resname SOL ME
+    mol addrep $molid
+    display depthcue off; color Display Background white;pbc box -off;axes location off
+  } 
+}
+
+proc ss_poly_bb {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    mol color Name
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection name CH1 CH2
+    mol addrep $molid
+    display depthcue off; color Display Background white;pbc box -off;axes location off
+  } 
+}
+
+proc hotkey_protein {} {
+    user add key w { ss_viz [molinfo top] }
+    user add key W { ss_viz_paper [molinfo top] }
+    #user add key W { protlig_viz_sketch [molinfo top] }
+    user add key B { align [molinfo top] "backbone" }
+    user add key A { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
+    #user add key z { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
+    #user add key A { align [molinfo top] "protein and backbone" }
+    #user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA2 CA3 CA4 CA5 CA6 A1 A2 A3 A4 A5 A6" }
+}
+
+proc hotkey_poly {} {
+    user add key w { ss_poly [molinfo top] }
+    user add key W { ss_poly_bb [molinfo top] }
+    user add key A { align [molinfo top] "name CH1 CH2" }
+}
+
+hotkey_poly
