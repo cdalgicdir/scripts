@@ -3,12 +3,12 @@
 hom=$PWD
 JOBDIR="$HOME/.lsbatch"
 rjobIDs=`bjobs | awk '{if ($1 ~ /^[0-9]/)print $1}'`
+dirset=false
 
 # COLORS
 ###################################################################
 # Reset
 Color_Off='\e[0m'       # Text Reset
-
 # Bold
 BBlack='\e[1;30m'       # Black
 BRed='\e[1;31m'         # Red
@@ -18,6 +18,7 @@ BBlue='\e[1;34m'        # Blue
 BPurple='\e[1;35m'      # Purple
 BCyan='\e[1;36m'        # Cyan
 BWhite='\e[1;37m'       # White
+###################################################################
 
 printRUN () {
     echo -e "$d: $BGreen running! $Color_Off"
@@ -35,15 +36,15 @@ while [[ $# -ge 1 ]]; do
             dirset=true
             shift 2;;
 
-esac
+    esac
 done
 
-if [[ `ls -d Lambda_* 2>/dev/null` ]] ; then
+if [[ `ls -d Lambda_*/ 2>/dev/null` ]] ; then
     for d in Lambda_*;do
 	cwd="$hom/$d/4-TI"
 	[[ `grep $cwd *$JOBDIR/.out 2>/dev/null` ]] && printRUN || printERR
     done
-elif [[ `ls -d d?.* 2>/dev/null` ]] ; then
+elif [[ `ls -d d?.*/ 2>/dev/null` ]] ; then
     for d in d?.*; do
 	cwd="$hom/$d/4-US"
 	[[ `grep $cwd $JOBDIR/*.out 2>/dev/null` ]] && printRUN || printERR
@@ -53,5 +54,5 @@ elif $dirset; then
 	[[ `grep $d $JOBDIR/*.out 2>/dev/null` ]] && printRUN || printERR
     done
 else 
-    [[ `grep $hom *$JOBDIR/.out 2>/dev/null` ]] && printRUN || printERR
+    [[ `grep $hom $JOBDIR/*.out 2>/dev/null` ]] && printRUN || printERR
 fi
