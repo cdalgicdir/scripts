@@ -1,0 +1,51 @@
+#! /bin/bash
+
+hom=$PWD
+#runningjobIDs=`qstat -u cdalgicdir | awk '{if ($1 ~ /^[0-9]/)print $1}'`
+runningjobIDs=`bjobs | awk '{if ($1 ~ /^[0-9]/)print $1}'`
+if [[ `ls -d Lambda_* 2>/dev/null` ]] ; then
+
+    #for d in d?.???;do
+    for d in Lambda_*;do
+	#cd $d/4-PULL
+	cd $d/4-TI
+	#JOBNAME=`grep "\-J" xsubmit | awk '{print $3}'`
+	#thelogs=`ls $JOBNAME.o* 2> /dev/null`
+	thelogs=`ls job_*.out 2> /dev/null`
+	if [[ $thelogs != "" ]]; then
+	    JOBids=()
+	    for f in ${thelogs[@]}; do
+		#JOBid=${f#$JOBNAME.o}
+		JOBid=${f#job_}
+		JOBid=${JOBid%.out}
+		JOBids+=($JOBid)
+	    done
+	    max=0
+	    for id in ${JOBids[@]}; do
+		[[ $id -gt $max ]] && max=$id
+	    done
+	    [[ $runningjobIDs =~ $max ]] && echo "$d: running!" || echo "$d: not running!"
+	else
+	    echo "$d: not running!"
+	fi
+	cd $hom
+    done
+else 
+        #JOBNAME=`grep "\-J" xsubmit | awk '{print $3}'`
+        thelogs=`ls job_*.out 2> /dev/null`
+        if [[ $thelogs != "" ]]; then
+            JOBids=()
+            for f in ${thelogs[@]}; do
+                JOBid=${f#job_}
+		JOBid=${JOBid%.out}
+                JOBids+=($JOBid)
+            done
+            max=0
+            for id in ${JOBids[@]}; do
+                [[ $id -gt $max ]] && max=$id
+            done
+            [[ $runningjobIDs =~ $max ]] && echo "running!" || echo "$d: not running!"
+        else
+            echo "not running!"
+        fi
+fi
