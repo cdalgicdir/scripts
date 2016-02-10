@@ -19,7 +19,7 @@ linewidth=1.5
 size="800,600"
 output=""
 termset=""
-usersetlabels=false
+usersetlabels=false userlabels=()
 keyvh="vertical"
 keysamplen="4"
 keyspacing="1"
@@ -88,9 +88,10 @@ while [[ $# -gt 0 ]]; do
 	-t | -titles)
 	    usersetlabels=true
 	    IFS=$';'
-	    for i in ${2}; do labellist+=( "$i" );done
+	    #for i in ${2}; do labellist+=( "$i" );done
+	    for i in ${2}; do userlabels+=( "$i" );done
 	    IFS=$' \t\n'
-	    k=0
+	    #k=0
 	    shift 2
 	    ;;
 
@@ -236,6 +237,41 @@ IFS=$'\t\n'
 len_plots=`expr ${#plots[@]} - 1`
 i=0
 
+if ! $usersetlabels ; then
+    for dir in ${folders[@]}; do
+	if [[ $dir == $dirvac ]]; then
+	    dirlabel="atm-vac"
+	elif [[ $dir == $dirint ]]; then
+	    dirlabel="atm-int"
+	elif [[ $dir == $dirbulk ]]; then
+	    dirlabel="atm-bulk"
+	else
+	    dirlabel=`echo "$dir" | sed 's/_/-/g'`
+	fi
+	labels+=("${dirlabel}")
+    done
+elif [[ ${#folders[@]} -gt ${#userlabels[@]} ]]; then
+    echo "Some labels were not provided. Trying to generate them automatically!"
+    c=0
+    for i in `seq 0 $((${#folders[@]}-1))`; do
+	dir="${folders[$i]}"
+	if [[ $dir == $dirvac ]]; then
+	    dirlabel="atm-vac"
+	elif [[ $dir == $dirint ]]; then
+	    dirlabel="atm-int"
+	elif [[ $dir == $dirbulk ]]; then
+	    dirlabel="atm-bulk"
+	else
+	    [[ ! ${userlabels[$c]} ]] && dirlabel=`echo "$dir" | sed 's/_/-/g'` || dirlabel=${userlabels[$c]}
+	    c=$((c+1))
+	fi
+	labels+=("${dirlabel}")
+    done
+else
+    echo "Using the provided labels!"
+    labels=("${userlabels[@]}")
+fi
+
 for f in ${plotlist[@]}; do
 
     if [[ $f == table*xvg ]]; then
@@ -365,7 +401,6 @@ for f in ${plotlist[@]}; do
     else
 	identical=false
     fi
-
     if ! $identical; then
     for dir in ${folders[@]}; do
 	address=$dir/$histdir/$f
@@ -381,19 +416,21 @@ for f in ${plotlist[@]}; do
 	elif [[ $dir == cg-CAB* ]] || [[ $dir == map-CAB* ]]; then
 	    dir="CAB"
 	fi
-	if [[ $dir == $dirvac ]]; then
-	    dirlabel="atm-vac"
-	elif [[ $dir == $dirint ]]; then
-	    dirlabel="atm-int"
-	elif [[ $dir == $dirbulk ]]; then
-	    dirlabel="atm-bulk"
-	else
-	    if $usersetlabels; then
-		dirlabel="${labellist[$((counter-2))]}"
-	    else
-		dirlabel=`echo "$dir" | sed 's/_/-/g'`
-	    fi
-	fi
+	dirlabel="${labels[$((counter))]}"
+	#if [[ $dir == $dirvac ]]; then
+	#    dirlabel="atm-vac"
+	#elif [[ $dir == $dirint ]]; then
+	#    dirlabel="atm-int"
+	#elif [[ $dir == $dirbulk ]]; then
+	#    dirlabel="atm-bulk"
+	#else
+	#    if $usersetlabels; then
+	#	#dirlabel="${labellist[$((counter-2))]}"
+	#	dirlabel="${labels[$((counter-2))]}"
+	#    else
+	#	dirlabel=`echo "$dir" | sed 's/_/-/g'`
+	#    fi
+	#fi
 	plcomms=${plcomms}${q}${address}${q}${using}${with}'t '${q}${dirlabel}${q},
     let counter=$counter+1
     done
