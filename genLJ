@@ -6,7 +6,7 @@ import sys
 np.seterr(divide='ignore',invalid='ignore')
 MAX = 1e6
 R_CUTOFF = 1.4
-CHOICELIST = ["126","124","96","cos96","cos126","rep"]
+CHOICELIST = ["126","124","1210","96","cos96","cos126","rep"]
 
 def help():
     print "Usage: genLJ epsilon sigma table.xvg [choice]"
@@ -28,6 +28,10 @@ def LJcos126(r, eps, sigma):
 def LJ124(r, eps, sigma):
     return np.sqrt(27.)/2.*eps*((sigma/r)**12-(sigma/r)**4)
 
+def LJ1210(r, eps, sigma):
+    # bereau2009
+    return eps*(5*(sigma/r)**12 - 6*(sigma/r)**10)
+
 def LJ96(r, eps, sigma):
     return 27.0/4.0*eps*((sigma/r)**9-(sigma/r)**6)
 
@@ -46,16 +50,20 @@ def shift_to_zero(r,U):
     U = U - U[np.isclose(r,R_CUTOFF)]
     return U - np.concatenate((np.zeros(r[r<R_CUTOFF].size),U[r>=R_CUTOFF]))
 
+choice = "126"
 if len(sys.argv) < 3: help()
-print len(sys.argv)
+elif len(sys.argv) > 5:
+    choice = sys.argv[4]
+    if len(sys.argv) == 6:  R_CUTOFF = float(sys.argv[5])
+
+print len(sys.argv), choice
+
 eps = float(sys.argv[1])
 sigma = float(sys.argv[2])
 foutname = sys.argv[3]
-if len(sys.argv) > 4: choice = sys.argv[4]
-else: choice = "126"
 
 minr = 0.0
-maxr = 2.5
+maxr = 25.0
 stepr = 0.002
 dummy = 1e-4
 r = np.arange(minr,maxr+dummy,stepr)
@@ -64,6 +72,8 @@ if choice == "126":
     V = LJ126(r, eps, sigma)
 elif choice == "124":
     V = LJ124(r, eps, sigma)
+elif choice == "1210":
+    V = LJ1210(r, eps, sigma)
 elif choice == "96":
     V = LJ96(r, eps, sigma)
 elif choice == "cos96":
@@ -74,6 +84,7 @@ elif choice == "rep":
     V = LJrep(r, eps, sigma)
 else:
     print "Unknown choice! Choices are: ", ', '.join(CHOICELIST)
+    sys.exit(1)
 
 Z = np.zeros(r.size)
 V[np.isnan(V)] = MAX
@@ -82,4 +93,4 @@ V = shift_to_zero(r,V)
 
 A = np.column_stack((r,Z,Z,Z,Z,V,Z))
 np.savetxt(foutname,A,fmt='%.4e')
-print "%s generated with LJ %s" %(foutname,choice)
+print "%s generated with LJ %s!" %(foutname,choice)
