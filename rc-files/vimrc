@@ -7,14 +7,18 @@
 :autocmd BufWritePre *.gro call Update_number_of_atoms()
 :au BufNewFile,BufRead *.rtp    setf top.gromacs
 :au BufNewFile,BufRead *.gp  set filetype=gnuplot
+:au BufNewFile,BufRead *.comms  set filetype=sh
 :au BufNewFile,BufRead .vmdrc  set filetype=tcl
 :au BufNewFile,BufRead bash-fc-*    set syntax=sh
 ":au BufRead *.tex set spell
 ":highlight SpellBad gui=underline guibg=NONE guifg=NONE
+highlight Search cterm=NONE ctermfg=black ctermbg=yellow
 
-:map <F6> {v}!par -w85<CR>
-:vmap <F6> !par -w85<CR>
-:map <F4> :highlight Normal ctermfg=black ctermbg=white<CR>
+
+:map <F6> {v}!par -w75<CR>
+:vmap <F6> !par -w75<CR>
+":map <F4> :highlight Normal ctermfg=black ctermbg=white<CR>
+:map <F4> :set background=light<CR>:colorscheme earendel<CR>
 
 ":set autoindent
 set autowrite
@@ -36,8 +40,8 @@ set undolevels=1000
 set ignorecase          " ignore case when searching
 set smartcase           " no ignorecase if Uppercase char present
 
-map <F8> :w <enter> :!/home/cdalgicdir/progs/bin/vimrun % <enter>
-map <F2> :w <enter> :!/home/cdalgicdir/progs/bin/latexcrop % <enter>
+map <F8> :w <enter> :!/home/cdalgicdir/soft/bin/vimrun % <enter>
+map <F2> :w <enter> :!/home/cdalgicdir/soft/bin/latexcrop % <enter>
 "nnoremap    <F2> :<C-U>setlocal lcs=tab:>-,trail:-,eol:$ list! list? <CR>
 
 " LATEX PLUGIN options 
@@ -121,6 +125,10 @@ Plugin 'bling/vim-airline'
 Plugin 'benmills/vimux'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'vim-scripts/earendel'
+Plugin 'mayansmoke'
+Plugin 'junegunn/goyo.vim'
+Plugin 'mtth/scratch.vim'
 " Git plugin not hosted on GitHub
 "lugin 'https://github.com/Lokaltog/vim-easymotion.git'
 "Plugin 'https://github.com/vim-scripts/Rainbow-Parenthsis-Bundle.git'
