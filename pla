@@ -284,7 +284,7 @@ while [[ $# -ge 1 ]]; do
 
 	-png)
 	    $lwset && lw=$lw || lw=3
-	    terminal='set terminal pngcairo font "Gill Sans,16" linewidth '"$lw"' rounded size 800,600'
+	    terminal='set terminal pngcairo font "Gill Sans,24" linewidth '"$lw"' rounded size 800,600'
 	    [[ $2 == *.png ]] && outfile="$2" && shift || outfile="out.png"
 	    output="-o ${outfile}"
 	    echo "Generating $outfile!"
@@ -324,6 +324,7 @@ while [[ $# -ge 1 ]]; do
 
 	-entcorr|-ec)
 	    doentcorr=true
+	    extra="set xlabel 'r (nm)';set ylabel 'V(r) (kJ/mol)'"
 	    shift;;
 	    
 	-pmf)
@@ -331,6 +332,10 @@ while [[ $# -ge 1 ]]; do
 	    doshifting=true
 	    doentcorr=true
 	    keypos='set key right bottom'
+	    extra="set xlabel 'r (nm)';set ylabel 'V(r) (kJ/mol)'"
+	    shift;;
+
+	-table)
 	    extra="set xlabel 'r (nm)';set ylabel 'V(r) (kJ/mol)'"
 	    shift;;
 
@@ -431,7 +436,7 @@ if $doshifting; then
 	    shift=`tail -1 ${f} | awk '{print $2}'`
 	    [[ $shift == "" ]] && shift=`tail -2 ${f} | awk '{print $2}'`
 	elif $doshiftmin; then
-	    tmp=`awk '!/^[@|#]/{if ($2<y){y=$2;x=$1}}END{print x,y}' ${f}`
+	    tmp=`awk -v y=1e6 '!/^[@|#]/{if ($2<y){y=$2;x=$1}}END{print x,y}' ${f}`
 	    tmp=(${tmp// / })
 	    shiftR=${tmp[0]}
 	    shift=${tmp[1]}
