@@ -527,7 +527,7 @@ do
 	    # shift to zero and entropic correction (for second cols only)
 	    if $doshifting && ! $doentcorr; then
 		using=" u $column0:(\$$column-$theshift) "
-		echo "Shifting ${f} by $theshift (at $theshiftR)"
+		echo "Shifting ${file} by $theshift (at $theshiftR)"
 	    elif ! $doshifting && $doentcorr; then
 		using=" u $column0:(\$$column+2*$kT*log(\$1)) "
 	    elif $doshifting && $doentcorr; then
