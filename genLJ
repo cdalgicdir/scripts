@@ -39,7 +39,9 @@ def LJ126(r, eps, sigma):
     return 4.0*eps*((sigma/r)**12-(sigma/r)**6)
 
 def LJrep(r, eps, sigma):
-    rmin = 2.**(1/6.)*sigma
+    #rmin = 2.**(1/6.)*sigma
+    rmin = sigma
+    sigma = rmin/2.**(1/6.)
     Utmp = 4.0*eps*((sigma/r)**12-(sigma/r)**6) + eps
     D = -Utmp[r>=rmin]
     Z2 = np.zeros(Utmp[r<rmin].size)
@@ -51,19 +53,19 @@ def shift_to_zero(r,U):
     return U - np.concatenate((np.zeros(r[r<R_CUTOFF].size),U[r>=R_CUTOFF]))
 
 choice = "126"
-if len(sys.argv) < 3: help()
-elif len(sys.argv) > 5:
+if len(sys.argv) < 4: help()
+elif len(sys.argv) > 4:
     choice = sys.argv[4]
     if len(sys.argv) == 6:  R_CUTOFF = float(sys.argv[5])
 
-print len(sys.argv), choice
+#print len(sys.argv), choice
 
 eps = float(sys.argv[1])
 sigma = float(sys.argv[2])
 foutname = sys.argv[3]
 
 minr = 0.0
-maxr = 25.0
+maxr = 5.0
 stepr = 0.002
 dummy = 1e-4
 r = np.arange(minr,maxr+dummy,stepr)
