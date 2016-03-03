@@ -34,11 +34,15 @@ keyfont="\"${fonttype}, $fontsize\""
 ###################################################################
 # Atomistic EALA directories
 ###################################################################
-dirvac="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-implicit/071014_implicit-excluded/cg-only-CA-glu-PME/map"
-dirint="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-interface/map-only-CA-glu"
-dirbulk="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-bulk/map-CA-AB"
+#dirvac="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-implicit/071014_implicit-excluded/cg-only-CA-glu-PME/map"
+#dirint="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-interface/map-only-CA-glu"
+#dirbulk="/mnt/data2/cdalgicdir/SIMS/EALA-cg/atm-bulk/map-CA-AB"
+dirvac="$HOME/SIMS/EALA-cg/references/atm-vac"
+dirint="$HOME/SIMS/EALA-cg/references/atm-int"
+dirbulk="$HOME/SIMS/EALA-cg/references/atm-bulk-charged"
+dirnbulk="$HOME/SIMS/EALA-cg/references/atm-bulk-uncharged"
 plot_atm=true
-folders=($dirvac $dirint)
+folders=($dirvac $dirint $dirbulk $dirnbulk)
 ###################################################################
 
 
@@ -74,7 +78,7 @@ while [[ $# -gt 0 ]]; do
 	    keyfont="\"${fonttype}, $fontsize\""
             shift;;
 
-        -fl|-filelabel)
+        -fl | -filelabel)
 	    filelabel="_${2}"
             shift 2;;
 
@@ -176,15 +180,31 @@ while [[ $# -gt 0 ]]; do
 	    shift
 	    ;;
 
-	-main)
+	-mm | -main)
 	    plotlist=('dist_CNi-CNi3_avg.xvg' 'dih_CN-CA-CN-CA_avg.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CA-CA-CA_avg.xvg')
 	    shift
 	    ;;
 
-	-bb )
+	-bb | -backbone)
 	    plotlist=('dih_CN-CA-CN-CA_avg.xvg' 'dih_CN-CA-CN-CA_avg_mid.xvg' 'dih_CA-CN-CA-CN_avg.xvg' 'dih_CA-CN-CA-CN_avg_mid.xvg')
 	    shift
 	    ;;
+
+	-e | -essential)
+	    plotlist=('dih_CN-CA-CN-CA_avg_mid.xvg' 'dih_CA-CN-CA-CN_avg_mid.xvg' 'dih_CA-CA-CA-CA_avg.xvg' 'dist_CNi-CNi3_avg_mid.xvg')
+	    shift
+	    ;;
+
+ 	-nb | -nonbonded )
+ 	    plotlist=('table_L_L.xvg' 'table_L_AB.xvg' 'table_AB_AB.xvg' 'table_GC_GC.xvg' 'table_GO_GC.xvg' 'table_GO_GO.xvg' 'table_CN_CN.xvg')
+ 	    shift
+ 	    ;;
+ 
+ 	-x )
+ 	    plotlist=('dih_CN-CA-CN-CA_avg_mid.xvg' 'dist_CNi-CNi3_avg_mid.xvg')
+	    shift
+	    ;;
+
 
 	-b | -bulk )
 	    folders=(${folders[@]/$dirint})
@@ -245,6 +265,8 @@ if ! $usersetlabels ; then
 	    dirlabel="atm-int"
 	elif [[ $dir == $dirbulk ]]; then
 	    dirlabel="atm-bulk"
+	elif [[ $dir == $dirnbulk ]]; then
+	    dirlabel="atm-nbulk"
 	else
 	    dirlabel=`echo "$dir" | sed 's/_/-/g'`
 	fi
@@ -261,6 +283,8 @@ elif [[ ${#folders[@]} -gt ${#userlabels[@]} ]]; then
 	    dirlabel="atm-int"
 	elif [[ $dir == $dirbulk ]]; then
 	    dirlabel="atm-bulk"
+	elif [[ $dir == $dirnbulk ]]; then
+	    dirlabel="atm-nbulk"
 	else
 	    [[ ! ${userlabels[$c]} ]] && dirlabel=`echo "$dir" | sed 's/_/-/g'` || dirlabel=${userlabels[$c]}
 	    c=$((c+1))
