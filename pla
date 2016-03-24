@@ -98,6 +98,7 @@ help () {
     echo "       $ pla file* u 3 (plot files using column 3)"
     echo "       $ pla file* 3 (plot files using column 3)"
     echo "       $ pla file* w lw/p/l (plot files using with linetype lw/p/l etc)"
+    echo "       $ pla file* -al(-autolabel) (automatic labeling of files with Xmgrace convention)"
     echo "       $ pla -h/--help/-help/--h (print this help)"
     echo "Needs: gplot script from C. Junghans"
 }
