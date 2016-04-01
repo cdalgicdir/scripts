@@ -19,40 +19,53 @@ Options:
 
 
 # total time for simulation
-end=100000
-closetoend=80000
-directories="d?.???/?-PULL"
+end=200000
+closetoend=180000
+#directories="d?.???/?-PULL*"
 dirset=false
 noFinished=false
 noColor=false
 multipledir=true
+printonlydir=false
+printonlydirlist=false
+
+if [[ `ls -d Lambda_*/ 2>/dev/null` ]]; then
+    directories="Lambda_*/*TI"
+elif [[ `ls -d d?.*/*US 2>/dev/null` ]]; then
+    directories="d?.*/*US"
+fi
 
 # option for no color
 while [[ $# -ge 1 ]]; do
     case $1 in
-	-d)
+
+	-d | -dirs)
 	    directories="$2"
 	    dirset=true
 	    shift 2;;
-	-nf)
+
+	-nf | -notfinished)
 	    option=$1
 	    noFinished=true
 	    shift;;
-	-nc)
+
+	-nc | -nocolor)
 	    option=$1
 	    noColor=true
 	    shift;;
-	-e)
+
+	-e | -end)
 	    end=$2
 	    closetoend=`echo "$end*0.8"|bc`
 	    shift 2;;
+
 	-ti)
 	    TI=true
 	    dirset=true
 	    directories=`ls -d Lambda*/Production_MD`
 	    shift ;;
 
-	-f)
+	-f | -file)
 	    multipledir=false
 	    if [[ -n "$2" ]]; then
 		file=$2 
@@ -62,6 +75,15 @@ while [[ $# -ge 1 ]]; do
 		shift
 	    fi
 	    ;;
+
+	-n | -name)
+	    printonlydir=true
+	    shift;;
+
+	-nl | -namelist)
+	    printonlydirlist=true
+	    shift;;
+
 
 	-h|-help|--help|--h|*)
 	    printhelp
@@ -110,7 +132,7 @@ definecolor () {
     if [[ $t ]] ; then
 	if [[ `echo "print $end>$t>$closetoend"|python` == 'True' ]]; then
 	    color=$BRed
-	elif [[ `echo "print $end==$t"|python` == 'True' ]]; then
+	elif [[ `echo "print $end<=$t"|python` == 'True' ]]; then
 	    color=$BPurple
 	else
 	    color=$BGreen
@@ -137,7 +159,19 @@ if [[ $multipledir == true ]]; then
     for dir in ${directories[@]};do
 	pulldir=`ls -d $dir  2>/dev/null`
 	file=`ls -1 $pulldir/md*.log 2>/dev/null | tail -1` t=$(lastoccur $file) color=$(definecolor $t)
-	[[ -e $file ]] && printout $file $t $color
+	if $printonlydir; then
+	    [[ -e $file ]] && printout $dir $t $color
+	elif $printonlydirlist; then
+	    if $noFinished; then
+		if [[ "$color" != "$BPurple" ]]; then
+		    echo $dir
+		fi
+	    else
+		echo $dir
+	    fi
+	else
+	    [[ -e $file ]] && printout $file $t $color
+	fi
     done
 else
     t=$(lastoccur $file) color=$(definecolor $t)
