@@ -5,6 +5,7 @@ help () {
 Options: 
     -lw n : linewidth n [default 3]
     -fs n : fontsize n [default 16]
+    -ft string : font fontname [default Gill Sans]
     -l [x,y]: set output size x,y [default: 8,4]
     -size x,y: set output size x,y [default: 1500,1000]
     -e : enhanced 
@@ -66,6 +67,10 @@ if [[ $# -ge 1 ]] ; then
 
 	    -fs | -fontsize)
 		fontsize=$2
+		shift 2;;
+
+	    -ft | -fonttype)
+		fonttype=$2
 		shift 2;;
 
 	    -size)
