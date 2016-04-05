@@ -17,13 +17,20 @@ Options:
 }
 
 option=""
-linewidth=1.5
+linewidth=3
 length="8,4"
-fontsize=16
-fonttype="Gill Sans"
+#fontsize=16
+#fonttype="Gill Sans"
+#fonttype="Rosario"
+#fonttype="Actor"
+fontsize=22
+fonttype="Linotte-Regular"
+#fonttype="Ubuntu"
+#fonttype="Comfortaa"
 term="pdfcairo"
 size="1500,1000"
 show=true
+usersetlw=false
 
 if [[ $# -ge 1 ]] ; then
     if [[ $1 != -* ]]; then
@@ -34,7 +41,7 @@ if [[ $# -ge 1 ]] ; then
     do
         case $1 in
 
-            -e)
+            -e | -enhanced)
                 option="${option} enhanced"
                 shift ;;
 
@@ -53,16 +60,16 @@ if [[ $# -ge 1 ]] ; then
 		fi
 		    ;;
 
-	    -dashed|-d)
+	    -d | -dashed)
 		option="${option} dashed"
 		shift ;;
 
-	    -dashlength|-dl)
+	    -dl | -dashlength)
 		option="${option} dashlength $2"
 		shift 2;;
 
-	    -lw)
-		linewidth=$2
+	    -lw | -linewidth)
+		linewidth=$2 && usersetlw=true
 		shift 2;;
 
 	    -fs | -fontsize)
@@ -80,7 +87,7 @@ if [[ $# -ge 1 ]] ; then
 	    -png)
 		term="pngcairo"
 		#fontsize=32
-		linewidth=1
+		$usersetlw || linewidth=2
 		fontsize=20
 		size="1000,600"
 		option="$option crop"
@@ -108,7 +115,9 @@ font="\"$fonttype, $fontsize\""
 if [[ $term == "pdfcairo" ]]; then
     terminal="$term font $font linewidth $linewidth rounded $option"
     output=${file%.gp}.pdf
-    app="mupdf-x11"
+    #ftt=$(echo ${fonttype} | sed 's/ //g')
+    output=${file%.gp}.pdf
+    app="mupdf"
 elif [[ $term == "pngcairo" ]]; then
     terminal="$term font $font linewidth $linewidth size $size $option"
     output=${file%.gp}.png
