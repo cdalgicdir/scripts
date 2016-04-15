@@ -31,6 +31,7 @@ term="pdfcairo"
 size="1500,1000"
 show=true
 usersetlw=false
+extra=""
 
 if [[ $# -ge 1 ]] ; then
     if [[ $1 != -* ]]; then
@@ -45,7 +46,7 @@ if [[ $# -ge 1 ]] ; then
                 option="${option} enhanced"
                 shift ;;
 
-	    -l)
+	    -l | -length)
 		if [[ -z $2 ]]; then
 		    option="${option} size $length"
 		    shift
@@ -82,6 +83,11 @@ if [[ $# -ge 1 ]] ; then
 
 	    -size)
 		size=$2
+		shift 2;;
+
+	    -ps | -pointsize)
+		pointsize=$2
+		extra="set pointsize $pointsize"
 		shift 2;;
 
 	    -png)
@@ -129,5 +135,5 @@ fi
 
 echo "$output created!"
 
-gnuplot "${file}" -e "set terminal ${terminal};set output \"${output}\";rep;set output"
+gnuplot "${file}" -e "${extra};set terminal ${terminal};set output \"${output}\";rep;set output"
 $show && $app $output &
