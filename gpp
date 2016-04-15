@@ -93,8 +93,8 @@ if [[ $# -ge 1 ]] ; then
 	    -png)
 		term="pngcairo"
 		#fontsize=32
+		#fontsize=20
 		$usersetlw || linewidth=2
-		fontsize=20
 		size="1000,600"
 		option="$option crop"
 		shift ;;
