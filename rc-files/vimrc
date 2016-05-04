@@ -1,19 +1,35 @@
+let mysyntaxfile = "~/.vim/syntax/mysyntax.vim"
 :syntax on
-:autocmd FileType *      set formatoptions=tcql nocindent comments&
-:autocmd FileType c,cpp  set formatoptions=croql cindent comments=sr:/*,mb:*,ex:*/,://
-:autocmd FileType mdp.gromacs set omnifunc=mdpcomplete#Complete
-" imap <C-n> <C-x><C-o>
-:autocmd FileType python set omnifunc=pythoncomplete#Complete
-:autocmd BufWritePre *.gro call Update_number_of_atoms()
-:au BufNewFile,BufRead *.rtp    setf top.gromacs
-:au BufNewFile,BufRead *.gp  set filetype=gnuplot
-:au BufNewFile,BufRead *.comms  set filetype=sh
-:au BufNewFile,BufRead .vmdrc  set filetype=tcl
-:au BufNewFile,BufRead bash-fc-*    set syntax=sh
-":au BufRead *.tex set spell
-":highlight SpellBad gui=underline guibg=NONE guifg=NONE
-highlight Search cterm=NONE ctermfg=black ctermbg=yellow
+"augroup syntax
+":autocmd FileType *      set formatoptions=tcql nocindent comments&
+":autocmd FileType c,cpp  set formatoptions=croql cindent comments=sr:/*,mb:*,ex:*/,://
+":autocmd FileType mdp.gromacs set omnifunc=mdpcomplete#Complete
+"" imap <C-n> <C-x><C-o>
+":autocmd FileType python set omnifunc=pythoncomplete#Complete
+":autocmd BufWritePre *.gro call Update_number_of_atoms()
+":au BufNewFile,BufRead *.rtp    setf top.gromacs
+":au BufNewFile,BufRead *.gp  set filetype=gnuplot
+":au BufNewFile,BufRead *.comms  set filetype=sh
+":au BufNewFile,BufRead .vmdrc  set filetype=tcl
+":au BufNewFile,BufRead bash-fc-*    set syntax=sh
+":au BufNewFile,BufReadPost *.lmp           setfiletype lammps
+":au BufNewFile,BufReadPost *.lammps           setfiletype lammps
+":au BufNewFile,BufReadPost system.in.init           setfiletype lammps
+":au BufNewFile,BufReadPost system.in.settings           setfiletype lammps
+":au BufNewFile,BufReadPost run.in.*           setfiletype lammps
+":au BufNewFile,BufReadPost in.*           setfiletype lammps
+"augroup end
 
+augroup pencil
+  autocmd!
+  autocmd FileType markdown,mkd call pencil#init()
+  autocmd FileType text         call pencil#init()
+  autocmd FileType tex,latex         call pencil#init()
+augroup END
+
+highlight Search cterm=NONE ctermfg=black ctermbg=yellow
+":highlight SpellBad gui=underline guibg=NONE guifg=NONE
+":au BufRead *.tex set spell
 
 :map <F6> {v}!par -w75<CR>
 :vmap <F6> !par -w75<CR>
@@ -129,6 +145,14 @@ Plugin 'vim-scripts/earendel'
 Plugin 'mayansmoke'
 Plugin 'junegunn/goyo.vim'
 Plugin 'mtth/scratch.vim'
+Plugin 'aquach/vim-mediawiki-editor'
+Plugin 'chikamichi/mediawiki.vim'
+Plugin 'junegunn/limelight.vim'
+Plugin 'reedes/vim-pencil'
+Plugin 'reedes/vim-thematic'
+Plugin 'reedes/vim-colors-pencil'
+Plugin 'nickburlett/vim-colors-stylus'
+"Plugin 'reedes/vim-textobj-sentence'
 " Git plugin not hosted on GitHub
 "lugin 'https://github.com/Lokaltog/vim-easymotion.git'
 "Plugin 'https://github.com/vim-scripts/Rainbow-Parenthsis-Bundle.git'
@@ -321,3 +345,62 @@ nmap <leader>vp :VimuxPromptCommand<cr>
 nmap <leader>vl :VimuxRunLastCommand<cr>
 nmap <leader>vq :VimuxCloseRunner<cr>
 nmap <leader>vx :VimuxInterruptRunner<cr>
+
+" Wikimedia
+let g:mediawiki_editor_url = "localhost/mediawiki"
+"let g:mediawiki_editor_path = ""
+let g:mediawiki_editor_username = "cdalgicdir"
+"g:mediawiki_editor_password
+
+" Limelight
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
+" Default: 0.5
+let g:limelight_default_coefficient = 0.7
+
+" Number of preceding/following paragraphs to include (default: 0)
+let g:limelight_paragraph_span = 1
+
+" Beginning/end of paragraph
+"   When there's no empty line between the paragraphs
+"   and each paragraph starts with indentation
+let g:limelight_bop = '^\s'
+let g:limelight_eop = '\ze\n^\s'
+
+" Highlighting priority (default: 10)
+"   Set it to -1 not to overrule hlsearch
+let g:limelight_priority = -1
+
+let g:pencil#autoformat = 1  
+noremap <buffer> <silent> <F7> :<C-u>PFormatToggle<cr>
+inoremap <buffer> <silent> <F7> <C-o>:PFormatToggle<cr>
+let g:pencil#textwidth = 74
+"let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
+set statusline=%<%f\ %h%m%r%w\ \ %{PencilMode()}\ %=\ col\ %c%V\ \ line\ %l\,%L\ %P
+set rulerformat=%-12.(%l,%c%V%)%{PencilMode()}\ %P
+let g:airline_section_x = '%{PencilMode()}'
+
+let g:pencil#mode_indicators = {'hard': '␍', 'auto': 'ª', 'soft': '⤸', 'off': '',}
+
+
+
+" Highlight words to avoid in tech writing
+" =======================================
+"
+"   obviously, basically, simply, of course, clearly,
+"   just, everyone knows, However, So, easy
+
+"   http://css-tricks.com/words-avoid-educational-writing/
+
+highlight TechWordsToAvoid ctermbg=red ctermfg=white
+match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however\|so,\|easy/
+autocmd BufWinEnter * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
+autocmd InsertEnter * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
+autocmd InsertLeave * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
+autocmd BufWinLeave * call clearmatches()
