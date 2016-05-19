@@ -24,7 +24,7 @@ augroup pencil
   autocmd!
   autocmd FileType markdown,mkd call pencil#init()
   autocmd FileType text         call pencil#init()
-  autocmd FileType tex,latex         call pencil#init()
+  "autocmd FileType tex,latex         call pencil#init()
 augroup END
 
 highlight Search cterm=NONE ctermfg=black ctermbg=yellow
@@ -152,6 +152,8 @@ Plugin 'reedes/vim-pencil'
 Plugin 'reedes/vim-thematic'
 Plugin 'reedes/vim-colors-pencil'
 Plugin 'nickburlett/vim-colors-stylus'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
 "Plugin 'reedes/vim-textobj-sentence'
 " Git plugin not hosted on GitHub
 "lugin 'https://github.com/Lokaltog/vim-easymotion.git'
@@ -354,18 +356,22 @@ let g:mediawiki_editor_username = "cdalgicdir"
 
 " Limelight
 " Color name (:help cterm-colors) or ANSI code
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
+"let g:limelight_conceal_ctermfg = 'gray'
+"let g:limelight_conceal_ctermfg = 240
+let g:limelight_conceal_ctermfg = (&bg == 'dark') ? 'red' : 'gray'
+"let g:limelight_conceal_ctermfg = 245  " Solarized Base1
+"let g:limelight_conceal_guifg = '#8a8a8a'  " Solarized Base1
 
 " Color name (:help gui-colors) or RGB color
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
+"let g:limelight_conceal_guifg = 'DarkGray'
+"let g:limelight_conceal_guifg = '#777777'
+let g:limelight_conceal_guifg = (&bg == 'dark') ? 'red' : 'gray'
 
 " Default: 0.5
 let g:limelight_default_coefficient = 0.7
 
 " Number of preceding/following paragraphs to include (default: 0)
-let g:limelight_paragraph_span = 1
+let g:limelight_paragraph_span = 0
 
 " Beginning/end of paragraph
 "   When there's no empty line between the paragraphs
@@ -404,3 +410,102 @@ autocmd BufWinEnter * match TechWordsToAvoid /\cobviously\|basically\|simply\|of
 autocmd InsertEnter * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
 autocmd InsertLeave * match TechWordsToAvoid /\cobviously\|basically\|simply\|of\scourse\|clearly\|just\|everyone\sknows\|however,\|so,\|easy/
 autocmd BufWinLeave * call clearmatches()
+
+map <C-n> :NERDTreeToggle<CR>
+let g:pencil_higher_contrast_ui = 0   " 0=low (def), 1=high
+let g:pencil_neutral_headings = 1   " 0=blue (def), 1=normal
+let g:pencil_neutral_code_bg = 1   " 0=gray (def), 1=normal
+let g:pencil_spell_undercurl = 1       " 0=underline, 1=undercurl (def)
+let g:pencil_terminal_italics = 1
+"let g:airline_theme = 'pencil'
+
+let g:thematic#themes = {
+\ 'bubblegum'  : {
+\                },
+\ 'jellybeans' : { 'laststatus': 0,
+\                  'ruler': 1,
+\                },
+\ 'pencil_dark' :{'colorscheme': 'pencil',
+\                 'background': 'dark',
+\                 'airline-theme': 'pencil',
+\                 'ruler': 1,
+\                },
+\ 'pencil_lite' :{'colorscheme': 'pencil',
+\                 'background': 'light',
+\                 'airline-theme': 'pencil',
+\                 'ruler': 1,
+\                },
+\ 'write'   : { 'colorscheme': 'pencil',
+\                  'background': 'light',
+\                  'columns': 75,
+\                  'font-size': 17,
+\                  'fullscreen': 1,
+\                  'laststatus': 0,
+\                  'linespace': 8,
+\                  'typeface': 'Courier Prime',
+\                },
+\ }
+
+function! s:goyo_enter()
+  if has('gui_running')
+    set fullscreen
+    colorscheme pencil
+    set guifont=Courier\ Prime\ 17
+    set background=light
+    set linespace=7
+  elseif exists('$TMUX')
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+  endif
+  set noshowmode
+  set noshowcmd
+  set scrolloff=999
+  set antialias
+  set guicursor+=a:blinkon0    " disable cursor blink
+  set guioptions-=r   "kill right scrollbar
+  set guioptions-=l   "kill left scrollbar
+  set guioptions-=L   "kill left scrollbar multiple buffers
+  set guioptions-=T   "kill toolbar
+  Limelight
+  let b:quitting = 0
+  let b:quitting_bang = 0
+  autocmd QuitPre <buffer> let b:quitting = 1
+  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+  " ...
+endfunction
+
+function! s:goyo_leave()
+  if has('gui_running')
+    set nofullscreen
+    set background=dark
+    set linespace=0
+  elseif exists('$TMUX')
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+  endif
+  set showmode
+  set showcmd
+  set scrolloff=5
+  set guioptions+=r   "kill right scrollbar
+  Limelight!
+  " Quit Vim if this is the only remaining buffer
+  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+    if b:quitting_bang
+      qa!
+    else
+      qa
+    endif
+  endif
+  " ...
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+let g:goyo_height=50
+let g:goyo_width=75
+
+"noremap <silent> <F5> :<C-u>ThematicNarrow<cr>
+"noremap <silent> <F6> :<C-u>ThematicWiden<cr>
+"inoremap <silent> <F5> <C-o>:ThematicNarrow<cr>
+"inoremap <silent> <F6> <C-o>:ThematicWiden<cr>
