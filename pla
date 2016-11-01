@@ -453,7 +453,7 @@ if $doshifting; then
 	    shift=${tmp[1]}
 	elif $doshiftval; then
 	    #tmp=`awk -v val=$shiftXval -v eps=0.009 '!/^[@|#]/{if ($1<val+eps && $1>val-eps){print $2}}' ${f}`
-	    tmp=$(awk -v c=1 -v v=$shiftXval '!/^[@|#]/BEGIN{l=$c;ld=999}{d=($c-v>=0) ? ($c-v) : v-$c; if (d <= ld) {ld=d; l=$c }} END{print l}' ${f})
+	    tmp=$(awk -v c=1 -v cv=2 -v v=$shiftXval 'BEGIN{l=$c;ld=999} !/^[@|#]/ {d=($c-v>=0) ? ($c-v) : v-$c; if (d <= ld) {ld=d; l=$c; lv=$cv }} END {print lv}' ${f})
 	    tmp=(${tmp// / })
 	    shiftR=${shiftXval}
 	    shift=${tmp[0]}
