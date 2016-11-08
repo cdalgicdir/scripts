@@ -559,7 +559,8 @@ do
 		    title_label=${titlelist[$((column-2))]}
 		    title="t ${q}${title_label}${q}, "
 		else
-		    title='t '${q}${file}${titlextra}${q}','
+		    title_file=$(echo ${file} | sed 's/_/\\_/g')
+		    title='t '${q}${title_file}${titlextra}${q}','
 		fi
 	    else
 		title='not,'
