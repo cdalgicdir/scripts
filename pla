@@ -437,10 +437,10 @@ if $doshifting; then
     shiftRlist=()
     for f in ${filelist[@]}; do
 	if $doshiftend; then
-	    shiftR=`tail -1 ${f} | awk '{print $1}'`
-	    [[ $shiftR == "" ]] && shiftR=`tail -2 ${f} | awk '{print $2}'`
-	    shift=`tail -1 ${f} | awk '{print $2}'`
-	    [[ $shift == "" ]] && shift=`tail -2 ${f} | awk '{print $2}'`
+	    shiftR=$(awk '!/[@|#]/{print $1}' $f | tail -n 1)
+	    [[ $shiftR == "" ]] && shiftR=$(awk '!/[@|#]/{print $2}' $f | tail -n 2)
+	    shift=$(awk '!/[@|#]/{print $2}' $f | tail -n 1)
+	    [[ $shift == "" ]] && shift=$(awk '!/[@|#]/{print $2}' $f | tail -n 1)
 	elif $doshiftmin; then
 	    tmp=`awk -v y=1e6 '!/^[@|#]/{if ($2<y){y=$2;x=$1}}END{print x,y}' ${f}`
 	    tmp=(${tmp// / })
