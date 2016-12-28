@@ -17,13 +17,13 @@ Options:
 }
 
 option=""
-linewidth=3
+linewidth=1
 length="8,4"
 #fontsize=16
 #fonttype="Gill Sans"
 #fonttype="Rosario"
 #fonttype="Actor"
-fontsize=22
+fontsize=18
 fonttype="Linotte-Regular"
 #fonttype="Ubuntu"
 #fonttype="Comfortaa"
