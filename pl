@@ -30,7 +30,7 @@ elif [[ $1 == $tabfile && $1 != *table_d*.xvg && $1 != *table_a*.xvg && $1 != *t
     fi
 
 elif [[ $1 == '-en' ]]; then
-    gplot --term "$terminal" -c "set key right center" -y "Energy (kJ/mol)" -x "Time(ps)" -- "'energy.xvg' u 1:2 t 'Potential','energy.xvg' u 1:3 t 'Kinetic','energy.xvg' u 1:4 t 'Total'"
+    gplot --term "$terminal" -c "set key right center" -y "Energy (kJ/mol)" -x "Time(ps)" -- "'energies.xvg' u 1:2 t 'Potential','' u 1:3 t 'Kinetic','' u 1:4 t 'Total'"
 
 else
     if [[ $1 == *$energyfile ]]; then
