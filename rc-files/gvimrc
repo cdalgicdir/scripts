@@ -3,12 +3,15 @@ set background=dark
 set guioptions-=T
 
 if matchstr(expand("%"),".*\.md") != ""
-    colorscheme darkdevel
-    set guifont=Monofur\ 15
+    "colorscheme darkdevel
+    "set guifont=Monofur\ 15
+    colorscheme pencil
+    set background=light
+    set guifont=Courier\ Prime\ 15
     " Monofur, Monaco, Source Code Pro
     "set guifont=Ubuntu\ Mono\ 16
     :au BufRead *.tex set spell
-    :highlight SpellBad gui=underline guibg=NONE guifg=red
+    ":highlight SpellBad gui=underline guibg=NONE guifg=red
     :au BufRead *.md syn region mkdCode start="\[@" end="\]"
     ":au BufRead *.md syn region mkdRule matchgroup=mkdDelimiter start="\[@" end="\]"
 elseif matchstr(expand("%"),".*\.tex") != ""
@@ -26,11 +29,11 @@ elseif matchstr(expand("%"),".*\.tex") != ""
     "set guifont=Source\ Code\ Pro\ 16
     " Monofur, Monaco, Source Code Pro
     :au BufRead *.tex set spell
-    :highlight SpellBad gui=underline guibg=NONE guifg=red
+    ":highlight SpellBad gui=underline guibg=NONE guifg=red
+    :syn match TmlDoubleWords /\c\<\(\S\+\)\_s\+\1\ze\_s/ 
+    :highlight TmlDoubleWords gui=underline guibg=NONE guifg=red
 else
     "colorscheme moria, twilight, solarized, inkpot, corporation, monokai,
-    "jellybeans
-    "colorscheme corporation
     colorscheme jellybeans
     set guifont=Monaco\ 14
     "set guifont=Droid\ Sans\ Mono\ 14
@@ -75,3 +78,10 @@ endif
 
 map <silent> <F11>
 \    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+
+set antialias
+"set guicursor+=a:blinkon0    " disable cursor blink
+"set guioptions-=r   "kill right scrollbar
+"set guioptions-=l   "kill left scrollbar
+"set guioptions-=L   "kill left scrollbar multiple buffers
+"set guioptions-=T   "kill toolbar

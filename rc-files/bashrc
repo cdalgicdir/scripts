@@ -8,18 +8,45 @@ case $- in
       *) return;;
 esac
 
+_chomp_path() {
+    #local path=${1/${HOME}\// }
+    local path=${1/${HOME}/ ~}
+    path=${path//${HOME}}
+    local last=${path} sedout= count=0 path2=
+    #bash is dumb, "${#path//[^'/']/}" fails.
+    #sedout="${path//[^'/']/}"
+    sedout=(${path//\// })
+    count=${#sedout[@]}
+    echo ${last}
+}
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoredups
+HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
+
 # Combine multiline commands into one in history
 shopt -s cmdhist
+
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=200000
-HISTFILESIZE=10000
-export HISTIGNORE="&:ls:[bf]g:exit"
+#HISTSIZE=1000
+#HISTFILESIZE=2000
+
+unset HISTSIZE
+unset HISTFILESIZE
+HISTIGNORE="&:ls:[bf]g:exit:..:l:dow"
+HOSTNAME="$(hostname)"
+HOSTNAME_SHORT="${HOSTNAME%%.*}"
+HISTFILE="${HOME}/.history/$(date -u +%Y/%m/%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
+mkdir -p "$(dirname "$HISTFILE")"
+histgrep () {
+    grep --color=auto -r "$@" ~/.history
+    history | grep --color=auto "$@"
+}
+
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -38,7 +65,7 @@ fi
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
-    xterm-color) color_prompt=yes;;
+    xterm-color|*-256color) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -58,7 +85,8 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='\[\033[01;32m\]# `date +"%Y.%m.%d %R"` $(pwd)\n\$\[\033[00m\] '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -90,18 +118,19 @@ complete -f -X '!*.pdf' pdfviewer
 complete -f -X '!*.corr' ramaplot
 complete -f -X '!*.gp' gp
 complete -f -X '!*.gp' gpp
+complete -f -X '!*.pdf' cn
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
-#alias ll='ls -alF'
-#alias la='ls -A'
-#alias l='ls -CF'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
 ###################################################################
 PROMPT_DIRTRIM=2
-PS1='\[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] '
-#PS1='\[\e[1;34m\](${PWD//\// })\[\e[m\] \[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] '
-#PS1='\[\e[1;34m\]\w\[\e[m\]\n\[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] '
-#PS1="\e[01;34m# `date +'%Y.%m.%d %R'` \w\[\e[m\]\n\[\e[1;32m\]\$ \[\e[m\]\[\e[1;37m\] "
+PS1='\[\e[38;5;172m\]# \h\[\e[38;5;245m\]: \[\e[38;5;5m\]`_chomp_path $(pwd)`\n\[\e[38;5;202m\]⟫\[\e[00m\] '
 ###################################################################
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -123,49 +152,36 @@ fi
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
-    . ~/.bash_completion.d/books
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
   fi
 fi
-
-GROMACSDIR=/usr/local/gromacs/gromacs-4.6.7
-VOTCADIR=$HOME/votca/votca-1.2.4-g467
-
-CDPATH=".:~/remote"
-export PATH=$PATH:$HOME/progs/bin:$HOME/Mendeley/bin
-source $GROMACSDIR/bin/GMXRC.bash
-export GMXLIB=$GROMACSDIR/share/gromacs/top
-source $VOTCADIR/bin/VOTCARC.bash
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:$VOTCADIR/lib
-export MANPATH=/usr/share/man/:/usr/local/gromacs-4.5.6/share/man:/opt/novell/man
-#calc(){ echo "scale=2;$@" | bc;}
-#calc(){ printf "%.4f\n" `echo $@ |bc -l`;}
-calc(){ echo $@ | octave -q;}
+calc(){ echo $@ | julia;}
 shopt -s extglob
 #export VIMRUNTIME=/usr/share/vim/vimcurrent
 alias emerillon='export CLUTTER_VBLANK=none && emerillon'
 man () { yelp "man:$@"; }
-export SVNROOT=svn+ssh://cdalgicdir@88.255.97.68/home/svnroot
-#export DSSP=$HOME/Documents/scripts/currentscripts/dsspold
-#MANPATH=$MANPATH:/usr/local/texlive/2012/texmf/doc/man
-#INFOPATH=:$INFOPATH:/usr/local/texlive/2012/texmf/doc/info
-#PATH=$PATH:/usr/local/texlive/2012/bin/x86_64-linux
-# beginning CUDA variables
-#export PATH=$PATH:/usr/local/cuda-5.0/bin
-#export LD_LIBRARY_PATH=/usr/local/cuda-5.0/lib64:/lib
-# end of CUDA variables
+export SVNROOT=svn+ichiport://cdalgicdir@88.255.97.68/home/svnroot
+
+case "$TERM" in
+    xterm*|rxvt*|screen*)
+        bind '"\e[A": history-search-backward'
+        bind '"\e[B": history-search-forward'
+    ;;
+esac
+
+# added by Anaconda2 4.2.0 installer
+export PATH="/home/cdalgicdir/anaconda2/bin:$PATH"
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
+export PATH=$PATH:/usr/local/cuda/bin
+
 ## Up Arrow: search and complete from previous history
-bind '"\e[A": history-search-backward'
+#bind '"\e[A": history-search-backward'
 ## Down Arrow: search and complete from next history
-bind '"\e[B": history-search-forward'
+#bind '"\e[B": history-search-forward'
 # Ctrl-v: (insert mode) switch to command mode and edit in vi
 bind '"\C-v": "\ev"'
 function gvim () { (/usr/bin/gvim -f "$@" &) }
-#export PATH=$PATH:/usr/local/namd/namd-2.9-multicore
-#export SCHRODINGER=/opt/schrodinger
-
-### FUNCTIONS
 
 #Automatically do an ls after each cd
 cd() {
@@ -179,14 +195,64 @@ function pawk {
     local cmd="${first}\$${1}${last}"
     eval $cmd
 }
+
+function dirawk {
+    local cmd="awk '{split(\$1,a,\"/\");print a[1]}'"
+    eval $cmd
+}
+
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
 alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png "[$?] $(alert_helper)"'
-export VIMRUNTIME=/usr/share/vim/vim74
+#export VIMRUNTIME=/usr/share/vim/vim74
 export LC_TIME=en_GB.utf8
 export EDITOR=vim
-export MMTSBDIR=$HOME/mmtsb
-export PATH=$PATH:$MMTSBDIR/perl:$MMTSBDIR/bin
-#export PATH=/usr/local/plumed/plumed-2.1/bin:$PATH
-#export LD_LIBRARY_PATH=/usr/local/plumed/plumed-2.1/lib:$LD_LIBRARY_PATH
+#export MMTSBDIR=$HOME/mmtsb
 #source /home/soft/bashrc_extension_soft
-#export PATH=$PATH:~/remote/soft/MATLAB/R2014a/bin/
+
+# add /home/soft software
+#GROMACS="/home/soft/gromacs/gromacs-4.6.7/inst/shared"
+SOFT=$HOME/soft
+TMUX=$SOFT/tmux/tmux-2.3
+GNUPLOT=$SOFT/gnuplot/gnuplot-5.0.5-qt5
+GROMACS=$SOFT/gromacs/gromacs-4.6.7
+PLUMED=$SOFT/plumed/plumed-2.2.2
+#VOTCA=$SOFT/votca/votca-1.2.4-fixed
+VOTCA=$SOFT/votca/votca-1.3
+export PATH=/home/cdalgicdir/anaconda/bin:$PATH
+export PATH=$TMUX/bin:$SOFT/bin:$PATH
+export PATH=$GNUPLOT/bin:$PATH
+#export PATH=$TMUX/bin:$GNUPLOT/bin:$SOFT/bin:$PATH
+source $GROMACS/bin/GMXRC.bash
+export GMXLIB=$GROMACS/share/gromacs/top
+source $VOTCA/bin/VOTCARC.bash
+export PATH=$PATH:$PLUMED/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PLUMED/lib
+export PLUMED_KERNEL=$PLUMED/lib/libplumedKernel.so
+export PATH=$PATH:$HOME/soft/moltemplate/moltemplate/src
+export MOLTEMPLATE_PATH=$HOME/soft/moltemplate/moltemplate/common
+export PATH=$PATH:$HOME/soft/espressopp/espressopp/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/soft/espressopp/espressopp/lib
+export PYTHONPATH=$PYTHONPATH:$HOME/soft/espressopp/espressopp/lib/python2.7/dist-packages
+#export PATH=$HOME/progs/screen-4.2.1/bin:$PATH
+alias diff-side-by-side='diff --side-by-side -W"`tput cols`"'
+alias diff-side-by-side-changes='diff --side-by-side --suppress-common-lines -W"`tput cols`"'
+#[ -r /home/cdalgicdir/.byobu/prompt ] && . /home/cdalgicdir/.byobu/prompt   #byobu-prompt#
+#CDPATH=$CDPATH:~/remote
+# get airline working 
+export TERM=xterm-256color
+#export TERM=screen-256color-bce
+#export TERM=screen-256color
+#so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
+stty -ixon
+
+if [ -f ~/.bash_aliases_soft ]; then
+    . ~/.bash_aliases_soft
+fi
+
+export PATH=$PATH:$SOFT/wham/bin
+export LC_NUMERIC="en_US.UTF-8"
+export PROMPT_COMMAND="history -a"
+export PATH=$PATH:$HOME/.local/bin
+export LESS='-R'
+export LESSOPEN='|~/.lessfilter %s'
+export PLUMED_VIMPATH=$PLUMED/lib/plumed/vim

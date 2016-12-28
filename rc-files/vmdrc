@@ -31,6 +31,7 @@ light 3 off
 stage location off
 
 #display resize 1338 1668
+display resize 900 1100
 
 # position and turn on menus
 menu main move 5 5
@@ -213,7 +214,7 @@ user add key Right { if {[molinfo top get numframes] == [ expr [molinfo top get 
 user add key q { reset_viz [molinfo top] }
 user add key Control-w { addwall }
 user add key Control-d { draw delete all }
-user add key E { ss_viz_LEUsc [molinfo top] }
+#user add key E { ss_viz_LEUsc [molinfo top] }
 user add key w { ss_poly [molinfo top] }
 user add key W { ss_poly_bb [molinfo top] }
 user add key Alt-w { showWaterClose [molinfo top] }
@@ -243,12 +244,19 @@ user add key J { if {[molinfo top get rep] == "Lines"} { changerep [molinfo top]
 user add key L { addHeavyLabels [molinfo top] }
 user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA3 CA4 CA5 CA6 CA7 CA8 CA9 CA10 CA11"}
 user add key b { showbackbone [molinfo top] }
-user add key F8 { snap [molinfo top] "auto" "false" }
-#user add key F8 { snap_tachyon [molinfo top] "auto" "false" }
-user add key F9 { writegro [molinfo top] }
-user add key F10 { snap }
+###################################################################
+# SNAP
+# Tachyon
+user add key F8 { snap_tachyon [molinfo top] "auto" "false" }
+user add key F10 { snap_tachyon }
+user add key F12 { snap_tachyon [molinfo top] "auto" "true" } 
+# TachyonLOptiXInternal
+#user add key F8 { snap [molinfo top] "auto" "false" }
+#user add key F10 { snap }
+#user add key F12 { snap "auto" "true" "true" }
+###################################################################
 user add key F11 { display depthcue off; color Display Background white;axes location off;foreach mol [molinfo list] { mol top $mol; pbc box -off }}
-user add key F12 { snap "auto" "true" "true" }
+user add key F9 { writegro [molinfo top] }
 user add key F5 { refresh_trajectory [molinfo top] "traj.xtc" 1 }
 user add key Control-c { cg_map "mapped.gro" }
 user add key Control-v { cg_map_all "mapped.gro" }
@@ -1741,6 +1749,49 @@ proc ss_poly_bb {molid} {
   } 
 }
 
+proc ss_poly_sc {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    mol color Name
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection resname PNI
+    mol addrep $molid
+    mol color ColorID 10
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection name CH1 CH2 HC1 HC2
+    mol addrep $molid
+    mol color ColorID 13
+    mol selection name CAM NAM HAM OAM
+    mol addrep $molid
+    mol color ColorID 6
+    mol selection name CH3 HC3 CTN
+    mol addrep $molid
+    display depthcue off; color Display Background white;pbc box -off;axes location off
+  } 
+}
+
+proc ss_poly_cg {molid} {
+  # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    mol color Name
+    mol selection resname POL
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol addrep $molid
+    display depthcue off; color Display Background white;axes location off
+  } 
+}
+
+
 proc hotkey_protein {} {
     user add key w { ss_viz [molinfo top] }
     user add key W { ss_viz_paper [molinfo top] }
@@ -1750,12 +1801,18 @@ proc hotkey_protein {} {
     #user add key z { align [molinfo top] "fragment 0 and resid 3 to 10 and backbone and protein" }
     #user add key A { align [molinfo top] "protein and backbone" }
     #user add key a { align [molinfo top] "name CN3 CN4 CN5 CN6 CN7 CN8 CN9 CN10 CN11 CN12 CA2 CA3 CA4 CA5 CA6 A1 A2 A3 A4 A5 A6" }
+    user add key E { ss_viz_LEUsc [molinfo top] }
 }
 
 proc hotkey_poly {} {
     user add key w { ss_poly [molinfo top] }
     user add key W { ss_poly_bb [molinfo top] }
+    user add key E { ss_poly_sc [molinfo top] }
     user add key A { align [molinfo top] "name CH1 CH2" }
+}
+
+proc hotkey_poly_cg {} {
+    user add key w { ss_poly_cg [molinfo top] }
 }
 
 hotkey_poly

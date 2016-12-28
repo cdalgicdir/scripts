@@ -18,6 +18,7 @@ STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 .tgz 01;31
 .tar.gz 01;31
 .tar.bz 01;31
+.tar.bz2 01;31
 .tbz 01;31
 .zip 01;31
 .rar 01;31
@@ -39,7 +40,9 @@ STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 .pdf 01;33
 .sh 00;33
 .py 00;33
+.tcl 00;33
 .comms 00;33
+.info 03;37
 .avi 03;36
 .mkv 03;36
 .mp4 03;36

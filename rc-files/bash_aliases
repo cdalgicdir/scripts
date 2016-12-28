@@ -14,14 +14,21 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='ls -alFh'
 alias la='ls -A'
 alias l='ls -CF'
+alias lv='ls -1v'
+alias lz='ll -rS'    # sort by size
+alias lx='ll -BX'    # sort by extension
+alias lt='ll -rt'    # sort by date
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+DATDIR="/mnt/data/cdalgicdir"
+alias dat="cd /mnt/data/cdalgicdir"
+alias dat2="cd /mnt/data2/cdalgicdir"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -30,51 +37,68 @@ alias sl='ls'
 alias doc="cd $HOME/Documents"
 alias des="cd $HOME/Desktop"
 alias dow="cd $HOME/Downloads"
-#alias scr="cd $HOME/Documents/scripts/currentscripts"
-alias scr="cd $HOME/progs/bin"
+alias scr="cd $HOME/soft/bin"
+#alias sim="cd $DATDIR/SIMS"
 alias sim="cd $HOME/SIMS"
+alias eala="cd /mnt/data2/cdalgicdir/SIMS/EALA-cg"
 ###################################################################
 # SSH
-alias hamsi='ssh hamsi -X'
-alias lufer='ssh lufer -X'
 alias ichi='ssh ichi -X'
-alias yunus='ssh yunus -X'
 alias yunust-tunnel='ssh -X -f -N -L 9001:yunus.hpc.ku.edu.tr:22 ichi'
+alias lufert-tunnel='ssh -X -f -N -L 9003:lufer.hpc.ku.edu.tr:22 ichi'
 alias yunust='ssh yunust -X'
-alias tric='ssh tric -X'
-alias trict-tunnel='ssh -X -f -N -L 9002:172.23.160.14:22 ichi'
+alias lufert='ssh lufert -X'
+alias trict-tunnel='ssh -X -f -N -L 9002:172.23.123.11:22 ichi'
 alias trict='ssh trict -X'
-alias karls='ssh karls -X'
-alias scc='ssh scc -X'
+alias kit='ssh -X kit'
+alias scc='ssh -X scc'
+alias scc2='ssh -X sccdata2'
+alias enzot-tunnel='ssh -X -f -N -L 9004:10.0.0.10:22 biby'
+alias enzot='ssh enzot -X'
 ###################################################################
 alias gp='gnuplot --persist'
 alias emerillon='export CLUTTER_VBLANK=none && emerillon'
 #alias psudo='sudo env PATH="$PATH"'
 alias diff-side-by-side='diff --side-by-side -W"`tput cols`"'
 alias diff-side-by-side-changes='diff --side-by-side --suppress-common-lines -W"`tput cols`"'
-alias btw="$HOME/genymotion/player --vm-name Between &"
-alias btwoff="ps aux | grep '\-\-vm-name Between' | awk '{print \$2}' | xargs kill"
-#alias xp="virtualbox --startvm WinXP"
-#alias xpsave="VBoxManage controlvm WinXP savestate"
-#alias xpoff="VBoxManage controlvm WinXP acpipowerbutton"
 alias off="xset dpms force off"
 alias pymol="export PYTHONPATH=/opt/pymol/modules:$PYTHONPATH && pymol"
-#export SCHRODINGER=/opt/schrodinger
-#alias maestro="$SCHRODINGER/maestro %f &"
-#alias matlab="$HOME/matlabR2013a/bin/matlab -desktop &"
 alias dsvisualizer="/home/cdalgicdir/Accelrys/DiscoveryStudio35/bin/DiscoveryStudio35 &"
-#alias open="gnome-open"
-#alias op="gnome-open"
 alias octave="octave -q"
 alias cpuinfo='lscpu'
 alias gpumeminfo='grep -i --color memory /var/log/Xorg.0.log'
 alias dud='du -hsx * | sort -rh | head -10'
 alias gv='gvim'
 alias mkcd='_(){ mkdir $1; cd $1; }; _'
-alias mangro="gnome-open $HOME/Manuals/gromacs-manual-4.6.7.pdf &"
-alias github="cd $HOME/Dropbox/github"
-#alias eclipse="$HOME/Courses/comp130/eclipse/eclipse &"
-alias btstart="~/.btsync/btsync --config ~/.btsync/sync.conf --log ~/.btsync/log"
-alias btkill="pkill btsync"
+alias mangro="gnome-open $HOME/manuals/gromacs_manual-4.6.7.pdf &"
+alias manlmp="gnome-open $HOME/manuals/lammps160301-manual.pdf &"
+alias manplu="gnome-open $HOME/manuals/plumed_manual_2.1.4.pdf &"
+alias manplu1="gnome-open $HOME/manuals/plumed_manual_1.3.0.pdf &"
+#alias btstart="~/.btsync/btsync --config ~/.btsync/sync.conf --log ~/.btsync/log"
+#alias btkill="pkill btsync"
 alias tmux="tmux -2"
-alias genymotion="$HOME/genymotion/genymotion"
+#alias ipython="/usr/bin/ipython --pylab"
+#alias vmd="/usr/local/bin/vmd -size 1338 1668"
+alias fltr="builtin cd ~/.FLTR && java -jar FLTR.jar &"
+alias dsvisualizer="/home/cdalgicdir/Accelrys/DiscoveryStudio40/bin/DiscoveryStudio40 &"
+alias diff="colordiff"
+#alias pip="/usr/bin/pip"
+#alias cgrun="bash /mnt/data2/cdalgicdir/SIMS/EALA-cg/CA-AB-mapping/run.sh"
+#alias cgclean="/mnt/data2/cdalgicdir/SIMS/EALA-cg/CA-AB-mapping/clean.sh"
+#alias cgext="bash /mnt/data2/cdalgicdir/SIMS/EALA-cg/CA-AB-mapping/run-extended.sh"
+#alias anaconda="export PATH=/usr/local/anaconda/bin:/home/cdalgicdir/anaconda/bin:$PATH"
+#alias ipython="export PATH=/usr/local/anaconda/bin:/home/cdalgicdir/anaconda/bin:$PATH;ipython"
+###################################################################
+alias gromacs-4.6.7_plumed-2.1.5="export PLUMED=\$SOFT/plumed/plumed-2.1.5;export PATH=\$PLUMED/bin:\$PATH;export LD_LIBRARY_PATH=\$PLUMED/lib:\$LD_LIBRARY_PATH;export PLUMED_KERNEL=\$PLUMED/lib/libplumedKernel.so;source \$SOFT/gromacs/gromacs-4.6.7_plumed-2.1.5/bin/GMXRC.bash"
+alias gromacs-4.6.7_plumed-2.2.2="export PLUMED=\$SOFT/plumed/plumed-2.2.2;export PATH=\$PLUMED/bin:\$PATH;export LD_LIBRARY_PATH=\$PLUMED/lib:\$LD_LIBRARY_PATH;export PLUMED_KERNEL=\$PLUMED/lib/libplumedKernel.so;source \$SOFT/gromacs/gromacs-4.6.7_plumed-2.2.2/bin/GMXRC.bash"
+alias gromacs-4.6.7_plumed-2.2-hrex="export PLUMED=\$SOFT/plumed/plumed-2.2-hrex;export PATH=\$PLUMED/bin:\$PATH;export LD_LIBRARY_PATH=\$PLUMED/lib:\$LD_LIBRARY_PATH;export PLUMED_KERNEL=\$PLUMED/lib/libplumedKernel.so;source \$SOFT/gromacs/gromacs-4.6.7_plumed-2.2/bin/GMXRC.bash"
+alias plumed-2.0-hrex="export PLUMED=\$SOFT/plumed/plumed-2.0-hrex;export PATH=\$PLUMED/bin:\$PATH;export LD_LIBRARY_PATH=\$PLUMED/lib:\$LD_LIBRARY_PATH;export PLUMED_KERNEL=\$PLUMED/lib/libplumedKernel.so"
+alias plumed-2.2-hrex="export PLUMED=\$SOFT/plumed/plumed-2.2-hrex;export PATH=\$PLUMED/bin:\$PATH;export LD_LIBRARY_PATH=\$PLUMED/lib:\$LD_LIBRARY_PATH;export PLUMED_KERNEL=\$PLUMED/lib/libplumedKernel.so"
+alias plumed-2.2.2="export PLUMED=\$SOFT/plumed/plumed-2.2.2;export PATH=\$PLUMED/bin:\$PATH;export LD_LIBRARY_PATH=\$PLUMED/lib:\$LD_LIBRARY_PATH;export PLUMED_KERNEL=\$PLUMED/lib/libplumedKernel.so"
+alias plumed-2.1.5="export PLUMED=\$SOFT/plumed/plumed-2.1.5;export PATH=\$PLUMED/bin:\$PATH;export LD_LIBRARY_PATH=\$PLUMED/lib:\$LD_LIBRARY_PATH;export PLUMED_KERNEL=\$PLUMED/lib/libplumedKernel.so"
+###################################################################
+alias na="nautilus"
+alias pnirep="gnome-open $HOME/reports/PNiPAM/overview/report.pdf &"
+alias gittree="git log --graph --full-history --all --color --pretty=format:'%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s'"
+alias opl="ls -tr | tail -n 1 | xargs gnome-open"
+#alias cn="convert -density 300"

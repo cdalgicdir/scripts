@@ -1,5 +1,6 @@
 #set term wxt noctrl raise size 1000,600 font "Gill Sans,16"
-set term wxt noctrl raise size 800,480 font "Gill Sans,14"
+#set term wxt noctrl raise size 800,480 font "Gill Sans,14"
+set term wxt noctrl raise size 800,480 font "Linotte-Regular,14"
 #show style line
 #set term wxt size 800,600
 ###################################################################
@@ -54,14 +55,15 @@ set style line 7 lt 7 lw 4 lc rgb "cyan"
 set style line 7 lt 7 lw 4 lc rgb "#87ceeb"
 set style line 8 lt 8 lw 4 lc rgb "olive"
 set style line 9 lt 9 lw 4 lc rgb "grey"
-set style line 10 lt 10 lw 4 lc rgb "red"
+#set style line 10 lt 10 lw 4 lc rgb "red"
+set style line 10 lt 10 lw 4 lc rgb "#cc99ff"
 set style line 11 lt 11 lw 4 lc rgb "navy"
 set style line 12 lt 12 lw 4 lc rgb "light-green"
 set style line 13 lt 13 lw 4 lc rgb "dark-red"
 set style line 14 lt 14 lw 4 lc rgb "#00A000"
 set style line 15 lt 15 lw 4 lc rgb "#5060D0"
 set style line 16 lt 16 lw 4 lc rgb "#F25900"
-set style line 17 lt 17 lw 4 lc rgb "#cc99ff"
+#set style line 17 lt 17 lw 4 lc rgb "#cc99ff"
 ###################################################################
 #set style line 1 lt 1 pt 1 lc rgb "#1b9e77" lw 6
 #set style line 2 lt 2 pt 6 lc rgb "#d95f02" lw 6
@@ -105,17 +107,17 @@ set macros
 ###################################################################
 # MACROS
 ###################################################################
-pdf="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 2 rounded"
+pdf="set terminal pdfcairo enhanced font \"Linotte-Regular,16\" linewidth 1 rounded"
 out="set output \"out.pdf\";rep;set output"
-pdfout="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 2 rounded;set output \"out.pdf\";rep;set output;set term wxt"
-po="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 2 rounded;set output \"out.pdf\";rep;set output;set term wxt"
-pod="set terminal pdfcairo enhanced font \"Gill Sans,16\" linewidth 2 rounded dashed;set output \"out.pdf\";rep;set output;set term wxt"
-pone="set terminal pdfcairo font \"Gill Sans,16\" linewidth 2 rounded;set output \"out.pdf\";rep;set output;set term wxt"
-#set terminal pdfcairo font "Gill Sans,16" linewidth 3 rounded;set output "out.pdf";rep;set output
-pngout="set terminal pngcairo size 1000,600 enhanced font 'Gill Sans,16' linewidth 1 rounded;set output 'out.png';rep;set output;set term wxt"
-png="set terminal pngcairo size 1000,600 enhanced font 'Gill Sans,16' linewidth 1 rounded"
-pno="set terminal pngcairo size 1000,600 enhanced font 'Gill Sans,24' linewidth 1 rounded;set output \"out.png\";rep;set output;set term wxt"
-pnone="set terminal pngcairo size 1000,600 font 'Gill Sans,16' linewidth 1 rounded;set output \"out.png\";rep;set output;set term wxt"
+pdfout="set terminal pdfcairo enhanced font \"Linotte-Regular,16\" linewidth 1 rounded;set output \"out.pdf\";rep;set output;set term wxt"
+po="set terminal pdfcairo enhanced font \"Linotte-Regular,16\" linewidth 1 rounded;set output \"out.pdf\";rep;set output;set term wxt"
+pod="set terminal pdfcairo enhanced font \"Linotte-Regular,16\" linewidth 1 rounded dashed;set output \"out.pdf\";rep;set output;set term wxt"
+pone="set terminal pdfcairo font \"Linotte-Regular,16\" linewidth 1 rounded;set output \"out.pdf\";rep;set output;set term wxt"
+#set terminal pdfcairo font "Linotte-Regular,16" linewidth 3 rounded;set output "out.pdf";rep;set output
+pngout="set terminal pngcairo size 1000,600 enhanced font 'Linotte-Regular,16' linewidth 1 rounded;set output 'out.png';rep;set output;set term wxt"
+png="set terminal pngcairo size 1000,600 enhanced font 'Linotte-Regular,16' linewidth 1 rounded"
+pno="set terminal pngcairo size 1000,600 enhanced font 'Linotte-Regular,24' linewidth 1 rounded;set output \"out.png\";rep;set output;set term wxt"
+pnone="set terminal pngcairo size 1000,600 font 'Linotte-Regular,16' linewidth 1 rounded;set output \"out.png\";rep;set output;set term wxt"
 dist="set xlabel 'r (nm)';set ylabel 'P (r)';rep"
 ang="set xlabel '{/Symbol q}';set ylabel 'P ({/Symbol q})';set xtics 30;set xrange [0:180];set term wxt enhanced;rep"
 angpot="set xlabel '{/Symbol q}';set ylabel 'V ({/Symbol q}) (kJ/mol)';set xtics 30;set xrange [0:180];set term wxt enhanced;rep"
