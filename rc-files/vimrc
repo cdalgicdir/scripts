@@ -31,8 +31,8 @@ highlight Search cterm=NONE ctermfg=black ctermbg=yellow
 ":highlight SpellBad gui=underline guibg=NONE guifg=NONE
 ":au BufRead *.tex set spell
 
-:map <F6> {v}!par -w75<CR>
-:vmap <F6> !par -w75<CR>
+:map <F6> {v}!par -w70<CR>
+:vmap <F6> !par -w70<CR>
 ":map <F4> :highlight Normal ctermfg=black ctermbg=white<CR>
 :map <F4> :set background=light<CR>:colorscheme earendel<CR>
 
@@ -154,9 +154,10 @@ Plugin 'reedes/vim-colors-pencil'
 Plugin 'nickburlett/vim-colors-stylus'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
+"Plugin 'Txtfmt-The-Vim-Highlighter'
 "Plugin 'reedes/vim-textobj-sentence'
 " Git plugin not hosted on GitHub
-"lugin 'https://github.com/Lokaltog/vim-easymotion.git'
+"Plugin 'https://github.com/Lokaltog/vim-easymotion.git'
 "Plugin 'https://github.com/vim-scripts/Rainbow-Parenthsis-Bundle.git'
 
 " All of your Plugins must be added before the following line
@@ -383,11 +384,11 @@ let g:limelight_eop = '\ze\n^\s'
 "   Set it to -1 not to overrule hlsearch
 let g:limelight_priority = -1
 
-let g:pencil#autoformat = 1  
+let g:pencil#autoformat = 0
 noremap <buffer> <silent> <F7> :<C-u>PFormatToggle<cr>
 inoremap <buffer> <silent> <F7> <C-o>:PFormatToggle<cr>
 let g:pencil#textwidth = 74
-"let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
+let g:pencil#cursorwrap = 1     " 0=disable, 1=enable (def)
 set statusline=%<%f\ %h%m%r%w\ \ %{PencilMode()}\ %=\ col\ %c%V\ \ line\ %l\,%L\ %P
 set rulerformat=%-12.(%l,%c%V%)%{PencilMode()}\ %P
 let g:airline_section_x = '%{PencilMode()}'
@@ -509,3 +510,13 @@ let g:goyo_width=75
 "noremap <silent> <F6> :<C-u>ThematicWiden<cr>
 "inoremap <silent> <F5> <C-o>:ThematicNarrow<cr>
 "inoremap <silent> <F6> <C-o>:ThematicWiden<cr>
+
+function! WC()
+    echo "\n"
+    let filename = expand("%")
+    let cmd = "~/Downloads/texcount/texcount.pl " . filename . ""
+    let result = system(cmd)
+    echo result . ""
+endfunction
+
+command WC call WC()
