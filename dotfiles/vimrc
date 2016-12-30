@@ -154,6 +154,7 @@ Plugin 'reedes/vim-colors-pencil'
 Plugin 'nickburlett/vim-colors-stylus'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
+Plugin 'vimoutliner/vimoutliner'
 "Plugin 'Txtfmt-The-Vim-Highlighter'
 "Plugin 'reedes/vim-textobj-sentence'
 " Git plugin not hosted on GitHub

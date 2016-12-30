@@ -1,0 +1,17 @@
+#! /bin/bash
+
+source_gromacs () {
+    source $GROMACS/bin/GMXRC.bash
+}
+
+source_plumed () {
+    export PATH=$PLUMED/bin:$PATH
+    export LD_LIBRARY_PATH=$PLUMED/lib:$LD_LIBRARY_PATH
+    export PLUMED_KERNEL=$PLUMED/lib/libplumedKernel.so
+}
+
+#alias plumed-2.1.4="PLUMED=$SOFT/plumed/plumed-2.1.4 && source_plumed && GROMACS=$SOFT/gromacs/gromacs-4.6.7_plumed-2.1.4 && source_gromacs"
+#alias plumed-2.2.1="PLUMED=$SOFT/plumed/plumed-2.2.1 && source_plumed && GROMACS=$SOFT/gromacs/gromacs-4.6.7_plumed-2.2.1 && source_gromacs"
+alias plumed-2.2.2="PLUMED=$SOFT/plumed/plumed-2.2.2 && source_plumed && GROMACS=$SOFT/gromacs/gromacs-4.6.7_plumed-2.2.2 && source_gromacs"
+alias plumed-2.2.4="PLUMED=$SOFT/plumed/plumed-2.2.4 && source_plumed && GROMACS=$SOFT/gromacs/gromacs-4.6.7_plumed-2.2.4 && source_gromacs"
+alias plumed-2.3.0="PLUMED=$SOFT/plumed/plumed-2.3.0 && source_plumed && GROMACS=$SOFT/gromacs/gromacs-4.6.7_plumed-2.3.0 && source_gromacs"
