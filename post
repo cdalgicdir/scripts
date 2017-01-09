@@ -1,22 +1,22 @@
 #! /bin/bash
 
-#sitedir="$HOME/Ubuntu\ One/github/research/_posts"
-sitedir="$HOME/Dropbox/github/research/_posts"
+sitedir="$HOME/research/_posts"
 
 [[ ! -n "$1" ]] && echo "Missing argument!" && exit 1
 
 date=`date +%Y-%m-%d`
-fname="$date-$1.md"
-project=(${1//-/ })
-project=${project[0]}
+fname="${date}-${1}.md"
+category=(${1//-/ })
+category=${category[0]}
+tag=${category[1]}
 
 if [[ ! -e "$(eval echo $sitedir/$fname)" ]]; then
     eval cd $sitedir
 
     echo -e "---\n\
 layout: post\n\
-tags: [$project]\n\
-category: $project\n\
+tags: [$category,$tag]\n\
+category: $category\n\
 ---" > $fname
 
     gvim $fname
