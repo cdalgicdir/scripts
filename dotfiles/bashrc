@@ -181,7 +181,7 @@ export PATH=$PATH:/usr/local/cuda/bin
 #bind '"\e[B": history-search-forward'
 # Ctrl-v: (insert mode) switch to command mode and edit in vi
 bind '"\C-v": "\ev"'
-function gvim () { (/usr/bin/gvim -f "$@" &) }
+#function gvim () { (/usr/bin/gvim -f "$@" &) }
 
 #Automatically do an ls after each cd
 cd() {
@@ -218,6 +218,8 @@ GROMACS=$SOFT/gromacs/gromacs-4.6.7
 PLUMED=$SOFT/plumed/plumed-2.2.4
 #VOTCA=$SOFT/votca/votca-1.2.4-fixed
 VOTCA=$SOFT/votca/votca-1.3
+VIM=$SOFT/vim/vim
+export PATH=$VIM/bin:$PATH
 export PATH=/home/cdalgicdir/anaconda/bin:$PATH
 export PATH=$TMUX/bin:$SOFT/bin:$PATH
 export PATH=$GNUPLOT/bin:$PATH

@@ -20,7 +20,8 @@ elseif matchstr(expand("%"),".*\.tex") != ""
     "colorscheme pencil
     colorscheme stylus
     "set guifont=Anonymous\ Pro\ 15
-    set guifont=Courier\ Prime\ 15
+    "set guifont=Courier\ Prime\ 15
+    set guifont=Deja\ Vu\ Sans\ Mono\ 15
     "set guifont=Cousine\ 15
     "set guifont=Fantasque\ Sans\ Mono\ 15
     "set guifont=Luxi\ Mono\ Regular\ 15

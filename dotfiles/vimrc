@@ -515,7 +515,7 @@ let g:goyo_width=75
 function! WC()
     echo "\n"
     let filename = expand("%")
-    let cmd = "~/Downloads/texcount/texcount.pl " . filename . ""
+    let cmd = "~/.vim/texcount_3/texcount.pl " . filename . ""
     let result = system(cmd)
     echo result . ""
 endfunction
