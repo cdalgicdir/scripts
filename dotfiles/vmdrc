@@ -247,9 +247,9 @@ user add key b { showbackbone [molinfo top] }
 ###################################################################
 # SNAP
 # Tachyon
-user add key F8 { snap_tachyon [molinfo top] "auto" "false" }
-user add key F10 { snap_tachyon }
-user add key F12 { snap_tachyon [molinfo top] "auto" "true" } 
+user add key F8 { snap [molinfo top] "auto" "false" }
+user add key F10 { snap }
+user add key F12 { snap [molinfo top] "auto" "true" } 
 # TachyonLOptiXInternal
 #user add key F8 { snap [molinfo top] "auto" "false" }
 #user add key F10 { snap }
@@ -1816,3 +1816,6 @@ proc hotkey_poly_cg {} {
 }
 
 hotkey_poly
+# automatic logging in .history-vmd
+set thelogfile /home/cdalgicdir/.history-vmd/[eval exec {date -u +%Y/%m/%d.%H.%M.%S}].vmd
+logfile $thelogfile
