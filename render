@@ -17,6 +17,7 @@ res_lights="0.3"
 dotrim=true
 shade="-fullshade"
 options="-trans_vmd "
+foutauto=true
 
 help () {
 cat << eof
@@ -33,13 +34,15 @@ OPTIONS:
 -s, -sky, -skylight	Sets -add_skylight (default 1.0)
 -sh, -shade		Sets shading [fullshade (default), mediumshade, lowshade, lowestshade]
 -nosh, -noshade		Disable shading
--o, -opt, -options	Additional options
+-opt, -options		Additional options
+-o, -output		Additional options
 -h, -help		Prints this help output
 
 EXAMPLES:
 	${0##*/} file.dat 
 	${0##*/} file.dat -hdr
 	${0##*/} file.dat -hdr -nt
+	${0##*/} file.dat -o out.png
 	${0##*/} file.dat -f TARGA -r "3200 3200"
 	${0##*/} file.dat -f PSD48 -s 0.8 -resc 0.2 -r "4000 3000" -sh fullshade
 	${0##*/} file.dat -f PSD48 -s 0.8 -o "-fog_vmd -trans_max_surface 1"
@@ -105,9 +108,14 @@ while [[ $# -ge 1 ]]; do
 	    shade="-${2}"
 	    shift 2 ;;
 
-	-o | -options)
+	-opt | -options)
 	    options=${options}"${2} "
 	    shift 2 ;;
+
+	-o | -output)
+	    foutauto=false
+	    fout="${2}"
+	    shift 2;;
 
 	-h | -help | --h | --help)
 	    help
@@ -123,7 +131,16 @@ done
 
 options=${options}"-rescale_lights ${res_lights} -add_skylight ${skylight} -aasamples $aasamples ${shade}"
 set_extension $format
-fout=${f%.dat}.${extension}
+
+if $foutauto; then
+    basef="${f%.dat}"
+    fout="${basef}.${extension}"
+    i=2
+    while [[ -e ${fout} ]]; do
+	fout=${basef}-${i}.$extension
+	let i=i+1
+    done
+fi
 
 echo -e "Starting rendering with command:\n\
 $TACHYONBIN $options -res ${resolution} ${f} -format $format -o ${fout}
@@ -133,12 +150,14 @@ render $@
 
 if $dotrim; then
     trimfile="${fout%.$extension}-crop.png"
-    basetrimfile="${fout%.$extension}-crop"
-    i=2
-    while [[ -e ${trimfile} ]]; do
-	trimfile=${basetrimfile}-${i}.png
-	let i=i+1
-    done
+    if $foutauto; then
+	basetrimfile="${fout%.$extension}-crop"
+	i=2
+	while [[ -e ${trimfile} ]]; do
+	    trimfile=${basetrimfile}-${i}.png
+	    let i=i+1
+	done
+    fi
     convert -trim -density 300 ${fout} ${trimfile}
 fi
 
