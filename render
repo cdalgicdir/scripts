@@ -1,0 +1,134 @@
+#! /bin/bash
+
+set -e
+
+VMDDIR=/usr/local/lib/vmd
+export TACHYONBIN=$VMDDIR/tachyon_LINUXAMD64
+resolution="2400 2400"
+usage="Usage: ${0##*/} filename [OPTIONS]"
+
+
+
+fout=""
+options=""
+format="TARGA"
+extension="tga"
+aasamples=12
+skylight="1.0"
+res_lights="0.3"
+dotrim=true
+options="-trans_vmd "
+
+help () {
+cat << eof
+Rendering for VMD.
+$usage
+
+OPTIONS:
+-hdr			PSD48 format with -normalize option
+-f, -format		Sets the format [BMP, JPEG, PNG, PPM, PPM48, PSD48, RGB, TARGA (default)]
+-nt, -notrim		Disables cropping
+-r, -res, -resolution	Sets the resolution (default: 2400 2400)
+-aa, -aas, -aasamples	Sets the anisotropic sampling value (default: 12)
+-resc, -rescale		Sets -rescale_lights (default: 0.3)
+-s, -sky, -skylight	Sets -add_skylight (default 1.0)
+-sh, -shade		Sets shading (fullshade, mediumshade, lowshade, lowestshade)
+-h, -help		Prints this help output
+
+EXAMPLES:
+	${0##*/} file.dat 
+	${0##*/} file.dat -hdr
+	${0##*/} file.dat -hdr -nt
+	${0##*/} file.dat -f TARGA -r "3200 3200"
+	${0##*/} file.dat -f PSD48 -s 0.8 -resc 0.2 -r "4000 3000" -sh fullshade
+eof
+}
+
+render () {
+    $TACHYONBIN $options -res ${resolution} ${f} -format $format -o ${fout}
+}
+
+set_extension () {
+    if [[ $format == "PSD48" ]]; then
+	extension="psd"
+    elif [[ $format == "PPM48" ]]; then
+	extension="ppm"
+    elif [[ $format == "TARGA" ]]; then
+	extension="tga"
+    elif [[ $format == "PNG" ]]; then
+	extension="png"
+    else
+	extension=$format
+    fi
+}
+
+while [[ $# -ge 1 ]]; do
+    case $1 in
+
+	-hdr)
+	    options=${options}"-normalize "
+	    format="PSD48"
+	    shift ;;
+
+	-f | -format)
+	    format=${2}
+	    shift ;;
+
+	-nt | -notrim)
+	    dotrim=false
+	    shift ;;
+
+	-r | -res | -resolution)
+	    resolution="${2}"
+	    echo $resolution
+	    shift 2;;
+
+	-aa | -aas | -aasamples)
+	    options=${options}"-aasamples $2 "
+	    shift 2 ;;
+
+	-resc | -rescale)
+	    options=${options}"-rescale_lights $2 "
+	    shift 2 ;;
+
+	-s | -sky | -skylight)
+	    options=${options}"-add_skylight $2 "
+	    shift 2 ;;
+
+	-sh | -shade)
+	    options="-${2}"
+	    shift 2 ;;
+
+	-h | -help | --h | --help)
+	    help
+	    exit 0
+	    ;;
+
+	*)
+	    f=${1}
+	    shift ;;
+
+    esac
+done
+
+options=${options}"-rescale_lights ${res_lights} -add_skylight ${skylight} -aasamples $aasamples"
+set_extension $format
+fout=${f%.dat}.${extension}
+
+echo -e "Starting rendering with command:\n\
+$TACHYONBIN $options -res ${resolution} ${f} -format $format -o ${fout}
+    "
+
+render $@
+
+if $dotrim; then
+    trimfile="${fout%.$extension}-trim.png"
+    i=2
+    while [[ -e ${trimfile} ]]; do
+	trimfile=${trimfile%.png}-${i}.png
+	let i=i+1
+    done
+    convert -trim -density 300 ${fout} ${trimfile}
+fi
+
+echo -e "DONE!\n\nInput file: ${f}\nOutput file: ${fout}\nCropped file: ${trimfile}\n"
