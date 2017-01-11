@@ -122,10 +122,11 @@ $TACHYONBIN $options -res ${resolution} ${f} -format $format -o ${fout}
 render $@
 
 if $dotrim; then
-    trimfile="${fout%.$extension}-trim.png"
+    trimfile="${fout%.$extension}-crop.png"
+    basetrimfile="${fout%.$extension}-crop"
     i=2
     while [[ -e ${trimfile} ]]; do
-	trimfile=${trimfile%.png}-${i}.png
+	trimfile=${basetrimfile}-${i}.png
 	let i=i+1
     done
     convert -trim -density 300 ${fout} ${trimfile}
