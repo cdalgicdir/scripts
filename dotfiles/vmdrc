@@ -1135,10 +1135,11 @@ proc snap {{filename "auto"} {dotrim "true"} {ambient "true"} {aoambient "0.8"} 
 	set trimfile [string map {".png" "-trim.png"} $file]
 	#eval exec {convert -density 300 -trim $file $trimfile}
 	eval exec {convert -density 300 -trim $ppmfile $trimfile}
-	file delete $file
+	file delete $ppmfile
 	file rename $trimfile $file
     } else {
-	eval exec {convert -density 300 -trim $ppmfile $file}
+	eval exec {convert -density 300 $ppmfile $file}
+	file delete $ppmfile
 	puts
     }
     file delete $ppmfile
@@ -1791,7 +1792,6 @@ proc ss_poly_cg {molid} {
   } 
 }
 
-
 proc hotkey_protein {} {
     user add key w { ss_viz [molinfo top] }
     user add key W { ss_viz_paper [molinfo top] }
@@ -1819,3 +1819,5 @@ hotkey_poly
 # automatic logging in .history-vmd
 set thelogfile /home/cdalgicdir/.history-vmd/[eval exec {date -u +%Y/%m/%d.%H.%M.%S}].vmd
 logfile $thelogfile
+#set env(VMDOPTIXIMAGESIZE) "2048 2048"
+set env(VMDOPTIXIMAGESIZE) "4096 4096"

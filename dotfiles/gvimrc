@@ -2,19 +2,22 @@ syntax enable
 set background=dark
 set guioptions-=T
 
-if matchstr(expand("%"),".*\.md") != ""
+if matchstr(expand("%"),".*\\.md") != ""
+"if (&ft=='markdown')
     "colorscheme darkdevel
     "set guifont=Monofur\ 15
     colorscheme pencil
+    "colorscheme Tomorrow-Night
     set background=light
     set guifont=Courier\ Prime\ 15
     " Monofur, Monaco, Source Code Pro
     "set guifont=Ubuntu\ Mono\ 16
-    :au BufRead *.tex set spell
+    :au BufRead *.md set spell
     ":highlight SpellBad gui=underline guibg=NONE guifg=red
     :au BufRead *.md syn region mkdCode start="\[@" end="\]"
     ":au BufRead *.md syn region mkdRule matchgroup=mkdDelimiter start="\[@" end="\]"
-elseif matchstr(expand("%"),".*\.tex") != ""
+elseif matchstr(expand("%"),".*\\.tex") != ""
+"elseif index(tex, &filetype) == -1
     "colorscheme corporation
     "set guifont=Inconsolata\ 15
     "colorscheme pencil
@@ -36,7 +39,7 @@ elseif matchstr(expand("%"),".*\.tex") != ""
 else
     "colorscheme moria, twilight, solarized, inkpot, corporation, monokai,
     colorscheme jellybeans
-    set guifont=Monaco\ 14
+    set guifont=Monaco\ 15
     "set guifont=Droid\ Sans\ Mono\ 14
 endif
 
