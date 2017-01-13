@@ -1835,16 +1835,42 @@ proc pnipam {molid} {
   } 
 }
 
+proc pvme {molid} {
+    # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    #mol color Name
+    #mol representation Licorice 0.300000 10.000000 10.000000
+    #mol selection resname PVM and not HC1 HC2 HC3 HCT HAM
+    #mol addrep $molid
+    mol color ColorID 6
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection name CH1 CH2
+    mol addrep $molid
+    mol color ColorID 3
+    mol selection name CH3 OET CH1
+    mol addrep $molid
+    display depthcue off; color Display Background white;pbc box -off;axes location off
+  }
+}
+
+
 proc hotkey_poly {} {
     user add key w { ss_poly [molinfo top] }
     user add key W { ss_poly_bb [molinfo top] }
     user add key E { pnipam [molinfo top] }
+    user add key ` { pvme [molinfo top] }
     user add key A { align [molinfo top] "name CH1 CH2" }
 }
 
 hotkey_poly
 # automatic logging in .history-vmd
-set thelogfile /home/cdalgicdir/.history-vmd/[eval exec {date -u +%Y/%m/%d.%H.%M.%S}].vmd
+set HOSTNAME [info hostname]
+set thelogfile /home/cdalgicdir/.history-vmd/[eval exec {date -u +%Y/%m/%d.%H.%M.%S}]_$HOSTNAME.vmd
 logfile $thelogfile
 set env(VMDOPTIXIMAGESIZE) "2048 2048"
 #set env(VMDOPTIXIMAGESIZE) "4096 4096"
