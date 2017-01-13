@@ -1854,6 +1854,10 @@ proc pvme {molid} {
     mol color ColorID 3
     mol selection name CH3 OET CH1
     mol addrep $molid
+    mol color ColorID 15
+    mol selection name OW and within 2.5 of resname PVM
+    mol representation VDW 0.6 15.0
+    mol addrep $molid
     display depthcue off; color Display Background white;pbc box -off;axes location off
   }
 }
