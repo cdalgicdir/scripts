@@ -5,21 +5,33 @@ sitedir="$HOME/research/_posts"
 [[ ! -n "$1" ]] && echo "Missing argument!" && exit 1
 
 date=`date +%Y-%m-%d`
-fname="${date}-${1}.md"
+postfile="${date}-${1}.md"
 category=(${1//-/ })
 category=${category[0]}
 tag=${category[1]}
 
-if [[ ! -e "$(eval echo $sitedir/$fname)" ]]; then
+if [[ ! -e "$(eval echo $sitedir/$postfile)" ]]; then
     eval cd $sitedir
 
-    echo -e "---\n\
-layout: post\n\
-tags: [$category,$tag]\n\
-category: $category\n\
----" > $fname
+[[ $category == "papers" ]] && papertag=$tag || papertag="bibtag"
+cat << EOF  > $postfile
+---
+layout: post
+tags: [$category,$tag]
+category: $category
+---
 
-    gvim $fname
+## ${tag}
+
+{% cite $papertag %}
+
+
+References:
+
+{% bibliography --cited %}
+
+EOF
+    gvim $postfile
 else
-    echo "$fname exists! Quitting..."
+    echo "$postfile exists! Quitting..."
 fi
