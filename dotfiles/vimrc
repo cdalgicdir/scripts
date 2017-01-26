@@ -156,6 +156,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vimoutliner/vimoutliner'
 Plugin 'tpope/vim-vinegar'
+"Plugin 'kynan/dokuvimki'
 "Plugin 'Txtfmt-The-Vim-Highlighter'
 "Plugin 'reedes/vim-textobj-sentence'
 " Git plugin not hosted on GitHub
@@ -295,7 +296,7 @@ let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_MultipleCompileFormats = 'pdf'
 let g:Tex_CompileRule_pdf = 'pdflatex -interaction=nonstopmode $*'
 let g:Tex_GotoError = 0
-let g:Tex_ViewRule_pdf = 'evince'
+let g:Tex_ViewRule_pdf = 'zathura'
 " Initial fold level for markdown syntax plugin
 let g:vim_markdown_initial_foldlevel=4
 " Highlight YAML frontmatter
@@ -352,10 +353,10 @@ nmap <leader>vq :VimuxCloseRunner<cr>
 nmap <leader>vx :VimuxInterruptRunner<cr>
 
 " Wikimedia
-let g:mediawiki_editor_url = "localhost/mediawiki"
+"let g:mediawiki_editor_url = "localhost/mediawiki"
 "let g:mediawiki_editor_path = ""
-let g:mediawiki_editor_username = "cdalgicdir"
-"g:mediawiki_editor_password
+"let g:mediawiki_editor_username = "cdalgicdir"
+"let g:mediawiki_editor_password
 
 " Limelight
 " Color name (:help cterm-colors) or ANSI code
@@ -522,3 +523,8 @@ function! WC()
 endfunction
 
 command WC call WC()
+
+"" Include DokuVimKi Configuration
+"if filereadable($HOME."/.vim/dokuvimkirc")
+"  source $HOME/.vim/dokuvimkirc
+"endif

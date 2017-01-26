@@ -260,3 +260,9 @@ export PATH=$PATH:$HOME/.local/bin
 export LESS='-R'
 export LESSOPEN='|~/.lessfilter %s'
 export PLUMED_VIMPATH=$PLUMED/lib/plumed/vim
+#export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+
+#alias vidoku='viDokuVimKi() { vim +DokuVimKi +"DWedit $1" }; viDokuVimKi'
+#alias gvidoku='gviDokuVimKi() { gvim +DokuVimKi +"DWedit $1" }; gviDokuVimKi'
+
+#alias vidmywiki='vi -u ~/.dokuwiki/mywiki.vim'

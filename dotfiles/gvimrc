@@ -46,37 +46,29 @@ endif
 "let g:fullscreen = 1
 :au BufRead *.tex set spell
 :highlight SpellBad gui=underline guibg=NONE guifg=red
-if matchstr(expand("%"),".*\.tex") != ""
-"if matchstr(expand("%"),"manuscript\.tex$") != ""
+if matchstr(expand("%"),".*\\.tex") != "" || matchstr(expand("%"),".*\\.md") != ""
+"if matchstr(expand("%"),"manuscript\\.tex$") != ""
     :iab teh the
     :iab aa amino-acid
     :iab hfl hydrophilic
     :iab hfb hydrophobic
-    :iab amf amphiphilic
-    :iab ss secondary structure
+    :iab conff conformation
+    :iab conffs conformations
     :iab sc sidechain
     :iab bb backbone
     :iab com1 center of mass
-    :iab bs beta-sheet
-    :iab rc random-coil
-    :iab ah $\alpha$-helix
-    :iab hh half-helix
-    :iab ahc $\alpha$-helical
-    :iab 1bw bulk water
-    :iab 1int air/water interface
-    :iab 1pmf potential of mean force
-    :iab pp peptide
-    :iab 1leu leucine
-    :iab 1lys lysine
-    :iab KL LK$\alpha$14
+    :iab bww bulk water
+    :iab pmff potential of mean force
+    :iab pp PNIPAM
     :iab ie i.e.
     :iab adn and
     :iab ii3 \emph{CN$_i$-CN$_{i+3}$}
     :iab ca1 C$_{\alpha}$
     :iab cb1 C$_{\beta}$
-    :iab cgn \emph{cg-neutral}
-    :iab cgc \emph{cg-charged}
-    :iab DH Debye-H\"uckel
+    :iab cg coarse-grain
+    :iab con cononsolvency
+    :iab met methanol
+    :iab ww water
     ":map <F2> viWB<ESC><ESC>i\emph{<ESC>Ea}<ESC>
 endif
 

@@ -102,5 +102,3 @@ alias pnirep="gnome-open $HOME/reports/PNiPAM/overview/report.pdf &"
 alias gittree="git log --graph --full-history --all --color --pretty=format:'%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s'"
 alias opl="ls -tr | tail -n 1 | xargs gnome-open"
 #alias cn="convert -density 300"
-# manually installed vim-gtk fails for F9 autocompletion
-alias gvim="/usr/bin/gvim"

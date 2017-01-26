@@ -77,7 +77,7 @@ material change shininess Ghostmod3 0.23
 material change opacity Ghostmod3 0.10
 material change outline Ghostmod3 0.0
 material change outlinewidth Ghostmod3 0.0
-# a second one where molecules are less ghostly
+# another one where molecules are less ghostly
 material add Spectre
 material change diffuse Spectre 0.3
 material change ambient Spectre 0.3
@@ -86,6 +86,17 @@ material change shininess Spectre 0.23
 material change opacity Spectre 0.35
 material change outline Spectre 0.0
 material change outlinewidth Spectre 0.0
+# a second one where molecules are less ghostly
+material add Ghostchalky
+material change ambient Ghostchalky 0.0
+material change diffuse Ghostchalky 0.1
+material change specular Ghostchalky 1.0
+material change shininess Ghostchalky 0.0
+material change mirror Ghostchalky 0.53
+material change opacity Ghostchalky 0.0
+material change outline Ghostchalky 0.0
+material change outlinewidth Ghostchalky 0.0
+# see /usr/local/lib/vmd/plugins/noarch/tcl/vmdprefs1.0/vmdprefs.tcl for the values
 ###################################################################
 #
 # nearclip / zoom more
@@ -1123,14 +1134,15 @@ proc snap {{filename "auto"} {dotrim "true"} {ambient "true"} {aoambient "0.8"} 
     while {[file exists $file] == 1} { set i [expr $i+1] ; set file "$basename-$i.png"}
     set datfile [string map {".png" ".dat"} $file]
     set ppmfile [string map {".png" ".ppm"} $file]
-    render TachyonLOptiXInternal $ppmfile
-    #render Tachyon $datfile tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
+    # workaround to get a .dat file when rendering with Optix
+    # generate a .dat file before the image processing
     if {$ambient == "true"} {
 	# dummy command to generate dat file
 	render Tachyon $datfile tachyon --a > sil.out
 	file delete sil.out
     }
-
+    render TachyonLOptiXInternal $ppmfile
+    #render Tachyon $datfile tachyon -aasamples 12 %s -format PNG -res 1200 1500 -o $file -mediumshade
     if {$dotrim == "true"} {
 	set trimfile [string map {".png" "-trim.png"} $file]
 	#eval exec {convert -density 300 -trim $file $trimfile}
@@ -1139,7 +1151,7 @@ proc snap {{filename "auto"} {dotrim "true"} {ambient "true"} {aoambient "0.8"} 
     } else {
 	eval exec {convert -density 300 $ppmfile $file}
     }
-    file delete $ppmfile
+    #file delete $ppmfile
     lores $molid
     puts "Generated snapshot $file"
 }   
@@ -1873,7 +1885,8 @@ proc hotkey_poly {} {
 
 hotkey_poly
 # automatic logging in .history-vmd
-set HOSTNAME [info hostname]
+#set HOSTNAME [info hostname]
+set HOSTNAME [hostname]
 set thelogfile /home/cdalgicdir/.history-vmd/[eval exec {date -u +%Y/%m/%d.%H.%M.%S}]_$HOSTNAME.vmd
 logfile $thelogfile
 set env(VMDOPTIXIMAGESIZE) "2048 2048"
