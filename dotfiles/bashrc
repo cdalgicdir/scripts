@@ -114,6 +114,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 complete -f -X '!*.pdf' mupdf
+complete -f -X '!*.@(pdf|djvu|ps)' zathura
 complete -f -X '!*.pdf' pdfviewer
 complete -f -X '!*.corr' ramaplot
 complete -f -X '!*.gp' gp
