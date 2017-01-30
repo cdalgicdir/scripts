@@ -42,7 +42,7 @@ HOSTNAME_SHORT="${HOSTNAME%%.*}"
 HISTFILE="${HOME}/.history/$(date -u +%Y/%m/%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
 mkdir -p "$(dirname "$HISTFILE")"
 histgrep () {
-    grep --color=auto -r "$@" ~/.history
+    grep --color=auto -r "$@" $(ls -dv ~/.history)
     history | grep --color=auto "$@"
 }
 
