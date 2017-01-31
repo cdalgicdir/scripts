@@ -30,10 +30,10 @@ ZSH_THEME="cobalt2m"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -192,3 +192,15 @@ export LESS='-R'
 export LESSOPEN='|~/.lessfilter %s'
 export PLUMED_VIMPATH=$PLUMED/lib/plumed/vim
 #export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+
+unset HISTSIZE
+unset HISTFILESIZE
+HISTIGNORE="&:ls:[bf]g:exit:..:l:dow"
+HOSTNAME="$(hostname)"
+HOSTNAME_SHORT="${HOSTNAME%%.*}"
+HISTFILE="${HOME}/.history/$(date -u +%Y/%m/%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
+mkdir -p "$(dirname "$HISTFILE")"
+histgrep () {
+    grep --color=auto -r "$@" $(ls -dv ~/.history)
+    history | grep --color=auto "$@"
+}
