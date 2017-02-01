@@ -55,7 +55,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git bundler tmux)
+plugins=(git git-extras bundler tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -204,3 +204,5 @@ histgrep () {
     grep --color=auto -r "$@" $(ls -dv ~/.history)
     history | grep --color=auto "$@"
 }
+setopt interactivecomments
+bindkey '\e#' pound-insert

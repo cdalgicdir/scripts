@@ -123,7 +123,8 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'L9'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-commentary'
+"Plugin 'tpope/vim-commentary'
+Plugin 'tomtom/tcomment_vim'
 Plugin 'matchit.zip'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -528,3 +529,4 @@ command WC call WC()
 "if filereadable($HOME."/.vim/dokuvimkirc")
 "  source $HOME/.vim/dokuvimkirc
 "endif
+
