@@ -105,7 +105,7 @@ complete -f -X '!*.pdf' cn
 
 cd() {
    builtin cd "$@"
-   [[ $PWD == "$HOME/Downloads" ]] && ls -tr || ls
+   [[ $PWD == "$HOME/Downloads" ]] && ls -tr || ls -v
 }
 
 function pawk {

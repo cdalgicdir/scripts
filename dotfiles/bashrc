@@ -187,7 +187,7 @@ bind '"\C-v": "\ev"'
 #Automatically do an ls after each cd
 cd() {
    builtin cd "$@"
-   [[ $PWD == "$HOME/Downloads" ]] && ls -tr || ls
+   [[ $PWD == "$HOME/Downloads" ]] && ls -tr || ls -v
 }
 
 function pawk {
