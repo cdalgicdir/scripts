@@ -55,7 +55,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git git-extras bundler tmux)
+plugins=(git git-extras bundler tmux command-not-found)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -206,3 +206,9 @@ histgrep () {
 }
 setopt interactivecomments
 bindkey '\e#' pound-insert
+
+##Automatically quote globs in URL and remote references
+#__remote_commands=(scp rsync)
+#autoload -U url-quote-magic
+#zle -N self-insert url-quote-magic
+#zstyle -e :urlglobber url-other-schema '[[ $__remote_commands[(i)$words[1]] -le ${#__remote_commands} ]] && reply=("*") || reply=(http https ftp)'

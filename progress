@@ -14,6 +14,10 @@ Options:
 \t-ti\t\tthermodynamic integration, directories are Lambda_*
 \t-nc\t\tno color
 \t-nf\t\tdon't print out completed sims
+\t-of\t\tprint out only completed sims
+\t-f\t\tfile option
+\t-n\t\tnames
+\t-nl\t\tnameslist
 \t-h\t\tprints help"
 }
 
@@ -24,6 +28,7 @@ closetoend=180000
 #directories="d?.???/?-PULL*"
 dirset=false
 noFinished=false
+onlyFinished=false
 noColor=false
 multipledir=true
 printonlydir=false
@@ -35,7 +40,7 @@ elif [[ `ls -d d?.*/*US 2>/dev/null` ]]; then
     directories="d?.*/*US"
 fi
 
-# option for no color
+# options
 while [[ $# -ge 1 ]]; do
     case $1 in
 
@@ -47,6 +52,11 @@ while [[ $# -ge 1 ]]; do
 	-nf | -notfinished)
 	    option=$1
 	    noFinished=true
+	    shift;;
+
+	-of | -onlyfinished)
+	    option=$1
+	    onlyFinished=true
 	    shift;;
 
 	-nc | -nocolor)
@@ -68,11 +78,11 @@ while [[ $# -ge 1 ]]; do
 	-f | -file)
 	    multipledir=false
 	    if [[ -n "$2" ]]; then
-		file=$2 
-		shift 2
+            file=$2 
+            shift 2
 	    else
-		file='md.log'
-		shift
+            file='md.log'
+            shift
 	    fi
 	    ;;
 
@@ -147,11 +157,13 @@ printout () {
     color=$3
     [[ $file == *part* ]] && tab='\t' || tab='\t\t'
     if [[ $noColor == true ]]; then
-	echo -ne "$file :$tab" $t"\n" 
+        echo -ne "$file :$tab" $t"\n" 
     elif [[ $noFinished == true ]]; then
-	[[ "$color" != "$BPurple" ]] && echo -ne "$file :$tab" $color $t $Color_Off"\n"
+        [[ "$color" != "$BPurple" ]] && echo -ne "$file :$tab" $color $t $Color_Off"\n"
+    elif [[ $onlyFinished == true ]]; then
+        [[ "$color" == "$BPurple" ]] && echo -ne "$file :$tab" $color $t $Color_Off"\n"
     else
-	echo -ne "$file :$tab" $color $t $Color_Off"\n"
+        echo -ne "$file :$tab" $color $t $Color_Off"\n"
     fi
 }
 
@@ -163,11 +175,15 @@ if [[ $multipledir == true ]]; then
 	    [[ -e $file ]] && printout $dir $t $color
 	elif $printonlydirlist; then
 	    if $noFinished; then
-		if [[ "$color" != "$BPurple" ]]; then
-		    echo $dir
-		fi
+            if [[ "$color" != "$BPurple" ]]; then
+                echo $dir
+            fi
+        elif $onlyFinished; then
+            if [[ "$color" == "$BPurple" ]]; then
+                echo $dir
+            fi
 	    else
-		echo $dir
+            echo $dir
 	    fi
 	else
 	    [[ -e $file ]] && printout $file $t $color

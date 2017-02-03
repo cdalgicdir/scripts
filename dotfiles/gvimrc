@@ -65,9 +65,9 @@ if matchstr(expand("%"),".*\\.tex") != "" || matchstr(expand("%"),".*\\.md") != 
     :iab ii3 \emph{CN$_i$-CN$_{i+3}$}
     :iab ca1 C$_{\alpha}$
     :iab cb1 C$_{\beta}$
-    :iab cg coarse-grain
+    :iab cgg coarse-grain
     :iab con cononsolvency
-    :iab met methanol
+    :iab mett methanol
     :iab ww water
     ":map <F2> viWB<ESC><ESC>i\emph{<ESC>Ea}<ESC>
 endif
