@@ -531,3 +531,4 @@ command WC call WC()
 "  source $HOME/.vim/dokuvimkirc
 "endif
 
+let NERDSpaceDelims=1

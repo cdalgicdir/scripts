@@ -1950,9 +1950,17 @@ proc hotkey_poly {} {
 
 hotkey_poly
 # automatic logging in .history-vmd
-#set HOSTNAME [info hostname]
-set HOSTNAME [hostname]
+set HOSTNAME [info hostname]
+# set HOSTNAME [hostname]
 set thelogfile /home/cdalgicdir/.history-vmd/[eval exec {date -u +%Y/%m/%d.%H.%M.%S}]_$HOSTNAME.vmd
 logfile $thelogfile
 set env(VMDOPTIXIMAGESIZE) "2048 2048"
 #set env(VMDOPTIXIMAGESIZE) "4096 4096"
+#
+
+# set nf [molinfo top get numframes] 
+# # Mind the line break after -I 
+# for {set i 0} {$i < $nf} {incr i} { 
+#   render POV3 vmdscene${i}.pov "/usr/bin/povray_" +W1280 +H1024 -I \ 
+#   vmdscene${i}.pov -O vmdscene${i}.png +D +X +A +FN +UA 
+# } 

@@ -101,18 +101,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
 complete -f -X '!*.pdf' mupdf
 complete -f -X '!*.@(pdf|djvu|ps)' zathura
 complete -f -X '!*.pdf' pdfviewer
@@ -124,19 +112,12 @@ complete -f -X '!*.pdf' cn
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 
 ###################################################################
 PROMPT_DIRTRIM=2
 PS1='\[\e[38;5;172m\]# \h\[\e[38;5;245m\]: \[\e[38;5;5m\]`_chomp_path $(pwd)`\n\[\e[38;5;202m\]⟫\[\e[00m\] '
 ###################################################################
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -145,6 +126,14 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
+fi
+
+if [ -f ~/.bash_soft ]; then
+    . ~/.bash_soft
+fi
+
+if [ -f ~/.bash_aliases_soft ]; then
+    . ~/.bash_aliases_soft
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -159,8 +148,6 @@ if ! shopt -oq posix; then
 fi
 calc(){ echo $@ | julia;}
 shopt -s extglob
-#export VIMRUNTIME=/usr/share/vim/vimcurrent
-alias emerillon='export CLUTTER_VBLANK=none && emerillon'
 man () { yelp "man:$@"; }
 export SVNROOT=svn+ichiport://cdalgicdir@88.255.97.68/home/svnroot
 
@@ -171,15 +158,6 @@ case "$TERM" in
     ;;
 esac
 
-# added by Anaconda2 4.2.0 installer
-export PATH="/home/cdalgicdir/anaconda2/bin:$PATH"
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
-export PATH=$PATH:/usr/local/cuda/bin
-
-## Up Arrow: search and complete from previous history
-#bind '"\e[A": history-search-backward'
-## Down Arrow: search and complete from next history
-#bind '"\e[B": history-search-forward'
 # Ctrl-v: (insert mode) switch to command mode and edit in vi
 bind '"\C-v": "\ev"'
 #function gvim () { (/usr/bin/gvim -f "$@" &) }
@@ -202,46 +180,11 @@ function dirawk {
     eval $cmd
 }
 
-alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
-alias alert='notify-send -i /usr/share/icons/gnome/32x32/apps/gnome-terminal.png "[$?] $(alert_helper)"'
-#export VIMRUNTIME=/usr/share/vim/vim74
 export LC_TIME=en_GB.utf8
 export EDITOR=vim
-#export MMTSBDIR=$HOME/mmtsb
-#source /home/soft/bashrc_extension_soft
 
-# add /home/soft software
-#GROMACS="/home/soft/gromacs/gromacs-4.6.7/inst/shared"
-SOFT=$HOME/soft
-TMUX=$SOFT/tmux/tmux-2.3
-GNUPLOT=$SOFT/gnuplot/gnuplot-5.0.5-qt5
-GROMACS=$SOFT/gromacs/gromacs-4.6.7
-PLUMED=$SOFT/plumed/plumed-2.2.4
-#VOTCA=$SOFT/votca/votca-1.2.4-fixed
-VOTCA=$SOFT/votca/votca-1.3
-VIM=$SOFT/vim/vim
-MUPDF=$SOFT/mupdf/mupdf
-export LD_LIBRARY_PATH=$MUPDF/lib:$LD_LIBRARY_PATH
-export PATH=$VIM/bin:$PATH
-export PATH=/home/cdalgicdir/anaconda/bin:$PATH
-export PATH=$TMUX/bin:$SOFT/bin:$PATH
-export PATH=$GNUPLOT/bin:$PATH
-#export PATH=$TMUX/bin:$GNUPLOT/bin:$SOFT/bin:$PATH
-source $GROMACS/bin/GMXRC.bash
-export GMXLIB=$GROMACS/share/gromacs/top
-source $VOTCA/bin/VOTCARC.bash
-export PATH=$PATH:$PLUMED/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PLUMED/lib
-export PLUMED_KERNEL=$PLUMED/lib/libplumedKernel.so
-export PATH=$PATH:$HOME/soft/moltemplate/moltemplate/src
-export MOLTEMPLATE_PATH=$HOME/soft/moltemplate/moltemplate/common
-export PATH=$PATH:$HOME/soft/espressopp/espressopp/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/soft/espressopp/espressopp/lib
-export PYTHONPATH=$PYTHONPATH:$HOME/soft/espressopp/espressopp/lib/python2.7/dist-packages
-#export PATH=$HOME/progs/screen-4.2.1/bin:$PATH
 alias diff-side-by-side='diff --side-by-side -W"`tput cols`"'
 alias diff-side-by-side-changes='diff --side-by-side --suppress-common-lines -W"`tput cols`"'
-#[ -r /home/cdalgicdir/.byobu/prompt ] && . /home/cdalgicdir/.byobu/prompt   #byobu-prompt#
 #CDPATH=$CDPATH:~/remote
 # get airline working 
 export TERM=xterm-256color
@@ -250,20 +193,4 @@ export TERM=xterm-256color
 #so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
 stty -ixon
 
-if [ -f ~/.bash_aliases_soft ]; then
-    . ~/.bash_aliases_soft
-fi
-
-export PATH=$PATH:$SOFT/wham/bin
-export LC_NUMERIC="en_US.UTF-8"
-export PROMPT_COMMAND="history -a"
-export PATH=$PATH:$HOME/.local/bin
-export LESS='-R'
-export LESSOPEN='|~/.lessfilter %s'
-export PLUMED_VIMPATH=$PLUMED/lib/plumed/vim
 #export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
-
-#alias vidoku='viDokuVimKi() { vim +DokuVimKi +"DWedit $1" }; viDokuVimKi'
-#alias gvidoku='gviDokuVimKi() { gvim +DokuVimKi +"DWedit $1" }; gviDokuVimKi'
-
-#alias vidmywiki='vi -u ~/.dokuwiki/mywiki.vim'
