@@ -63,7 +63,8 @@ prompt_end() {
 		echo -n "\n%{%k%}"
   fi
 	echo -n "%{%f%}"
-	echo -n "%(!.%{%F{yellow}%}.)❯%{%k%} "
+	# echo -n "%(!.%{%F{yellow}%}.)❯%{%k%} "
+	echo -n "%(!.%{%F{yellow}%}.)🚀%{%k%} "
 	CURRENT_BG=''
 }
 
@@ -76,7 +77,8 @@ prompt_context() {
 
   if [[ "$user" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
     #prompt_segment black default "%(!.%{%F{yellow}%}.)✝"
-		prompt_segment black default "%(!.%{%F{yellow}%}.)❯"
+		# prompt_segment black default "%(!.%{%F{yellow}%}.)❯"
+		prompt_segment black default "%(!.%{%F{yellow}%}.)🜀"
   fi
 }
 
