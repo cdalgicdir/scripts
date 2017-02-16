@@ -1,7 +1,7 @@
 #! /bin/bash
 
 DIR=scripts/dotfiles
-cd $HOME
+pushd $HOME
 
 ln -s $DIR/bash_aliases .bash_aliases
 ln -s $DIR/bash_aliases_soft .bash_aliases_soft
@@ -16,4 +16,8 @@ ln -s $DIR/tmux.conf .tmux.conf
 ln -s $DIR/vmdrc .vmdrc 
 ln -s $DIR/bash_soft .bash_soft
 
-cd -
+pushd $HOME/.config/matplotlib
+ln -s $DIR/matplotlibrc .
+
+popd
+popd
