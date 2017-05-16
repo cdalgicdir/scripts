@@ -180,14 +180,13 @@ function dirawk {
     eval $cmd
 }
 
-export LC_TIME=en_GB.utf8
 export EDITOR=vim
 
 alias diff-side-by-side='diff --side-by-side -W"`tput cols`"'
 alias diff-side-by-side-changes='diff --side-by-side --suppress-common-lines -W"`tput cols`"'
 #CDPATH=$CDPATH:~/remote
 # get airline working 
-export TERM=xterm-256color
+# export TERM=xterm-256color
 #export TERM=screen-256color-bce
 #export TERM=screen-256color
 #so as not to be disturbed by Ctrl-S ctrl-Q in terminals:

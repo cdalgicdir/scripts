@@ -135,7 +135,7 @@ export LC_TIME=en_GB.utf8
 
 #CDPATH=$CDPATH:~/remote
 # get airline working 
-export TERM=xterm-256color
+# export TERM=xterm-256color
 #export TERM=screen-256color-bce
 #export TERM=screen-256color
 #so as not to be disturbed by Ctrl-S ctrl-Q in terminals:
@@ -167,3 +167,17 @@ bindkey '\e#' pound-insert
 #autoload -U url-quote-magic
 #zle -N self-insert url-quote-magic
 #zstyle -e :urlglobber url-other-schema '[[ $__remote_commands[(i)$words[1]] -le ${#__remote_commands} ]] && reply=("*") || reply=(http https ftp)'
+
+# Disable globbing on the remote path.
+# alias scp='nocorrect noglob scp_wrap'
+alias sshfs='nocorrect sshfs'
+# alias rsync='noglob rsync'
+function scp_wrap {
+  local -a args
+  local i
+  for i in "$@"; do case $i in
+    (*:*) args+=($i) ;;
+    (*) args+=(${~i}) ;;
+  esac; done
+  command scp "${(@)args}"
+}

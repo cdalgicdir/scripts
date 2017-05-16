@@ -1,6 +1,7 @@
 #! /user/bin/env bash
 
 export PATH="$HOME/anaconda2/bin:$PATH"
+export PATH="$HOME/anaconda3/bin:$PATH"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export PATH=$PATH:/usr/local/cuda/bin
 
@@ -15,7 +16,6 @@ VIM=$SOFT/vim/vim
 MUPDF=$SOFT/mupdf/mupdf
 export LD_LIBRARY_PATH=$MUPDF/lib:$LD_LIBRARY_PATH
 export PATH=$VIM/bin:$PATH
-export PATH=/home/cdalgicdir/anaconda/bin:$PATH
 export PATH=$TMUX/bin:$SOFT/bin:$PATH
 export PATH=$GNUPLOT/bin:$PATH
 #export PATH=$TMUX/bin:$GNUPLOT/bin:$SOFT/bin:$PATH
@@ -29,8 +29,7 @@ export PATH=$PATH:$HOME/soft/moltemplate/moltemplate/src
 export MOLTEMPLATE_PATH=$HOME/soft/moltemplate/moltemplate/common
 export PATH=$PATH:$HOME/soft/espressopp/espressopp/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/soft/espressopp/espressopp/lib
-export PYTHONPATH=$PYTHONPATH:$HOME/soft/espressopp/espressopp/lib/python2.7/dist-packages
-
+# export PYTHONPATH=$PYTHONPATH:$HOME/soft/espressopp/espressopp/lib/python2.7/dist-packages
 export PATH=$PATH:$SOFT/wham/bin
 export LC_NUMERIC="en_US.UTF-8"
 export PROMPT_COMMAND="history -a"

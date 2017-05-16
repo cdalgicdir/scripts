@@ -116,6 +116,26 @@ material change mirror Ghostmod3Chalky 0.0
 material change opacity Ghostmod3Chalky 0.1
 material change outline Ghostmod3Chalky 0.0
 material change outlinewidth Ghostmod3Chalky 0.0
+# Ghostmod2 with AOChalky
+material add Ghostmod2Chalky
+material change ambient Ghostmod2Chalky 0.0
+material change diffuse Ghostmod2Chalky 0.85
+material change specular Ghostmod2Chalky 0.0
+material change shininess Ghostmod2Chalky 0.53
+material change mirror Ghostmod2Chalky 0.0
+material change opacity Ghostmod2Chalky 0.07
+material change outline Ghostmod2Chalky 0.0
+material change outlinewidth Ghostmod2Chalky 0.0
+# Ghostmodx with AOChalky
+material add GhostmodxChalky
+material change ambient GhostmodxChalky 0.0
+material change diffuse GhostmodxChalky 0.85
+material change specular GhostmodxChalky 0.0
+material change shininess GhostmodxChalky 0.53
+material change mirror GhostmodxChalky 0.0
+material change opacity GhostmodxChalky 0.04
+material change outline GhostmodxChalky 0.0
+material change outlinewidth GhostmodxChalky 0.0
 # see /usr/local/lib/vmd/plugins/noarch/tcl/vmdprefs1.0/vmdprefs.tcl for the values
 ###################################################################
 #
@@ -1266,11 +1286,12 @@ proc showHbonds {{molid "0"}} {
 } else {
                 mol delrep $lastrep $molid
                 mol representation HBonds 3.500000 30.000000 3
-                mol selection {protein}
+                mol selection {(same residue as resname ME and within 3.5 of resname PNI) or resname PNI}
                 mol addrep $molid }
 } {
     mol representation HBonds 3.500000 30.000000 3
     #mol color ColorID 0
+    mol color ColorID 10
     mol selection {protein}
     mol addrep $molid
     }
@@ -1805,6 +1826,20 @@ proc ss_poly_sc {molid} {
     mol addrep $molid
     display depthcue off; color Display Background white;pbc box -off;axes location off
   } 
+}
+
+proc rg {sel} {
+  # make sure this is a proper selection and has atoms
+  if {[$sel num] <= 0} {
+    error "gyr_radius: must have at least one atom in selection"
+  }
+  # gyration is sqrt( sum((r(i) - r(center_of_mass))^2) / N)
+  set com [com $sel]
+  set sum 0
+  foreach coord [$sel get {x y z}] {
+    set sum [vecadd $sum [veclength2 [vecsub $coord $com]]]
+  }
+  return [expr sqrt($sum / ([$sel num] + 0.0))]
 }
 
 proc ss_poly_cg {molid} {

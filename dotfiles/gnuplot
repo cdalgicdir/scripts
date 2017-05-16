@@ -1,8 +1,9 @@
-#set term wxt noctrl raise size 1000,600 font "Gill Sans,16"
-#set term wxt noctrl raise size 800,480 font "Gill Sans,14"
+# set term wxt noctrl raise size 1000,600 font "Gill Sans,16"
+# set term wxt noctrl raise size 800,480 font "Gill Sans,14"
 set term wxt noctrl raise size 800,480 font "Linotte-Regular,14"
+# set term wxt size 800,480 font "Linotte-Regular,14"
 #show style line
-#set term wxt size 800,600
+# set term wxt size 800,600
 ###################################################################
 # LINE STYLES
 ###################################################################
