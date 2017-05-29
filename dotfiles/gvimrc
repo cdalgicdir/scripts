@@ -46,7 +46,7 @@ elseif matchstr(expand("%"),".*\\.sh") != ""
 elseif matchstr(expand("%"),".*\\.c") != ""
     colorscheme github
     set guifont=Monaco\ 15
-elseif matchstr(expand("%"),".*\\.cpp") != "
+elseif matchstr(expand("%"),".*\\.cpp") != ""
     colorscheme github
     set guifont=Monaco\ 15
 else
