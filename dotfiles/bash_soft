@@ -6,7 +6,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export PATH=$PATH:/usr/local/cuda/bin
 
 SOFT=$HOME/soft
-TMUX=$SOFT/tmux/tmux-2.3
+TMUX=$SOFT/tmux/tmux-2.5
 GNUPLOT=$SOFT/gnuplot/gnuplot-5.0.5_2
 GROMACS=$SOFT/gromacs/gromacs-4.6.7
 PLUMED=$SOFT/plumed/plumed-2.2.4
@@ -37,3 +37,7 @@ export PATH=$PATH:$HOME/.local/bin
 export LESS='-R'
 export LESSOPEN='|~/.lessfilter %s'
 export PLUMED_VIMPATH=$PLUMED/lib/plumed/vim
+export PYTHONPATH=$PYTHONPATH:$HOME/simfiles/pylib
+export PATH=/usr/local/texlive/2017/bin/x86_64-linux:$PATH
+export MANPATH=/usr/local/texlive/2017/texmf-dist/doc/man:$MANPATH
+export INFOPATH=/usr/local/texlive/2017/texmf-dist/doc/info:INFOPATH

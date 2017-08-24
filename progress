@@ -34,10 +34,14 @@ multipledir=true
 printonlydir=false
 printonlydirlist=false
 
-if [[ `ls -d Lambda_*/ 2>/dev/null` ]]; then
+if [[ $(ls -dv Lambda_*/ 2>/dev/null) ]]; then
     directories="Lambda_*/*TI"
-elif [[ `ls -d d?.*/*US 2>/dev/null` ]]; then
+elif [[ $(ls -dv d?.*/*US 2>/dev/null) ]]; then
     directories="d?.*/*US"
+elif [[ $(ls -dv pull*/*US 2>/dev/null) ]]; then
+    directories="pull*/*US"
+elif [[ $(ls -dv L-State-*/*TI 2>/dev/null) ]]; then
+    directories="L-State-*/*TI"
 fi
 
 # options
@@ -72,7 +76,7 @@ while [[ $# -ge 1 ]]; do
 	-ti)
 	    TI=true
 	    dirset=true
-	    directories=`ls -d Lambda*/Production_MD`
+	    directories=`ls -dv Lambda*/Production_MD`
 	    shift ;;
 
 	-f | -file)
@@ -101,9 +105,9 @@ while [[ $# -ge 1 ]]; do
     esac
 done
 
-logfiles=`ls md*.log 2>/dev/null`
+logfiles=$(ls md*.log 2>/dev/null)
 logfileslist=(${logfiles// / })
-dirs=`ls -d d?.??? 2>/dev/null`
+dirs=$(ls -dv d?.??? 2>/dev/null)
 
 if [[ $multipledir == true ]]; then
     [[ ${#logfileslist[@]} == 1 ]] && [[ $dirset == false  ]] && [[ ${dirs[@]} == "" ]] && multipledir=false && file=${logfiles[0]}
@@ -140,9 +144,9 @@ lastoccur () {
 definecolor () {
     t=$1
     if [[ $t ]] ; then
-	if [[ `echo "print $end>$t>$closetoend"|python` == 'True' ]]; then
+	if [[ `echo "print($end>$t>$closetoend)"|python` == 'True' ]]; then
 	    color=$BRed
-	elif [[ `echo "print $end<=$t"|python` == 'True' ]]; then
+	elif [[ `echo "print($end<=$t)"|python` == 'True' ]]; then
 	    color=$BPurple
 	else
 	    color=$BGreen
@@ -169,7 +173,7 @@ printout () {
 
 if [[ $multipledir == true ]]; then
     for dir in ${directories[@]};do
-	pulldir=`ls -d $dir  2>/dev/null`
+	pulldir=$(ls -dv $dir  2>/dev/null)
 	file=`ls -1 $pulldir/md*.log 2>/dev/null | tail -1` t=$(lastoccur $file) color=$(definecolor $t)
 	if $printonlydir; then
 	    [[ -e $file ]] && printout $dir $t $color

@@ -39,7 +39,7 @@ unset HISTFILESIZE
 HISTIGNORE="&:ls:[bf]g:exit:..:l:dow"
 HOSTNAME="$(hostname)"
 HOSTNAME_SHORT="${HOSTNAME%%.*}"
-HISTFILE="${HOME}/.history/$(date -u +%Y/%m/%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
+HISTFILE="${HOME}/.history/$(date +%Y/%m/%d.%H.%M.%S)_${HOSTNAME_SHORT}_$$"
 mkdir -p "$(dirname "$HISTFILE")"
 histgrep () {
     grep --color=auto -r "$@" $(ls -dv ~/.history)

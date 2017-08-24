@@ -136,6 +136,15 @@ material change mirror GhostmodxChalky 0.0
 material change opacity GhostmodxChalky 0.04
 material change outline GhostmodxChalky 0.0
 material change outlinewidth GhostmodxChalky 0.0
+# add new material bg with coloring
+material add bg
+material change ambient bg 0.3
+material change diffuse bg 0.3
+material change specular bg 0.0
+material change shininess bg 0.23
+material change opacity bg 0.04
+material change outline bg 0.0
+material change outlinewidth bg 0.0
 # see /usr/local/lib/vmd/plugins/noarch/tcl/vmdprefs1.0/vmdprefs.tcl for the values
 ###################################################################
 #
@@ -150,7 +159,8 @@ source ~/.sscache.tcl
 
 display projection Orthographic
 #color Display Background white
-color Name H iceblue
+# color Name H iceblue
+# color Name H white
 #mol modstyle 0 0 Points 3.000
 mol modstyle 0 0 Lines
 
@@ -1891,10 +1901,10 @@ proc pnipam {molid} {
     mol selection name CH1 CH2
     mol addrep $molid
     mol color ColorID 23
-    mol selection name CAM NAM OAM CTN CH1
+    mol selection name CAM NAM OAM HAM CH1
     mol addrep $molid
     mol color ColorID 3
-    mol selection name CH3 CTN
+    mol selection name CH3 CTN NAM
     mol addrep $molid
     mol color ColorID 15
     mol selection name OW and within 2.5 of resname PNI
@@ -1922,21 +1932,21 @@ proc pnipam_fancy {molid} {
     mol material AOChalky
     mol addrep $molid
     mol color ColorID 23
-    mol selection name CAM NAM OAM CTN CH1
+    mol selection name CAM NAM OAM HAM CH1
     mol material AOChalky
     mol addrep $molid
     mol color ColorID 3
-    mol selection name CH3 CTN
+    mol selection name CH3 CTN NAM
     mol material AOChalky
     mol addrep $molid
-    mol color Name
-    #mol color ColorID 15
-    mol selection same residue as water within 3.5 of resname PNI
+    # mol color Name
+    mol color ColorID 15
+    mol selection same residue as water within 3 of resname PNI
     mol representation Licorice 0.300000 10.000000 10.000000
-    mol material Ghostmod3Chalky
+    mol material SpectreChalky
     mol addrep $molid
     mol color ColorID 7
-    mol selection same residue as resname ME and within 3.5 of resname PNI
+    mol selection same residue as resname ME and within 3 of resname PNI
     mol representation Licorice 0.300000 10.000000 10.000000
     mol material SpectreChalky
     mol addrep $molid
@@ -1987,7 +1997,7 @@ hotkey_poly
 # automatic logging in .history-vmd
 set HOSTNAME [info hostname]
 # set HOSTNAME [hostname]
-set thelogfile /home/cdalgicdir/.history-vmd/[eval exec {date -u +%Y/%m/%d.%H.%M.%S}]_$HOSTNAME.vmd
+set thelogfile /home/cdalgicdir/.history-vmd/[eval exec {date +%Y/%m/%d.%H.%M.%S}]_$HOSTNAME.vmd
 logfile $thelogfile
 set env(VMDOPTIXIMAGESIZE) "2048 2048"
 #set env(VMDOPTIXIMAGESIZE) "4096 4096"

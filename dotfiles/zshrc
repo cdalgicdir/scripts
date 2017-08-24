@@ -181,3 +181,4 @@ function scp_wrap {
   esac; done
   command scp "${(@)args}"
 }
+alias lc='colorls'

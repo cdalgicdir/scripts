@@ -49,6 +49,9 @@ elseif matchstr(expand("%"),".*\\.c") != ""
 elseif matchstr(expand("%"),".*\\.cpp") != ""
     colorscheme github
     set guifont=Monaco\ 15
+elseif matchstr(expand("%"),".*\\.otl") != ""
+    colorscheme votl_light2
+    set guifont=Monaco\ 15
 else
     "colorscheme moria, twilight, solarized, inkpot, corporation, monokai
     colorscheme jellybeans
@@ -83,6 +86,7 @@ if matchstr(expand("%"),".*\\.tex") != "" || matchstr(expand("%"),".*\\.md") != 
     :iab con cononsolvency
     :iab mett methanol
     :iab ww water
+    :iab etal ~\textit{et.~al.}
     ":map <F2> viWB<ESC><ESC>i\emph{<ESC>Ea}<ESC>
 endif
 

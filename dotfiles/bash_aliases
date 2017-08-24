@@ -56,7 +56,7 @@ alias scc2='ssh -X sccdata2'
 alias enzot-tunnel='ssh -X -f -N -L 9004:10.0.0.10:22 biby'
 alias enzot='ssh enzot -X'
 ###################################################################
-alias gp='gnuplot --persist'
+alias gup='gnuplot --persist'
 alias emerillon='export CLUTTER_VBLANK=none && emerillon'
 #alias psudo='sudo env PATH="$PATH"'
 alias diff-side-by-side='diff --side-by-side -W"`tput cols`"'
