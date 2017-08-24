@@ -49,7 +49,7 @@ while [[ $# -ge 1 ]]; do
     case $1 in
 
 	-d | -dirs)
-	    directories="$2"
+	    directories=$(ls -dv $2)
 	    dirset=true
 	    shift 2;;
 
@@ -76,7 +76,7 @@ while [[ $# -ge 1 ]]; do
 	-ti)
 	    TI=true
 	    dirset=true
-	    directories=`ls -dv Lambda*/Production_MD`
+	    directories=$(ls -dv Lambda*/Production_MD)
 	    shift ;;
 
 	-f | -file)
@@ -113,7 +113,7 @@ if [[ $multipledir == true ]]; then
     [[ ${#logfileslist[@]} == 1 ]] && [[ $dirset == false  ]] && [[ ${dirs[@]} == "" ]] && multipledir=false && file=${logfiles[0]}
     if [[ ${#logfileslist[@]} -gt 1 ]] && [[ $dirset == false ]] && [[ ${dirs[@]} == "" ]]; then
 	multipledir=false
-	file=`ls -l md*.log | tail -1 | awk '{print $9}'`
+	file=$(ls -l md*.log | tail -1 | awk '{print $9}')
     fi
 fi
 
@@ -174,7 +174,7 @@ printout () {
 if [[ $multipledir == true ]]; then
     for dir in ${directories[@]};do
 	pulldir=$(ls -dv $dir  2>/dev/null)
-	file=`ls -1 $pulldir/md*.log 2>/dev/null | tail -1` t=$(lastoccur $file) color=$(definecolor $t)
+	file=$(ls -1 $pulldir/md*.log 2>/dev/null | tail -1) t=$(lastoccur $file) color=$(definecolor $t)
 	if $printonlydir; then
 	    [[ -e $file ]] && printout $dir $t $color
 	elif $printonlydirlist; then
