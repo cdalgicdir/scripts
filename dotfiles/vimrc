@@ -159,6 +159,7 @@ Plugin 'vimoutliner/vimoutliner'
 Plugin 'tpope/vim-vinegar'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-voom/VOoM'
+Plugin 'NLKNguyen/papercolor-theme'
 "Plugin 'kynan/dokuvimki'
 "Plugin 'Txtfmt-The-Vim-Highlighter'
 "Plugin 'reedes/vim-textobj-sentence'
@@ -555,3 +556,9 @@ let g:pencil_terminal_italics = 1
 "             \ 'plaintex': {'commentstring': '%% %s'}
 "             \ }
 " call tcomment#DefineType('plaintex',         '%% %s'            )
+" This allows including the proper PLUMED syntax file:
+" :let &runtimepath.=','.$PLUMED_VIMPATH
+" This makes autocompletion work in the expected way:
+:set completeopt=longest,menuone
+" This enables bindings of F2/F3/F4 to plumed specific commands:
+:let plumed_shortcuts=1

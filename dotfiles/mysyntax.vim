@@ -16,5 +16,12 @@ augroup syntax
 :au BufNewFile,BufReadPost system.in.settings           setfiletype lammps
 :au BufNewFile,BufReadPost run.in.*           setfiletype lammps
 :au BufNewFile,BufReadPost in.*           setfiletype lammps
+" :au BufNewFile,BufReadPost *.tex           setfiletype plaintex
 :autocmd FileType bib  set paste
+:autocmd FileType plumed.dat      setfiletype plumed
+:au BufNewFile,BufReadPost plumed.dat           setfiletype plumed
+:autocmd FileType colvar      setfiletype plumedf
+:au BufNewFile,BufReadPost colvar           setfiletype plumedf
+:autocmd FileType COLVAR      setfiletype plumedf
+:au BufNewFile,BufReadPost COLVAR           setfiletype plumedf
 augroup end

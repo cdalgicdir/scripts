@@ -1,5 +1,5 @@
 syntax enable
-set background=dark
+set background=light
 set guioptions-=T
 
 if matchstr(expand("%"),".*\\.md") != ""
@@ -54,7 +54,10 @@ elseif matchstr(expand("%"),".*\\.otl") != ""
     set guifont=Monaco\ 15
 else
     "colorscheme moria, twilight, solarized, inkpot, corporation, monokai
-    colorscheme jellybeans
+    " colorscheme jellybeans
+    " colorscheme earendel
+    " colorscheme PaperColor
+    colorscheme github
     set guifont=Monaco\ 15
     "set guifont=Droid\ Sans\ Mono\ 14
 endif

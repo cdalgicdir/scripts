@@ -128,3 +128,4 @@ fi
 #alias vidmywiki='vi -u ~/.dokuwiki/mywiki.vim'
 alias conda3="export PATH=$HOME/anaconda3/bin:$PATH"
 alias conda2="export PATH=$HOME/anaconda2/bin:$PATH"
+alias emacs="emacs25"

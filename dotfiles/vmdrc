@@ -320,7 +320,8 @@ user add key F11 { display depthcue off; color Display Background white;axes loc
 user add key F9 { writegro [molinfo top] }
 user add key F5 { refresh_trajectory [molinfo top] "traj.xtc" 1 }
 user add key Control-c { cg_map "mapped.gro" }
-user add key Control-v { cg_map_all "mapped.gro" }
+# user add key Control-v { cg_map_all "mapped.gro" }
+user add key Control-v { viz_ion [molinfo top] }
 #user add key Control-x { cg_colors [molinfo top] }
 #user add key B { align [molinfo top] "residue 1 to 15 and backbone" }
 #user add key V { align [molinfo top] "not water and mass 12 to 99" }
@@ -1955,7 +1956,6 @@ proc pnipam_fancy {molid} {
   } 
 }
 
-
 proc pvme {molid} {
     # operate only on existing molecules
   if {[lsearch [molinfo list] $molid] >= 0} {
@@ -1983,6 +1983,25 @@ proc pvme {molid} {
   }
 }
 
+proc viz_ion {molid} {
+    # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+	}
+    }
+
+    mol selection water
+    mol representation Lines
+    mol addrep $molid
+    mol selection not water
+    mol representation VDW 1.0 15.0
+    mol addrep $molid
+    # display depthcue off; color Display Background white;pbc box -off;axes location off
+
+}
 
 proc hotkey_poly {} {
     user add key w { ss_poly [molinfo top] }
