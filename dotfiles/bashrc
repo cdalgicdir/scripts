@@ -193,3 +193,6 @@ alias diff-side-by-side-changes='diff --side-by-side --suppress-common-lines -W"
 stty -ixon
 
 #export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+export PATH=/usr/local/cuda/bin:$PATH
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

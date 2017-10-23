@@ -42,6 +42,7 @@ STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 .py 00;33
 .tcl 00;33
 .comms 00;33
+.ipynb 00;33
 .info 03;37
 .avi 03;36
 .mkv 03;36
@@ -49,3 +50,4 @@ STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 .mov 03;36
 .deb 00;31
 .gp 00;31
+.dat 01;37
