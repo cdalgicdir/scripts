@@ -466,7 +466,8 @@ function! s:goyo_enter()
   if has('gui_running')
     set fullscreen
     colorscheme pencil
-    set guifont=Courier\ Prime\ 17
+    " set guifont=Courier\ Prime\ 17
+    set guifont=Source\ Code\ Pro\ Medium\ 18
     set background=light
     set linespace=7
   elseif exists('$TMUX')
@@ -482,6 +483,10 @@ function! s:goyo_enter()
   set guioptions-=l   "kill left scrollbar
   set guioptions-=L   "kill left scrollbar multiple buffers
   set guioptions-=T   "kill toolbar
+  highlight SpellBad gui=underline guibg=NONE guifg=red
+  syn match TmlDoubleWords /\c\<\(\S\+\)\_s\+\1\ze\_s/
+  highlight TmlDoubleWords gui=underline guibg=NONE guifg=red
+  syn spell toplevel
   Limelight
   let b:quitting = 0
   let b:quitting_bang = 0
@@ -535,11 +540,6 @@ function! WC()
 endfunction
 
 command WC call WC()
-
-"" Include DokuVimKi Configuration
-"if filereadable($HOME."/.vim/dokuvimkirc")
-"  source $HOME/.vim/dokuvimkirc
-"endif
 
 let NERDSpaceDelims=1
 " Ignore unreadable or useless files when autocomplete filenames

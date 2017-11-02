@@ -9,8 +9,9 @@ if matchstr(expand("%"),".*\\.md") != ""
     colorscheme pencil
     "colorscheme Tomorrow-Night
     set background=light
-    set guifont=Courier\ Prime\ 15
-    " Monofur, Monaco, Source Code Pro
+    " set guifont=Courier\ Prime\ 18
+    set guifont=Source\ Code\ Pro\ Medium\ 18
+    " Monofur, Monaco, Source Code Pro, Menlo
     "set guifont=Ubuntu\ Mono\ 16
     :au BufRead *.md set spell
     ":highlight SpellBad gui=underline guibg=NONE guifg=red
@@ -27,10 +28,11 @@ elseif matchstr(expand("%"),".*\\.tex") != ""
     "set guifont=Liberation\ Mono\ 15
     "set guifont=Ubuntu\ Mono\ 16
     "set guifont=Source\ Code\ Pro\ 16
-    " Monofur, Monaco, Source Code Pro
+    " Monofur, Monaco, Source Code Pro, Menlo
     set background=light
     colorscheme pencil
-    set guifont=Deja\ Vu\ Sans\ Mono\ 15
+    " set guifont=Deja\ Vu\ Sans\ Mono\ 15
+    set guifont=Source\ Code\ Pro\ Medium\ 18
     au BufRead *.tex set spell
     highlight SpellBad gui=underline guibg=NONE guifg=red
     syn match TmlDoubleWords /\c\<\(\S\+\)\_s\+\1\ze\_s/ 
@@ -107,6 +109,10 @@ set antialias
 function! ProseMode()
   call goyo#execute(0, [])
   set spell noci nosi noai nolist noshowmode noshowcmd
+  highlight SpellBad gui=underline guibg=NONE guifg=red
+  syn match TmlDoubleWords /\c\<\(\S\+\)\_s\+\1\ze\_s/
+  highlight TmlDoubleWords gui=underline guibg=NONE guifg=red
+  syn spell toplevel
   set complete+=s
   set bg=light
   if !has('gui_running')
