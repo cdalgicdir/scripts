@@ -2,12 +2,15 @@
 
 export PATH="$HOME/anaconda2/bin:$PATH"
 export PATH="$HOME/anaconda3/bin:$PATH"
+# export LD_LIBRARY_PATH=$HOME/anaconda2/lib:$LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=$HOME/anaconda3/lib:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export PATH=$PATH:/usr/local/cuda/bin
 
 SOFT=$HOME/soft
 TMUX=$SOFT/tmux/tmux-2.5
-GNUPLOT=$SOFT/gnuplot/gnuplot-5.0.5_2
+# GNUPLOT=$SOFT/gnuplot/gnuplot-5.0.5_2
+GNUPLOT=$SOFT/gnuplot/gnuplot-5.2.2
 GROMACS=$SOFT/gromacs/gromacs-4.6.7
 PLUMED=$SOFT/plumed/plumed-2.2.4
 #VOTCA=$SOFT/votca/votca-1.2.4-fixed
@@ -19,7 +22,7 @@ export PATH=$VIM/bin:$PATH
 export PATH=$TMUX/bin:$SOFT/bin:$PATH
 export PATH=$GNUPLOT/bin:$PATH
 #export PATH=$TMUX/bin:$GNUPLOT/bin:$SOFT/bin:$PATH
-source $GROMACS/bin/GMXRC.bash
+source "$GROMACS/bin/GMXRC.bash"
 export GMXLIB=$GROMACS/share/gromacs/top
 # source $VOTCA/bin/VOTCARC.bash
 export PATH=$PATH:$PLUMED/bin
@@ -41,3 +44,9 @@ export PYTHONPATH=$PYTHONPATH:$HOME/simfiles/pylib
 export PATH=/usr/local/texlive/2017/bin/x86_64-linux:$PATH
 export MANPATH=/usr/local/texlive/2017/texmf-dist/doc/man:$MANPATH
 export INFOPATH=/usr/local/texlive/2017/texmf-dist/doc/info:INFOPATH
+# pyenv
+export PATH="$HOME/.pyenv/bin:$PATH"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+alias acpyenv='eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"'
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1

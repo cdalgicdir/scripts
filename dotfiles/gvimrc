@@ -40,6 +40,7 @@ elseif matchstr(expand("%"),".*\\.tex") != ""
     syn spell toplevel
 elseif matchstr(expand("%"),".*\\.py") != ""
     colorscheme github
+    " colorscheme jelleybeans
     set guifont=Monaco\ 15
     " colorscheme earendel
 elseif matchstr(expand("%"),".*\\.sh") != ""
@@ -52,7 +53,7 @@ elseif matchstr(expand("%"),".*\\.cpp") != ""
     colorscheme github
     set guifont=Monaco\ 15
 elseif matchstr(expand("%"),".*\\.otl") != ""
-    colorscheme votl_light2
+    colorscheme votl_light
     set guifont=Monaco\ 15
 else
     "colorscheme moria, twilight, solarized, inkpot, corporation, monokai

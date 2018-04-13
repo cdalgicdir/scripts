@@ -23,4 +23,6 @@ alias plumed-2.4b="PLUMED=$SOFT/plumed/plumed-2.4b && source_plumed && GROMACS=$
 alias gromacs-5.1.4="GROMACS=$SOFT/gromacs/gromacs-5.1.4 && source_gromacs"
 # alias gromacs-2016.1="GROMACS=$SOFT/gromacs/gromacs-2016.1 && source_gromacs"
 alias gromacs-2016.2="GROMACS=$SOFT/gromacs/gromacs-2016.2 && source_gromacs"
+alias gromacs-2018="GROMACS=$SOFT/gromacs/gromacs-2018 && source_gromacs"
 alias gromacs-2016.1_plumed-2.3.0="PLUMED=$SOFT/plumed/plumed-2.3.0 && source_plumed && GROMACS=$SOFT/gromacs/gromacs-2016.1_plumed-2.3.0 && source_gromacs"
+alias update-conda="conda update numpy scipy pandas matplotlib dask ipython notebook seaborn bokeh"

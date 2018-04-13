@@ -26,6 +26,7 @@ STICKY 37;44 # dir with the sticky bit set (+t) and not other-writable
 # image formats
 .png 01;35
 .jpg 01;35
+.JPG 01;35
 .jpeg 01;35
 .gif 01;35
 .bmp 01;35

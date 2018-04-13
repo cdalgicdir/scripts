@@ -165,6 +165,8 @@ Plugin 'mileszs/ack.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'w0rp/ale'
 Plugin 'tpope/vim-sleuth'
+Plugin 'xolox/vim-notes'
+Plugin 'xolox/vim-misc'
 "Plugin 'kynan/dokuvimki'
 "Plugin 'Txtfmt-The-Vim-Highlighter'
 "Plugin 'reedes/vim-textobj-sentence'
@@ -186,7 +188,9 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-:let g:notes_directory = '~/Documents/Notes'
+let g:notes_directories = ['~/Dropbox/Notes']
+let g:notes_suffix = '.md'
+
 
 autocmd FileType top.gromacs set commentstring=;\ %s
 autocmd FileType mdp.gromacs set commentstring=;\ %s
@@ -644,10 +648,10 @@ endif
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:flake8_show_in_gutter=1  " show
 
-" ale plugin: linter
-let g:ale_echo_msg_error_str = 'E'
-let g:ale_echo_msg_warning_str = 'W'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" " ale plugin: linter
+" let g:ale_echo_msg_error_str = 'E'
+" let g:ale_echo_msg_warning_str = 'W'
+" let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"
+" nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+" nmap <silent> <C-j> <Plug>(ale_next_wrap)

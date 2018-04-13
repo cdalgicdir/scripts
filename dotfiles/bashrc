@@ -182,8 +182,8 @@ function dirawk {
 
 export EDITOR=vim
 
-alias diff-side-by-side='diff --side-by-side -W"`tput cols`"'
-alias diff-side-by-side-changes='diff --side-by-side --suppress-common-lines -W"`tput cols`"'
+# alias diff-side-by-side='diff --side-by-side -W"`tput cols`"'
+# alias diff-side-by-side-changes='diff --side-by-side --suppress-common-lines -W"`tput cols`"'
 #CDPATH=$CDPATH:~/remote
 # get airline working 
 # export TERM=xterm-256color
