@@ -38,9 +38,7 @@ alias doc="cd $HOME/Documents"
 alias des="cd $HOME/Desktop"
 alias dow="cd $HOME/Downloads"
 alias scr="cd $HOME/soft/bin"
-#alias sim="cd $DATDIR/SIMS"
 alias sim="cd $HOME/SIMS"
-alias eala="cd /mnt/data2/cdalgicdir/SIMS/EALA-cg"
 ###################################################################
 # SSH
 alias ichi='ssh ichi -X'
@@ -104,25 +102,10 @@ alias emerillon='export CLUTTER_VBLANK=none && emerillon'
 #   sleep 10; alert
 alias alert_helper='history|tail -n1|sed -e "s/^\s*[0-9]\+\s*//" -e "s/;\s*alert$//"'
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-
 #alias vidoku='viDokuVimKi() { vim +DokuVimKi +"DWedit $1" }; viDokuVimKi'
 #alias gvidoku='gviDokuVimKi() { gvim +DokuVimKi +"DWedit $1" }; gviDokuVimKi'
 
 #alias vidmywiki='vi -u ~/.dokuwiki/mywiki.vim'
-alias conda3="export PATH=$HOME/anaconda3/bin:$PATH"
-alias conda2="export PATH=$HOME/anaconda2/bin:$PATH"
-alias emacs="emacs25"
 # alias borg="$HOME/borg-env/bin/borg"
 # alias borgfs="$HOME/borg-env/bin/borgfs"
 # alias borgmatic="$HOME/borg-env/bin/borgmatic"

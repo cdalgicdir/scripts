@@ -82,17 +82,22 @@ if matchstr(expand("%"),".*\\.tex") != "" || matchstr(expand("%"),".*\\.md") != 
     :iab com1 center of mass
     :iab bww bulk water
     :iab pmff potential of mean force
-    :iab pp PNIPAM
-    :iab ie i.e.
+    :iab pp PNiPAM
+    :iab ie \textit{i.e.}
     :iab adn and
     :iab ii3 \emph{CN$_i$-CN$_{i+3}$}
     :iab ca1 C$_{\alpha}$
     :iab cb1 C$_{\beta}$
     :iab cgg coarse-grain
-    :iab con cononsolvency
+    :iab cns cononsolvency
     :iab mett methanol
     :iab ww water
-    :iab etal ~\textit{et.~al.}
+    :iab wmm water/methanol
+    :iab aqm aqueous methanol
+    :iab aqms aqueous methanol solution
+    :iab etal \textit{et~al.}
+    :iab aqq aqueous
+    :iab e2c $\Delta U_{E \rightarrow C}$
     ":map <F2> viWB<ESC><ESC>i\emph{<ESC>Ea}<ESC>
 endif
 

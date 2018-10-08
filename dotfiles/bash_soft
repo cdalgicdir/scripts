@@ -1,16 +1,13 @@
 #! /user/bin/env bash
 
-export PATH="$HOME/anaconda2/bin:$PATH"
-export PATH="$HOME/anaconda3/bin:$PATH"
-# export LD_LIBRARY_PATH=$HOME/anaconda2/lib:$LD_LIBRARY_PATH
-# export LD_LIBRARY_PATH=$HOME/anaconda3/lib:$LD_LIBRARY_PATH
+# export PATH="$HOME/anaconda3/bin:$PATH"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64
 export PATH=$PATH:/usr/local/cuda/bin
 
 SOFT=$HOME/soft
-TMUX=$SOFT/tmux/tmux-2.5
+TMUX=$SOFT/tmux/tmux
 # GNUPLOT=$SOFT/gnuplot/gnuplot-5.0.5_2
-GNUPLOT=$SOFT/gnuplot/gnuplot-5.2.2
+GNUPLOT=$SOFT/gnuplot/gnuplot-5.2.4
 GROMACS=$SOFT/gromacs/gromacs-4.6.7
 PLUMED=$SOFT/plumed/plumed-2.2.4
 #VOTCA=$SOFT/votca/votca-1.2.4-fixed
@@ -50,3 +47,6 @@ export PATH="$HOME/.pyenv/bin:$PATH"
 # eval "$(pyenv virtualenv-init -)"
 alias acpyenv='eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"'
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+. /data/anaconda3/etc/profile.d/conda.sh
+conda activate
+source $HOME/soft/fast-p/p

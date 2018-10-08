@@ -1,0 +1,27 @@
+#! /bin/bash
+
+
+#JOBNAME=`grep "\-N" xsubmit-thread  | awk '{print $3}'`
+JOBNAME="job_"
+#thelogs=`ls $JOBNAME.o*`
+thelogs=$(ls job_*.out)
+JOBids=()
+for f in ${thelogs[@]}; do
+    #JOBid=${f#$JOBNAME.o}
+    JOBid=${f#$JOBNAME}
+    JOBid=${JOBid%.out}
+    JOBids+=($JOBid)
+done
+
+N=${#JOBids[@]}
+
+for i in `seq 0 $((N-2))`; do
+    tobedeleted+=($JOBNAME${JOBids[$i]}.out)
+    tobedeleted+=($JOBNAME${JOBids[$i]}.err)
+done
+
+echo ${tobedeleted[@]}
+for file in ${tobedeleted[@]}; do
+    rm $file
+done
+
