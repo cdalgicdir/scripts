@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/env bash
 
 
 ###################################################################
@@ -34,13 +34,17 @@ multipledir=true
 printonlydir=false
 printonlydirlist=false
 
-if [[ $(ls -dv Lambda_*/ 2>/dev/null) ]]; then
+if [[ $(ls -dv Lambda_*/ 2>/dev/null) ]]
+then
     directories="Lambda_*/*TI"
-elif [[ $(ls -dv d?.*/*US 2>/dev/null) ]]; then
+elif [[ $(ls -dv d?.*/*US 2>/dev/null) ]]
+then
     directories="d?.*/*US"
-elif [[ $(ls -dv pull*/*US 2>/dev/null) ]]; then
+elif [[ $(ls -dv pull*/*US 2>/dev/null) ]]
+then
     directories="pull*/*US"
-elif [[ $(ls -dv L-State-*/*TI 2>/dev/null) ]]; then
+elif [[ $(ls -dv L-State-*/*TI 2>/dev/null) ]]
+then
     directories="L-State-*/*TI"
 fi
 
@@ -70,7 +74,7 @@ while [[ $# -ge 1 ]]; do
 
 	-e | -end)
 	    end=$2
-	    closetoend=`echo "$end*0.8"|bc`
+	    closetoend=$(echo "$end*0.8" | bc)
 	    shift 2;;
 
 	-ti)
@@ -81,12 +85,13 @@ while [[ $# -ge 1 ]]; do
 
 	-f | -file)
 	    multipledir=false
-	    if [[ -n "$2" ]]; then
-            file=$2 
-            shift 2
+	    if [[ -n "$2" ]]
+	    then
+		file=$2 
+		shift 2
 	    else
-            file='md.log'
-            shift
+		file="md.log"
+		shift
 	    fi
 	    ;;
 
@@ -109,11 +114,18 @@ logfiles=$(ls md*.log 2>/dev/null)
 logfileslist=(${logfiles// / })
 dirs=$(ls -dv d?.??? 2>/dev/null)
 
-if [[ $multipledir == true ]]; then
-    [[ ${#logfileslist[@]} == 1 ]] && [[ $dirset == false  ]] && [[ ${dirs[@]} == "" ]] && multipledir=false && file=${logfiles[0]}
-    if [[ ${#logfileslist[@]} -gt 1 ]] && [[ $dirset == false ]] && [[ ${dirs[@]} == "" ]]; then
+NN=1
+
+if [[ $multipledir == true ]]
+then
+    [[ ${#logfileslist[@]} == 1 ]] && [[ $dirset == false  ]] && \
+	[[ ${dirs[@]} == "" ]] && multipledir=false && file=${logfiles[0]}
+    if [[ ${#logfileslist[@]} -gt 1 ]] && \
+       	[[ $dirset == false ]] && \
+	[[ ${dirs[@]} == "" ]]
+    then
 	multipledir=false
-	file=$(ls -l md*.log | tail -1 | awk '{print $9}')
+	file=$(ls -l md*.log | tail -n 1 | awk '{print $9}')
     fi
 fi
 
@@ -123,35 +135,40 @@ fi
 Color_Off='\e[0m'       # Text Reset
 
 # Bold
-BBlack='\e[1;30m'       # Black
+# BBlack='\e[1;30m'       # Black
 BRed='\e[1;31m'         # Red
 BGreen='\e[1;32m'       # Green
-BYellow='\e[1;33m'      # Yellow
-BBlue='\e[1;34m'        # Blue
+# BYellow='\e[1;33m'      # Yellow
+# BBlue='\e[1;34m'        # Blue
 BPurple='\e[1;35m'      # Purple
-BCyan='\e[1;36m'        # Cyan
-BWhite='\e[1;37m'       # White
+# BCyan='\e[1;36m'        # Cyan
+# BWhite='\e[1;37m'       # White
 
 
 lastoccur () {
     file=$1
-    if [[ $file ]]; then
-	progress=`tac $file 2>/dev/null | grep "Time " -m 1 -B 1 | tac | tail -1 | awk '{print $2}'`
-	echo -n $progress
+    if [[ -f "$file" ]]
+    then
+	progress=$(tac "$file" 2>/dev/null | grep -v "Time:" \
+	    | grep "Time" -m 1 -B 1 | head -n 1 | awk '{print $2}')
+	echo -n "$progress"
     fi
 }
 
 definecolor () {
     t=$1
-    if [[ $t ]] ; then
-	if [[ `echo "print($end>$t>$closetoend)"|python` == 'True' ]]; then
-	    color=$BRed
-	elif [[ `echo "print($end<=$t)"|python` == 'True' ]]; then
-	    color=$BPurple
+    if [[ $t ]] 
+    then
+	if [[ $(echo "print($end>$t>$closetoend)" | python) == 'True' ]]
+       	then
+	    color="$BRed"
+	elif [[ $(echo "print($end<=$t)" | python) == 'True' ]]
+       	then
+	    color="$BPurple"
 	else
-	    color=$BGreen
+	    color="$BGreen"
 	fi
-	echo $color
+	echo "$color"
     fi
 }
 
@@ -159,41 +176,45 @@ printout () {
     file=$1
     t=$2
     color=$3
+    print=true
     [[ $file == *part* ]] && tab='\t' || tab='\t\t'
-    if [[ $noColor == true ]]; then
-        echo -ne "$file :$tab" $t"\n" 
-    elif [[ $noFinished == true ]]; then
-        [[ "$color" != "$BPurple" ]] && echo -ne "$file :$tab" $color $t $Color_Off"\n"
-    elif [[ $onlyFinished == true ]]; then
-        [[ "$color" == "$BPurple" ]] && echo -ne "$file :$tab" $color $t $Color_Off"\n"
+    [[ $noColor == true ]] && color="$Color_Off"
+    if [[ "$color" == "$BPurple" ]]
+    then
+	$noFinished && print=false
     else
-        echo -ne "$file :$tab" $color $t $Color_Off"\n"
+	$onlyFinished && print=false
     fi
+    $print && echo -ne "$NN- $file :$tab" "$color" "$t" "$Color_Off""\n"
+    let NN=$((NN+1))
 }
 
-if [[ $multipledir == true ]]; then
-    for dir in ${directories[@]};do
-	pulldir=$(ls -dv $dir  2>/dev/null)
-	file=$(ls -1 $pulldir/md*.log 2>/dev/null | tail -1) t=$(lastoccur $file) color=$(definecolor $t)
-	if $printonlydir; then
-	    [[ -e $file ]] && printout $dir $t $color
-	elif $printonlydirlist; then
-	    if $noFinished; then
-            if [[ "$color" != "$BPurple" ]]; then
-                echo $dir
-            fi
-        elif $onlyFinished; then
-            if [[ "$color" == "$BPurple" ]]; then
-                echo $dir
-            fi
+if [[ $multipledir == true ]]
+then
+    for dir in ${directories[@]}
+    do
+	pulldir=$(ls -dv "$dir"  2>/dev/null)
+	file=$(ls -1 $pulldir/md*.log 2>/dev/null | tail -n 1)
+	t=$(lastoccur "$file") color=$(definecolor "$t")
+	if $printonlydir
+       	then
+	    [[ -e "$file" ]] && printout "$dir" "$t" "$color"
+	elif $printonlydirlist
+       	then
+	    if $noFinished
+	    then
+		[[ "$color" != "$BPurple" ]] && echo "$dir"
+	    elif $onlyFinished
+	    then
+		[[ "$color" == "$BPurple" ]] && echo "$dir"
 	    else
-            echo $dir
+		echo "$dir"
 	    fi
 	else
-	    [[ -e $file ]] && printout $file $t $color
+	    [[ -e "$file" ]] && printout "$file" "$t" "$color"
 	fi
     done
 else
-    t=$(lastoccur $file) color=$(definecolor $t)
-    printout $file $t $color
+    t=$(lastoccur "$file") color=$(definecolor "$t")
+    printout "$file" "$t" "$color"
 fi

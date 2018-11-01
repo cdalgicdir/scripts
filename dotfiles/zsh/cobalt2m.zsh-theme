@@ -79,6 +79,7 @@ prompt_context() {
     #prompt_segment black default "%(!.%{%F{yellow}%}.)✝"
 		# prompt_segment black default "%(!.%{%F{yellow}%}.)❯"
 		prompt_segment black default "%(!.%{%F{yellow}%}.)🜀"
+		# prompt_segment black default "%(!.%{%F{yellow}%}.)."
   fi
 }
 
@@ -100,7 +101,8 @@ prompt_git() {
 
 # Dir: current working directory
 prompt_dir() {
-	prompt_segment blue black '%~'
+	# prompt_segment blue black '%~'
+	prompt_segment 131 black '%~'
 	#prompt_segment blue white '%~'
   # echo $(pwd | sed -e "s,^$HOME,~," | sed "s@\(.\)[^/]*/@\1/@g")
 }
@@ -123,7 +125,7 @@ prompt_status() {
 build_prompt() {
   RETVAL=$?
   prompt_status
-  #prompt_context
+  # prompt_context
   prompt_dir
   prompt_git
   prompt_end
