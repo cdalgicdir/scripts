@@ -260,6 +260,7 @@ user add key f {rotate x by 90}
 user add key F {rotate y by 90}
 user add key v {rotate z by 90}
 user add key S {sas [molinfo top]}
+user add key Alt-d {viz_aq_sol [molinfo top]; color Display Background white; pbc box -off;axes location off;display rendermode GLSL}
 ###################################################################
 # Periodicity
 user add key Control-z {if {![string match *z*Z* [mol showperiodic [molinfo top] 0] ]} { periodicZ [molinfo top]} { periodicZoff [molinfo top]; rotate y by 0.1; rotate y by -0.1}}
@@ -1148,7 +1149,7 @@ proc snapincr {{increment "1000"}  {ambient "true"}} {
 }
 
 #proc snap {{molid "0"} {filename "auto"} {dotrim "true"} {ambient "true"}} {
-proc snap {{filename "auto"} {dotrim "true"} {ambient "true"} {aoambient "0.8"} {aodirect "0.3"} } {
+proc snap {{filename "auto"} {dotrim "true"} {ambient "true"} {aoambient "0.9"} {aodirect "0.4"} } {
   # take a snapshot, process and output as frame#.png
     foreach i [molinfo list] {hires $i}
     set molid 0
@@ -1171,7 +1172,8 @@ proc snap {{filename "auto"} {dotrim "true"} {ambient "true"} {aoambient "0.8"} 
     if {$filename == "auto"} {
     if {[molinfo top get numframes] == 1} {
 	set fname [molinfo top get filename]
-	set nfile [string trimright $fname ".pdbgro"]
+        set fname2 [lrange [split $fname /] end end]
+	set nfile [string trimright $fname2 ".pdbgro"]
 	set file "$nfile.png"
 	#while {[file exists $file] == 1} { set i [expr $i+1] ; set c [format %c $i]; set file "$nfile$c.png"}
     } else {
@@ -1202,7 +1204,7 @@ proc snap {{filename "auto"} {dotrim "true"} {ambient "true"} {aoambient "0.8"} 
     } else {
 	eval exec {convert -density 300 $ppmfile $file}
     }
-    #file delete $ppmfile
+    file delete $ppmfile
     lores $molid
     puts "Generated snapshot $file"
 }   
@@ -1375,7 +1377,8 @@ proc sas {{molid "0"}} {
 }
 
 proc unwrap {{molid "0"}} {
-    pbc unwrap -sel "protein or resname NME ACE"
+    # pbc unwrap -sel "protein or resname NME ACE"
+    pbc unwrap -sel "resname POL PNI PVM PDE"
     align $molid
 }
 
@@ -1593,13 +1596,13 @@ proc cg_map_all {{mapped "mapped.gro"}} {
 }
 
 set water [atomselect top "water"]
-set protein [atomselect top "protein"]
-set backbone [atomselect top "backbone"]
-set ca [atomselect top "name CA and protein"]
-set sidechain [atomselect top "sidechain"]
+# set protein [atomselect top "protein"]
+# set backbone [atomselect top "backbone"]
+# set ca [atomselect top "name CA and protein"]
+# set sidechain [atomselect top "sidechain"]
 puts "**** [molinfo top get numframes] frames exist"
 puts "**** [$water num] water atoms and [expr [$water num]/3] water molecules"
-puts "**** [$protein num] protein atoms"
+# puts "**** [$protein num] protein atoms"
 animate style Once
 
 #proc cg_colors {{molid "0"}} {
@@ -1956,6 +1959,36 @@ proc pnipam_fancy {molid} {
   } 
 }
 
+
+proc pdea {molid} {
+    # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+    }
+    mol color ColorID 6
+    mol representation Licorice 0.300000 10.000000 10.000000
+    mol selection name C1 C2
+    mol material AOChalky
+    mol addrep $molid
+    mol color ColorID 2
+    mol selection name C O N
+    mol material AOChalky
+    mol addrep $molid
+    mol color ColorID 10
+    mol selection name name CA3 CB3 CTB3 CTA3 N
+    mol material AOChalky
+    mol addrep $molid
+    mol color ColorID 3
+    mol selection name OW and within 2.5 of resname PNI
+    mol representation VDW 0.6 15.0
+    mol material SpectreChalky
+    mol addrep $molid
+    display depthcue off; color Display Background white;pbc box -off;axes location off
+  } 
+}
 proc pvme {molid} {
     # operate only on existing molecules
   if {[lsearch [molinfo list] $molid] >= 0} {
@@ -2003,6 +2036,32 @@ proc viz_ion {molid} {
 
 }
 
+proc viz_aq_sol {molid} {
+    # operate only on existing molecules
+  if {[lsearch [molinfo list] $molid] >= 0} {
+    # delete all representations
+    set numrep [molinfo $molid get numreps]
+    for {set i $numrep} {$i > -1} {incr i -1} {
+      mol delrep $i $molid
+	}
+    }
+    mol selection water
+    mol representation CPK 2.0 0.5 12.0 12.0
+    mol addrep $molid
+    mol selection resname MET ETH PRO DMS
+    mol representation CPK 2.0 0.5 12.0 12.0
+    mol addrep $molid
+    mol selection resname POL PNI PDE
+    mol representation CPK 2.0 1.0 12.0 12.0
+    mol addrep $molid
+    mol modcolor 0 $molid ColorID 0
+    mol modcolor 1 $molid ColorID 1
+    mol modcolor 2 $molid ColorID 2
+    mol modmaterial 0 $molid Ghostmod2Chalky
+    mol modmaterial 1 $molid Ghostmod2Chalky
+    mol modmaterial 2 $molid AOChalky
+}
+
 proc hotkey_poly {} {
     user add key w { ss_poly [molinfo top] }
     user add key W { ss_poly_bb [molinfo top] }
@@ -2028,3 +2087,10 @@ set env(VMDOPTIXIMAGESIZE) "2048 2048"
 #   render POV3 vmdscene${i}.pov "/usr/bin/povray_" +W1280 +H1024 -I \ 
 #   vmdscene${i}.pov -O vmdscene${i}.png +D +X +A +FN +UA 
 # } 
+# color change rgb 32 0.667 0.224 0.224
+# color change rgb 31 0.686 0.243 0.043
+# color change rgb 30 0.686 0.42 0.043
+# color change rgb 29 0.059 0.263 0.443
+# color change rgb 28 0.027 0.463 0.298
+# color change rgb 27 0.42 0.129 0
+# color change rgb 26 70  87  117

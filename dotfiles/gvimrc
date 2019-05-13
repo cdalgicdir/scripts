@@ -29,8 +29,9 @@ elseif matchstr(expand("%"),".*\\.tex") != ""
     "set guifont=Ubuntu\ Mono\ 16
     "set guifont=Source\ Code\ Pro\ 16
     " Monofur, Monaco, Source Code Pro, Menlo
-    set background=light
-    colorscheme pencil
+    set background=dark
+    " colorscheme pencil
+    colorscheme solarized
     " set guifont=Deja\ Vu\ Sans\ Mono\ 15
     set guifont=Source\ Code\ Pro\ Medium\ 18
     au BufRead *.tex set spell
@@ -39,12 +40,16 @@ elseif matchstr(expand("%"),".*\\.tex") != ""
     highlight TmlDoubleWords gui=underline guibg=NONE guifg=red
     syn spell toplevel
 elseif matchstr(expand("%"),".*\\.py") != ""
-    colorscheme github
+    " colorscheme github
+    colorscheme gruvbox
+    set background=dark
     " colorscheme jelleybeans
     set guifont=Monaco\ 15
     " colorscheme earendel
 elseif matchstr(expand("%"),".*\\.sh") != ""
-    colorscheme github
+    " colorscheme github
+    colorscheme gruvbox
+    set background=dark
     set guifont=Monaco\ 15
 elseif matchstr(expand("%"),".*\\.c") != ""
     colorscheme github
@@ -97,7 +102,8 @@ if matchstr(expand("%"),".*\\.tex") != "" || matchstr(expand("%"),".*\\.md") != 
     :iab aqms aqueous methanol solution
     :iab etal \textit{et~al.}
     :iab aqq aqueous
-    :iab e2c $\Delta U_{E \rightarrow C}$
+    :iab e2c \(\Delta U_{E \rightarrow C}\)
+    :iab fig. Fig.~\ref{fig:<++>}
     ":map <F2> viWB<ESC><ESC>i\emph{<ESC>Ea}<ESC>
 endif
 

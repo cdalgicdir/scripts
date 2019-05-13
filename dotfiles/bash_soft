@@ -12,7 +12,7 @@ GROMACS=$SOFT/gromacs/gromacs-4.6.7
 PLUMED=$SOFT/plumed/plumed-2.2.4
 #VOTCA=$SOFT/votca/votca-1.2.4-fixed
 # VOTCA=$SOFT/votca/votca-1.3
-# VIM=$SOFT/vim/vim
+VIM=$SOFT/vim/vim-181113
 MUPDF=$SOFT/mupdf/mupdf
 export LD_LIBRARY_PATH=$MUPDF/lib:$LD_LIBRARY_PATH
 # export PATH=$VIM/bin:$PATH
@@ -26,9 +26,9 @@ export PATH=$PATH:$PLUMED/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PLUMED/lib
 export PLUMED_KERNEL=$PLUMED/lib/libplumedKernel.so
 export PATH=$PATH:$HOME/soft/moltemplate/moltemplate/src
-export MOLTEMPLATE_PATH=$HOME/soft/moltemplate/moltemplate/common
-export PATH=$PATH:$HOME/soft/espressopp/espressopp/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/soft/espressopp/espressopp/lib
+# export MOLTEMPLATE_PATH=$HOME/soft/moltemplate/moltemplate/common
+# export PATH=$PATH:$HOME/soft/espressopp/espressopp/bin
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/soft/espressopp/espressopp/lib
 # export PYTHONPATH=$PYTHONPATH:$HOME/soft/espressopp/espressopp/lib/python2.7/dist-packages
 export PATH=$PATH:$SOFT/wham/bin
 export LC_NUMERIC="en_US.UTF-8"
@@ -49,4 +49,4 @@ alias acpyenv='eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init -)"'
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 . /data/anaconda3/etc/profile.d/conda.sh
 conda activate
-source $HOME/soft/fast-p/p
+# source $HOME/soft/fast-p/p

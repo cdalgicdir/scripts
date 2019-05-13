@@ -31,7 +31,7 @@ highlight Search cterm=NONE ctermfg=black ctermbg=yellow
 ":highlight SpellBad gui=underline guibg=NONE guifg=NONE
 ":au BufRead *.tex set spell
 
-:map <F6> {v}!par -w70<CR>
+:map <F6> {v}!par -w80<CR>
 :vmap <F6> !par -w70<CR>
 ":map <F4> :highlight Normal ctermfg=black ctermbg=white<CR>
 :map <F4> :set background=light<CR>:colorscheme earendel<CR>
@@ -184,7 +184,9 @@ Plugin 'xolox/vim-misc'
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'vim-scripts/indentpython.vim'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'ambv/black'
+Plugin 'aperezdc/vim-template'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -706,3 +708,13 @@ command! -nargs=1 Bs :call BufSel("<args>")
 "" YouCompleteMe
 " let g:ycm_autoclose_preview_window_after_completion=1
 " map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" let g:loaded_youcompleteme = 1
+autocmd FileType c++ Bundle 'Valloric/YouCompleteMe'
+autocmd FileType c Bundle 'Valloric/YouCompleteMe'
+autocmd FileType python Bundle 'Valloric/YouCompleteMe'
+autocmd FileType shell Bundle 'Valloric/YouCompleteMe'
+autocmd FileType php Bundle 'Valloric/YouCompleteMe'
+autocmd FileType lammps Bundle 'Valloric/YouCompleteMe'
+autocmd FileType top.gromacs Bundle 'Valloric/YouCompleteMe'
+colorscheme gruvbox
+set background=dark
